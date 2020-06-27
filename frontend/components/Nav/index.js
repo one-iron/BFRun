@@ -14,12 +14,13 @@ const Nav = () => {
               <TitleText>BFRun</TitleText>
             </a>
           </Link>
+          <div>| About</div>
         </NavLeft>
         <NavMiddle>
           <SearchBox>
             <SearchInput
               type="text"
-              placeholder="검색하실 태그를 입력해주세요"
+              placeholder="검색하실 태그를 입력해주세요 (최대 3개)"
             />
             <SearchButton type="submit">
               <i className="fa fa-search" />
@@ -29,6 +30,7 @@ const Nav = () => {
         <NavRight>
           <RightContent>Roadmap</RightContent>
           <RightContent>BFTest</RightContent>
+          <div>Login</div>
         </NavRight>
       </NavContainer>
     </NavWrap>
@@ -38,30 +40,42 @@ const Nav = () => {
 export default Nav;
 
 const NavWrap = styled.nav`
-  width: 100vw;
+  width: 100%;
   height: 80px;
   border-bottom: 1px solid gray;
+  position: fixed;
+  background-color: white;
+  z-index: 100;
 `;
 
 const NavContainer = styled.div`
-  width: 700px;
+  width: 900px;
   margin: 0 auto;
   padding: 30px 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
-const NavLeft = styled.div``;
+const NavLeft = styled.div`
+  display: flex;
+  align-items: center;
+
+  div {
+    margin-left: 10px;
+  }
+`;
 
 const TitleText = styled.div`
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
   color: black;
   cursor: pointer;
-  padding-left: 20px;
 `;
 
-const NavMiddle = styled(NavLeft)``;
+const NavMiddle = styled(NavLeft)`
+  padding-left: 30px;
+`;
 
 const SearchBox = styled.form`
   border: 1px solid gray;
@@ -71,6 +85,8 @@ const SearchBox = styled.form`
 const SearchInput = styled.input`
   width: 280px;
   height: 25px;
+  font-size: 12px;
+  padding-left: 10px;
 `;
 
 const SearchButton = styled.button`
@@ -87,5 +103,5 @@ const NavRight = styled(NavLeft)`
 `;
 
 const RightContent = styled.div`
-  padding-left: 15px;
+  padding: 0 5px;
 `;

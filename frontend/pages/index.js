@@ -10,19 +10,25 @@ const HomePage = () => {
   return (
     <>
       <Nav />
-      <Content>
-        <Category />
-        <VideoList />
-      </Content>
+      <ContentWrap>
+        <ContentContainer>
+          <Category />
+          <VideoList />
+        </ContentContainer>
+      </ContentWrap>
     </>
   );
 };
 
 export default HomePage;
 
-const Content = styled.section`
-  display: felx;
-  flex-wrap: wrap;
-  width: 800px;
-  margin: 0 auto;
+const ContentWrap = styled.section`
+  position: relative;
+  top: 100px;
+`;
+
+const ContentContainer = styled.div`
+  /* margin: 0 auto; */
+  max-width: 1060px;
+  width: 1000px;
 `;
