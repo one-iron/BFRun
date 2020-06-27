@@ -55,6 +55,10 @@ a {
     all: unset;
     box-sizing: border-box;
 }
+a, a:link, a:hover, a:active, a:visited, a:focus {
+    text-decoration: none;
+    outline: none;
+}
 textarea {
     all:unset;
     box-sizing: border-box;

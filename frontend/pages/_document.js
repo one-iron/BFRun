@@ -1,10 +1,11 @@
 // export modules
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
+import { ServerStyleSheet, ThemeProvider } from 'styled-components';
 
 // internal modules
 import { Globalstyle } from '../components/GlobalStyle';
+import theme from '../components/theme';
 
 export default class MyDocument extends Document {
   static async getInitialProps(context) {
@@ -53,7 +54,11 @@ export default class MyDocument extends Document {
           />
           <meta
             name="keywords"
-            content="frontend, backend, 프론트엔드, 백엔드, 웹 개발"
+            content="frontend, backend, 프론트엔드, 백엔드, 웹 개발, HTML, CSS, JavaScript, Python"
+          />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
           />
           {/* <link
             rel="stylesheet"
@@ -76,10 +81,6 @@ export default class MyDocument extends Document {
             href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
           />
           <script
-            src="https://kit.fontawesome.com/64e36ccb37.js"
-            crossOrigin="anonymous"
-          />
-          <script
             type="text/javascript"
             src="https://code.jquery.com/jquery-1.12.4.min.js"
           />
@@ -90,8 +91,10 @@ export default class MyDocument extends Document {
           <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" /> */}
         </Head>
         <body>
-          <Main />
-          <NextScript />
+          <ThemeProvider theme={theme}>
+            <Main />
+            <NextScript />
+          </ThemeProvider>
         </body>
       </html>
     );
