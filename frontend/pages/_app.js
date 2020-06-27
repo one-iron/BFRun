@@ -1,4 +1,5 @@
 // external modules
+import React from 'react';
 import App from 'next/app';
 
 // internal modules
