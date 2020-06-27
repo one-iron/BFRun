@@ -1,11 +1,10 @@
 // export modules
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet, ThemeProvider } from 'styled-components';
+import { ServerStyleSheet } from 'styled-components';
 
 // internal modules
 import { Globalstyle } from '../components/GlobalStyle';
-import theme from '../components/theme';
 
 export default class MyDocument extends Document {
   static async getInitialProps(context) {
@@ -91,10 +90,8 @@ export default class MyDocument extends Document {
           <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" /> */}
         </Head>
         <body>
-          <ThemeProvider theme={theme}>
-            <Main />
-            <NextScript />
-          </ThemeProvider>
+          <Main />
+          <NextScript />
         </body>
       </html>
     );
