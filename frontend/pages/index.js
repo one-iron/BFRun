@@ -6,7 +6,7 @@ import Nav from '../components/Nav';
 import Category from '../components/Category';
 import VideoList from '../components/VideoList';
 
-const HomePage = () => {
+export default function HomePage() {
   return (
     <>
       <Nav />
@@ -18,9 +18,7 @@ const HomePage = () => {
       </ContentWrap>
     </>
   );
-};
-
-export default HomePage;
+}
 
 const ContentWrap = styled.section`
   position: relative;
