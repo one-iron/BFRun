@@ -3,13 +3,13 @@ import React from 'react';
 import App from 'next/app';
 
 // internal modules
-import Main from './index';
 
 class WrappedApp extends App {
   render() {
+    const { Component, ...other } = this.props;
     return (
       <>
-        <Main />
+        <Component {...other} />
       </>
     );
   }

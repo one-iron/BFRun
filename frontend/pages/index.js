@@ -6,7 +6,7 @@ import Nav from '../components/Nav';
 import Category from '../components/Category';
 import VideoList from '../components/VideoList';
 
-const HomePage = () => {
+export default function HomePage() {
   return (
     <>
       <Nav />
@@ -16,9 +16,7 @@ const HomePage = () => {
       </Content>
     </>
   );
-};
-
-export default HomePage;
+}
 
 const Content = styled.section`
   display: felx;
