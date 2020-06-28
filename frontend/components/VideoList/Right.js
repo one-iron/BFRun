@@ -25,10 +25,11 @@ const VideoList = () => {
 export default VideoList;
 
 const VideoWrap = styled.section`
-  position: absolute;
-  left: calc((100% - 500px) / 2);
-  max-width: 750px;
+  position: relative;
+  /* left: calc((100% - 500px) / 2); */
+  width: 900px;
   height: 1200px;
+  margin: 0 auto;
   border: 1px solid green;
 `;
 

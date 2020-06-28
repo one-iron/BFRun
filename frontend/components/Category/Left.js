@@ -53,11 +53,7 @@ export default Category;
 
 const CategoryWrap = styled.aside`
   position: fixed;
-  left: calc((100% - 1000px) / 2);
-
-  @media ${(props) => props.theme.laptopS} {
-    left: 5px;
-  }
+  z-index: 50;
 `;
 
 const CategoryContainer = styled.div`

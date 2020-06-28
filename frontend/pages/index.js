@@ -3,8 +3,11 @@ import styled from 'styled-components';
 
 // internal modules
 import Nav from '../components/Nav';
-import Category from '../components/Category';
-import VideoList from '../components/VideoList';
+import InfoLine from '../components/Category/InfoLine';
+import Category from '../components/Category/Left';
+import VideoList from '../components/VideoList/Right';
+import Top from '../components/Category/Top';
+import Bottom from '../components/VideoList/Bottom';
 
 const HomePage = () => {
   return (
@@ -12,8 +15,11 @@ const HomePage = () => {
       <Nav />
       <ContentWrap>
         <ContentContainer>
-          <Category />
+          {/* <Category /> */}
+          <InfoLine />
           <VideoList />
+          {/* <Top />
+          <Bottom /> */}
         </ContentContainer>
       </ContentWrap>
     </>
@@ -28,7 +34,7 @@ const ContentWrap = styled.section`
 `;
 
 const ContentContainer = styled.div`
-  /* margin: 0 auto; */
+  margin: 0 auto;
   max-width: 1060px;
   width: 1000px;
 `;
