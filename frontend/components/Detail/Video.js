@@ -20,4 +20,7 @@ const DetailVideoContainer = styled.div`
   margin: 20px auto;
   background-color: #ffffff;
   /* border: 1px solid green; */
+  @media ${(props) => props.theme.laptopM} {
+    width: 95vw;
+  }
 `;

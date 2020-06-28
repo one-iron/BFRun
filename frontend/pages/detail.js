@@ -4,7 +4,6 @@ import styled from 'styled-components';
 // internal modules
 import Nav from '../components/Nav';
 import DetailVideo from '../components/Detail/Video';
-import DetailList from '../components/Detail/List';
 import DetailContent from '../components/Detail/Content';
 
 const Detail = () => {
@@ -13,7 +12,6 @@ const Detail = () => {
       <Nav />
       <DetailWrap>
         <DetailVideo />
-        <DetailList />
         <DetailContent />
       </DetailWrap>
     </>

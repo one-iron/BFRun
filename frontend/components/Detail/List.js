@@ -18,11 +18,15 @@ const DetailListWrap = styled.div`
   top: 20px;
   left: 76vw;
   width: 15vw;
+  height: calc(80vh + 20px);
   background-color: #ffffff;
-  /* border: 1px solid blue; */
+  @media ${(props) => props.theme.laptopM} {
+    position: unset;
+    top: unset;
+    left: unset;
+    width: 45vw;
+    height: unset;
+    background-color: #ffffff;
+  }
 `;
-const DetailListContainer = styled.div`
-  overflow: auto;
-  height: calc(100vh - 156px);
-  /* border: 1px solid green; */
-`;
+const DetailListContainer = styled.div``;
