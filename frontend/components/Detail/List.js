@@ -18,13 +18,21 @@ const DetailListWrap = styled.div`
   top: 20px;
   left: 76vw;
   width: 15vw;
-  height: calc(80vh + 20px);
+  max-height: calc(80vh + 20px);
   background-color: #ffffff;
   @media ${(props) => props.theme.laptopM} {
     position: unset;
     top: unset;
     left: unset;
     width: 45vw;
+    height: unset;
+    background-color: #ffffff;
+  }
+  @media ${(props) => props.theme.tablet} {
+    position: unset;
+    top: unset;
+    left: unset;
+    width: 95vw;
     height: unset;
     background-color: #ffffff;
   }
