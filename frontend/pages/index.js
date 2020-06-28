@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Nav from '../components/Nav';
 import Category from '../components/Category';
 import VideoList from '../components/VideoList';
+import SelectedVideo from '../components/SelectedVideo';
 
 export default function HomePage() {
   return (
@@ -13,7 +14,8 @@ export default function HomePage() {
       <ContentWrap>
         <ContentContainer>
           <Category />
-          <VideoList />
+          {/* <VideoList /> */}
+          <SelectedVideo />
         </ContentContainer>
       </ContentWrap>
     </>
