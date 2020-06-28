@@ -18,12 +18,11 @@ const DetailListWrap = styled.div`
   top: 20px;
   left: 76vw;
   width: 15vw;
-  height: 65vh;
   background-color: #ffffff;
   /* border: 1px solid blue; */
 `;
 const DetailListContainer = styled.div`
   overflow: auto;
-  height: 65vh;
+  height: calc(100vh - 156px);
   /* border: 1px solid green; */
 `;
