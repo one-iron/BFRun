@@ -22,10 +22,17 @@ const DetailContent = () => {
   return (
     <DetailContentWrap>
       <DetailContentContainer>
-        <figure>
-          <ProfileImg img={data && data.profile} />
-          <Channel>{data && data.channel}</Channel>
-        </figure>
+        <section>
+          <figure>
+            <img src={data && data.profile} alt="" />
+            <figcaption>{data && data.channel}</figcaption>
+          </figure>
+        </section>
+        <section>
+          <summary>{data && data.title}</summary>
+          <article>{data && data.views}</article>
+          <time>{data && data.created_at}</time>
+        </section>
       </DetailContentContainer>
       <DetailList />
     </DetailContentWrap>
@@ -50,29 +57,41 @@ const DetailContentWrap = styled.div`
 `;
 
 const DetailContentContainer = styled.div`
-  background-color: #ffffff;
-  padding: 20px;
   @media ${(props) => props.theme.laptopM} {
     width: 45vw;
   }
   @media ${(props) => props.theme.tablet} {
     width: 95vw;
   }
-`;
-
-const ProfileImg = styled.div`
-  border: 1px solid #eee;
-  border-radius: 50px;
-  width: 55px;
-  height: 55px;
-  background-image: url(${(props) => props.img});
-  background-size: cover;
-`;
-
-const Channel = styled.div`
-  /* border: 1px solid red; */
-  margin: 10px 0;
-  display: inline-block;
+  background-color: #ffffff;
+  padding: 20px;
+  display: flex;
   font-size: 13px;
   color: #333;
+  section:nth-of-type(2) {
+    margin-left: 20px;
+    * {
+      margin-bottom: 5px;
+    }
+    :first-child {
+      color: red;
+    }
+  }
+  figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+  }
+  img {
+    border: 1px solid #eee;
+    border-radius: 50px;
+    width: 45px;
+    /* height: 55px; */
+    background-image: url(${(props) => props.img});
+    background-size: cover;
+  }
+  figcaption {
+    margin-top: 10px;
+  }
 `;
