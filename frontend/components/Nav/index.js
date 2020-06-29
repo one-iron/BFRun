@@ -1,10 +1,16 @@
 // external modules
-import styled from 'styled-components';
+import { useState } from 'react';
+import styled, { css } from 'styled-components';
 import Link from 'next/link';
 
-// interal modules
-
 const Nav = () => {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const dropDownMenu = () => {
+    setShowMenu(!showMenu);
+    console.log('hey');
+  };
+
   return (
     <NavWrap>
       <NavContainer>
@@ -14,7 +20,6 @@ const Nav = () => {
               <TitleText>BFRun</TitleText>
             </a>
           </Link>
-          <div>| About</div>
         </NavLeft>
         <NavMiddle>
           <SearchBox>
@@ -27,10 +32,15 @@ const Nav = () => {
             </SearchButton>
           </SearchBox>
         </NavMiddle>
-        <NavRight>
+        <RightMenu onClick={dropDownMenu}>
+          MENU
+          <i className="fa fa-caret-down" />
+        </RightMenu>
+        <NavRight isShow={showMenu}>
+          <RightContent>About</RightContent>
           <RightContent>Roadmap</RightContent>
           <RightContent>BFTest</RightContent>
-          <div>Login</div>
+          <RightContent>Login</RightContent>
         </NavRight>
       </NavContainer>
     </NavWrap>
@@ -42,19 +52,23 @@ export default Nav;
 const NavWrap = styled.nav`
   width: 100%;
   height: 80px;
-  border-bottom: 1px solid gray;
   position: fixed;
   background-color: white;
   z-index: 100;
+  box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.2);
 `;
 
 const NavContainer = styled.div`
-  width: 900px;
+  width: 1200px;
   margin: 0 auto;
   padding: 30px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media ${(props) => props.theme.laptopM} {
+    width: 90%;
+  }
 `;
 
 const NavLeft = styled.div`
@@ -100,8 +114,26 @@ const SearchButton = styled.button`
 
 const NavRight = styled(NavLeft)`
   display: flex;
+
+  @media ${(props) => props.theme.laptopS} {
+    display: ${(props) => (props.isShow ? 'block' : 'none')};
+  }
 `;
 
 const RightContent = styled.div`
   padding: 0 5px;
+`;
+
+const RightMenu = styled.div`
+  @media ${(props) => props.theme.laptopS} {
+    display: block;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+
+    i {
+      margin-left: 5px;
+      font-size: 18px;
+    }
+  }
 `;
