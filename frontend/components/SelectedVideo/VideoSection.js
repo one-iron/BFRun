@@ -1,22 +1,40 @@
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import styled, { css } from 'styled-components';
 
 const VideoSection = () => {
+  const [videoData, setVideoData] = useState([]);
+
+  useEffect(() => {
+    fetch('https://run.mocky.io/v3/62a3749c-fc70-4800-b16f-4e9b2b2079a7')
+      .then((res) => res.json())
+      .then((res) => setVideoData(res.videos));
+  }, []);
+
   return (
     <VideoSectionWrap>
       <CategoryName>제목부분</CategoryName>
       <VideoLiContainer>
-        <Buttons>이전</Buttons>
+        <Button back>
+          <i className="fa fa-chevron-circle-left" />
+        </Button>
         <ul>
-          <VideoLi>비디오 리스트1</VideoLi>
-          <VideoLi>비디오 리스트2</VideoLi>
-          <VideoLi>비디오 리스트3</VideoLi>
-          <VideoLi>비디오 리스트4</VideoLi>
-          <VideoLi>비디오 리스트4</VideoLi>
-          <VideoLi>비디오 리스트4</VideoLi>
-          <VideoLi>비디오 리스트4</VideoLi>
-          <VideoLi>비디오 리스트4</VideoLi>
+          {videoData.map((data) => {
+            return (
+              <VideoLi>
+                <iframe
+                  width="130"
+                  height="80"
+                  src={data.url}
+                  frameBorder="0"
+                  allowFullScreen
+                />
+              </VideoLi>
+            );
+          })}
         </ul>
-        <Buttons>다음</Buttons>
+        <Button next>
+          <i className="fa fa-chevron-circle-right" />
+        </Button>
       </VideoLiContainer>
     </VideoSectionWrap>
   );
@@ -26,6 +44,7 @@ export default VideoSection;
 
 const VideoSectionWrap = styled.div`
   border: 1px solid blue;
+  width: 90%;
   margin: 10px 0;
   padding: 10px;
   ul {
@@ -45,25 +64,30 @@ const CategoryName = styled.strong`
 const VideoLiContainer = styled.div`
   border: 1px solid red;
   display: flex;
+  position: relative;
   align-items: center;
   padding: 0 5px;
 `;
 
-const Buttons = styled.div`
-  border-radius: 5px;
-  text-align: center;
-  background-color: lime;
-  padding: 2px;
-  margin: 4px;
-  width: 100px;
+const Button = styled.div`
   cursor: pointer;
+  font-size: 20px;
+  position: absolute;
+  ${(props) =>
+    props.back &&
+    css`
+      left: 0;
+    `}
+  ${(props) =>
+    props.next &&
+    css`
+      right: 0;
+    `}
 `;
 
 const VideoLi = styled.li`
   float: left;
-  margin: 4px;
-  border: 1px solid blue;
-  background-color: rgba(52, 152, 219, 0.2);
+  margin: 10px;
   width: 120px;
   height: 80px;
 `;

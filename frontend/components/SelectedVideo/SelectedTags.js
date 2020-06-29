@@ -5,7 +5,7 @@ const SelectedTags = () => {
     <SelectedTagsWrap>
       <TagName>React</TagName>
       <TagName>Vue</TagName>
-      <TagName>HTML</TagName>
+      <TagName>어려워여ㅜㄹㅁㄹ</TagName>
       <TagName>HTML</TagName>
       <TagName>HTML</TagName>
       <TagName>HTML</TagName>
