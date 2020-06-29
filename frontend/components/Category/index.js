@@ -1,5 +1,5 @@
 // external modules
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 
 // internal modules
@@ -7,32 +7,51 @@ import LangToggle from './LangToggle';
 
 const Category = (props) => {
   const [showCategory, setShowCategory] = useState(false);
+  const categoryRef = useRef(null);
+  const buttonRef = useRef(null);
 
   const toggleCategory = () => {
-    setShowCategory(!showCategory);
+    if (showCategory) {
+      setShowCategory(false);
+    } else {
+      setShowCategory(true);
+    }
   };
 
-  const closeCategory = () => {
-    setShowCategory(false);
+  const clickedCategoryOutside = () => {
+    useEffect(() => {
+      const handleOutside = (e) => {
+        if (
+          !buttonRef.current.contains(e.target) &&
+          categoryRef.current &&
+          !categoryRef.current.contains(e.target)
+        ) {
+          setShowCategory(false);
+        }
+      };
+
+      document.addEventListener('mousedown', handleOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleOutside);
+      };
+    }, [categoryRef]);
   };
 
   const { selected } = props;
-
-  // 카테고리 height 775px 이하일때, scroll로 바꿔야 함
+  clickedCategoryOutside(categoryRef);
 
   return (
     <>
       {/* 모바일일 때 나오는 아이콘 */}
       <InfoWrap>
-        <InfoButton onClick={toggleCategory}>
+        <InfoButton onClick={toggleCategory} ref={buttonRef}>
           <i className="fa fa-bars" />
         </InfoButton>
       </InfoWrap>
 
       {/* 카테고리 창 */}
-      <CategoryWrap isOpen={showCategory}>
+      <CategoryWrap isOpen={showCategory} ref={categoryRef}>
         <CategoryContainer>
-          <Close onClick={closeCategory}>x</Close>
           <LangToggle />
           <GroupContainer>
             <Title>컨텐츠</Title>
@@ -70,7 +89,8 @@ const Category = (props) => {
             </AllTags>
           </GroupContainer>
           <GroupContainer>
-            <Title>위코드 홍보</Title>
+            <Title wecode>부트캠프를 찾고 계신다면?</Title>
+            <WecodeImg src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/logo_black.png" />
           </GroupContainer>
         </CategoryContainer>
       </CategoryWrap>
@@ -97,6 +117,7 @@ const InfoWrap = styled.section`
 const InfoButton = styled.button`
   width: 50px;
   height: 50px;
+  cursor: pointer;
   background-color: black;
   border-radius: 50px;
   outline: none;
@@ -134,12 +155,18 @@ const CategoryContainer = styled.div`
   border: 1px solid #ececec;
   border-radius: 10px;
   background-color: #ececec;
-`;
 
-const Close = styled.button`
-  display: none;
-  @media ${(props) => props.theme.laptopM} {
-    display: block;
+  @media (max-height: 775px && max-width: 1239px) {
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #b8b8b8;
+    }
   }
 `;
 
@@ -151,6 +178,13 @@ const GroupContainer = styled.div`
 const Title = styled.div`
   font-size: 20px;
   font-weight: bold;
+
+  ${(props) =>
+    props.wecode &&
+    css`
+      font-size: 15px;
+      font-weight: 400;
+    `}
 `;
 
 const AllTags = styled.div`
@@ -173,4 +207,10 @@ const Tag = styled.div`
     css`
       background-color: ${(props) => props.theme.subColor};
     `}
+`;
+
+const WecodeImg = styled.img`
+  width: 150px;
+  height: auto;
+  margin-top: 15px;
 `;
