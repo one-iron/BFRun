@@ -2,8 +2,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 
-// interal modules
-
 const Nav = () => {
   return (
     <NavWrap>
