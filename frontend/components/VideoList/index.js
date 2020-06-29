@@ -1,9 +1,11 @@
 // external modules
 import styled from 'styled-components';
 
-const VideoList = () => {
+const VideoList = (props) => {
+  const { selectedTags } = props;
   return (
     <VideoWrap>
+      {selectedTags}
       <VideoContainer>
         <div>prev</div>
         <Videos>
@@ -25,11 +27,17 @@ const VideoList = () => {
 export default VideoList;
 
 const VideoWrap = styled.section`
-  position: absolute;
-  left: calc((100% - 500px) / 2);
-  max-width: 750px;
+  position: relative;
+  left: calc((100% - 950px) / 2);
+  width: 950px;
   height: 1200px;
+  margin: 0 auto;
   border: 1px solid green;
+
+  @media ${(props) => props.theme.laptopM} {
+    left: 0;
+    width: 90%;
+  }
 `;
 
 const VideoContainer = styled.article`
