@@ -22,6 +22,7 @@ const VideoSection = () => {
             return (
               <VideoLi>
                 <iframe
+                  title="youtube"
                   width="130"
                   height="80"
                   src={data.url}
