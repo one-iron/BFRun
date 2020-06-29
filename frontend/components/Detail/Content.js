@@ -15,26 +15,31 @@ const DetailContent = () => {
       .then((response) => {
         // eslint-disable-next-line no-console
         setData(response.data);
-        console.log('axios >>>', response.data);
+        // console.log('axios >>>', response.data);
       });
   }, []);
 
   return (
     <DetailContentWrap>
       <DetailContentContainer>
-        <section>
-          <figure>
-            <img src={data && data.profile} alt="" />
-            <figcaption>{data && data.channel}</figcaption>
-          </figure>
-        </section>
-        <section>
-          <summary>{data && data.title}</summary>
-          <article>{data && data.views}</article>
-          <time>{data && data.created_at}</time>
-        </section>
+        {data && (
+          <>
+            <section>
+              <figure>
+                <img src={data.profile} alt="" />
+                <figcaption>{data.channel}</figcaption>
+              </figure>
+            </section>
+            <section>
+              <summary>{data.title}</summary>
+              <articel>{data.views}</articel>
+            </section>
+          </>
+        )}
       </DetailContentContainer>
-      <DetailList />
+      <ListSection>
+        <DetailList />
+      </ListSection>
     </DetailContentWrap>
   );
 };
@@ -42,9 +47,10 @@ const DetailContent = () => {
 export default DetailContent;
 
 const DetailContentWrap = styled.div`
-  width: 50vw;
+  position: absolute;
+  bottom: 3vh;
+  width: 60vw;
   height: 15vh;
-  margin: 20px auto;
   @media ${(props) => props.theme.laptopM} {
     display: flex;
     justify-content: space-between;
@@ -56,42 +62,58 @@ const DetailContentWrap = styled.div`
   }
 `;
 
+const ListSection = styled.section`
+  display: none;
+  @media ${(props) => props.theme.laptopM} {
+    display: unset;
+  }
+`;
+
 const DetailContentContainer = styled.div`
+  background-color: #ffffff;
+  display: flex;
+  font-size: 13px;
+  color: #333;
+  padding: 15px;
   @media ${(props) => props.theme.laptopM} {
     width: 45vw;
   }
   @media ${(props) => props.theme.tablet} {
     width: 95vw;
   }
-  background-color: #ffffff;
-  padding: 20px;
-  display: flex;
-  font-size: 13px;
-  color: #333;
-  section:nth-of-type(2) {
-    margin-left: 20px;
-    * {
-      margin-bottom: 5px;
-    }
-    :first-child {
-      color: red;
-    }
-  }
   figure {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 80px;
+    img {
+      border: 1px solid #eee;
+      border-radius: 50px;
+      width: 45px;
+      /* height: 55px; */
+      background-image: url(${(props) => props.img});
+      background-size: cover;
+    }
+    figcaption {
+      margin-top: 10px;
+    }
   }
-  img {
-    border: 1px solid #eee;
-    border-radius: 50px;
-    width: 45px;
-    /* height: 55px; */
-    background-image: url(${(props) => props.img});
-    background-size: cover;
-  }
-  figcaption {
-    margin-top: 10px;
+
+  section:nth-of-type(2) {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    * {
+      margin-bottom: 5px;
+    }
+    summary {
+      font-size: 18px;
+      font-weight: 600;
+      height: 25px;
+    }
+    article {
+      text-align: left;
+    }
   }
 `;

@@ -14,11 +14,9 @@ const DetailList = () => {
 export default DetailList;
 
 const DetailListWrap = styled.div`
-  position: absolute;
-  top: 20px;
-  left: 76vw;
-  width: 15vw;
-  max-height: calc(80vh + 20px);
+  width: 23vw;
+  height: 82vh;
+  margin-left: 20px;
   background-color: #ffffff;
   @media ${(props) => props.theme.laptopM} {
     position: unset;

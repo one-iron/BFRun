@@ -49,7 +49,7 @@ const NavWrap = styled.nav`
 `;
 
 const NavContainer = styled.div`
-  width: 900px;
+  width: 1200px;
   margin: 0 auto;
   padding: 30px 0;
   display: flex;

@@ -2,24 +2,33 @@
 import styled, { css } from 'styled-components';
 
 // internal modules
+import DetailList from './List';
 
 const DetailVideo = () => {
   return (
     <DetailVideoWrap>
       <DetailVideoContainer>detail Video Section</DetailVideoContainer>
+      <section>
+        <DetailList />
+      </section>
     </DetailVideoWrap>
   );
 };
 
 export default DetailVideo;
 
-const DetailVideoWrap = styled.div``;
+const DetailVideoWrap = styled.div`
+  display: flex;
+  @media ${(props) => props.theme.laptopM} {
+    section {
+      display: none;
+    }
+  }
+`;
 const DetailVideoContainer = styled.div`
-  width: 50vw;
-  height: 65vh;
-  margin: 20px auto;
+  width: 60vw;
+  height: 68vh;
   background-color: #ffffff;
-  /* border: 1px solid green; */
   @media ${(props) => props.theme.laptopM} {
     width: 95vw;
   }
