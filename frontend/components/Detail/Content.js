@@ -8,6 +8,9 @@ import DetailList from './List';
 
 const DetailContent = () => {
   const [data, setData] = useState();
+  const numberFilter = new Intl.NumberFormat('en-IN', {
+    maximumSignificantDigits: 3,
+  });
 
   useEffect(() => {
     axios
@@ -32,7 +35,10 @@ const DetailContent = () => {
             </section>
             <section>
               <summary>{data.title}</summary>
-              <articel>{data.views}</articel>
+              <articel>
+                조회수 {numberFilter.format(data.views)}회{' '}
+                <time>{data.created_at}</time>
+              </articel>
             </section>
           </>
         )}
@@ -85,6 +91,7 @@ const DetailContentContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 80px;
     img {
       border: 1px solid #eee;
@@ -103,17 +110,19 @@ const DetailContentContainer = styled.div`
     margin-left: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: center;
     * {
       margin-bottom: 5px;
     }
     summary {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 600;
       height: 25px;
     }
     article {
       text-align: left;
+      color: gray;
     }
   }
 `;
