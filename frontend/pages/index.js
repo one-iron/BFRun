@@ -4,9 +4,8 @@ import styled from 'styled-components';
 
 // internal modules
 import Nav from '../components/Nav';
-import Category from '../components/Category/Left';
+import Category from '../components/Category';
 import VideoList from '../components/VideoList';
-// import VideoList from '../components/VideoList';
 import SelectedVideo from '../components/SelectedVideo';
 
 export default function HomePage() {
