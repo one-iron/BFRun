@@ -1,8 +1,16 @@
 // external modules
-import styled from 'styled-components';
+import { useState } from 'react';
+import styled, { css } from 'styled-components';
 import Link from 'next/link';
 
 const Nav = () => {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const dropDownMenu = () => {
+    setShowMenu(!showMenu);
+    console.log('hey');
+  };
+
   return (
     <NavWrap>
       <NavContainer>
@@ -24,7 +32,11 @@ const Nav = () => {
             </SearchButton>
           </SearchBox>
         </NavMiddle>
-        <NavRight>
+        <RightMenu onClick={dropDownMenu}>
+          MENU
+          <i className="fa fa-caret-down" />
+        </RightMenu>
+        <NavRight isShow={showMenu}>
           <RightContent>About</RightContent>
           <RightContent>Roadmap</RightContent>
           <RightContent>BFTest</RightContent>
@@ -102,8 +114,26 @@ const SearchButton = styled.button`
 
 const NavRight = styled(NavLeft)`
   display: flex;
+
+  @media ${(props) => props.theme.laptopS} {
+    display: ${(props) => (props.isShow ? 'block' : 'none')};
+  }
 `;
 
 const RightContent = styled.div`
   padding: 0 5px;
+`;
+
+const RightMenu = styled.div`
+  @media ${(props) => props.theme.laptopS} {
+    display: block;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+
+    i {
+      margin-left: 5px;
+      font-size: 18px;
+    }
+  }
 `;
