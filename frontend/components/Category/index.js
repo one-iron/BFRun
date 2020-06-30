@@ -58,7 +58,7 @@ const Category = (props) => {
             <AllTags>
               <Tag onClick={() => selected('lecture')}>강의</Tag>
               <Tag onClick={() => selected('honey tips')}>꿀팁</Tag>
-              <Tag>공통</Tag>
+              <Tag onClick={() => selected('general')}>공통</Tag>
             </AllTags>
           </GroupContainer>
           <GroupContainer>
@@ -156,7 +156,7 @@ const CategoryContainer = styled.div`
   border-radius: 10px;
   background-color: #ececec;
 
-  @media (max-height: 775px && max-width: 1239px) {
+  @media (max-height: 775px) {
     height: 400px;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -182,7 +182,7 @@ const Title = styled.div`
   ${(props) =>
     props.wecode &&
     css`
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 400;
     `}
 `;
@@ -210,7 +210,7 @@ const Tag = styled.div`
 `;
 
 const WecodeImg = styled.img`
-  width: 150px;
+  width: 100px;
   height: auto;
   margin-top: 15px;
 `;
