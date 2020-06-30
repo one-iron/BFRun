@@ -15,7 +15,7 @@ const VideoSection = () => {
       <CategoryName>제목부분</CategoryName>
       <VideoLiContainer>
         <Button back>
-          <i className="fa fa-chevron-circle-left" />
+          <i className="fa fa-caret-left" />
         </Button>
         <ul>
           {videoData.map((data) => {
@@ -34,7 +34,7 @@ const VideoSection = () => {
           })}
         </ul>
         <Button next>
-          <i className="fa fa-chevron-circle-right" />
+          <i className="fa fa-caret-right" />
         </Button>
       </VideoLiContainer>
     </VideoSectionWrap>
@@ -74,7 +74,8 @@ const VideoLiContainer = styled.div`
 
 const Button = styled.div`
   cursor: pointer;
-  font-size: 20px;
+  font-size: 50px;
+  color: rgba(255, 118, 117, 1);
   position: absolute;
   ${(props) =>
     props.back &&
