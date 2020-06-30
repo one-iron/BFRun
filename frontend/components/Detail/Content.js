@@ -4,7 +4,6 @@ import axios from 'axios';
 import styled, { css } from 'styled-components';
 
 // internal modules
-import DetailList from './List';
 
 const DetailContent = () => {
   const [data, setData] = useState();
@@ -18,9 +17,7 @@ const DetailContent = () => {
     axios
       .get('https://run.mocky.io/v3/52ed43fb-0d74-437d-a71c-b9e59d436a09')
       .then((response) => {
-        // eslint-disable-next-line no-console
         setData(response.data);
-        // console.log('axios >>>', response.data);
       });
   }, []);
 
@@ -37,10 +34,36 @@ const DetailContent = () => {
             </section>
             <section>
               <summary>{data.title}</summary>
-              <articel>
+              <article>
                 조회수 {numberFilter.format(data.views)}회{' '}
                 <time>{data.created_at}</time>
-              </articel>
+              </article>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
+              <main>{data.descriptions}</main>
               <main>{data.descriptions}</main>
             </section>
           </>
@@ -57,7 +80,6 @@ const DetailContentWrap = styled.div`
   top: calc(68vh + 80px); */
   margin-top: 20px;
   width: 960px;
-  /* height: 15vh; */
   @media ${(props) => props.theme.laptopM} {
     display: flex;
     justify-content: space-between;
