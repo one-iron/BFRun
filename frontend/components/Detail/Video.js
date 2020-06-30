@@ -8,11 +8,15 @@ import DetailContent from './Content';
 import DetailList from './List';
 
 const DetailVideo = () => {
+  // gotUrl은 백엔드에서 받아오는 영상의 주소이다. 하지만 이 주소로는 iframe을 이용해서 띄울수가 없으니 가공을 해야한다.
   const gotUrl =
     'https://www.youtube.com/watch?v=tZooW6PritE&list=PLuHgQVnccGMDZP7FJ_ZsUrdCGH68ppvPb&index=2&t=0s';
+  // 디테일 영상 페이지로 쿼리를 찍어 들어오는지는 알 수 없지만, 그럴 가정으로 만들었다. 그러면, 쿼리유알에을 이 곳에 저장한다.
   const queryUrl = 'tZooW6PritE?list=PLuHgQVnccGMDZP7FJ_ZsUrdCGH68ppvPb';
+  // 쿼리 유알엘에서 리스트 주소만 뽑아 놓자
   const listUrl = 'PLuHgQVnccGMDZP7FJ_ZsUrdCGH68ppvPb';
   const [videoUrl, setVideoUrl] = useState([queryUrl]);
+  // clicklist 함수는 디테일 리스트 컴포넌트로 넘겨서, 재생목록을 클릭하면 해당 인덱스를 추가하여 영상을 재랜더하게 해주는 함수이다.
   const clickList = (index) => {
     setVideoUrl(`${queryUrl}&index=${index}`);
     console.log('videoUrl', videoUrl);
