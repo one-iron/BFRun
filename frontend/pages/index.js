@@ -10,6 +10,7 @@ import SelectedVideo from '../components/SelectedVideo';
 
 export default function HomePage() {
   const [selectedTags, setSelectedTags] = useState([]);
+  console.log(selectedTags);
 
   const selected = (tag) => {
     if (selectedTags.includes(tag)) {
@@ -35,8 +36,11 @@ export default function HomePage() {
       <ContentWrap>
         <ContentContainer>
           <Category selectedTags={selectedTags} selected={selected} />
-          <VideoList selectedTags={selectedTags} />
-          <SelectedVideo />
+          {selectedTags[0] ? (
+            <SelectedVideo selectedTags={selectedTags} />
+          ) : (
+            <VideoList />
+          )}
         </ContentContainer>
       </ContentWrap>
     </>

@@ -87,7 +87,8 @@ const NavWrap = styled.nav`
   width: 100%;
   height: 80px;
   position: fixed;
-  background-color: ${(props) => props.theme.mainColor};
+  background-color: white;
+  /* background-color: ${(props) => props.theme.mainColor}; */
   z-index: 100;
   box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.2);
 `;
@@ -126,10 +127,15 @@ const TitleText = styled.div`
   cursor: pointer;
 `;
 
-const NavMiddle = styled(NavLeft)`
-  padding-left: 30px;
+const NavMiddle = styled.div`
+  width: 500px;
+
+  @media ${(props) => props.theme.tablet} {
+    width: 300px;
+  }
 
   @media (max-width: 600px) {
+    width: 0;
     padding: 0;
   }
 `;
@@ -165,8 +171,7 @@ const ArrowBack = styled.i`
 const SearchBox = styled.form`
   border: 1px solid gray;
   border-radius: 5px;
-  width: 300px;
-  height: 25px;
+  height: 30px;
   display: flex;
   background-color: white;
 
@@ -182,14 +187,9 @@ const SearchBox = styled.form`
 `;
 
 const SearchInput = styled.input`
-  /* width: 280px; */
   width: 100%;
   font-size: 12px;
-  padding-left: 10px;
-
-  /* @media ${(props) => props.theme.tablet} {
-    width: 100%;
-  } */
+  padding-left: 20px;
 `;
 
 const SearchButton = styled.button`
@@ -240,13 +240,30 @@ const NavRight = styled.div`
   align-items: center;
 
   @media ${(props) => props.theme.laptopS} {
-    display: ${(props) => (props.isShow ? 'block' : 'none')};
+    display: none;
     position: absolute;
     background-color: white;
-    border: 1px solid green;
+    border: 1px solid black;
+    border-top: none;
     border-radius: 5px;
-    width: 80px;
-    height: 115px;
+
+    ${(props) =>
+      props.isShow &&
+      css`
+        display: block;
+        width: 80px;
+        animation-name: down;
+        animation-duration: 0.5s;
+      `}
+
+    @keyframes down {
+      from {
+        height: 0;
+      }
+      to {
+        height: 115px;
+      }
+    }
   }
 `;
 
@@ -257,5 +274,23 @@ const RightContent = styled.div`
   @media ${(props) => props.theme.laptopS} {
     margin: 10px 5px;
     padding: 0;
+
+    ${(props) =>
+      props.isShow &&
+      css`
+        width: 80px;
+        animation-name: slideDown;
+        animation-duration: 0.5s;
+      `}
+
+    @keyframes slideDown {
+      from {
+        height: 0;
+      }
+
+      to {
+        height: 115px;
+      }
+    }
   }
 `;
