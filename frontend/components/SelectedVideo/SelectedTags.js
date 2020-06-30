@@ -8,8 +8,8 @@ const SelectedTags = (props) => {
       {selectedTags.map((tag, index) => {
         return <TagName key={index}>{tag}</TagName>;
       })}
-      <TagName>React</TagName>
-      <TagName>Vue</TagName>
+      {/* <TagName>React</TagName>
+      <TagName>Vue</TagName> */}
       {/* <TagName>어려워여ㅜㄹㅁㄹ</TagName>
       <TagName>HTML</TagName>
       <TagName>HTML</TagName>

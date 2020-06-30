@@ -10,21 +10,18 @@ import SelectedVideo from '../components/SelectedVideo';
 
 export default function HomePage() {
   const [selectedTags, setSelectedTags] = useState([]);
-  console.log(selectedTags);
+  console.log('현재 Tags', selectedTags);
 
   const selected = (tag) => {
     if (selectedTags.includes(tag)) {
-      // 해당 태그가 있을 경우
+      // 해당 태그가 있을 경우, 제거
       console.log('tag', tag);
-      // console.log(
-      //   '제거할 애',
-      //   selectedTags.splice(selectedTags.indexOf(tag), 1),
-      // );
-      console.log('제거할 애 index', selectedTags.indexOf(tag));
+      console.log('제거할 애 index', tag, selectedTags.indexOf(tag));
+      console.log('remove', selectedTags.splice(selectedTags.indexOf(tag), 1));
       setSelectedTags(selectedTags.splice(selectedTags.indexOf(tag), 1));
       console.log('제거한 후의 selTag', selectedTags);
     } else {
-      // 해당 태그가 없을 경우 추가하고 중복 제거
+      // 해당 태그가 없을 경우 추가, 대신 중복 추가 불가
       console.log('selTag', selectedTags);
       setSelectedTags(Array.from(new Set([...selectedTags, tag])));
     }
