@@ -5,7 +5,7 @@ const SelectedTags = () => {
     <SelectedTagsWrap>
       <TagName>React</TagName>
       <TagName>Vue</TagName>
-      <TagName>어려워여ㅜㄹㅁㄹ</TagName>
+      {/* <TagName>어려워여ㅜㄹㅁㄹ</TagName>
       <TagName>HTML</TagName>
       <TagName>HTML</TagName>
       <TagName>HTML</TagName>
@@ -13,7 +13,7 @@ const SelectedTags = () => {
       <TagName>NextJS</TagName>
       <TagName>TypeScript</TagName>
       <TagName>React Native</TagName>
-      <TagName>Redux</TagName>
+      <TagName>Redux</TagName> */}
     </SelectedTagsWrap>
   );
 };
@@ -21,10 +21,12 @@ const SelectedTags = () => {
 export default SelectedTags;
 
 const SelectedTagsWrap = styled.div`
-  border: 1px solid black;
+  border: 1px solid #ececec;
   flex-wrap: wrap;
   display: flex;
-  /* width: 80%; */
+  width: 100%;
+  border-radius: 10px;
+  background-color: #ececec;
 `;
 
 const TagName = styled.span`

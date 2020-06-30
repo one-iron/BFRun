@@ -29,7 +29,7 @@ export default VideoList;
 const VideoWrap = styled.section`
   position: relative;
   left: calc((100% - 950px) / 2);
-  width: 950px;
+  max-width: 950px;
   height: 1200px;
   margin: 0 auto;
   border: 1px solid green;

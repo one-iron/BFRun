@@ -23,7 +23,7 @@ const VideoSection = () => {
               <VideoLi>
                 <iframe
                   title="youtube"
-                  width="130"
+                  width="100%"
                   height="80"
                   src={data.url}
                   frameBorder="0"
@@ -45,14 +45,16 @@ export default VideoSection;
 
 const VideoSectionWrap = styled.div`
   border: 1px solid blue;
-  width: 90%;
+  width: 100%;
   margin: 10px 0;
   padding: 10px;
   ul {
     border: 1px solid green;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    @media (max-width: 500px) {
+      justify-content: center;
+    }
   }
 `;
 
@@ -89,6 +91,10 @@ const Button = styled.div`
 const VideoLi = styled.li`
   float: left;
   margin: 10px;
-  width: 120px;
-  height: 80px;
+  width: 160px;
+  height: 90px;
+  @media (max-width: 500px) {
+    width: 200px;
+    heigth: 130px;
+  }
 `;
