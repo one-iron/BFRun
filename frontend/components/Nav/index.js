@@ -8,7 +8,6 @@ const Nav = () => {
 
   const dropDownMenu = () => {
     setShowMenu(!showMenu);
-    console.log('hey');
   };
 
   return (
@@ -22,6 +21,11 @@ const Nav = () => {
           </Link>
         </NavLeft>
         <NavMiddle>
+          {/* 600px 이하일 때, 클릭할 때 input창 보이게 */}
+          <Under600Search>
+            <i className="fa fa-search" />
+          </Under600Search>
+          {/* 600px 이상일 때 */}
           <SearchBox>
             <SearchInput
               type="text"
@@ -32,16 +36,18 @@ const Nav = () => {
             </SearchButton>
           </SearchBox>
         </NavMiddle>
-        <RightMenu onClick={dropDownMenu}>
-          MENU
-          <i className="fa fa-caret-down" />
-        </RightMenu>
-        <NavRight isShow={showMenu}>
-          <RightContent>About</RightContent>
-          <RightContent>Roadmap</RightContent>
-          <RightContent>BFTest</RightContent>
-          <RightContent>Login</RightContent>
-        </NavRight>
+        <RightContainer>
+          <RightMenu onClick={dropDownMenu}>
+            MENU
+            <i className="fa fa-caret-down" />
+          </RightMenu>
+          <NavRight isShow={showMenu}>
+            <RightContent>About</RightContent>
+            <RightContent>Roadmap</RightContent>
+            <RightContent>BFTest</RightContent>
+            <RightContent>Login</RightContent>
+          </NavRight>
+        </RightContainer>
       </NavContainer>
     </NavWrap>
   );
@@ -74,10 +80,7 @@ const NavContainer = styled.div`
 const NavLeft = styled.div`
   display: flex;
   align-items: center;
-
-  div {
-    margin-left: 10px;
-  }
+  margin-left: 10px;
 `;
 
 const TitleText = styled.div`
@@ -91,16 +94,36 @@ const NavMiddle = styled(NavLeft)`
   padding-left: 30px;
 `;
 
+const Under600Search = styled.div`
+  display: none;
+
+  @media (max-width: 600px) {
+    display: block;
+    font-size: 20px;
+  }
+`;
+
 const SearchBox = styled.form`
   border: 1px solid gray;
   border-radius: 5px;
+  width: 300px;
+  height: 25px;
+  display: flex;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const SearchInput = styled.input`
-  width: 280px;
-  height: 25px;
+  /* width: 280px; */
+  width: 100%;
   font-size: 12px;
   padding-left: 10px;
+
+  /* @media ${(props) => props.theme.tablet} {
+    width: 100%;
+  } */
 `;
 
 const SearchButton = styled.button`
@@ -112,28 +135,51 @@ const SearchButton = styled.button`
   padding: 0;
 `;
 
-const NavRight = styled(NavLeft)`
-  display: flex;
-
+const RightContainer = styled.div`
   @media ${(props) => props.theme.laptopS} {
-    display: ${(props) => (props.isShow ? 'block' : 'none')};
+    position: relative;
   }
 `;
 
-const RightContent = styled.div`
-  padding: 0 5px;
-`;
-
 const RightMenu = styled.div`
+  display: none;
+
   @media ${(props) => props.theme.laptopS} {
     display: block;
+    position: sticky;
+    cursor: pointer;
     border: 1px solid gray;
     border-radius: 5px;
     padding: 5px;
+    width: 80px;
 
     i {
       margin-left: 5px;
       font-size: 18px;
     }
+  }
+`;
+
+const NavRight = styled(NavLeft)`
+  display: flex;
+
+  @media ${(props) => props.theme.laptopS} {
+    display: ${(props) => (props.isShow ? 'block' : 'none')};
+    position: absolute;
+    background-color: white;
+    border: 1px solid green;
+    border-radius: 5px;
+    width: 80px;
+    height: 115px;
+  }
+`;
+
+const RightContent = styled.div`
+  padding: 0 5px;
+  margin-left: 10px;
+
+  @media ${(props) => props.theme.laptopS} {
+    margin: 10px 5px;
+    padding: 0;
   }
 `;
