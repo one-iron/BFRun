@@ -75,19 +75,11 @@ export default class MyDocument extends Document {
             href="/static/favicon.ico"
             type="image/x-icon"
           />
-          <link
-            rel="stylesheet"
-            href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
-          />
           <script
             type="text/javascript"
             src="https://code.jquery.com/jquery-1.12.4.min.js"
           />
-          <script
-            type="text/javascript"
-            src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"
-          />
-          <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" /> */}
+           */}
         </Head>
         <body>
           <Main />
