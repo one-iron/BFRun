@@ -5,6 +5,8 @@ import styled, { css } from 'styled-components';
 // internal modules
 import LangToggle from './LangToggle';
 
+// const contents = [{ lecture: '강의' }, { tips: '꿀팁' }, { general: '공통' }];
+
 const Category = (props) => {
   const [showCategory, setShowCategory] = useState(false);
   const categoryRef = useRef(null);
@@ -56,6 +58,13 @@ const Category = (props) => {
           <GroupContainer>
             <Title>컨텐츠</Title>
             <AllTags>
+              {/* {contents.map((tag, index) => {
+                return (
+                  <Tag key={index} onClick={() => selected(Object.keys(tag))}>
+                    {Object.values(tag)}
+                  </Tag>
+                );
+              })} */}
               <Tag onClick={() => selected('lecture')}>강의</Tag>
               <Tag onClick={() => selected('honey tips')}>꿀팁</Tag>
               <Tag onClick={() => selected('general')}>공통</Tag>
@@ -64,28 +73,30 @@ const Category = (props) => {
           <GroupContainer>
             <Title>프론트</Title>
             <AllTags>
-              <Tag>HTML</Tag>
-              <Tag>CSS</Tag>
-              <Tag>JavaScript</Tag>
-              <Tag>React</Tag>
+              <Tag style={{ backgroundColor: '#E55126' }}>HTML</Tag>
+              <Tag style={{ backgroundColor: '#0C73B8' }}>CSS</Tag>
+              <Tag style={{ backgroundColor: '#E5A228' }}>JavaScript</Tag>
+              <Tag style={{ backgroundColor: '#5ED4F4' }}>React</Tag>
             </AllTags>
           </GroupContainer>
           <GroupContainer>
             <Title>백</Title>
             <AllTags>
-              <Tag>Python</Tag>
-              <Tag>Node.js</Tag>
-              <Tag>Flask</Tag>
+              <Tag style={{ backgroundColor: '#396C97' }}>Python</Tag>
+              <Tag style={{ backgroundColor: '#7CB801' }}>Node.js</Tag>
+              <Tag style={{ backgroundColor: 'black' }}>Flask</Tag>
             </AllTags>
           </GroupContainer>
           <GroupContainer>
             <Title>크리에이터</Title>
             <AllTags>
-              <Tag creator>생활코딩</Tag>
-              <Tag>노마드코더</Tag>
-              <Tag>얄팍한 코딩사전</Tag>
-              <Tag>테크보이</Tag>
-              <Tag>김버그</Tag>
+              <Tag creator style={{ backgroundColor: '#F80000' }}>
+                생활코딩
+              </Tag>
+              <Tag style={{ backgroundColor: '#F80000' }}>노마드코더</Tag>
+              <Tag style={{ backgroundColor: '#F80000' }}>얄팍한 코딩사전</Tag>
+              <Tag style={{ backgroundColor: '#F80000' }}>테크보이</Tag>
+              <Tag style={{ backgroundColor: '#F80000' }}>김버그</Tag>
             </AllTags>
           </GroupContainer>
           <GroupContainer>
@@ -145,16 +156,29 @@ const CategoryWrap = styled.aside`
         display: block;
         bottom: 80px;
         left: 20px;
+
+        animation-name: slideUp;
+        animation-duration: 0.3s;
       `}
+
+    @keyframes slideUp {
+      from {
+        bottom: 0px;
+      }
+
+      to {
+        bottom: 80px;
+      }
+    }
   }
 `;
 
 const CategoryContainer = styled.div`
   width: 240px;
   height: 600px;
-  border: 1px solid #ececec;
+  border: 1px solid #eee;
   border-radius: 10px;
-  background-color: #ececec;
+  background-color: #eee;
 
   @media (max-height: 775px) {
     height: 400px;

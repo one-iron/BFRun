@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 
-const SelectedTags = () => {
+const SelectedTags = (props) => {
+  console.log(props);
+  const { selectedTags } = props;
   return (
     <SelectedTagsWrap>
+      {selectedTags.map((tag, index) => {
+        return <TagName key={index}>{tag}</TagName>;
+      })}
       <TagName>React</TagName>
       <TagName>Vue</TagName>
       {/* <TagName>어려워여ㅜㄹㅁㄹ</TagName>

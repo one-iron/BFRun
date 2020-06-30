@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import SelectedTags from './SelectedTags';
 import VideoSection from './VideoSection';
 
-const SelectedVideo = () => {
+const SelectedVideo = (props) => {
   return (
     <SelectedVideoWrap>
       이곳
-      <SelectedTags />
+      <SelectedTags selectedTags={props.selectedTags} />
       <VideoSection />
     </SelectedVideoWrap>
   );
