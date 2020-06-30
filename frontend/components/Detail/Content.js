@@ -8,13 +8,15 @@ import DetailList from './List';
 
 const DetailContent = () => {
   const [data, setData] = useState();
+  // 조회수의 숫자에 쉼표를 찍는 Intl 함수를 변수로 지정하여 조회수에 쓰이고 있습니다.
   const numberFilter = new Intl.NumberFormat('en-IN', {
     maximumSignificantDigits: 3,
   });
 
+  // 영상의 정보들을 이 곳에서 패치하여 data에 저장합니다.
   useEffect(() => {
     axios
-      .get('https://run.mocky.io/v3/f55d367e-769a-4257-9bd0-9b48f1926c45')
+      .get('https://run.mocky.io/v3/52ed43fb-0d74-437d-a71c-b9e59d436a09')
       .then((response) => {
         // eslint-disable-next-line no-console
         setData(response.data);
@@ -39,13 +41,11 @@ const DetailContent = () => {
                 조회수 {numberFilter.format(data.views)}회{' '}
                 <time>{data.created_at}</time>
               </articel>
+              <main>{data.descriptions}</main>
             </section>
           </>
         )}
       </DetailContentContainer>
-      <ListSection>
-        <DetailList />
-      </ListSection>
     </DetailContentWrap>
   );
 };
@@ -53,10 +53,11 @@ const DetailContent = () => {
 export default DetailContent;
 
 const DetailContentWrap = styled.div`
-  position: absolute;
-  bottom: 3vh;
-  width: 60vw;
-  height: 15vh;
+  /* position: absolute;
+  top: calc(68vh + 80px); */
+  margin-top: 20px;
+  width: 960px;
+  /* height: 15vh; */
   @media ${(props) => props.theme.laptopM} {
     display: flex;
     justify-content: space-between;
@@ -118,7 +119,7 @@ const DetailContentContainer = styled.div`
     summary {
       font-size: 20px;
       font-weight: 600;
-      height: 25px;
+      /* height: 25px; */
     }
     article {
       text-align: left;
