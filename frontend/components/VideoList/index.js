@@ -2,10 +2,14 @@
 import styled from 'styled-components';
 import Recommend from './Recommend';
 
+// internal modules
+import BFTest from '../BFTest';
+
 const VideoList = (props) => {
   const { selectedTags } = props;
   return (
     <VideoWrap>
+      <BFTest />
       {selectedTags}
       <article>
         <Recommend title="전체 추천 영상" />
