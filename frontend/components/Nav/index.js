@@ -8,6 +8,7 @@ const Nav = () => {
   const [searchBox, setSearchBox] = useState(false);
   const [input, setInput] = useState('');
 
+  // 화면 작아졌을 때, 오른쪽 상단 메뉴
   const dropDownMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -16,6 +17,7 @@ const Nav = () => {
     setShowMenu(false);
   };
 
+  // 화면 작아졌을 때, searchBox
   const showSearchBox = () => {
     setSearchBox(true);
   };
@@ -24,9 +26,11 @@ const Nav = () => {
     setSearchBox(false);
   };
 
+  // 검색창
   const searchKeyword = (e) => {
     setInput(e.target.value);
   };
+
   const submitKeyword = (e) => {
     e.preventDefault();
     console.log(input);
@@ -45,7 +49,7 @@ const Nav = () => {
             </a>
           </Link>
         </NavLeft>
-        <NavMiddle>
+        <NavMiddle openSearchBox={searchBox}>
           {/* 600px 이하일 때, 클릭할 때 input창 보이게 */}
           <Under600Search onClick={showSearchBox} openSearchBox={searchBox}>
             <i className="fa fa-search" />
@@ -143,8 +147,15 @@ const NavMiddle = styled.div`
   }
 
   @media (max-width: 600px) {
-    width: 0;
+    width: 0px;
     padding: 0;
+
+    ${(props) =>
+      props.openSearchBox &&
+      css`
+        width: 100%;
+        display: flex;
+      `}
   }
 `;
 
@@ -169,8 +180,9 @@ const ArrowBack = styled.i`
     ${(props) =>
       props.openSearchBox &&
       css`
-        display: block;
+        display: inline-block;
         margin-right: 15px;
+        margin-top: 3px;
         font-size: 20px;
       `}
   }
@@ -190,6 +202,7 @@ const SearchBox = styled.form`
       props.openSearchBox &&
       css`
         display: flex;
+        width: 300px;
       `}
   }
 `;
@@ -240,10 +253,6 @@ const RightMenu = styled.div`
       margin-left: 5px;
       font-size: 18px;
     }
-
-    :hover {
-      color: blue;
-    }
   }
 `;
 
@@ -265,9 +274,9 @@ const NavRight = styled.div`
         display: block;
         width: 80px;
         height: 115px;
-        /* transition: height 1s ease; */
-        animation-name: down;
-        animation-duration: 0.5s;
+
+        /* animation-name: down;
+        animation-duration: 0.5s; */
       `}
 
     @keyframes down {

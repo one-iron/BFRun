@@ -8,7 +8,10 @@ const SelectedVideo = (props) => {
   return (
     <SelectedVideoWrap>
       이곳
-      <SelectedTags selectedTags={props.selectedTags} />
+      <SelectedTags
+        selectedTags={props.selectedTags}
+        selected={props.selected}
+      />
       <VideoSection />
     </SelectedVideoWrap>
   );
