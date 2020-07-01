@@ -7,12 +7,8 @@ import VideoSection from './VideoSection';
 const SelectedVideo = (props) => {
   return (
     <SelectedVideoWrap>
-      이곳
-      <SelectedTags
-        selectedTags={props.selectedTags}
-        selected={props.selected}
-      />
-      <VideoSection />
+      <SelectedTags selectedTags={props.selectedTags} />
+      <VideoSection selectedTags={props.selectedTags} />
     </SelectedVideoWrap>
   );
 };
@@ -20,6 +16,7 @@ const SelectedVideo = (props) => {
 export default SelectedVideo;
 
 const SelectedVideoWrap = styled.section`
+  /* border: 1px solid red; */
   position: relative;
   display: flex;
   flex-direction: column;
@@ -29,7 +26,6 @@ const SelectedVideoWrap = styled.section`
   max-width: 950px;
   padding: 4px;
   margin: 0 auto;
-  border: 1px solid red;
 
   @media ${(props) => props.theme.laptopM} {
     left: 0;
