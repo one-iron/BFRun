@@ -3,9 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 
 // internal modules
-import LangToggle from './LangToggle';
-
-// const contents = [{ lecture: '강의' }, { tips: '꿀팁' }, { general: '공통' }];
+// import LangToggle from './LangToggle';
 
 const Category = (props) => {
   const [showCategory, setShowCategory] = useState(false);
@@ -41,6 +39,8 @@ const Category = (props) => {
 
   const { selected } = props;
   clickedCategoryOutside(categoryRef);
+
+  // 작은 화면에서 카테고리 키면 검정색 배경으로 바뀌고, 큰 화면에서는 white로
 
   return (
     <>
@@ -244,8 +244,10 @@ const Tag = styled.div`
   background-color: gray;
   color: white;
   font-size: 14px;
-  border-radius: 10px;
-  padding: 2px 10px;
+  /* border-radius: 10px; */
+  border-radius: 3px;
+  padding: 8px;
+  font-weight: 700;
   margin: 5px 3px;
   cursor: pointer;
 

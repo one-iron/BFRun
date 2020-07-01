@@ -2,23 +2,17 @@ import styled from 'styled-components';
 
 const SelectedTags = (props) => {
   console.log(props);
-  const { selectedTags } = props;
+  const { selectedTags, selected } = props;
+
   return (
     <SelectedTagsWrap>
       {selectedTags.map((tag, index) => {
-        return <TagName key={index}>{tag}</TagName>;
+        return (
+          <TagName key={index} onClick={() => selected(tag)}>
+            {tag}
+          </TagName>
+        );
       })}
-      {/* <TagName>React</TagName>
-      <TagName>Vue</TagName> */}
-      {/* <TagName>어려워여ㅜㄹㅁㄹ</TagName>
-      <TagName>HTML</TagName>
-      <TagName>HTML</TagName>
-      <TagName>HTML</TagName>
-      <TagName>JavaScript</TagName>
-      <TagName>NextJS</TagName>
-      <TagName>TypeScript</TagName>
-      <TagName>React Native</TagName>
-      <TagName>Redux</TagName> */}
     </SelectedTagsWrap>
   );
 };
@@ -41,4 +35,5 @@ const TagName = styled.span`
   margin: 4px 8px;
   padding: 4px 8px;
   min-width: 10px;
+  cursor: pointer;
 `;
