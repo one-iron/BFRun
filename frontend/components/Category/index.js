@@ -54,7 +54,7 @@ const Category = (props) => {
       {/* 카테고리 창 */}
       <CategoryWrap isOpen={showCategory} ref={categoryRef}>
         <CategoryContainer>
-          <LangToggle />
+          {/* <LangToggle /> */}
           <GroupContainer>
             <Title>컨텐츠</Title>
             <AllTags>
@@ -65,18 +65,42 @@ const Category = (props) => {
                   </Tag>
                 );
               })} */}
-              <Tag onClick={() => selected('lecture')}>강의</Tag>
-              <Tag onClick={() => selected('honey tips')}>꿀팁</Tag>
+              <Tag id="1" onClick={() => selected('lecture')}>
+                강의
+              </Tag>
+              <Tag id="2" onClick={() => selected('honey tips')}>
+                꿀팁
+              </Tag>
               <Tag onClick={() => selected('general')}>공통</Tag>
             </AllTags>
           </GroupContainer>
           <GroupContainer>
             <Title>프론트</Title>
             <AllTags>
-              <Tag style={{ backgroundColor: '#E55126' }}>HTML</Tag>
-              <Tag style={{ backgroundColor: '#0C73B8' }}>CSS</Tag>
-              <Tag style={{ backgroundColor: '#E5A228' }}>JavaScript</Tag>
-              <Tag style={{ backgroundColor: '#5ED4F4' }}>React</Tag>
+              <Tag
+                onClick={() => selected('HTML')}
+                style={{ backgroundColor: '#E55126' }}
+              >
+                HTML
+              </Tag>
+              <Tag
+                onClick={() => selected('CSS')}
+                style={{ backgroundColor: '#0C73B8' }}
+              >
+                CSS
+              </Tag>
+              <Tag
+                onClick={() => selected('JavaScript')}
+                style={{ backgroundColor: '#E5A228' }}
+              >
+                JavaScript
+              </Tag>
+              <Tag
+                onClick={() => selected('React')}
+                style={{ backgroundColor: '#5ED4F4' }}
+              >
+                React
+              </Tag>
             </AllTags>
           </GroupContainer>
           <GroupContainer>
@@ -195,8 +219,7 @@ const CategoryContainer = styled.div`
 `;
 
 const GroupContainer = styled.div`
-  margin-left: 10px;
-  margin-bottom: 30px;
+  margin: 30px 0 30px 10px;
 `;
 
 const Title = styled.div`

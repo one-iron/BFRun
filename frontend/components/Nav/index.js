@@ -12,6 +12,10 @@ const Nav = () => {
     setShowMenu(!showMenu);
   };
 
+  const removeDownMenu = () => {
+    setShowMenu(false);
+  };
+
   const showSearchBox = () => {
     setSearchBox(true);
   };
@@ -28,7 +32,7 @@ const Nav = () => {
     console.log(input);
     setInput('');
 
-    // 검색한 것 useEffect, fetch로
+    // 검색한 것 useEffect, axios로
   };
 
   return (
@@ -64,12 +68,16 @@ const Nav = () => {
             </SearchButton>
           </SearchBox>
         </NavMiddle>
-        <RightContainer openSearchBox={searchBox}>
-          <RightMenu onClick={dropDownMenu}>
+        <RightContainer
+          openSearchBox={searchBox}
+          onMouseEnter={dropDownMenu}
+          onMouseLeave={showMenu && removeDownMenu}
+        >
+          <RightMenu>
             MENU
             <i className="fa fa-caret-down" />
           </RightMenu>
-          <NavRight isShow={showMenu}>
+          <NavRight isShow={showMenu} onMouseLeave={showMenu && removeDownMenu}>
             <RightContent>About</RightContent>
             <RightContent>Roadmap</RightContent>
             <RightContent>BFTest</RightContent>
@@ -194,11 +202,11 @@ const SearchInput = styled.input`
 
 const SearchButton = styled.button`
   width: 30px;
-  height: 25px;
+  height: 28px;
   border: none;
   outline: none;
   background-color: transparent;
-  padding: 0;
+  padding-right: 20px;
 `;
 
 const RightContainer = styled.div`
@@ -232,6 +240,10 @@ const RightMenu = styled.div`
       margin-left: 5px;
       font-size: 18px;
     }
+
+    :hover {
+      color: blue;
+    }
   }
 `;
 
@@ -252,6 +264,8 @@ const NavRight = styled.div`
       css`
         display: block;
         width: 80px;
+        height: 115px;
+        /* transition: height 1s ease; */
         animation-name: down;
         animation-duration: 0.5s;
       `}
@@ -274,23 +288,6 @@ const RightContent = styled.div`
   @media ${(props) => props.theme.laptopS} {
     margin: 10px 5px;
     padding: 0;
-
-    ${(props) =>
-      props.isShow &&
-      css`
-        width: 80px;
-        animation-name: slideDown;
-        animation-duration: 0.5s;
-      `}
-
-    @keyframes slideDown {
-      from {
-        height: 0;
-      }
-
-      to {
-        height: 115px;
-      }
-    }
+    cursor: pointer;
   }
 `;
