@@ -1,5 +1,6 @@
 // external modules
 import styled from 'styled-components';
+
 // internal modules
 import SelectedTags from './SelectedTags';
 import VideoSection from './VideoSection';

@@ -3,6 +3,9 @@ import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import Link from 'next/link';
 
+// internal modules
+import Login from '../Login';
+
 const Nav = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [searchBox, setSearchBox] = useState(false);
@@ -84,8 +87,7 @@ const Nav = () => {
           <NavRight isShow={showMenu} onMouseLeave={showMenu && removeDownMenu}>
             <RightContent>About</RightContent>
             <RightContent>Roadmap</RightContent>
-            <RightContent>BFTest</RightContent>
-            <RightContent>Login</RightContent>
+            <Login />
           </NavRight>
         </RightContainer>
       </NavContainer>
@@ -273,7 +275,7 @@ const NavRight = styled.div`
       css`
         display: block;
         width: 80px;
-        height: 115px;
+        height: 95px;
 
         /* animation-name: down;
         animation-duration: 0.5s; */
@@ -293,10 +295,11 @@ const NavRight = styled.div`
 const RightContent = styled.div`
   padding: 0 5px;
   margin-left: 10px;
+  cursor: pointer;
 
   @media ${(props) => props.theme.laptopS} {
     margin: 10px 5px;
     padding: 0;
-    cursor: pointer;
+    /* cursor: pointer; */
   }
 `;
