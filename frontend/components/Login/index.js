@@ -1,4 +1,5 @@
 // external modules
+import { useState } from 'react';
 import styled from 'styled-components';
 import { GoogleLogin } from 'react-google-login';
 import axios from 'axios';
@@ -7,6 +8,8 @@ import axios from 'axios';
 import { googleLogin, clientId } from '../../config';
 
 const Login = (props) => {
+  const [loginToken, setToken] = useState('');
+
   const onGoogleLogin = async (res) => {
     console.log(res);
 
@@ -18,8 +21,8 @@ const Login = (props) => {
       });
       console.log(token);
       if (token.data.token) {
-        // localStorage.setItem('token', token.data.token);
-        // setToken(token.data.token);
+        localStorage.setItem('token', token.data.token);
+        setToken(token.data.token);
       } else {
         console.warn('Login failed, can not check google token');
       }
@@ -30,13 +33,17 @@ const Login = (props) => {
 
   return (
     <LoginWrap>
-      <GoogleLogin
-        clientId={clientId}
-        render={(props) => <div onClick={props.onClick}>Login </div>}
-        onSuccess={(result) => onGoogleLogin(result)}
-        onFailure={(result) => console.log(result)}
-        // cookiePolicy="single_host_origin"
-      />
+      {loginToken ? (
+        <></>
+      ) : (
+        <GoogleLogin
+          clientId={clientId}
+          render={(props) => <div onClick={props.onClick}>Login </div>}
+          onSuccess={(result) => onGoogleLogin(result)}
+          onFailure={(result) => console.log(result)}
+          // cookiePolicy="single_host_origin"
+        />
+      )}
     </LoginWrap>
   );
 };
