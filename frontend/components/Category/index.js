@@ -37,6 +37,10 @@ const Category = (props) => {
     }, [categoryRef]);
   };
 
+  const goToTop = () => {
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+  };
+
   const { selected } = props;
   clickedCategoryOutside(categoryRef);
 
@@ -71,7 +75,8 @@ const Category = (props) => {
               <Tag id="2" onClick={() => selected('honey tips')}>
                 꿀팁
               </Tag>
-              <Tag onClick={() => selected('general')}>공통</Tag>
+              <Tag onClick={() => selected('general')}>컴잘알</Tag>
+              <Tag onClick={() => selected('motivation')}>동기부여</Tag>
             </AllTags>
           </GroupContainer>
           <GroupContainer>
@@ -127,6 +132,9 @@ const Category = (props) => {
             <Title wecode>부트캠프를 찾고 계신다면?</Title>
             <WecodeImg src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/logo_black.png" />
           </GroupContainer>
+          <GoUp onClick={goToTop}>
+            <i className="fa fa-arrow-up" />
+          </GoUp>
         </CategoryContainer>
       </CategoryWrap>
     </>
@@ -167,9 +175,6 @@ const InfoButton = styled.button`
 
 const CategoryWrap = styled.aside`
   display: block;
-  position: fixed;
-  left: calc((100% - 1200px) / 2);
-  z-index: 50;
 
   @media ${(props) => props.theme.laptopM} {
     display: none;
@@ -178,11 +183,23 @@ const CategoryWrap = styled.aside`
       props.isOpen &&
       css`
         display: block;
+        position: fixed;
+        z-index: 50;
         bottom: 80px;
         left: 20px;
+        height: 400px;
+        overflow-y: scroll;
+        overflow-x: hidden;
 
         animation-name: slideUp;
         animation-duration: 0.3s;
+
+        ::-webkit-scrollbar {
+          width: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: #b8b8b8;
+        }
       `}
 
     @keyframes slideUp {
@@ -199,23 +216,10 @@ const CategoryWrap = styled.aside`
 
 const CategoryContainer = styled.div`
   width: 240px;
-  height: 600px;
+  height: 700px;
   border: 1px solid #eee;
   border-radius: 10px;
   background-color: #eee;
-
-  @media (max-height: 775px) {
-    height: 400px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-
-    ::-webkit-scrollbar {
-      width: 4px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #b8b8b8;
-    }
-  }
 `;
 
 const GroupContainer = styled.div`
@@ -262,4 +266,22 @@ const WecodeImg = styled.img`
   width: 100px;
   height: auto;
   margin-top: 15px;
+`;
+
+const GoUp = styled.div`
+  margin: 0 20px 0 auto;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  height: 40px;
+  width: 40px;
+  border: 1px solid black;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 35px;
+
+  @media ${(props) => props.theme.laptopM} {
+    display: none;
+  }
 `;

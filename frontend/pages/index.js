@@ -44,11 +44,13 @@ export default function HomePage() {
 const ContentWrap = styled.section`
   position: relative;
   top: 100px;
+  margin-bottom: 100px;
 `;
 
 const ContentContainer = styled.div`
   margin: 0 auto;
   width: 1200px;
+  display: flex;
 
   @media ${(props) => props.theme.laptopM} {
     max-width: 100%;
