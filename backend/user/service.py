@@ -8,4 +8,3 @@ class UserService:
     def test(self):
         data = self.user_dao.test_dao()
         return data
-
