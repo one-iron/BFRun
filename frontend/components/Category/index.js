@@ -1,14 +1,24 @@
 // external modules
 import { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
+import axios from 'axios';
 
 // internal modules
 // import LangToggle from './LangToggle';
 
 const Category = (props) => {
+  const [categorylist, setCategoryList] = useState();
   const [showCategory, setShowCategory] = useState(false);
   const categoryRef = useRef(null);
   const buttonRef = useRef(null);
+
+  // 카테고리 불러오기
+  useEffect(() => {
+    const getCategoryList = `https://run.mocky.io/v3/2f576afd-91a7-45b7-864f-f24c7d9e6682`;
+    axios.get(getCategoryList).then((res) => {
+      setCategoryList([res.data]);
+    });
+  }, []);
 
   const toggleCategory = () => {
     if (showCategory) {
@@ -56,87 +66,104 @@ const Category = (props) => {
       </InfoWrap>
 
       {/* 카테고리 창 */}
-      <CategoryWrap isOpen={showCategory} ref={categoryRef}>
-        <CategoryContainer>
-          {/* <LangToggle /> */}
-          <GroupContainer>
-            <Title>컨텐츠</Title>
-            <AllTags>
-              {/* {contents.map((tag, index) => {
-                return (
-                  <Tag key={index} onClick={() => selected(Object.keys(tag))}>
-                    {Object.values(tag)}
-                  </Tag>
-                );
-              })} */}
-              <Tag id="1" onClick={() => selected('lecture')}>
-                강의
-              </Tag>
-              <Tag id="2" onClick={() => selected('honey tips')}>
-                꿀팁
-              </Tag>
-              <Tag onClick={() => selected('general')}>컴잘알</Tag>
-              <Tag onClick={() => selected('motivation')}>동기부여</Tag>
-            </AllTags>
-          </GroupContainer>
-          <GroupContainer>
-            <Title>프론트</Title>
-            <AllTags>
-              <Tag
-                onClick={() => selected('HTML')}
-                style={{ backgroundColor: '#E55126' }}
-              >
-                HTML
-              </Tag>
-              <Tag
-                onClick={() => selected('CSS')}
-                style={{ backgroundColor: '#0C73B8' }}
-              >
-                CSS
-              </Tag>
-              <Tag
-                onClick={() => selected('JavaScript')}
-                style={{ backgroundColor: '#E5A228' }}
-              >
-                JavaScript
-              </Tag>
-              <Tag
-                onClick={() => selected('React')}
-                style={{ backgroundColor: '#5ED4F4' }}
-              >
-                React
-              </Tag>
-            </AllTags>
-          </GroupContainer>
-          <GroupContainer>
-            <Title>백</Title>
-            <AllTags>
-              <Tag style={{ backgroundColor: '#396C97' }}>Python</Tag>
-              <Tag style={{ backgroundColor: '#7CB801' }}>Node.js</Tag>
-              <Tag style={{ backgroundColor: 'black' }}>Flask</Tag>
-            </AllTags>
-          </GroupContainer>
-          <GroupContainer>
-            <Title>크리에이터</Title>
-            <AllTags>
-              <Tag creator style={{ backgroundColor: '#F80000' }}>
-                생활코딩
-              </Tag>
-              <Tag style={{ backgroundColor: '#F80000' }}>노마드코더</Tag>
-              <Tag style={{ backgroundColor: '#F80000' }}>얄팍한 코딩사전</Tag>
-              <Tag style={{ backgroundColor: '#F80000' }}>테크보이</Tag>
-              <Tag style={{ backgroundColor: '#F80000' }}>김버그</Tag>
-            </AllTags>
-          </GroupContainer>
-          <GroupContainer>
-            <Title wecode>부트캠프를 찾고 계신다면?</Title>
-            <WecodeImg src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/logo_black.png" />
-          </GroupContainer>
-          <GoUp onClick={goToTop}>
-            <i className="fa fa-arrow-up" />
-          </GoUp>
-        </CategoryContainer>
-      </CategoryWrap>
+      {categorylist && (
+        <CategoryWrap isOpen={showCategory} ref={categoryRef}>
+          <CategoryContainer>
+            {/* <LangToggle /> */}
+            <GroupContainer>
+              <Title>컨텐츠</Title>
+              <AllTags>
+                {categorylist[0].content_types.map((type) => {
+                  return (
+                    <Tag
+                      key={type.id}
+                      id={type.id}
+                      onClick={() => selected(type.name)}
+                    >
+                      {type.name}
+                    </Tag>
+                  );
+                })}
+              </AllTags>
+            </GroupContainer>
+            <GroupContainer>
+              <Title>프론트</Title>
+              <AllTags>
+                {categorylist[0].frontend_stacks.map((type) => {
+                  return (
+                    <Tag
+                      key={type.id}
+                      id={type.id}
+                      style={{ backgroundColor: type.color_code }}
+                      onClick={() => selected(type.name)}
+                    >
+                      {type.name}
+                    </Tag>
+                  );
+                })}
+              </AllTags>
+            </GroupContainer>
+            <GroupContainer>
+              <Title>백</Title>
+              <AllTags>
+                {categorylist[0].backend_stacks.map((type) => {
+                  return (
+                    <Tag
+                      key={type.id}
+                      id={type.id}
+                      style={{ backgroundColor: type.color_code }}
+                      onClick={() => selected(type.name)}
+                    >
+                      {type.name}
+                    </Tag>
+                  );
+                })}
+              </AllTags>
+            </GroupContainer>
+            <GroupContainer>
+              <Title>공통</Title>
+              <AllTags>
+                {categorylist[0].general_stacks.map((type) => {
+                  return (
+                    <Tag
+                      key={type.id}
+                      id={type.id}
+                      style={{ backgroundColor: type.color_code }}
+                      onClick={() => selected(type.name)}
+                    >
+                      {type.name}
+                    </Tag>
+                  );
+                })}
+              </AllTags>
+            </GroupContainer>
+            <GroupContainer>
+              <Title>크리에이터</Title>
+              <AllTags>
+                {categorylist[0].channels.map((type) => {
+                  return (
+                    <Tag
+                      key={type.id}
+                      id={type.id}
+                      style={{ backgroundColor: '#F80000' }}
+                      onClick={() => selected(type.name)}
+                    >
+                      {type.name}
+                    </Tag>
+                  );
+                })}
+              </AllTags>
+            </GroupContainer>
+            <GroupContainer>
+              <Title wecode>부트캠프를 찾고 계신다면?</Title>
+              <WecodeImg src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/logo_black.png" />
+            </GroupContainer>
+            <GoUp onClick={goToTop}>
+              <i className="fa fa-arrow-up" />
+            </GoUp>
+          </CategoryContainer>
+        </CategoryWrap>
+      )}
     </>
   );
 };
@@ -216,7 +243,7 @@ const CategoryWrap = styled.aside`
 
 const CategoryContainer = styled.div`
   width: 240px;
-  height: 700px;
+  height: 1170px;
   border: 1px solid #eee;
   border-radius: 10px;
   background-color: #eee;

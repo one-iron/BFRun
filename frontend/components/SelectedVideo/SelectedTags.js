@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const SelectedTags = (props) => {
-  console.log(props);
   const { selectedTags, selected } = props;
 
   return (
