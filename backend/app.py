@@ -1,6 +1,9 @@
-from flask      import Flask
+from flask import Flask
 from flask_cors import CORS
+
 from user.model import UserDao
+from user.controller import create_user_endpoints
+from user.service import UserService
 
 
 def create_app(test_config=None):
@@ -12,12 +15,12 @@ def create_app(test_config=None):
     CORS(app, resources={r"*": {"origins": "*"}})
 
     user_dao = UserDao()
-    video_dao = VideoDao()
+    # video_dao = VideoDao()
 
     user_service = UserService(user_dao)
-    video_service = VideoService(video_dao)
+    # video_service = VideoService(video_dao)
 
     create_user_endpoints(app, user_service)
-    create_video_endpoints(app, video_service)
+    # create_video_endpoints(app, video_service)
 
     return app
