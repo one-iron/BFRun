@@ -4,7 +4,7 @@ import axios from 'axios';
 import Router from 'next/router';
 import styled, { css } from 'styled-components';
 
-const VideoSection = (props) => {
+const VideoSection = ({ selectedTags }) => {
   const [videoData, setVideoData] = useState([]);
   const videoCount = videoData.length; // 영상이 4개 이상이면 좌, 우 버튼이 랜더 될 수 있도록 하기 위함..
 
@@ -20,7 +20,7 @@ const VideoSection = (props) => {
 
   return (
     <VideoSectionWrap>
-      <CategoryName>{props.selectedTags}</CategoryName>
+      <CategoryName>{selectedTags}</CategoryName>
       <VideoLiContainer>
         {videoCount > 4 && (
           <Button back>
