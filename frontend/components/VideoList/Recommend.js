@@ -33,9 +33,9 @@ const TitleH2 = styled.h2`
 `;
 
 const VideoContainer = styled.article`
-  border: 1px solid rgba(255, 234, 167, 0.4);
+  border: 1px solid black;
   border-radius: 10px;
-  background-color: rgba(255, 234, 167, 0.4);
+  background-color: black;
   /* margin: 2px 4px; */
   margin-bottom: 20px;
   display: flex;
@@ -46,7 +46,7 @@ const VideoContainer = styled.article`
 const Button = styled.div`
   cursor: pointer;
   font-size: 70px;
-  color: rgba(255, 118, 117, 1);
+  color: white;
 `;
 
 const Videos = styled.div`
@@ -60,11 +60,11 @@ const Videos = styled.div`
   div {
     width: 200px;
     height: 120px;
-    border: 1px solid rgba(255, 118, 117, 1);
+    border: 1px solid white;
     margin: 5px 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 118, 117, 1);
+    background-color: white;
   }
 `;

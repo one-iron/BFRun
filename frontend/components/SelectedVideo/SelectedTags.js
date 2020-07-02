@@ -20,17 +20,17 @@ const SelectedTags = (props) => {
 export default SelectedTags;
 
 const SelectedTagsWrap = styled.div`
-  border: 1px solid #ececec;
+  border: 1px solid black;
   flex-wrap: wrap;
   display: flex;
   width: 100%;
   border-radius: 10px;
-  background-color: #ececec;
+  background-color: white;
 `;
 
 const TagName = styled.span`
   border-radius: 14px;
-  background-color: blue;
+  background-color: black;
   color: white;
   margin: 4px 8px;
   padding: 4px 8px;
