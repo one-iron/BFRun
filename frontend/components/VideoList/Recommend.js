@@ -50,12 +50,16 @@ const Button = styled.div`
 `;
 
 const Videos = styled.div`
-  /* border: 1px solid green; */
+  /* border: 1px solid yellow; */
   display: flex;
   flex-wrap: wrap;
   padding: 0 5px;
-  @media (max-width: 701px) {
+  @media (max-width: 771px) {
     justify-content: center;
+  }
+  @media (max-width: 1004px) {
+    justify-content: center;
+    padding: 0 110px;
   }
   div {
     width: 200px;

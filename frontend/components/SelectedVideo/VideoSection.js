@@ -14,7 +14,7 @@ const VideoSection = ({ selectedTags }) => {
 
   useEffect(() => {
     axios
-      .get('https://run.mocky.io/v3/1bc92fb2-edd8-4414-8cfb-cfd846e889df')
+      .get('https://run.mocky.io/v3/24cb3d5b-febc-4428-ab78-1e3cad2d7116')
       .then((res) => setVideoData(res.data.videos));
   }, []);
 
@@ -32,6 +32,13 @@ const VideoSection = ({ selectedTags }) => {
             return (
               <VideoLi onClick={() => moveRoute('/detail')}>
                 <ThumbNail key={data.id} src={data.thumb} />
+                <div>
+                  {data.title.length < 20
+                    ? data.title
+                    : `${data.title.slice(0, 35)}...`}
+                </div>
+                <Views>조회수 {data.views.toLocaleString()}</Views>
+                <div />
               </VideoLi>
             );
           })}
@@ -96,15 +103,39 @@ const Button = styled.div`
 `;
 
 const VideoLi = styled.li`
+  /* border: 1px solid red; */
+  cursor: pointer;
+  border-radius: 5px;
   float: left;
   margin: 10px;
-  width: 160px;
-  @media (max-width: 500px) {
-    width: 200px;
+  width: 200px;
+  height: 200px;
+  box-shadow: 0.1em 0 0.5em rgba(0, 0, 0, 0.3);
+  div {
+    font-size: 14px;
+    margin-left: 4px;
+    padding: 4px;
+    /* white-space: nowrap; */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
   }
+  @media (max-width: 500px) {
+    width: 300px;
+    height: 300px;
+  }
+`;
+
+const Views = styled.div`
+  font-size: 12px;
+  color: grey;
+  margin: 5px 0 10px 0;
+  position: absolute;
+  bottom: 8px;
 `;
 
 const ThumbNail = styled.img`
   width: 100%;
-  cursor: pointer;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  /* cursor: pointer; */
 `;
