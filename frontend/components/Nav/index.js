@@ -143,6 +143,7 @@ const TitleText = styled.div`
 
 const NavMiddle = styled.div`
   width: 500px;
+  /* margin-left: 300px; */
 
   @media ${(props) => props.theme.tablet} {
     width: 300px;
