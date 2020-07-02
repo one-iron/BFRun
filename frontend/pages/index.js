@@ -14,9 +14,7 @@ export default function HomePage() {
   // 태그 추가/삭제
   const selected = (tag) => {
     if (selectedTags.includes(tag)) {
-      setSelectedTags(
-        selectedTags.filter((tags) => (tags !== tag ? tags : '')),
-      );
+      setSelectedTags(selectedTags.filter((tags) => tags !== tag));
     } else {
       setSelectedTags([...selectedTags, tag]);
     }
