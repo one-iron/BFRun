@@ -29,6 +29,9 @@ const DetailWrap = styled.div`
   /* height: calc(100vh - 80px); */
   background-color: #f9f9f9;
   border: 1px solid #f9f9f9;
+  @media ${(props) => props.theme.laptopM} {
+    text-align: unset;
+  }
 `;
 
 const DetailContainer = styled.div`

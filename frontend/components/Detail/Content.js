@@ -1,11 +1,12 @@
 // external modules
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 // internal modules
+import DetailList from './List';
 
-const DetailContent = () => {
+const DetailContent = (props) => {
   const [data, setData] = useState();
   // 조회수의 숫자에 쉼표를 찍는 Intl 함수를 변수로 지정하여 조회수에 쓰이고 있습니다.
   const numberFilter = new Intl.NumberFormat('en-IN', {
@@ -15,8 +16,9 @@ const DetailContent = () => {
   // 영상의 정보들을 이 곳에서 패치하여 data에 저장합니다.
   useEffect(() => {
     axios
-      .get('https://run.mocky.io/v3/52ed43fb-0d74-437d-a71c-b9e59d436a09')
+      .get('https://run.mocky.io/v3/cd4032e7-50ce-4420-882a-80616cff62b2')
       .then((response) => {
+        console.log('content', response.data);
         setData(response.data);
       });
   }, []);
@@ -35,40 +37,17 @@ const DetailContent = () => {
             <section>
               <summary>{data.title}</summary>
               <article>
-                조회수 {numberFilter.format(data.views)}회{' '}
+                조회수 {numberFilter.format(data.view)}회{' '}
                 <time>{data.created_at}</time>
               </article>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
-              <main>{data.descriptions}</main>
+              <main>{data.description}</main>
             </section>
           </>
         )}
       </DetailContentContainer>
+      <ListSection>
+        <DetailList listData={props.listData} />
+      </ListSection>
     </DetailContentWrap>
   );
 };
@@ -76,10 +55,9 @@ const DetailContent = () => {
 export default DetailContent;
 
 const DetailContentWrap = styled.div`
-  /* position: absolute;
-  top: calc(68vh + 80px); */
   margin-top: 20px;
   width: 960px;
+  margin-top: 20px;
   @media ${(props) => props.theme.laptopM} {
     display: flex;
     justify-content: space-between;
@@ -88,13 +66,7 @@ const DetailContentWrap = styled.div`
   @media ${(props) => props.theme.tablet} {
     display: unset;
     width: 95vw;
-  }
-`;
-
-const ListSection = styled.section`
-  display: none;
-  @media ${(props) => props.theme.laptopM} {
-    display: unset;
+    height: 100%;
   }
 `;
 
@@ -136,7 +108,7 @@ const DetailContentContainer = styled.div`
     align-items: flex-start;
     justify-content: center;
     * {
-      margin-bottom: 5px;
+      margin-top: 5px;
     }
     summary {
       font-size: 20px;
@@ -147,5 +119,14 @@ const DetailContentContainer = styled.div`
       text-align: left;
       color: gray;
     }
+  }
+`;
+const ListSection = styled.div`
+  display: none;
+  @media ${(props) => props.theme.laptopM} {
+    display: unset;
+  }
+  @media ${(props) => props.theme.tablet} {
+    display: unset;
   }
 `;
