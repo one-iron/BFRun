@@ -72,13 +72,13 @@ const VideoSectionWrap = styled.div`
 `;
 
 const CategoryName = styled.strong`
-  border: 1px solid green;
+  /* border: 1px solid green; */
   font-size: 20px;
   display: block;
 `;
 
 const VideoLiContainer = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   position: relative;
   align-items: center;
