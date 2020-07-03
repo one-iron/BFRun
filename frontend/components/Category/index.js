@@ -1,18 +1,18 @@
 // external modules
 import { useState, useEffect, useRef } from 'react';
-import styled, { css } from 'styled-components';
 import axios from 'axios';
+import styled, { css } from 'styled-components';
 
 // internal modules
 // import LangToggle from './LangToggle';
 
-const Category = (props) => {
+const Category = ({ selected, selectedTags }) => {
   const [categorylist, setCategoryList] = useState();
   const [showCategory, setShowCategory] = useState(false);
   const categoryRef = useRef(null);
   const buttonRef = useRef(null);
 
-  // 카테고리 불러오기
+  // 카테고리 태그 불러오기
   useEffect(() => {
     const getCategoryList = `https://run.mocky.io/v3/2f576afd-91a7-45b7-864f-f24c7d9e6682`;
     axios.get(getCategoryList).then((res) => {
@@ -51,7 +51,6 @@ const Category = (props) => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   };
 
-  const { selected } = props;
   clickedCategoryOutside(categoryRef);
 
   // 작은 화면에서 카테고리 키면 검정색 배경으로 바뀌고, 큰 화면에서는 white로
@@ -94,7 +93,17 @@ const Category = (props) => {
                     <Tag
                       key={type.id}
                       id={type.id}
-                      style={{ backgroundColor: type.color_code }}
+                      style={{
+                        backgroundColor: selectedTags.includes(type.name)
+                          ? type.color_code
+                          : 'white',
+                        color: selectedTags.includes(type.name)
+                          ? 'white'
+                          : 'black',
+                        // border: selectedTags.includes(type.name)
+                        // ? type.color_code
+                        // : 'white',
+                      }}
                       onClick={() => selected(type.name)}
                     >
                       {type.name}
@@ -111,7 +120,17 @@ const Category = (props) => {
                     <Tag
                       key={type.id}
                       id={type.id}
-                      style={{ backgroundColor: type.color_code }}
+                      style={{
+                        backgroundColor: selectedTags.includes(type.name)
+                          ? type.color_code
+                          : 'white',
+                        color: selectedTags.includes(type.name)
+                          ? 'white'
+                          : 'black',
+                        // border: selectedTags.includes(type.name)
+                        // ? type.color_code
+                        // : 'white',
+                      }}
                       onClick={() => selected(type.name)}
                     >
                       {type.name}
@@ -128,7 +147,17 @@ const Category = (props) => {
                     <Tag
                       key={type.id}
                       id={type.id}
-                      style={{ backgroundColor: type.color_code }}
+                      style={{
+                        backgroundColor: selectedTags.includes(type.name)
+                          ? type.color_code
+                          : 'white',
+                        color: selectedTags.includes(type.name)
+                          ? 'white'
+                          : 'black',
+                        // border: selectedTags.includes(type.name)
+                        // ? type.color_code
+                        // : 'white',
+                      }}
                       onClick={() => selected(type.name)}
                     >
                       {type.name}
@@ -275,7 +304,6 @@ const Tag = styled.div`
   background-color: gray;
   color: white;
   font-size: 14px;
-  /* border-radius: 10px; */
   border-radius: 3px;
   padding: 8px;
   font-weight: 700;
