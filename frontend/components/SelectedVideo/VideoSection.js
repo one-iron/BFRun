@@ -104,6 +104,8 @@ const Button = styled.div`
 
 const VideoLi = styled.li`
   /* border: 1px solid red; */
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
   border-radius: 5px;
   float: left;
@@ -111,6 +113,9 @@ const VideoLi = styled.li`
   width: 200px;
   height: 200px;
   box-shadow: 0.1em 0 0.5em rgba(0, 0, 0, 0.3);
+  &:hover {
+    transform: scale(1.04);
+  }
   div {
     font-size: 14px;
     margin-left: 4px;

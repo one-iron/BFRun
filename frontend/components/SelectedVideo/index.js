@@ -9,7 +9,9 @@ const SelectedVideo = ({ selectedTags, selected }) => {
   return (
     <SelectedVideoWrap>
       <SelectedTags selectedTags={selectedTags} selected={selected} />
-      <VideoSection selectedTags={selectedTags} />
+      {selectedTags.map((tag) => {
+        return <VideoSection selectedTags={tag} />;
+      })}
     </SelectedVideoWrap>
   );
 };
