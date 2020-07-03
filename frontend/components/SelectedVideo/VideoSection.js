@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 
 const VideoSection = ({ selectedTags }) => {
   const [videoData, setVideoData] = useState([]);
-  const videoCount = videoData.length; // 영상이 4개 이상이면 좌, 우 버튼이 랜더 될 수 있도록 하기 위함..
+  const videoCount = videoData.length; // 영상이 4개 이상일때만 좌, 우 버튼이 랜더 될 수 있도록 하기 위함..
 
   const moveRoute = (page) => {
     Router.push(page);
@@ -14,7 +14,7 @@ const VideoSection = ({ selectedTags }) => {
 
   useEffect(() => {
     axios
-      .get('https://run.mocky.io/v3/24cb3d5b-febc-4428-ab78-1e3cad2d7116')
+      .get('https://run.mocky.io/v3/67348608-f1af-47a6-94eb-a5a5896c8e5a')
       .then((res) => setVideoData(res.data.videos));
   }, []);
 
@@ -37,12 +37,16 @@ const VideoSection = ({ selectedTags }) => {
                     ? data.title
                     : `${data.title.slice(0, 35)}...`}
                 </div>
-                <Views>조회수 {data.views.toLocaleString()}</Views>
+                <CreatorName>{data.creator}</CreatorName>
+                {/* <CreatorName>조회수 {data.views.toLocaleString()}</CreatorName> */}
                 <div />
               </VideoLi>
             );
           })}
         </ul>
+        <Button next>
+          <i className="fa fa-caret-right" />
+        </Button>
         {videoCount > 4 && (
           <Button next>
             <i className="fa fa-caret-right" />
@@ -130,12 +134,11 @@ const VideoLi = styled.li`
   }
 `;
 
-const Views = styled.div`
+const CreatorName = styled.div`
   font-size: 12px;
   color: grey;
-  margin: 5px 0 10px 0;
   position: absolute;
-  bottom: 8px;
+  bottom: 2px;
 `;
 
 const ThumbNail = styled.img`
