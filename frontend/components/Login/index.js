@@ -38,7 +38,7 @@ const Login = (props) => {
       ) : (
         <GoogleLogin
           clientId={clientId}
-          render={(props) => <div onClick={props.onClick}>Login </div>}
+          render={(props) => <div onClick={props.onClick}>로그인</div>}
           onSuccess={(result) => onGoogleLogin(result)}
           onFailure={(result) => console.log(result)}
           // cookiePolicy="single_host_origin"
@@ -53,11 +53,16 @@ export default Login;
 const LoginWrap = styled.div`
   margin-left: 10px;
   cursor: pointer;
-  border: 1px solid #1a73e8;
   border-radius: 3px;
-  background-color: #1a73e8;
+  border: 1px solid gray;
+  color: gray;
+  padding: 6px 8px;
+
+  /* border: 1px solid orange;
+  background-color: orange;
   color: white;
-  padding: 3px;
+  padding: 6px 10px;
+  font-weight: 700; */
 
   @media ${(props) => props.theme.laptopS} {
     margin: 0;
