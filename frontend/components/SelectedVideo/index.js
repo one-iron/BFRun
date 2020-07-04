@@ -5,13 +5,28 @@ import styled from 'styled-components';
 import SelectedTags from './SelectedTags';
 import VideoSection from './VideoSection';
 
-const SelectedVideo = (props) => {
-  const { selectedTags, selected, removeTags } = props;
+const SelectedVideo = ({
+  selectedTags,
+  selected,
+  selectedContent,
+  addDelContentTags,
+  selectedStack,
+  addDelStackTags,
+  selectedCreator,
+  addDelCreatorTags,
+  removeTags,
+}) => {
   return (
     <SelectedVideoWrap>
       <SelectedTags
         selectedTags={selectedTags}
         selected={selected}
+        selectedContent={selectedContent}
+        addDelContentTags={addDelContentTags}
+        selectedStack={selectedStack}
+        addDelStackTags={addDelStackTags}
+        selectedCreator={selectedCreator}
+        addDelCreatorTags={addDelCreatorTags}
         removeTags={removeTags}
       />
       {selectedTags.map((tag) => {
