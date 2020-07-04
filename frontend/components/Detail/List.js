@@ -1,33 +1,48 @@
 // external modules
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 
 // internal modules
 
 const DetailList = (props) => {
-  console.log('props', props);
+  const [testData, setTestData] = useState([]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get('https://run.mocky.io/v3/e9d79bcb-ebf2-4ab2-8611-5bc5587f0839')
+  //     .then((response) => {
+  //       console.log('res', response.data.videos);
+  //       setTestData(response.data.videos);
+  //     });
+  // }, []);
+
+  console.log('list of props', props);
   return (
     <DetailListWrap>
       <DetailListContainer>
-        {props.listData.map((data) => {
-          return (
-            <>
-              <section onClick={() => props.clickList(data.snippet.position)}>
-                <img src={data.snippet.thumbnails.default.url} alt="" />
-                <section className="textSection">
-                  <summary>{data.snippet.title}</summary>
-                  <time>{data.snippet.publishedAt.slice(0, 10)}</time>
-                  <p>{data.snippet.channelTitle}</p>
-                  <p>
-                    {data.snippet.description.length < 18
-                      ? data.snippet.description
-                      : `${data.snippet.description.slice(0, 18)}...`}
-                  </p>
+        {props.listVideo &&
+          props.listVideo.map((data, index) => {
+            return (
+              <>
+                <section onClick={() => props.clickList(data.id)}>
+                  <img
+                    src={`http://i3.ytimg.com/vi/${data.url.slice(
+                      data.url.indexOf('v=') + 2,
+                      data.url.indexOf('&list'),
+                    )}/maxresdefault.jpg`}
+                    alt=""
+                  />
+                  <section className="textSection">
+                    <summary>{data.title}</summary>
+                    <time>{data.created_at.slice(0, 10)}</time>
+                    <p>{data.title}</p>
+                  </section>
                 </section>
-              </section>
-              <div className="line" />
-            </>
-          );
-        })}
+                <div className="line" />
+              </>
+            );
+          })}
       </DetailListContainer>
     </DetailListWrap>
   );
@@ -83,6 +98,7 @@ const DetailListContainer = styled.div`
   }
 
   img {
+    width: 100px;
   }
   .line {
     border: 1px solid lightgray;
