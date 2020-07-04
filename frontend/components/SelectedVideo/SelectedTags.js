@@ -2,13 +2,13 @@
 import styled from 'styled-components';
 
 const tagColors = {
-  강의: 'gray',
-  꿀팁: 'gray',
-  핵심개념: 'gray',
-  동기부여: 'gray',
+  강의: 'green',
+  꿀팁: 'green',
+  핵심개념: 'green',
+  동기부여: 'green',
   Apollo: '#112A47',
   AWS: 'gray',
-  Dtabase: '#036172',
+  Database: '#036172',
   Git: 'gray',
   Linux: 'gray',
   Etc: 'gray',

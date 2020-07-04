@@ -6,11 +6,13 @@ import styled, { css } from 'styled-components';
 // internal modules
 // import LangToggle from './LangToggle';
 
-const Category = ({ selected, selectedTags }) => {
+const Category = ({ selected, selectedTags, list }) => {
   const [categorylist, setCategoryList] = useState();
   const [showCategory, setShowCategory] = useState(false);
   const categoryRef = useRef(null);
   const buttonRef = useRef(null);
+
+  console.log(list);
 
   // 카테고리 태그 불러오기
   useEffect(() => {
@@ -47,10 +49,6 @@ const Category = ({ selected, selectedTags }) => {
     }, [categoryRef]);
   };
 
-  const goToTop = () => {
-    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-  };
-
   clickedCategoryOutside(categoryRef);
 
   // 작은 화면에서 카테고리 키면 검정색 배경으로 바뀌고, 큰 화면에서는 white로
@@ -70,13 +68,24 @@ const Category = ({ selected, selectedTags }) => {
           <CategoryContainer>
             {/* <LangToggle /> */}
             <GroupContainer>
-              <Title>컨텐츠</Title>
+              <Title>Contents</Title>
               <AllTags>
                 {categorylist[0].content_types.map((type) => {
                   return (
                     <Tag
                       key={type.id}
                       id={type.id}
+                      style={{
+                        backgroundColor: selectedTags.includes(type.name)
+                          ? 'green'
+                          : 'white',
+                        color: selectedTags.includes(type.name)
+                          ? 'white'
+                          : 'black',
+                        // border: selectedTags.includes(type.name)
+                        // ? type.color_code
+                        // : 'white',
+                      }}
                       onClick={() => selected(type.name)}
                     >
                       {type.name}
@@ -86,7 +95,7 @@ const Category = ({ selected, selectedTags }) => {
               </AllTags>
             </GroupContainer>
             <GroupContainer>
-              <Title>프론트</Title>
+              <Title>FrontEnd</Title>
               <AllTags>
                 {categorylist[0].frontend_stacks.map((type) => {
                   return (
@@ -113,7 +122,7 @@ const Category = ({ selected, selectedTags }) => {
               </AllTags>
             </GroupContainer>
             <GroupContainer>
-              <Title>백</Title>
+              <Title>BackEnd</Title>
               <AllTags>
                 {categorylist[0].backend_stacks.map((type) => {
                   return (
@@ -140,7 +149,7 @@ const Category = ({ selected, selectedTags }) => {
               </AllTags>
             </GroupContainer>
             <GroupContainer>
-              <Title>공통</Title>
+              <Title>Developer</Title>
               <AllTags>
                 {categorylist[0].general_stacks.map((type) => {
                   return (
@@ -167,14 +176,23 @@ const Category = ({ selected, selectedTags }) => {
               </AllTags>
             </GroupContainer>
             <GroupContainer>
-              <Title>크리에이터</Title>
+              <Title>Creator</Title>
               <AllTags>
                 {categorylist[0].channels.map((type) => {
                   return (
                     <Tag
                       key={type.id}
                       id={type.id}
-                      style={{ backgroundColor: '#F80000' }}
+                      style={{
+                        backgroundColor: selectedTags.includes(type.name)
+                          ? '#F80000'
+                          : 'white',
+
+                        color: selectedTags.includes(type.name)
+                          ? 'white'
+                          : 'black',
+                        // border: '2px solid black',
+                      }}
                       onClick={() => selected(type.name)}
                     >
                       {type.name}
@@ -187,14 +205,19 @@ const Category = ({ selected, selectedTags }) => {
               <Title wecode>부트캠프를 찾고 계신다면?</Title>
               <WecodeImg src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/logo_black.png" />
             </GroupContainer>
-            <GoUp onClick={goToTop}>
-              <i className="fa fa-arrow-up" />
-            </GoUp>
           </CategoryContainer>
         </CategoryWrap>
       )}
     </>
   );
+};
+
+export const getStaticProps = async () => {
+  const res = await fetch('');
+  const list = await res.json();
+  return {
+    props: { list },
+  };
 };
 
 export default Category;
@@ -229,12 +252,104 @@ const InfoButton = styled.button`
   }
 `;
 
+// const CategoryWrap = styled.aside`
+//   display: block;
+
+//   @media ${(props) => props.theme.laptopM} {
+//     display: none;
+
+//     ${(props) =>
+//       props.isOpen &&
+//       css`
+//         display: block;
+//         position: fixed;
+//         z-index: 50;
+//         bottom: 80px;
+//         left: 20px;
+//         height: 400px;
+//         overflow-y: scroll;
+//         overflow-x: hidden;
+
+//         animation-name: slideUp;
+//         animation-duration: 0.3s;
+
+//         ::-webkit-scrollbar {
+//           width: 4px;
+//         }
+//         ::-webkit-scrollbar-thumb {
+//           background: #b8b8b8;
+//         }
+//       `}
+
+//     @keyframes slideUp {
+//       from {
+//         bottom: 0px;
+//       }
+
+//       to {
+//         bottom: 80px;
+//       }
+//     }
+//   }
+// `;
+
+// const CategoryContainer = styled.div`
+//   width: 240px;
+//   height: 1100px;
+//   border: 1px solid #eee;
+//   border-radius: 10px;
+//   background-color: #eee;
+// `;
+
+// const GroupContainer = styled.div`
+//   margin: 30px 0 30px 10px;
+// `;
+
+// const Title = styled.div`
+//   font-size: 20px;
+//   font-weight: bold;
+
+//   ${(props) =>
+//     props.wecode &&
+//     css`
+//       font-size: 13px;
+//       font-weight: 400;
+//     `}
+// `;
+
+// const AllTags = styled.div`
+//   display: flex;
+//   flex-wrap: wrap;
+//   margin: 5px 5px;
+// `;
+
+// const Tag = styled.div`
+//   background-color: gray;
+//   color: white;
+//   font-size: 14px;
+//   border-radius: 3px;
+//   padding: 8px;
+//   font-weight: 700;
+//   margin: 5px 3px;
+//   cursor: pointer;
+
+//   ${(props) =>
+//     props.creator &&
+//     css`
+//       background-color: ${(props) => props.theme.subColor};
+//     `}
+// `;
+
+// const WecodeImg = styled.img`
+//   width: 100px;
+//   height: auto;
+//   margin-top: 15px;
+// `;
+
 const CategoryWrap = styled.aside`
   display: block;
-
   @media ${(props) => props.theme.laptopM} {
     display: none;
-
     ${(props) =>
       props.isOpen &&
       css`
@@ -246,10 +361,8 @@ const CategoryWrap = styled.aside`
         height: 400px;
         overflow-y: scroll;
         overflow-x: hidden;
-
         animation-name: slideUp;
         animation-duration: 0.3s;
-
         ::-webkit-scrollbar {
           width: 4px;
         }
@@ -257,12 +370,10 @@ const CategoryWrap = styled.aside`
           background: #b8b8b8;
         }
       `}
-
     @keyframes slideUp {
       from {
         bottom: 0px;
       }
-
       to {
         bottom: 80px;
       }
@@ -272,10 +383,13 @@ const CategoryWrap = styled.aside`
 
 const CategoryContainer = styled.div`
   width: 240px;
-  height: 1170px;
   border: 1px solid #eee;
-  border-radius: 10px;
-  background-color: #eee;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0.1em 0.1em 0.8em rgba(0, 0, 0, 0.3);
+  &:hover {
+    background-color: #faf7f7;
+  }
 `;
 
 const GroupContainer = styled.div`
@@ -285,7 +399,8 @@ const GroupContainer = styled.div`
 const Title = styled.div`
   font-size: 20px;
   font-weight: bold;
-
+  margin-bottom: 15px;
+  color: gray;
   ${(props) =>
     props.wecode &&
     css`
@@ -297,46 +412,24 @@ const Title = styled.div`
 const AllTags = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 5px 5px;
+  margin: 5px 0px;
 `;
 
 const Tag = styled.div`
-  background-color: gray;
-  color: white;
+  background-color: white;
+  border: 1px solid #eee;
+  color: #333;
   font-size: 14px;
+  /* border-radius: 10px; */
   border-radius: 3px;
   padding: 8px;
   font-weight: 700;
   margin: 5px 3px;
   cursor: pointer;
-
-  ${(props) =>
-    props.creator &&
-    css`
-      background-color: ${(props) => props.theme.subColor};
-    `}
 `;
 
 const WecodeImg = styled.img`
   width: 100px;
   height: auto;
   margin-top: 15px;
-`;
-
-const GoUp = styled.div`
-  margin: 0 20px 0 auto;
-  cursor: pointer;
-  background-color: black;
-  color: white;
-  font-size: 20px;
-  height: 40px;
-  width: 40px;
-  border: 1px solid black;
-  border-radius: 20px;
-  text-align: center;
-  line-height: 35px;
-
-  @media ${(props) => props.theme.laptopM} {
-    display: none;
-  }
 `;

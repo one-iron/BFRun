@@ -4,6 +4,7 @@ import App from 'next/app';
 import { ThemeProvider } from 'styled-components';
 
 // internal modules
+import GlobalStyle from '../components/GlobalStyle';
 import theme from '../components/theme';
 
 class WrappedApp extends App {
@@ -12,7 +13,9 @@ class WrappedApp extends App {
     return (
       <>
         <ThemeProvider theme={theme}>
-          <Component {...other} />
+          <GlobalStyle>
+            <Component {...other} />
+          </GlobalStyle>
         </ThemeProvider>
       </>
     );

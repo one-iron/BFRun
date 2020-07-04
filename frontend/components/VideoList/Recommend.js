@@ -3,33 +3,40 @@ import styled from 'styled-components';
 const Recommend = (props) => {
   return (
     <>
-      <TitleH2>{props.title}</TitleH2>
-      <VideoContainer>
-        <Button>
-          <i className="fa fa-caret-left" />
-        </Button>
-        <Videos>
-          <div>Video1</div>
-          <div>Video2</div>
-          <div>Video3</div>
-          <div>Video4</div>
-        </Videos>
-        <Button>
-          {' '}
-          <i className="fa fa-caret-right" />
-        </Button>
-      </VideoContainer>
+      <RecommendWrap>
+        <TitleH2>{props.title}</TitleH2>
+        <VideoContainer>
+          <Button>
+            <i className="fa fa-caret-left" />
+          </Button>
+          <Videos>
+            <div>Video1</div>
+            <div>Video2</div>
+            <div>Video3</div>
+            <div>Video4</div>
+          </Videos>
+          <Button>
+            {' '}
+            <i className="fa fa-caret-right" />
+          </Button>
+        </VideoContainer>
+      </RecommendWrap>
     </>
   );
 };
 
 export default Recommend;
 
+const RecommendWrap = styled.div`
+  margin: 30px auto;
+`;
+
 const TitleH2 = styled.h2`
   font-weight: 700;
-  font-size: 30px;
+  font-size: 25px;
   padding: 5px;
   margin: 0 50px;
+  margin-bottom: 10px;
 `;
 
 const VideoContainer = styled.article`
