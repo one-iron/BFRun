@@ -30,6 +30,7 @@ const SelectedVideoWrap = styled.section`
   width: 950px;
   padding: 4px;
   margin: 0 auto;
+  margin-bottom: 100px;
 
   @media ${(props) => props.theme.laptopM} {
     left: 0;

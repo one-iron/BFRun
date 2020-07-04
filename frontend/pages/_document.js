@@ -1,43 +1,8 @@
 // export modules
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
-
-// internal modules
-import { Globalstyle } from '../components/GlobalStyle';
 
 export default class MyDocument extends Document {
-  static async getInitialProps(context) {
-    const sheet = new ServerStyleSheet(); // SSR 할 수 있게 함
-    const originalRenderPage = context.renderPage;
-
-    try {
-      context.renderPage = () =>
-        originalRenderPage({
-          enhanceApp: (App) => (props) =>
-            sheet.collectStyles(
-              <>
-                <Globalstyle />
-                <App {...props} />
-              </>,
-            ),
-        });
-
-      const initialProps = await Document.getInitialProps(context);
-      return {
-        ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
-      };
-    } finally {
-      sheet.seal();
-    }
-  }
-
   render() {
     return (
       <html lang="ko">

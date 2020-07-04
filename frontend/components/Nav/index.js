@@ -48,7 +48,7 @@ const Nav = () => {
         <NavLeft openSearchBox={searchBox}>
           <Link href="/">
             <a>
-              <TitleText>BFRun</TitleText>
+              <TitleText>BF Run.</TitleText>
             </a>
           </Link>
         </NavLeft>
@@ -81,12 +81,12 @@ const Nav = () => {
           onMouseLeave={showMenu && removeDownMenu}
         >
           <RightMenu>
-            MENU
+            메뉴
             <i className="fa fa-caret-down" />
           </RightMenu>
           <NavRight isShow={showMenu} onMouseLeave={showMenu && removeDownMenu}>
-            <RightContent>About</RightContent>
-            <RightContent>Roadmap</RightContent>
+            <RightContent>소개</RightContent>
+            <RightContent>로드맵</RightContent>
             <Login />
           </NavRight>
         </RightContainer>
@@ -99,12 +99,12 @@ export default Nav;
 
 const NavWrap = styled.nav`
   width: 100%;
-  height: 80px;
+  height: 100px;
   position: fixed;
   background-color: white;
   /* background-color: ${(props) => props.theme.mainColor}; */
   z-index: 100;
-  box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 4px 4px 2px #2676E1; */
 `;
 
 const NavContainer = styled.div`
@@ -138,6 +138,11 @@ const TitleText = styled.div`
   font-size: 25px;
   font-weight: bold;
   color: black;
+  /* color: white;
+  background-color: orange;
+  border: 5px solid orange;
+  padding: 8px 18px;
+  border-radius: 40px; */
   cursor: pointer;
 `;
 
@@ -193,6 +198,7 @@ const ArrowBack = styled.i`
 
 const SearchBox = styled.form`
   border: 1px solid gray;
+  /* border: 1.5px solid orange; */
   border-radius: 5px;
   height: 30px;
   display: flex;
@@ -222,7 +228,13 @@ const SearchButton = styled.button`
   border: none;
   outline: none;
   background-color: transparent;
-  padding-right: 20px;
+  color: gray;
+  /* background-color: orange;
+  padding: 0 10px;
+
+  i {
+    color: white;
+  } */
 `;
 
 const RightContainer = styled.div`
@@ -297,6 +309,8 @@ const RightContent = styled.div`
   padding: 0 5px;
   margin-left: 10px;
   cursor: pointer;
+  color: gray;
+  font-size: 14px;
 
   @media ${(props) => props.theme.laptopS} {
     margin: 10px 5px;
