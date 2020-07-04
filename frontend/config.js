@@ -15,3 +15,7 @@ export const CATEGORY = `${SJ}/categories`;
 // Detail Video API
 export const VIDEO_LIST =
   'https://run.mocky.io/v3/d8eca722-2afa-423d-a11d-ae27e0e9f750';
+
+// 선택된 태그에 대한 비디오
+export const SELECTED_VIDEO =
+  'https://run.mocky.io/v3/67348608-f1af-47a6-94eb-a5a5896c8e5a';

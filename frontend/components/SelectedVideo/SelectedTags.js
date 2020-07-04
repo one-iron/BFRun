@@ -51,73 +51,63 @@ const SelectedTags = ({
 }) => {
   return (
     <SelectedTagsWrap>
-      {selectedTags.length > 2 && (
-        <Remove onClick={() => removeTags()}>전체 지우기</Remove>
-      )}
-      {selectedContent.map((tag, index) => {
-        return (
-          <TagName
-            key={index}
-            onClick={() => addDelContentTags(tag)}
-            style={{
-              backgroundColor: Object.keys(tagColors).includes(tag)
-                ? tagColors[tag]
-                : '',
-              color: Object.keys(tagColors).includes(tag) ? 'white' : '',
-            }}
-          >
-            {tag}
-          </TagName>
-        );
-      })}
-      {selectedStack.map((tag, index) => {
-        return (
-          <TagName
-            key={index}
-            onClick={() => addDelStackTags(tag)}
-            style={{
-              backgroundColor: Object.keys(tagColors).includes(tag)
-                ? tagColors[tag]
-                : '',
-              color: Object.keys(tagColors).includes(tag) ? 'white' : '',
-            }}
-          >
-            {tag}
-          </TagName>
-        );
-      })}
-      {selectedCreator.map((tag, index) => {
-        return (
-          <TagName
-            key={index}
-            onClick={() => addDelCreatorTags(tag)}
-            style={{
-              backgroundColor: Object.keys(tagColors).includes(tag)
-                ? tagColors[tag]
-                : '',
-              color: Object.keys(tagColors).includes(tag) ? 'white' : '',
-            }}
-          >
-            {tag}
-          </TagName>
-        );
-      })}
-      {/* {selectedTags.map((tag, index) => {
-        return (
-          <TagName
-            key={index}
-            onClick={() => selected(tag)}
-            style={{
-              backgroundColor: Object.keys(tagColors).includes(tag)
-                ? tagColors[tag]
-                : '',
-              color: Object.keys(tagColors).includes(tag) ? 'white' : '',
-            }}
-          >
-            {tag}
-          </TagName>
-        );
-      })} */}
+      <TagLine>
+        <Remove onClick={removeTags}>전체 지우기</Remove>
+      </TagLine>
+      <TagLine>
+        {selectedContent.map((tag, index) => {
+          return (
+            <TagName
+              key={index}
+              onClick={() => addDelContentTags(tag)}
+              style={{
+                backgroundColor: Object.keys(tagColors).includes(tag)
+                  ? tagColors[tag]
+                  : '',
+                color: Object.keys(tagColors).includes(tag) ? 'white' : '',
+              }}
+            >
+              {tag}
+            </TagName>
+          );
+        })}
+      </TagLine>
+      <TagLine>
+        {selectedStack.map((tag, index) => {
+          return (
+            <TagName
+              key={index}
+              onClick={() => addDelStackTags(tag)}
+              style={{
+                backgroundColor: Object.keys(tagColors).includes(tag)
+                  ? tagColors[tag]
+                  : '',
+                color: Object.keys(tagColors).includes(tag) ? 'white' : '',
+              }}
+            >
+              {tag}
+            </TagName>
+          );
+        })}
+      </TagLine>
+      <TagLine>
+        {selectedCreator.map((tag, index) => {
+          return (
+            <TagName
+              key={index}
+              onClick={() => addDelCreatorTags(tag)}
+              style={{
+                backgroundColor: Object.keys(tagColors).includes(tag)
+                  ? tagColors[tag]
+                  : '',
+                color: Object.keys(tagColors).includes(tag) ? 'white' : '',
+              }}
+            >
+              {tag}
+            </TagName>
+          );
+        })}
+      </TagLine>
     </SelectedTagsWrap>
   );
 };
@@ -128,9 +118,14 @@ const SelectedTagsWrap = styled.div`
   /* border: 1px solid black; */
   padding: 6px 10px;
   flex-wrap: wrap;
-  display: flex;
+  /* display: flex; */
   width: 100%;
   border-radius: 10px;
+`;
+
+const TagLine = styled.div`
+  display: flex;
+  /* border: 1px solid red; */
 `;
 
 const TagName = styled.span`
@@ -145,7 +140,7 @@ const TagName = styled.span`
 
 const Remove = styled.div`
   transform: scale(1);
-  transition: all 0.3s ease-in-out;
+  transition: all 0.4s ease-in-out;
   border: 1px solid black;
   border-radius: 3px;
   cursor: pointer;
