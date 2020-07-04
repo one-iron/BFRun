@@ -1,9 +1,9 @@
 from flask import Flask
 from flask_cors import CORS
 
-from user.model import UserDao
-from user.controller import create_user_endpoints
-from user.service import UserService
+from user.model       import UserDao
+from user.controller  import create_user_endpoints
+from user.service     import UserService
 
 from video.model import VideoDao
 from video.service import VideoService
@@ -16,7 +16,7 @@ def create_app(test_config=None):
     app.debug = True
     app.config["JSON_SORT_KEYS"] = False
     app.config.from_pyfile("config.py")
-    CORS(app, resources={r"*": {"origins": "*"}})
+    CORS(app, resources={r'*': {'origins': '*'}})
 
     user_dao = UserDao()
     video_dao = VideoDao()
