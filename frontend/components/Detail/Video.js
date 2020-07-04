@@ -15,36 +15,17 @@ const DetailVideo = () => {
 
   useEffect(() => {
     axios
-      .get('https://run.mocky.io/v3/cd4032e7-50ce-4420-882a-80616cff62b2')
+      .get('https://run.mocky.io/v3/d8eca722-2afa-423d-a11d-ae27e0e9f750')
       .then((response) => {
-        const filterUrl = response.data.url.replace('&', '?');
+        console.log(response);
+        const filterUrl = response.data.video_detail.video_url.replace(
+          '&',
+          '?',
+        );
         setVideoUrl(
           filterUrl.slice(filterUrl.indexOf('=') + 1, filterUrl.length),
         );
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get('https://run.mocky.io/v3/cd4032e7-50ce-4420-882a-80616cff62b2')
-      .then((response) => {
-        const testUrl = response.data.url.slice(
-          response.data.url.indexOf('list=') + 5,
-          response.data.url.indexOf('index') - 1,
-        );
-        const getResultApi = `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${testUrl}&part=snippet&key=AIzaSyAuxeBHYUNeNJtDze-Xpl1VwJLdL3Fh95M`;
-        axios.get(getResultApi).then((response) => {
-          const getListApi = `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${testUrl}&part=snippet&maxResults=${response.data.pageInfo.totalResults}&key=AIzaSyAuxeBHYUNeNJtDze-Xpl1VwJLdL3Fh95M`;
-          axios.get(getListApi).then((listResponse) => {
-            setListData(listResponse.data.items);
-          });
-        });
-        setListUrl(
-          response.data.url.slice(
-            response.data.url.indexOf('list=') + 5,
-            response.data.url.indexOf('index') - 1,
-          ),
-        );
+        setListUrl(response.data.video_playlist);
       });
   }, []);
 
@@ -73,8 +54,8 @@ const DetailVideo = () => {
       <section className="listSection">
         {/* 유튜브 영상 재생복록이 들어갈 컴포넌트 입니다. */}
         <DetailList
-          listData={listData}
           videoUrl={videoUrl}
+          listVideo={listUrl}
           clickList={clickList}
         />
       </section>
