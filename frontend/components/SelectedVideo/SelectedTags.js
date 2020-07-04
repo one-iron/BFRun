@@ -8,7 +8,7 @@ const tagColors = {
   동기부여: 'gray',
   Apollo: '#112A47',
   AWS: 'gray',
-  Dtabase: '#036172',
+  Database: '#036172',
   Git: 'gray',
   Linux: 'gray',
   Etc: 'gray',
@@ -38,9 +38,13 @@ const tagColors = {
   '조코딩 JoCoding': 'gray',
 };
 
-const SelectedTags = ({ selectedTags, selected }) => {
+const SelectedTags = (props) => {
+  const { selectedTags, selected, removeTags } = props;
   return (
     <SelectedTagsWrap>
+      {selectedTags.length > 2 && (
+        <Remove onClick={() => removeTags()}>전체 지우기</Remove>
+      )}
       {selectedTags.map((tag, index) => {
         return (
           <TagName
@@ -64,18 +68,37 @@ const SelectedTags = ({ selectedTags, selected }) => {
 export default SelectedTags;
 
 const SelectedTagsWrap = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  padding: 6px 10px;
   flex-wrap: wrap;
   display: flex;
   width: 100%;
   border-radius: 10px;
-  background-color: white;
 `;
 
 const TagName = styled.span`
-  border-radius: 14px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 700;
   margin: 4px 8px;
   padding: 4px 8px;
   min-width: 10px;
   cursor: pointer;
+`;
+
+const Remove = styled.div`
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
+  border: 1px solid black;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 4px 8px;
+  padding: 4px 8px;
+  background-color: white;
+  color: black;
+  &:hover {
+    transform: scale(1.06);
+  }
 `;

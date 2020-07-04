@@ -20,6 +20,10 @@ export default function HomePage() {
     }
   };
 
+  const removeTags = () => {
+    setSelectedTags([]);
+  };
+
   // 선택한 태그로 axios
 
   return (
@@ -29,7 +33,11 @@ export default function HomePage() {
         <ContentContainer>
           <Category selectedTags={selectedTags} selected={selected} />
           {selectedTags[0] ? (
-            <SelectedVideo selectedTags={selectedTags} selected={selected} />
+            <SelectedVideo
+              selectedTags={selectedTags}
+              selected={selected}
+              removeTags={removeTags}
+            />
           ) : (
             <VideoList />
           )}
