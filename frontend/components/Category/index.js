@@ -1,26 +1,27 @@
 // external modules
 import { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
 import styled, { css } from 'styled-components';
 
 // internal modules
+// import { CATEGORY } from '../../config';
 // import LangToggle from './LangToggle';
 
-const Category = ({ selected, selectedTags, list }) => {
-  const [categorylist, setCategoryList] = useState();
+const Category = ({
+  selected,
+  selectedTags,
+  contentList,
+  selectedContent,
+  addDelContentTags,
+  stackList,
+  selectedStack,
+  addDelStackTags,
+  creatorList,
+  selectedCreator,
+  addDelCreatorTags,
+}) => {
   const [showCategory, setShowCategory] = useState(false);
   const categoryRef = useRef(null);
   const buttonRef = useRef(null);
-
-  console.log(list);
-
-  // 카테고리 태그 불러오기
-  useEffect(() => {
-    const getCategoryList = `https://run.mocky.io/v3/2f576afd-91a7-45b7-864f-f24c7d9e6682`;
-    axios.get(getCategoryList).then((res) => {
-      setCategoryList([res.data]);
-    });
-  }, []);
 
   const toggleCategory = () => {
     if (showCategory) {
@@ -63,162 +64,154 @@ const Category = ({ selected, selectedTags, list }) => {
       </InfoWrap>
 
       {/* 카테고리 창 */}
-      {categorylist && (
-        <CategoryWrap isOpen={showCategory} ref={categoryRef}>
-          <CategoryContainer>
-            {/* <LangToggle /> */}
-            <GroupContainer>
-              <Title>Contents</Title>
-              <AllTags>
-                {categorylist[0].content_types.map((type) => {
+      <CategoryWrap isOpen={showCategory} ref={categoryRef}>
+        <CategoryContainer>
+          {/* <LangToggle /> */}
+          <GroupContainer>
+            <Title>Contents</Title>
+            <AllTags>
+              {contentList &&
+                contentList[0].map((type) => {
                   return (
                     <Tag
                       key={type.id}
                       id={type.id}
                       style={{
-                        backgroundColor: selectedTags.includes(type.name)
+                        backgroundColor: selectedContent.includes(type.name)
                           ? 'green'
                           : 'white',
-                        color: selectedTags.includes(type.name)
+                        color: selectedContent.includes(type.name)
                           ? 'white'
                           : 'black',
                         // border: selectedTags.includes(type.name)
                         // ? type.color_code
                         // : 'white',
                       }}
-                      onClick={() => selected(type.name)}
+                      onClick={() => addDelContentTags(type.name)}
                     >
                       {type.name}
                     </Tag>
                   );
                 })}
-              </AllTags>
-            </GroupContainer>
-            <GroupContainer>
-              <Title>FrontEnd</Title>
-              <AllTags>
-                {categorylist[0].frontend_stacks.map((type) => {
+            </AllTags>
+          </GroupContainer>
+          <GroupContainer>
+            <Title>FrontEnd</Title>
+            <AllTags>
+              {stackList &&
+                stackList[0][0].frontend_stacks.map((type) => {
                   return (
                     <Tag
                       key={type.id}
                       id={type.id}
                       style={{
-                        backgroundColor: selectedTags.includes(type.name)
+                        backgroundColor: selectedStack.includes(type.name)
                           ? type.color_code
                           : 'white',
-                        color: selectedTags.includes(type.name)
+                        color: selectedStack.includes(type.name)
                           ? 'white'
                           : 'black',
-                        // border: selectedTags.includes(type.name)
-                        // ? type.color_code
-                        // : 'white',
                       }}
-                      onClick={() => selected(type.name)}
+                      onClick={() => addDelStackTags(type.name)}
                     >
                       {type.name}
                     </Tag>
                   );
                 })}
-              </AllTags>
-            </GroupContainer>
-            <GroupContainer>
-              <Title>BackEnd</Title>
-              <AllTags>
-                {categorylist[0].backend_stacks.map((type) => {
+            </AllTags>
+          </GroupContainer>
+          <GroupContainer>
+            <Title>BackEnd</Title>
+            <AllTags>
+              {stackList &&
+                stackList[0][0].backend_stacks.map((type) => {
                   return (
                     <Tag
                       key={type.id}
                       id={type.id}
                       style={{
-                        backgroundColor: selectedTags.includes(type.name)
+                        backgroundColor: selectedStack.includes(type.name)
                           ? type.color_code
                           : 'white',
-                        color: selectedTags.includes(type.name)
+                        color: selectedStack.includes(type.name)
                           ? 'white'
                           : 'black',
-                        // border: selectedTags.includes(type.name)
-                        // ? type.color_code
-                        // : 'white',
                       }}
-                      onClick={() => selected(type.name)}
+                      onClick={() => addDelStackTags(type.name)}
                     >
                       {type.name}
                     </Tag>
                   );
                 })}
-              </AllTags>
-            </GroupContainer>
-            <GroupContainer>
-              <Title>Developer</Title>
-              <AllTags>
-                {categorylist[0].general_stacks.map((type) => {
+            </AllTags>
+          </GroupContainer>
+          <GroupContainer>
+            <Title>Developer</Title>
+            <AllTags>
+              {stackList &&
+                stackList[0][0].general_stacks.map((type) => {
                   return (
                     <Tag
                       key={type.id}
                       id={type.id}
                       style={{
-                        backgroundColor: selectedTags.includes(type.name)
+                        backgroundColor: selectedStack.includes(type.name)
                           ? type.color_code
                           : 'white',
-                        color: selectedTags.includes(type.name)
+                        color: selectedStack.includes(type.name)
                           ? 'white'
                           : 'black',
-                        // border: selectedTags.includes(type.name)
-                        // ? type.color_code
-                        // : 'white',
                       }}
-                      onClick={() => selected(type.name)}
+                      onClick={() => addDelStackTags(type.name)}
                     >
                       {type.name}
                     </Tag>
                   );
                 })}
-              </AllTags>
-            </GroupContainer>
-            <GroupContainer>
-              <Title>Creator</Title>
-              <AllTags>
-                {categorylist[0].channels.map((type) => {
+            </AllTags>
+          </GroupContainer>
+          <GroupContainer>
+            <Title>Creator</Title>
+            <AllTags>
+              {creatorList &&
+                creatorList[0].map((type) => {
                   return (
                     <Tag
                       key={type.id}
                       id={type.id}
                       style={{
-                        backgroundColor: selectedTags.includes(type.name)
+                        backgroundColor: selectedCreator.includes(type.name)
                           ? '#F80000'
                           : 'white',
-
-                        color: selectedTags.includes(type.name)
+                        color: selectedCreator.includes(type.name)
                           ? 'white'
                           : 'black',
-                        // border: '2px solid black',
                       }}
-                      onClick={() => selected(type.name)}
+                      onClick={() => addDelCreatorTags(type.name)}
                     >
                       {type.name}
                     </Tag>
                   );
                 })}
-              </AllTags>
-            </GroupContainer>
-            <GroupContainer>
-              <Title wecode>부트캠프를 찾고 계신다면?</Title>
-              <WecodeImg src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/logo_black.png" />
-            </GroupContainer>
-          </CategoryContainer>
-        </CategoryWrap>
-      )}
+            </AllTags>
+          </GroupContainer>
+          <GroupContainer>
+            <Title wecode>부트캠프를 찾고 계신다면?</Title>
+            <WecodeImg src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/logo_black.png" />
+          </GroupContainer>
+        </CategoryContainer>
+      </CategoryWrap>
     </>
   );
 };
 
-export const getStaticProps = async () => {
-  const res = await fetch('');
-  const list = await res.json();
-  return {
-    props: { list },
-  };
-};
+// export const getStaticProps = async () => {
+//   const res = await fetch(CATEGORY);
+//   const list = await res.json();
+//   return {
+//     props: { list },
+//   };
+// };
 
 export default Category;
 
@@ -251,100 +244,6 @@ const InfoButton = styled.button`
     font-size: 20px;
   }
 `;
-
-// const CategoryWrap = styled.aside`
-//   display: block;
-
-//   @media ${(props) => props.theme.laptopM} {
-//     display: none;
-
-//     ${(props) =>
-//       props.isOpen &&
-//       css`
-//         display: block;
-//         position: fixed;
-//         z-index: 50;
-//         bottom: 80px;
-//         left: 20px;
-//         height: 400px;
-//         overflow-y: scroll;
-//         overflow-x: hidden;
-
-//         animation-name: slideUp;
-//         animation-duration: 0.3s;
-
-//         ::-webkit-scrollbar {
-//           width: 4px;
-//         }
-//         ::-webkit-scrollbar-thumb {
-//           background: #b8b8b8;
-//         }
-//       `}
-
-//     @keyframes slideUp {
-//       from {
-//         bottom: 0px;
-//       }
-
-//       to {
-//         bottom: 80px;
-//       }
-//     }
-//   }
-// `;
-
-// const CategoryContainer = styled.div`
-//   width: 240px;
-//   height: 1100px;
-//   border: 1px solid #eee;
-//   border-radius: 10px;
-//   background-color: #eee;
-// `;
-
-// const GroupContainer = styled.div`
-//   margin: 30px 0 30px 10px;
-// `;
-
-// const Title = styled.div`
-//   font-size: 20px;
-//   font-weight: bold;
-
-//   ${(props) =>
-//     props.wecode &&
-//     css`
-//       font-size: 13px;
-//       font-weight: 400;
-//     `}
-// `;
-
-// const AllTags = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-//   margin: 5px 5px;
-// `;
-
-// const Tag = styled.div`
-//   background-color: gray;
-//   color: white;
-//   font-size: 14px;
-//   border-radius: 3px;
-//   padding: 8px;
-//   font-weight: 700;
-//   margin: 5px 3px;
-//   cursor: pointer;
-
-//   ${(props) =>
-//     props.creator &&
-//     css`
-//       background-color: ${(props) => props.theme.subColor};
-//     `}
-// `;
-
-// const WecodeImg = styled.img`
-//   width: 100px;
-//   height: auto;
-//   margin-top: 15px;
-// `;
 
 const CategoryWrap = styled.aside`
   display: block;
@@ -394,6 +293,12 @@ const CategoryContainer = styled.div`
 
 const GroupContainer = styled.div`
   margin: 30px 0 30px 10px;
+
+  :hover {
+    div {
+      color: black;
+    }
+  }
 `;
 
 const Title = styled.div`

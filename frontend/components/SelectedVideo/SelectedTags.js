@@ -27,25 +27,82 @@ const tagColors = {
   Flask: '#000000',
   GraphQL: '#DF34A6',
   SQL: '#008062',
-  생활코딩: 'gray',
-  '얄팍한 코딩사전': 'gray',
-  '김왼손의 왼손코딩': 'gray',
-  '코딩하는 테크보이 워니': 'gray',
-  '드림코딩 by 엘리': 'gray',
-  '노마드 코더 Nomad Coders': 'gray',
-  'Minjun Kim': 'gray',
-  '김버그 Kimbug': 'gray',
-  '조코딩 JoCoding': 'gray',
+  생활코딩: '#F80000',
+  '얄팍한 코딩사전': '#F80000',
+  '김왼손의 왼손코딩': '#F80000',
+  '코딩하는 테크보이 워니': '#F80000',
+  '드림코딩 by 엘리': '#F80000',
+  '노마드 코더 Nomad Coders': '#F80000',
+  'Minjun Kim': '#F80000',
+  '김버그 Kimbug': '#F80000',
+  '조코딩 JoCoding': '#F80000',
 };
 
-const SelectedTags = (props) => {
-  const { selectedTags, selected, removeTags } = props;
+const SelectedTags = ({
+  selectedTags,
+  selected,
+  selectedContent,
+  addDelContentTags,
+  selectedStack,
+  addDelStackTags,
+  selectedCreator,
+  addDelCreatorTags,
+  removeTags,
+}) => {
   return (
     <SelectedTagsWrap>
       {selectedTags.length > 2 && (
         <Remove onClick={() => removeTags()}>전체 지우기</Remove>
       )}
-      {selectedTags.map((tag, index) => {
+      {selectedContent.map((tag, index) => {
+        return (
+          <TagName
+            key={index}
+            onClick={() => addDelContentTags(tag)}
+            style={{
+              backgroundColor: Object.keys(tagColors).includes(tag)
+                ? tagColors[tag]
+                : '',
+              color: Object.keys(tagColors).includes(tag) ? 'white' : '',
+            }}
+          >
+            {tag}
+          </TagName>
+        );
+      })}
+      {selectedStack.map((tag, index) => {
+        return (
+          <TagName
+            key={index}
+            onClick={() => addDelStackTags(tag)}
+            style={{
+              backgroundColor: Object.keys(tagColors).includes(tag)
+                ? tagColors[tag]
+                : '',
+              color: Object.keys(tagColors).includes(tag) ? 'white' : '',
+            }}
+          >
+            {tag}
+          </TagName>
+        );
+      })}
+      {selectedCreator.map((tag, index) => {
+        return (
+          <TagName
+            key={index}
+            onClick={() => addDelCreatorTags(tag)}
+            style={{
+              backgroundColor: Object.keys(tagColors).includes(tag)
+                ? tagColors[tag]
+                : '',
+              color: Object.keys(tagColors).includes(tag) ? 'white' : '',
+            }}
+          >
+            {tag}
+          </TagName>
+        );
+      })}
+      {/* {selectedTags.map((tag, index) => {
         return (
           <TagName
             key={index}
@@ -60,7 +117,7 @@ const SelectedTags = (props) => {
             {tag}
           </TagName>
         );
-      })}
+      })} */}
     </SelectedTagsWrap>
   );
 };

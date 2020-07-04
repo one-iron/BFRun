@@ -9,5 +9,6 @@
         "preprocess": false
       }
     ]
+    // ["./babel-plugin-nextjs-mdx-patch"]
   ]
 }
