@@ -21,38 +21,46 @@ const VideoSection = ({ selectedTags }) => {
   return (
     <VideoSectionWrap>
       <CategoryName>{selectedTags}</CategoryName>
-      <VideoLiContainer>
+      <SlideDiv>
         {videoCount > 4 && (
           <Button back>
             <i className="fa fa-caret-left" />
           </Button>
         )}
-        <ul>
-          {videoData.map((data) => {
-            return (
-              <VideoLi onClick={() => moveRoute('/detail')}>
-                <ThumbNail key={data.id} src={data.thumb} />
-                <div>
-                  {data.title.length < 20
-                    ? data.title
-                    : `${data.title.slice(0, 35)}...`}
-                </div>
-                <CreatorName>{data.creator}</CreatorName>
-                {/* <CreatorName>조회수 {data.views.toLocaleString()}</CreatorName> */}
-                <div />
-              </VideoLi>
-            );
-          })}
-        </ul>
-        <Button next>
-          <i className="fa fa-caret-right" />
-        </Button>
-        {videoCount > 4 && (
+        <VideoLiContainer>
+          <ul>
+            {videoData.map((data, index) => {
+              return (
+                <VideoLi onClick={() => moveRoute('/detail')}>
+                  <VideoHover>
+                    <ThumbNail key={data.id} src={data.thumb} />
+                    <VodeoTitle>
+                      {data.title.length < 20
+                        ? data.title
+                        : `${data.title.slice(0, 35)}...`}
+                    </VodeoTitle>
+                    <CreatorName>{data.creator}</CreatorName>
+                  </VideoHover>
+                  {/* <VideoHover>
+                     <ThumbNail key={data.id} src={videoData[i].thumb} />
+                     <VodeoTitle>
+                       {videoData[i].title.length < 20
+                         ? videoData[i].title
+                         : `${videoData[i].title.slice(0, 35)}...`}
+                     </VodeoTitle>
+                     <CreatorName>{videoData[i].creator}</CreatorName>
+                   </VideoHover> */}
+                </VideoLi>
+              );
+            })}
+          </ul>
+        </VideoLiContainer>
+        {videoCount && (
           <Button next>
             <i className="fa fa-caret-right" />
           </Button>
         )}
-      </VideoLiContainer>
+      </SlideDiv>
     </VideoSectionWrap>
   );
 };
@@ -60,19 +68,10 @@ const VideoSection = ({ selectedTags }) => {
 export default VideoSection;
 
 const VideoSectionWrap = styled.div`
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   width: 100%;
   margin: 10px 0;
   padding: 10px;
-  ul {
-    /* border: 1px solid green; */
-    margin: 5px 15px;
-    display: flex;
-    flex-wrap: wrap;
-    @media (max-width: 500px) {
-      justify-content: center;
-    }
-  }
 `;
 
 const CategoryName = styled.strong`
@@ -81,15 +80,37 @@ const CategoryName = styled.strong`
   display: block;
 `;
 
-const VideoLiContainer = styled.div`
-  /* border: 1px solid red; */
+const SlideDiv = styled.div`
   display: flex;
-  position: relative;
+  align-items: center;
+`;
+
+const VideoLiContainer = styled.div`
+  border: 1px solid red;
+  display: flex;
+  /* position: relative; */
   align-items: center;
   padding: 0 5px;
+  width: 100%;
+  ul {
+    /* border: 1px solid green; */
+    display: flex;
+    margin: 5px 15px;
+    height: 500px;
+    @media (max-width: 500px) {
+      justify-content: center;
+    }
+  }
+`;
+
+const VideoWindow = styled.div`
+  width: 100%;
+  overflow: auto;
+  display: flex;
 `;
 
 const Button = styled.div`
+  display: inline;
   cursor: pointer;
   font-size: 50px;
   color: rgba(255, 118, 117, 1);
@@ -107,38 +128,32 @@ const Button = styled.div`
 `;
 
 const VideoLi = styled.li`
-  /* border: 1px solid red; */
-  transform: scale(1);
-  transition: all 0.3s ease-in-out;
   cursor: pointer;
-  border-radius: 5px;
   float: left;
   margin: 10px;
   width: 200px;
+  height: auto;
+`;
+
+const VideoHover = styled.div`
+  margin: 10px 0;
   height: 200px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   box-shadow: 0.1em 0 0.5em rgba(0, 0, 0, 0.3);
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
   &:hover {
     transform: scale(1.04);
-  }
-  div {
-    font-size: 14px;
-    margin-left: 4px;
-    padding: 4px;
-    /* white-space: nowrap; */
-    /* overflow: hidden; */
-    /* text-overflow: ellipsis; */
-  }
-  @media (max-width: 500px) {
-    width: 300px;
-    height: 300px;
   }
 `;
 
 const CreatorName = styled.div`
+  margin-left: 5px;
   font-size: 12px;
   color: grey;
   position: absolute;
-  bottom: 2px;
+  bottom: 5px;
 `;
 
 const ThumbNail = styled.img`
@@ -146,4 +161,18 @@ const ThumbNail = styled.img`
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   /* cursor: pointer; */
+`;
+
+const VodeoTitle = styled.div`
+  font-size: 14px;
+  margin-left: 4px;
+  padding: 4px;
+  margin-bottom: 30px;
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+  @media (max-width: 500px) {
+    width: 300px;
+    height: 300px;
+  }
 `;
