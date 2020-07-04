@@ -27,3 +27,7 @@ class VideoService:
         categories["channels"] = channels
 
         return categories
+
+    def get_video_detail(self, video_id):
+        video_detail, video_playlist = self.video_dao.get_video_detail(video_id), self.video_dao.get_video_playlist(video_id)
+        return video_detail, video_playlist
