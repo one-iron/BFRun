@@ -2,15 +2,6 @@
 //   import React from 'react'
 //   import { mdx } from '@mdx-js/react'
 
-//   export async function getStaticProps () {
-//     return {
-//       props: {
-//         foo: 'bar'
-//       }
-//     }
-//   }
-// `;
-
 const withMDX = require('@next/mdx')({
   // options: {
   //   renderer: mdxRenderer,

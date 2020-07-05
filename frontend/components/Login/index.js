@@ -34,7 +34,7 @@ const Login = (props) => {
   return (
     <LoginWrap>
       {loginToken ? (
-        <></>
+        <div>로그아웃</div>
       ) : (
         <GoogleLogin
           clientId={clientId}
