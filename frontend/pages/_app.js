@@ -2,7 +2,6 @@
 import React from 'react';
 import App from 'next/app';
 import { ThemeProvider } from 'styled-components';
-// import { MDXProvider } from '@mdx-js/react';
 
 // internal modules
 import GlobalStyle from '../components/GlobalStyle';
@@ -13,11 +12,11 @@ class WrappedApp extends App {
     const { Component, ...other } = this.props;
     return (
       <>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle>
+        <GlobalStyle>
+          <ThemeProvider theme={theme}>
             <Component {...other} />
-          </GlobalStyle>
-        </ThemeProvider>
+          </ThemeProvider>
+        </GlobalStyle>
       </>
     );
   }

@@ -7,6 +7,7 @@ import styled, { css } from 'styled-components';
 // import LangToggle from './LangToggle';
 
 const Category = ({
+  list,
   selected,
   selectedTags,
   contentList,
@@ -22,6 +23,8 @@ const Category = ({
   const [showCategory, setShowCategory] = useState(false);
   const categoryRef = useRef(null);
   const buttonRef = useRef(null);
+
+  // console.log('Category list', list);
 
   const toggleCategory = () => {
     if (showCategory) {
@@ -70,129 +73,122 @@ const Category = ({
           <GroupContainer>
             <Title>Contents</Title>
             <AllTags>
-              {contentList &&
-                contentList[0].map((type) => {
-                  return (
-                    <Tag
-                      key={type.id}
-                      id={type.id}
-                      style={{
-                        backgroundColor: selectedContent.includes(type.name)
-                          ? 'green'
-                          : 'white',
-                        color: selectedContent.includes(type.name)
-                          ? 'white'
-                          : 'black',
-                        // border: selectedTags.includes(type.name)
-                        // ? type.color_code
-                        // : 'white',
-                      }}
-                      onClick={() => addDelContentTags(type.name)}
-                    >
-                      {type.name}
-                    </Tag>
-                  );
-                })}
+              {contentList.map((type) => {
+                return (
+                  <Tag
+                    key={type.id}
+                    id={type.id}
+                    style={{
+                      backgroundColor: selectedContent.includes(type.name)
+                        ? 'green'
+                        : 'white',
+                      color: selectedContent.includes(type.name)
+                        ? 'white'
+                        : 'black',
+                    }}
+                    onClick={() => addDelContentTags(type.name)}
+                  >
+                    {type.name}
+                  </Tag>
+                );
+              })}
             </AllTags>
           </GroupContainer>
+          <Line />
           <GroupContainer>
             <Title>FrontEnd</Title>
             <AllTags>
-              {stackList &&
-                stackList[0][0].frontend_stacks.map((type) => {
-                  return (
-                    <Tag
-                      key={type.id}
-                      id={type.id}
-                      style={{
-                        backgroundColor: selectedStack.includes(type.name)
-                          ? type.color_code
-                          : 'white',
-                        color: selectedStack.includes(type.name)
-                          ? 'white'
-                          : 'black',
-                      }}
-                      onClick={() => addDelStackTags(type.name)}
-                    >
-                      {type.name}
-                    </Tag>
-                  );
-                })}
+              {stackList[0].frontend_stacks.map((type) => {
+                return (
+                  <Tag
+                    key={type.id}
+                    id={type.id}
+                    style={{
+                      backgroundColor: selectedStack.includes(type.name)
+                        ? type.color_code
+                        : 'white',
+                      color: selectedStack.includes(type.name)
+                        ? 'white'
+                        : 'black',
+                    }}
+                    onClick={() => addDelStackTags(type.name)}
+                  >
+                    {type.name}
+                  </Tag>
+                );
+              })}
             </AllTags>
           </GroupContainer>
           <GroupContainer>
             <Title>BackEnd</Title>
             <AllTags>
-              {stackList &&
-                stackList[0][0].backend_stacks.map((type) => {
-                  return (
-                    <Tag
-                      key={type.id}
-                      id={type.id}
-                      style={{
-                        backgroundColor: selectedStack.includes(type.name)
-                          ? type.color_code
-                          : 'white',
-                        color: selectedStack.includes(type.name)
-                          ? 'white'
-                          : 'black',
-                      }}
-                      onClick={() => addDelStackTags(type.name)}
-                    >
-                      {type.name}
-                    </Tag>
-                  );
-                })}
+              {stackList[0].backend_stacks.map((type) => {
+                return (
+                  <Tag
+                    key={type.id}
+                    id={type.id}
+                    style={{
+                      backgroundColor: selectedStack.includes(type.name)
+                        ? type.color_code
+                        : 'white',
+                      color: selectedStack.includes(type.name)
+                        ? 'white'
+                        : 'black',
+                    }}
+                    onClick={() => addDelStackTags(type.name)}
+                  >
+                    {type.name}
+                  </Tag>
+                );
+              })}
             </AllTags>
           </GroupContainer>
           <GroupContainer>
             <Title>Developer</Title>
             <AllTags>
-              {stackList &&
-                stackList[0][0].general_stacks.map((type) => {
-                  return (
-                    <Tag
-                      key={type.id}
-                      id={type.id}
-                      style={{
-                        backgroundColor: selectedStack.includes(type.name)
-                          ? type.color_code
-                          : 'white',
-                        color: selectedStack.includes(type.name)
-                          ? 'white'
-                          : 'black',
-                      }}
-                      onClick={() => addDelStackTags(type.name)}
-                    >
-                      {type.name}
-                    </Tag>
-                  );
-                })}
+              {stackList[0].general_stacks.map((type) => {
+                return (
+                  <Tag
+                    key={type.id}
+                    id={type.id}
+                    style={{
+                      backgroundColor: selectedStack.includes(type.name)
+                        ? type.color_code
+                        : 'white',
+                      color: selectedStack.includes(type.name)
+                        ? 'white'
+                        : 'black',
+                    }}
+                    onClick={() => addDelStackTags(type.name)}
+                  >
+                    {type.name}
+                  </Tag>
+                );
+              })}
             </AllTags>
           </GroupContainer>
           <GroupContainer>
             <Title>Creator</Title>
             <AllTags>
-              {creatorList &&
-                creatorList[0].map((type) => {
-                  return (
-                    <Tag
-                      key={type.id}
-                      id={type.id}
-                      style={{
-                        backgroundColor: selectedCreator.includes(type.name)
-                          ? '#F80000'
-                          : 'white',
-                        color: selectedCreator.includes(type.name)
-                          ? 'white'
-                          : 'black',
-                      }}
-                      onClick={() => addDelCreatorTags(type.name)}
-                    >
-                      {type.name}
-                    </Tag>
-                  );
-                })}
+              {creatorList.map((type) => {
+                return (
+                  <Tag
+                    key={type.id}
+                    id={type.id}
+                    style={{
+                      backgroundColor: selectedCreator.includes(type.name)
+                        ? '#F80000'
+                        : 'white',
+                      color: selectedCreator.includes(type.name)
+                        ? 'white'
+                        : 'black',
+                    }}
+                    onClick={() => addDelCreatorTags(type.name)}
+                  >
+                    {type.name}
+                  </Tag>
+                );
+              })}
             </AllTags>
           </GroupContainer>
           <GroupContainer>
@@ -299,6 +295,12 @@ const GroupContainer = styled.div`
       color: black;
     }
   }
+`;
+
+const Line = styled.div`
+  width: 100%;
+  border: 1px solid #ececec;
+  margin: -10px auto;
 `;
 
 const Title = styled.div`
