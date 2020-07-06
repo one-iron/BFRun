@@ -86,8 +86,11 @@ export default function HomePage(props) {
     }
   };
 
+  // 선택된 태그 전체지우기
   const removeTags = () => {
-    setSelectedTags([]);
+    setSelectedContent([]);
+    setSelectedStack([]);
+    setSelectedCreator([]);
   };
 
   // 선택한 태그로 axios
@@ -114,7 +117,6 @@ export default function HomePage(props) {
             creatorList={creatorList}
             selectedCreator={selectedCreator}
             addDelCreatorTags={addDelCreatorTags}
-            removeTags={removeTags}
           />
           {selectedContent[0] || selectedStack[0] || selectedCreator[0] ? (
             <SelectedVideo
@@ -126,6 +128,7 @@ export default function HomePage(props) {
               addDelStackTags={addDelStackTags}
               selectedCreator={selectedCreator}
               addDelCreatorTags={addDelCreatorTags}
+              removeTags={removeTags}
             />
           ) : (
             <VideoList />

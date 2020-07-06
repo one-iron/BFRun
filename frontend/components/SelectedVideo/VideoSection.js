@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Router from 'next/router';
 import styled, { css } from 'styled-components';
 
+import { SELECTED_VIDEO } from '../../config';
+
 const VideoSection = ({ selectedTags }) => {
   const [videoData, setVideoData] = useState([]);
   const videoCount = videoData.length; // 영상이 4개 이상일때만 좌, 우 버튼이 랜더 될 수 있도록 하기 위함..
@@ -14,9 +16,7 @@ const VideoSection = ({ selectedTags }) => {
   };
 
   useEffect(() => {
-    axios
-      .get('https://run.mocky.io/v3/67348608-f1af-47a6-94eb-a5a5896c8e5a')
-      .then((res) => setVideoData(res.data.videos));
+    axios.get({ SELECTED_VIDEO }).then((res) => setVideoData(res.data.videos));
   }, []);
 
   return (
@@ -89,12 +89,13 @@ const SlideDiv = styled.div`
 `;
 
 const VideoLiContainer = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   /* position: relative; */
   align-items: center;
   padding: 0 5px;
   width: 100%;
+  overflow: auto;
   ul {
     /* border: 1px solid green; */
     display: flex;
@@ -106,18 +107,23 @@ const VideoLiContainer = styled.div`
   }
 `;
 
-const VideoWindow = styled.div`
-  width: 100%;
-  overflow: auto;
-  display: flex;
-`;
+// const VideoWindow = styled.div`
+//   width: 100%;
+//   overflow: auto;
+//   display: flex;
+// `;
 
 const Button = styled.div`
+  transform: scale(1.5);
+  transition: all 0.2s ease-in-out;
   display: inline;
   cursor: pointer;
   font-size: 50px;
   color: rgba(255, 118, 117, 1);
   position: absolute;
+  &:hover {
+    transform: scale(2);
+  }
   ${(props) =>
     props.back &&
     css`
