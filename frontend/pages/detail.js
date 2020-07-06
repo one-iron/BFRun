@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // internal modules
 import Nav from '../components/Nav';
-import DetailVideo from '../components/Detail/Video';
+import DetailVideo from '../components/DetailVideo';
 
 const Detail = () => {
   return (
@@ -24,11 +24,12 @@ const DetailWrap = styled.div`
   position: relative;
   text-align: center;
   padding: 20px;
-  top: 80px;
-  width: 100vw;
+  top: 100px;
+  width: 100%;
   /* height: calc(100vh - 80px); */
   background-color: #f9f9f9;
   border: 1px solid #f9f9f9;
+
   @media ${(props) => props.theme.laptopM} {
     text-align: unset;
   }

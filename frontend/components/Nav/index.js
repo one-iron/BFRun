@@ -288,7 +288,7 @@ const NavRight = styled.div`
       css`
         display: block;
         width: 80px;
-        height: 95px;
+        height: 80px;
 
         /* animation-name: down;
         animation-duration: 0.5s; */
@@ -316,5 +316,9 @@ const RightContent = styled.div`
     margin: 10px 5px;
     padding: 0;
     /* cursor: pointer; */
+
+    :hover {
+      color: red;
+    }
   }
 `;

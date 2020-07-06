@@ -7,7 +7,7 @@ const BFTest = () => {
       <BFTestContainer>
         아직 프론트인지 백인지 모르겠다면?{' '}
         <a href="http://bftest.wecode.co.kr/" target="_blank">
-          BFTest
+          BF-Test
         </a>{' '}
         하러가기!
       </BFTestContainer>

@@ -4,9 +4,9 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 // internal modules
-import DetailList from './List';
+import PlayList from './PlayList';
 
-const DetailContent = (props) => {
+const Information = (props) => {
   const [data, setData] = useState();
   // 조회수의 숫자에 쉼표를 찍는 Intl 함수를 변수로 지정하여 조회수에 쓰이고 있습니다.
   const numberFilter = new Intl.NumberFormat('en-IN', {
@@ -24,8 +24,8 @@ const DetailContent = (props) => {
   }, []);
 
   return (
-    <DetailContentWrap>
-      <DetailContentContainer>
+    <InformationWrap>
+      <InformationContainer>
         {data && (
           <>
             <section>
@@ -44,17 +44,17 @@ const DetailContent = (props) => {
             </section>
           </>
         )}
-      </DetailContentContainer>
+      </InformationContainer>
       <ListSection>
-        <DetailList listData={props.listData} />
+        <PlayList listData={props.listData} />
       </ListSection>
-    </DetailContentWrap>
+    </InformationWrap>
   );
 };
 
-export default DetailContent;
+export default Information;
 
-const DetailContentWrap = styled.div`
+const InformationWrap = styled.div`
   margin-top: 20px;
   width: 960px;
   margin-top: 20px;
@@ -70,7 +70,7 @@ const DetailContentWrap = styled.div`
   }
 `;
 
-const DetailContentContainer = styled.div`
+const InformationContainer = styled.div`
   background-color: #ffffff;
   display: flex;
   font-size: 13px;
@@ -121,6 +121,7 @@ const DetailContentContainer = styled.div`
     }
   }
 `;
+
 const ListSection = styled.div`
   display: none;
   @media ${(props) => props.theme.laptopM} {

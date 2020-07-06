@@ -9,6 +9,10 @@ import { googleLogin, clientId } from '../../config';
 
 const Login = (props) => {
   const [loginToken, setToken] = useState('');
+  const [img, setImg] = useState('');
+
+  // console.log(loginToken);
+  // console.log(lstoken);
 
   const onGoogleLogin = async (res) => {
     console.log(res);
@@ -17,12 +21,22 @@ const Login = (props) => {
       const token = await axios({
         method: 'POST',
         url: googleLogin,
-        data: { id: res.googleId, token: res.tokenObj.id_token },
+        data: {
+          id: res.googleId,
+          token: res.tokenObj.id_token,
+          email: res.profileObj.email,
+        },
       });
       console.log(token);
       if (token.data.token) {
+        const { email, familyName, givenName, imageUrl } = res.profileObj;
         localStorage.setItem('token', token.data.token);
+        localStorage.setItem('imageUrl', imageUrl);
+        localStorage.setItem('email', email);
+        localStorage.setItem('familyName', familyName);
+        localStorage.setItem('givenName', givenName);
         setToken(token.data.token);
+        setImg(imageUrl);
       } else {
         console.warn('Login failed, can not check google token');
       }
@@ -31,17 +45,27 @@ const Login = (props) => {
     }
   };
 
+  const onGoogleLogout = () => {
+    setToken('');
+    setImg('');
+    localStorage.removeItem('token');
+    localStorage.removeItem('imageUrl');
+    localStorage.removeItem('email');
+    localStorage.removeItem('familyName');
+    localStorage.removeItem('givenName');
+  };
+
   return (
     <LoginWrap>
       {loginToken ? (
-        <div>로그아웃</div>
+        <div onClick={onGoogleLogout}>로그아웃</div>
       ) : (
         <GoogleLogin
           clientId={clientId}
           render={(props) => <div onClick={props.onClick}>로그인</div>}
           onSuccess={(result) => onGoogleLogin(result)}
           onFailure={(result) => console.log(result)}
-          // cookiePolicy="single_host_origin"
+          cookiePolicy="single_host_origin"
         />
       )}
     </LoginWrap>
@@ -66,6 +90,12 @@ const LoginWrap = styled.div`
 
   @media ${(props) => props.theme.laptopS} {
     margin: 0;
-    /* padding: 0; */
+    border: none;
+    padding: 0 5px;
+    font-size: 14px;
+
+    :hover {
+      color: red;
+    }
   }
 `;
