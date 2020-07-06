@@ -33,6 +33,10 @@ const BFTestContainer = styled.div`
   text-align: center;
   line-height: 30px;
 
+  @media (max-width: 500px) {
+    height: 80px;
+  }
+
   :before,
   :after {
     content: '';

@@ -1,25 +1,10 @@
 // external modules
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 
 // internal modules
 
 const PlayList = (props) => {
-  const [testData, setTestData] = useState([]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get('https://run.mocky.io/v3/e9d79bcb-ebf2-4ab2-8611-5bc5587f0839')
-  //     .then((response) => {
-  //       console.log('res', response.data.videos);
-  //       setTestData(response.data.videos);
-  //     });
-  // }, []);
-
-  console.log('list of props', props);
   const { listVideo, clickList } = props;
-
   return (
     <PlayListWrap>
       <PlayListContainer>
@@ -49,47 +34,39 @@ const PlayList = (props) => {
     </PlayListWrap>
   );
 };
-
 export default PlayList;
-
 const PlayListWrap = styled.div`
   width: 340px;
   overflow: auto;
   height: 100vh;
   margin-left: 20px;
   background-color: #ffffff;
-
   ::-webkit-scrollbar {
     width: 4px;
   }
   ::-webkit-scrollbar-thumb {
     background: #b8b8b8;
   }
-
   @media ${(props) => props.theme.laptopM} {
     width: 45vw;
     height: 300px;
     background-color: #ffffff;
   }
-
   @media ${(props) => props.theme.tablet} {
     width: 95vw;
     height: 300px;
     background-color: #ffffff;
   }
 `;
-
 const PlayListContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;
   font-size: 12px;
-
   section {
     display: flex;
     text-align: left;
-
     &:hover {
       cursor: pointer;
       background-color: #eeeeee;
@@ -110,7 +87,6 @@ const PlayListContainer = styled.div`
       }
     }
   }
-
   img {
     width: 100px;
   }

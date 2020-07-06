@@ -3,34 +3,28 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Iframe from 'react-iframe';
 import styled from 'styled-components';
-
 // internal modules
 import Information from './Information';
 import PlayList from './PlayList';
 import { VIDEO_LIST } from '../../config';
-
 const DetailVideo = () => {
   const [listData, setListData] = useState([]);
-  const [listUrl, setListUrl] = useState();
+  const [listVideo, setListVideo] = useState();
   const [videoUrl, setVideoUrl] = useState();
-
   useEffect(() => {
     axios.get(VIDEO_LIST).then((response) => {
-      console.log(response);
       const filterUrl = response.data.video_detail.video_url.replace('&', '?');
       setVideoUrl(
         filterUrl.slice(filterUrl.indexOf('=') + 1, filterUrl.length),
       );
-      setListUrl(response.data.video_playlist);
+      setListVideo(response.data.video_playlist);
     });
   }, []);
-
   // clicklist 함수는 디테일 리스트 컴포넌트로 넘겨서, 재생목록을 클릭하면 해당 인덱스를 추가하여 영상을 재랜더하게 해주는 함수이다.
   const clickList = (index) => {
     setVideoUrl(
       `${videoUrl.slice(0, videoUrl.indexOf('index'))}&index=${index}`,
     );
-    console.log('videoUrl', videoUrl);
   };
   return (
     <DetailVideoWrap>
@@ -44,33 +38,32 @@ const DetailVideo = () => {
           />
         </main>
         {/* 유튜브 영상 정보가 들어갈 컴포넌트 입니다. */}
-        <Information listData={listData} />
+        <Information
+          videoUrl={videoUrl}
+          listVideo={listVideo}
+          clickList={clickList}
+        />
       </DetailVideoContainer>
-
       <section className="listSection">
         {/* 유튜브 영상 재생복록이 들어갈 컴포넌트 입니다. */}
         <PlayList
           videoUrl={videoUrl}
-          listVideo={listUrl}
+          listVideo={listVideo}
           clickList={clickList}
         />
       </section>
     </DetailVideoWrap>
   );
 };
-
 export default DetailVideo;
-
 const DetailVideoWrap = styled.div`
   display: flex;
-
   @media ${(props) => props.theme.laptopM} {
     .listSection {
       display: none;
     }
   }
 `;
-
 const DetailVideoContainer = styled.div`
   .videoMain {
     /* width: 960px; */
