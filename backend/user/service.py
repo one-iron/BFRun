@@ -23,11 +23,10 @@ class UserService:
             return {'message': 'MODIFIED_TOKEN'}, 401
 
         user_id = self.user_dao.google_login(user)
-        print(user_id)
 
-        if user_id == 0:
+        if user_id is None:
             user_id = self.user_dao.get_user(google_id)
-
+            print(user_id)
         token = jwt.encode(
             {'id': user_id}, SECRET_KEY['secret'], algorithm= ALGORITHM['algorithm']
         ).decode('utf-8')

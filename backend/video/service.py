@@ -1,6 +1,5 @@
 import yaml
 
-
 class VideoService:
     def __init__(self, video_dao):
         self.video_dao = video_dao

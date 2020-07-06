@@ -12,16 +12,15 @@ class UserDao:
             WHERE google_id = %(id)s
             )
         """
-
         db = DB()
         db.insert(login_sql, user)
 
-    def get_user(self, user):
+    def get_user(self, google_id):
         get_user_sql = """
         SELECT id
         FROM users
-        WHERE google_id=%s
+        WHERE google_id = %s
         """
         db = DB()
-        db.fetch(get_user_sql, user)
+        return db.fetchone(get_user_sql, google_id)[0]
 
