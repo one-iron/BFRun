@@ -27,6 +27,15 @@ class DB:
 
         return cursor.fetchall()
 
+    def fetchone(self, sql, *args):
+        with self.conn.cursor() as cursor:
+            affected_row = cursor.execute(sql, *args)
+
+            if affected_row == 0:
+                return 0
+
+        return cursor.fetchone()
+
     def dict_fetch(self, sql, *args):
         with self.conn.cursor(pymysql.cursors.DictCursor) as cursor:
             affected_row = cursor.execute(sql, *args)
@@ -44,5 +53,6 @@ class DB:
                 return {'message': 'CANNOT INSERT DATA'}, 500
             if affected_row == 0:
                 return 0
-            if affected_row > 0:
+            if affected_row == 1:
+                self.conn.commit()
                 return cursor.lastrowid
