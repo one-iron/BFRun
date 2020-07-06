@@ -1,37 +1,57 @@
 import styled from 'styled-components';
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import React, { useState } from 'react';
 
 const Recommend = (props) => {
+  const { recommended } = props;
+  const [left, setLeft] = useState(0);
+  const [buttonCount, setButtonCount] = useState(0);
+
+  const moveScroll = (direction) => {
+    if (direction === 'before') {
+      setLeft(left + 840);
+      setButtonCount(buttonCount - 1);
+    } else if (direction === 'next' && buttonCount < 5) {
+      setLeft(left - 840);
+      setButtonCount(buttonCount + 1);
+    }
+    console.log('버튼클릭', left);
+  };
+  //   if (direction === 'before') {
+  //     if (left < 0) {
+  //       setLeft(left + 840);
+  //     }
+  //   } else if (direction === 'next') {
+  //     setLeft(left - 840);
+  //   }
+  //   console.log('버튼클릭', left);
+  // };
   return (
     <>
       <RecommendWrap>
         <TitleH2>{props.title}</TitleH2>
         <VideoContainer>
-          <Button>
-            <i className="fa fa-caret-left" />
-          </Button>
+          {buttonCount > 0 && (
+            <Button onClick={() => moveScroll('before')}>
+              <i className="fa fa-caret-left" />
+            </Button>
+          )}
           <Videos>
-            <VideoWindow>
-              <div>Video1</div>
-              <div>Video2</div>
-              <div>Video3</div>
-              <div>Video4</div>
-            </VideoWindow>
-            <VideoWindow>
-              <div>Video1</div>
-              <div>Video2</div>
-              <div>Video3</div>
-              <div>Video4</div>
-            </VideoWindow>
+            <Absolute toLeft={left}>
+              {recommended &&
+                recommended['생활코딩'].map((video) => {
+                  return (
+                    <VideoWindow>
+                      <div>{video.id}</div>
+                    </VideoWindow>
+                  );
+                })}
+            </Absolute>
           </Videos>
-          <Button
-            onClick={() => {
-              window.scrollTo(400, 0);
-            }}
-          >
-            <i className="fa fa-caret-right" />
-          </Button>
+          {buttonCount < 5 && (
+            <Button onClick={() => moveScroll('next')}>
+              <i className="fa fa-caret-right" />
+            </Button>
+          )}
         </VideoContainer>
       </RecommendWrap>
     </>
@@ -54,26 +74,36 @@ const TitleH2 = styled.h2`
 
 const VideoContainer = styled.article`
   /* border: 1px solid black; */
+  height: 200px;
   border-radius: 10px;
   margin: 2px 4px;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100px;
 `;
 
 const Button = styled.div`
   cursor: pointer;
-  margin: 0 20px;
+  margin: 0 12px;
   font-size: 70px;
   color: black;
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 const Videos = styled.div`
-  border: 2px solid red;
+  /* border: 2px solid red; */
   width: 900px;
+  height: 150px;
   display: flex;
+  align-items: center;
+  position: relative;
   padding: 0 5px;
-  /* z-index: 10; */
+  overflow: hidden;
   @media (max-width: 771px) {
     justify-content: center;
   }
@@ -83,9 +113,15 @@ const Videos = styled.div`
   }
 `;
 
+const Absolute = styled.div`
+  display: flex;
+  position: absolute;
+  left: ${(props) => props.toLeft}px;
+  transition: left 0.8s ease-in-out;
+`;
+
 const VideoWindow = styled.div`
   display: flex;
-  /* overflow: hidden; */
   div {
     width: 200px;
     height: 120px;
