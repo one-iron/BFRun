@@ -3,11 +3,9 @@ import { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 
 // internal modules
-// import { CATEGORY } from '../../config';
 // import LangToggle from './LangToggle';
 
 const Category = ({
-  list,
   selected,
   selectedTags,
   contentList,
@@ -23,8 +21,6 @@ const Category = ({
   const [showCategory, setShowCategory] = useState(false);
   const categoryRef = useRef(null);
   const buttonRef = useRef(null);
-
-  // console.log('Category list', list);
 
   const toggleCategory = () => {
     if (showCategory) {
@@ -98,7 +94,7 @@ const Category = ({
           <GroupContainer>
             <Title>FrontEnd</Title>
             <AllTags>
-              {stackList[0].frontend_stacks.map((type) => {
+              {stackList[1].frontend_stacks.map((type) => {
                 return (
                   <Tag
                     key={type.id}
@@ -122,7 +118,7 @@ const Category = ({
           <GroupContainer>
             <Title>BackEnd</Title>
             <AllTags>
-              {stackList[0].backend_stacks.map((type) => {
+              {stackList[2].backend_stacks.map((type) => {
                 return (
                   <Tag
                     key={type.id}
@@ -193,21 +189,15 @@ const Category = ({
           </GroupContainer>
           <GroupContainer>
             <Title wecode>부트캠프를 찾고 계신다면?</Title>
-            <WecodeImg src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/logo_black.png" />
+            <a href="https://wecode.co.kr/" target="_blank">
+              <WecodeImg src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/logo_black.png" />
+            </a>
           </GroupContainer>
         </CategoryContainer>
       </CategoryWrap>
     </>
   );
 };
-
-// export const getStaticProps = async () => {
-//   const res = await fetch(CATEGORY);
-//   const list = await res.json();
-//   return {
-//     props: { list },
-//   };
-// };
 
 export default Category;
 
@@ -313,6 +303,7 @@ const Title = styled.div`
     css`
       font-size: 13px;
       font-weight: 400;
+      margin-bottom: 0;
     `}
 `;
 
@@ -336,6 +327,7 @@ const Tag = styled.div`
 `;
 
 const WecodeImg = styled.img`
+  cursor: pointer;
   width: 100px;
   height: auto;
   margin-top: 15px;

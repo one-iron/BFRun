@@ -5,8 +5,9 @@ import Iframe from 'react-iframe';
 import styled from 'styled-components';
 
 // internal modules
-import DetailContent from './Content';
-import DetailList from './List';
+import Information from './Information';
+import PlayList from './PlayList';
+import { VIDEO_LIST } from '../../config';
 
 const DetailVideo = () => {
   const [listData, setListData] = useState([]);
@@ -14,19 +15,14 @@ const DetailVideo = () => {
   const [videoUrl, setVideoUrl] = useState();
 
   useEffect(() => {
-    axios
-      .get('https://run.mocky.io/v3/d8eca722-2afa-423d-a11d-ae27e0e9f750')
-      .then((response) => {
-        console.log(response);
-        const filterUrl = response.data.video_detail.video_url.replace(
-          '&',
-          '?',
-        );
-        setVideoUrl(
-          filterUrl.slice(filterUrl.indexOf('=') + 1, filterUrl.length),
-        );
-        setListUrl(response.data.video_playlist);
-      });
+    axios.get(VIDEO_LIST).then((response) => {
+      console.log(response);
+      const filterUrl = response.data.video_detail.video_url.replace('&', '?');
+      setVideoUrl(
+        filterUrl.slice(filterUrl.indexOf('=') + 1, filterUrl.length),
+      );
+      setListUrl(response.data.video_playlist);
+    });
   }, []);
 
   // clicklist 함수는 디테일 리스트 컴포넌트로 넘겨서, 재생목록을 클릭하면 해당 인덱스를 추가하여 영상을 재랜더하게 해주는 함수이다.
@@ -48,12 +44,12 @@ const DetailVideo = () => {
           />
         </main>
         {/* 유튜브 영상 정보가 들어갈 컴포넌트 입니다. */}
-        <DetailContent listData={listData} />
+        <Information listData={listData} />
       </DetailVideoContainer>
 
       <section className="listSection">
         {/* 유튜브 영상 재생복록이 들어갈 컴포넌트 입니다. */}
-        <DetailList
+        <PlayList
           videoUrl={videoUrl}
           listVideo={listUrl}
           clickList={clickList}
@@ -67,12 +63,14 @@ export default DetailVideo;
 
 const DetailVideoWrap = styled.div`
   display: flex;
+
   @media ${(props) => props.theme.laptopM} {
     .listSection {
       display: none;
     }
   }
 `;
+
 const DetailVideoContainer = styled.div`
   .videoMain {
     /* width: 960px; */

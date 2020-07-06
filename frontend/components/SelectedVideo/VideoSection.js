@@ -1,6 +1,7 @@
 // external modules
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 import Router from 'next/router';
 import styled, { css } from 'styled-components';
 
@@ -32,15 +33,17 @@ const VideoSection = ({ selectedTags }) => {
             {videoData.map((data, index) => {
               return (
                 <VideoLi onClick={() => moveRoute('/detail')}>
-                  <VideoHover>
-                    <ThumbNail key={data.id} src={data.thumb} />
-                    <VodeoTitle>
-                      {data.title.length < 20
-                        ? data.title
-                        : `${data.title.slice(0, 35)}...`}
-                    </VodeoTitle>
-                    <CreatorName>{data.creator}</CreatorName>
-                  </VideoHover>
+                  <Link href="/detail/[id]">
+                    <VideoHover>
+                      <ThumbNail key={data.id} src={data.thumb} />
+                      <VodeoTitle>
+                        {data.title.length < 20
+                          ? data.title
+                          : `${data.title.slice(0, 35)}...`}
+                      </VodeoTitle>
+                      <CreatorName>{data.creator}</CreatorName>
+                    </VideoHover>
+                  </Link>
                   {/* <VideoHover>
                      <ThumbNail key={data.id} src={videoData[i].thumb} />
                      <VodeoTitle>
