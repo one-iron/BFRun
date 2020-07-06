@@ -7,10 +7,10 @@ export const clientId =
 export const googleLogin = `${YE}/login`;
 
 // 카테고리 API
-// export const CATEGORY =
-//   'https://run.mocky.io/v3/20e5e480-4505-4ea2-823d-b753cc54f4b2';
+export const CATEGORY =
+  'https://run.mocky.io/v3/20e5e480-4505-4ea2-823d-b753cc54f4b2';
 
-export const CATEGORY = `${SJ}/categories`;
+// export const CATEGORY = `${SJ}/categories`;
 
 // Detail Video API
 export const VIDEO_LIST =

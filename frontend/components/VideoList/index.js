@@ -1,20 +1,28 @@
 // external modules
 import styled from 'styled-components';
 import Recommend from './Recommend';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 
 // internal modules
 import BFTest from '../BFTest';
 
-const VideoList = (props) => {
-  const { selectedTags } = props;
+const VideoList = () => {
+  const [recommended, setRecommended] = useState();
+
+  useEffect(() => {
+    axios
+      .get('https://run.mocky.io/v3/257ee40e-be84-4f39-8a53-aba9e5691ddf')
+      .then((res) => setRecommended(res.data));
+  }, []);
+
   return (
     <VideoWrap>
       <BFTest />
-      {selectedTags}
       <article>
-        <Recommend title="전체 추천 영상" />
-        <Recommend title="프론트엔드 추천 영상" />
-        <Recommend title="백엔드 추천 영상" />
+        <Recommend recommended={recommended} />
+        {/* <Recommend title="프론트엔드 추천 영상" />
+        <Recommend title="백엔드 추천 영상" /> */}
       </article>
     </VideoWrap>
   );
