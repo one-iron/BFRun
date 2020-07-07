@@ -16,7 +16,7 @@ const VideoSection = ({ tag }) => {
     Router.push(page);
   };
 
-  // console.log(videoData);
+  console.log('videoData', videoData);
 
   useEffect(() => {
     axios.get(SELECTED_VIDEO).then((res) => setVideoData(res.data.videos));

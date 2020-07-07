@@ -1,21 +1,29 @@
+// external modules
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import Link from 'next/link';
+import Router from 'next/router';
 
 const Recommend = (props) => {
   const { recommended } = props;
   const [left, setLeft] = useState(0);
-  const [buttonCount, setButtonCount] = useState(0);
+  const visible = useRef(null);
+  const total = useRef(null);
 
   const moveScroll = (direction) => {
-    if (direction === 'before' && buttonCount > 0) {
-      setLeft(left + 840);
-      setButtonCount(buttonCount - 1);
-    } else if (direction === 'next' && buttonCount < 5) {
-      setLeft(left - 840);
-      setButtonCount(buttonCount + 1);
+    const visibleWidth = visible.current.offsetWidth;
+    const totalWidth = total.current.offsetWidth;
+
+    if (direction === 'before' && left < 0) {
+      setLeft(left + visibleWidth);
+    } else if (direction === 'next' && left >= -totalWidth + 1000) {
+      setLeft(left - visibleWidth);
     }
-    console.log('버튼클릭', left);
+    // console.log('버튼클릭', left);
   };
+
+  // 클릭했을 때, 해당 영상 detail 페이지로 가게 push
+
   return (
     <>
       <RecommendWrap>
@@ -24,31 +32,33 @@ const Recommend = (props) => {
           <Button onClick={() => moveScroll('before')}>
             <i className="fa fa-caret-left" />
           </Button>
-          {/* {buttonCount > 0 && (
-            <Button onClick={() => moveScroll('before')}>
-              <i className="fa fa-caret-left" />
-            </Button>
-          )} */}
-          <Videos>
-            <Absolute toLeft={left}>
-              {recommended &&
-                recommended.map((video) => {
-                  return (
-                    <VideoWindow>
-                      <div>{video.video_id}</div>
-                    </VideoWindow>
-                  );
-                })}
+          <Videos ref={visible}>
+            <Absolute toLeft={left} ref={total}>
+              {/* url 형태: video/video.video_id */}
+              {recommended.map((data) => {
+                return (
+                  <VideoWindow>
+                    <ThumbNail
+                      key={data.video_id}
+                      src={`http://i3.ytimg.com/vi/${data.url.slice(
+                        data.url.indexOf('v=') + 2,
+                        data.url.indexOf('&list'),
+                      )}/maxresdefault.jpg`}
+                    />
+                    <VideoTitle>
+                      {data.title.length < 20
+                        ? data.title
+                        : `${data.title.slice(0, 35)}...`}
+                    </VideoTitle>
+                    <CreatorName>{data.channel_name}</CreatorName>
+                  </VideoWindow>
+                );
+              })}
             </Absolute>
           </Videos>
           <Button onClick={() => moveScroll('next')}>
             <i className="fa fa-caret-right" />
           </Button>
-          {/* {buttonCount < 5 && (
-            <Button onClick={() => moveScroll('next')}>
-              <i className="fa fa-caret-right" />
-            </Button>
-          )} */}
         </VideoContainer>
       </RecommendWrap>
     </>
@@ -58,7 +68,7 @@ const Recommend = (props) => {
 export default Recommend;
 
 const RecommendWrap = styled.div`
-  margin: 30px auto;
+  height: 200px;
 `;
 
 const TitleH2 = styled.h2`
@@ -66,18 +76,16 @@ const TitleH2 = styled.h2`
   font-size: 25px;
   padding: 5px;
   margin: 0 50px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 const VideoContainer = styled.article`
   /* border: 1px solid black; */
-  height: 200px;
-  border-radius: 10px;
+  height: 100px;
   margin: 2px 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100px;
 `;
 
 const Button = styled.div`
@@ -90,6 +98,10 @@ const Button = styled.div`
   &:hover {
     transform: scale(1.2);
   }
+
+  @media ${(props) => props.theme.tablet} {
+    display: none;
+  }
 `;
 
 const Videos = styled.div`
@@ -97,16 +109,22 @@ const Videos = styled.div`
   width: 900px;
   height: 150px;
   display: flex;
-  align-items: center;
   position: relative;
-  padding: 0 5px;
-  overflow: hidden;
-  @media (max-width: 771px) {
-    justify-content: center;
+  margin-top: 20px;
+  overflow-x: scroll;
+
+  ::-webkit-scrollbar {
+    width: 0;
   }
+
+  @media ${(props) => props.theme.tablet} {
+    ::-webkit-scrollbar {
+      /* width: 4px; */
+    }
+  }
+
   @media (max-width: 1004px) {
     justify-content: center;
-    padding: 0 110px;
   }
 `;
 
@@ -118,7 +136,7 @@ const Absolute = styled.div`
 `;
 
 const VideoWindow = styled.div`
-  display: flex;
+  /* display: flex; */
   div {
     width: 200px;
     height: 120px;
@@ -130,3 +148,11 @@ const VideoWindow = styled.div`
     background-color: white;
   }
 `;
+
+const ThumbNail = styled.img`
+  width: 100px;
+`;
+
+const VideoTitle = styled.div``;
+
+const CreatorName = styled.div``;

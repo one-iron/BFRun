@@ -1,5 +1,5 @@
 const SJ = 'http://172.30.1.44:5000';
-const YE = 'http://192.168.1.59:5000';
+const YE = 'http://172.30.1.34:5000';
 
 // 구글 로그인
 export const clientId =
