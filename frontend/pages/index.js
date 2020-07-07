@@ -7,20 +7,19 @@ import Nav from '../components/Nav';
 import Category from '../components/Category';
 import VideoList from '../components/VideoList';
 import SelectedVideo from '../components/SelectedVideo';
-import { CATEGORY } from '../config';
+import { CATEGORY, RECOMMEND } from '../config';
 
 export async function getStaticProps() {
   const res = await fetch(CATEGORY);
+  const resP = await fetch(RECOMMEND);
   const list = await res.json();
+  const recommendList = await resP.json();
   return {
-    props: { list },
+    props: { list, recommendList },
   };
 }
 
 export default function HomePage(props) {
-  // ----------- 추후 제거할 코드
-  const [selectedTags, setSelectedTags] = useState([]);
-  // 추후 제거할 코드 ------------------
   // 카테고리 저장
   const categoryfromAPI = props.pageProps.list;
   const contentList = categoryfromAPI.content_types;
@@ -29,17 +28,6 @@ export default function HomePage(props) {
   const [selectedContent, setSelectedContent] = useState([]);
   const [selectedStack, setSelectedStack] = useState([]);
   const [selectedCreator, setSelectedCreator] = useState([]);
-
-  // ----------- 추후 제거할 코드
-  // 모든 태그 추가/제거
-  const selected = (tag) => {
-    if (selectedTags.includes(tag)) {
-      setSelectedTags(selectedTags.filter((tags) => tags !== tag));
-    } else {
-      setSelectedTags([...selectedTags, tag]);
-    }
-  };
-  // 추후 제거할 코드 --------------
 
   // 컨텐츠 태그 추가/제거
   const addDelContentTags = (tag) => {
@@ -99,15 +87,12 @@ export default function HomePage(props) {
   const goToTop = () => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   };
-
   return (
     <>
       <Nav />
       <ContentWrap>
         <ContentContainer>
           <Category
-            selectedTags={selectedTags}
-            selected={selected}
             contentList={contentList}
             selectedContent={selectedContent}
             addDelContentTags={addDelContentTags}
@@ -120,8 +105,6 @@ export default function HomePage(props) {
           />
           {selectedContent[0] || selectedStack[0] || selectedCreator[0] ? (
             <SelectedVideo
-              selectedTags={selectedTags}
-              selected={selected}
               selectedContent={selectedContent}
               addDelContentTags={addDelContentTags}
               selectedStack={selectedStack}
@@ -131,7 +114,7 @@ export default function HomePage(props) {
               removeTags={removeTags}
             />
           ) : (
-            <VideoList />
+            <VideoList recommendList={props.pageProps.recommendList} />
           )}
           <GoUp onClick={goToTop}>
             <i className="fa fa-arrow-up" />
