@@ -61,8 +61,17 @@ class VideoService:
         if contents_types is None and len(channels) == 0:
             videos = []
             for stack in stacks:
-                # videos.append(self.video_dao.get_stack_videos(stack))
-                video_lists[stack] = self.video_dao.get_stack_videos(stack)
+                videos.append(self.video_dao.get_stack_videos(stack))
+                video_lists["videos"] = videos
+
+            return video_lists
+
+        # 채널 필터
+        if contents_types is None and len(stacks) == 0:
+            videos = []
+            for channel in channels:
+                videos.append(self.video_dao.get_channel_videos(channel))
+                video_lists["videos"] = videos
 
             return video_lists
 

@@ -101,6 +101,27 @@ class VideoDao:
         db = DB()
         return db.dict_fetch(get_stack_videos_sql, (stack_id))
 
+    def get_channel_videos(self, channel):
+        get_stack_videos_sql = """  
+        SELECT
+            videos.id AS video_id,
+            videos.title,
+            DATE_FORMAT(videos.created_at, '%%Y-%%m-%%d') AS created_at,
+            videos.url,
+            videos.channel_id,
+            channels.name AS channel_name
+        FROM
+            videos
+        INNER JOIN channels ON channels.id = videos.channel_id
+        WHERE
+            channel_id = %s
+        ORDER BY
+            RAND()
+        LIMIT 20
+        """
+        db = DB()
+        return db.dict_fetch(get_stack_videos_sql, (channel))
+
     def get_channel_name(self, channel_id):
         get_channel_name_sql = """
         SELECT
