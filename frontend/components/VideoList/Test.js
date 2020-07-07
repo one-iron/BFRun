@@ -33,7 +33,7 @@ const Test = (props) => {
                 recommended.map((video) => {
                   return (
                     <VideoWindow>
-                      <div>{video.video_id}</div>
+                      <div>video id : {video.video_id}</div>
                     </VideoWindow>
                   );
                 })}
