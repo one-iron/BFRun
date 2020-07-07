@@ -6,8 +6,6 @@ import styled, { css } from 'styled-components';
 // import LangToggle from './LangToggle';
 
 const Category = ({
-  selected,
-  selectedTags,
   contentList,
   selectedContent,
   addDelContentTags,
@@ -82,7 +80,7 @@ const Category = ({
                         ? 'white'
                         : 'black',
                     }}
-                    onClick={() => addDelContentTags(type.name)}
+                    onClick={() => addDelContentTags(type.name, type.id)}
                   >
                     {type.name}
                   </Tag>
@@ -107,7 +105,7 @@ const Category = ({
                         ? 'white'
                         : 'black',
                     }}
-                    onClick={() => addDelStackTags(type.name)}
+                    onClick={() => addDelStackTags(type.name, type.id)}
                   >
                     {type.name}
                   </Tag>
@@ -131,7 +129,7 @@ const Category = ({
                         ? 'white'
                         : 'black',
                     }}
-                    onClick={() => addDelStackTags(type.name)}
+                    onClick={() => addDelStackTags(type.name, type.id)}
                   >
                     {type.name}
                   </Tag>
@@ -179,7 +177,7 @@ const Category = ({
                         ? 'white'
                         : 'black',
                     }}
-                    onClick={() => addDelCreatorTags(type.name)}
+                    onClick={() => addDelCreatorTags(type.name, type.id)}
                   >
                     {type.name}
                   </Tag>

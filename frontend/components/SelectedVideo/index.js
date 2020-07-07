@@ -16,6 +16,7 @@ const SelectedVideo = ({
   addDelCreatorTags,
   removeTags,
 }) => {
+  // console.log('selectedVideo', selectedContent, selecte);
   return (
     <SelectedVideoWrap>
       <SelectedTags
@@ -29,8 +30,14 @@ const SelectedVideo = ({
         addDelCreatorTags={addDelCreatorTags}
         removeTags={removeTags}
       />
-      {selectedTags.map((tag) => {
-        return <VideoSection selectedTags={tag} />;
+      {selectedContent.map((tag) => {
+        return <VideoSection tag={tag} />;
+      })}
+      {selectedStack.map((tag) => {
+        return <VideoSection tag={tag} />;
+      })}
+      {selectedCreator.map((tag) => {
+        return <VideoSection tag={tag} />;
       })}
     </SelectedVideoWrap>
   );
