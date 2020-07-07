@@ -16,15 +16,6 @@ const Recommend = (props) => {
     }
     console.log('버튼클릭', left);
   };
-  //   if (direction === 'before') {
-  //     if (left < 0) {
-  //       setLeft(left + 840);
-  //     }
-  //   } else if (direction === 'next') {
-  //     setLeft(left - 840);
-  //   }
-  //   console.log('버튼클릭', left);
-  // };
   return (
     <>
       <RecommendWrap>
@@ -41,10 +32,10 @@ const Recommend = (props) => {
           <Videos>
             <Absolute toLeft={left}>
               {recommended &&
-                recommended['생활코딩'].map((video) => {
+                recommended.map((video) => {
                   return (
                     <VideoWindow>
-                      <div>{video.id}</div>
+                      <div>{video.video_id}</div>
                     </VideoWindow>
                   );
                 })}

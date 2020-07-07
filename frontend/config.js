@@ -19,3 +19,7 @@ export const VIDEO_LIST =
 // 선택된 태그에 대한 비디오
 export const SELECTED_VIDEO =
   'https://run.mocky.io/v3/67348608-f1af-47a6-94eb-a5a5896c8e5a';
+
+// 메인 페이지 추천영상 Mock-up Data
+export const RECOMMEND =
+  'https://run.mocky.io/v3/b509b683-7046-4296-827a-7475560062fc';

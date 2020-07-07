@@ -30,10 +30,10 @@ const Test = (props) => {
           <Videos ref={visible}>
             <Absolute toLeft={left} ref={total}>
               {recommended &&
-                recommended['생활코딩'].map((video) => {
+                recommended.map((video) => {
                   return (
                     <VideoWindow>
-                      <div>{video.id}</div>
+                      <div>{video.video_id}</div>
                     </VideoWindow>
                   );
                 })}
