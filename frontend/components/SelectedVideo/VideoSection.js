@@ -7,27 +7,31 @@ import styled, { css } from 'styled-components';
 
 import { SELECTED_VIDEO } from '../../config';
 
-const VideoSection = ({ selectedTags }) => {
+const VideoSection = ({ tag }) => {
   const [videoData, setVideoData] = useState([]);
   const videoCount = videoData.length; // 영상이 4개 이상일때만 좌, 우 버튼이 랜더 될 수 있도록 하기 위함..
 
+  // console.log(tag);
   const moveRoute = (page) => {
     Router.push(page);
   };
 
+  // console.log(videoData);
+
   useEffect(() => {
-    axios.get({ SELECTED_VIDEO }).then((res) => setVideoData(res.data.videos));
+    axios.get(SELECTED_VIDEO).then((res) => setVideoData(res.data.videos));
   }, []);
 
   return (
     <VideoSectionWrap>
-      <CategoryName>{selectedTags}</CategoryName>
+      <CategoryName>{tag}</CategoryName>
       <SlideDiv>
         {videoCount > 4 && (
           <Button back>
             <i className="fa fa-caret-left" />
           </Button>
         )}
+
         <VideoLiContainer>
           <ul>
             {videoData.map((data, index) => {
@@ -44,20 +48,12 @@ const VideoSection = ({ selectedTags }) => {
                       <CreatorName>{data.creator}</CreatorName>
                     </VideoHover>
                   </Link>
-                  {/* <VideoHover>
-                     <ThumbNail key={data.id} src={videoData[i].thumb} />
-                     <VodeoTitle>
-                       {videoData[i].title.length < 20
-                         ? videoData[i].title
-                         : `${videoData[i].title.slice(0, 35)}...`}
-                     </VodeoTitle>
-                     <CreatorName>{videoData[i].creator}</CreatorName>
-                   </VideoHover> */}
                 </VideoLi>
               );
             })}
           </ul>
         </VideoLiContainer>
+
         {videoCount && (
           <Button next>
             <i className="fa fa-caret-right" />

@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Iframe from 'react-iframe';
 import styled from 'styled-components';
+
 // internal modules
 import Information from './Information';
 import PlayList from './PlayList';
 import { VIDEO_LIST } from '../../config';
+
 const DetailVideo = () => {
   const [listData, setListData] = useState([]);
   const [listVideo, setListVideo] = useState();
