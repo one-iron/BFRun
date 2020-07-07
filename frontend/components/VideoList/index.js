@@ -23,7 +23,7 @@ const VideoList = (props) => {
     <VideoWrap>
       <BFTest />
       <article>
-        <Recommend title="전체" recommended={props.recommendList.general} />
+        {/* <Recommend title="전체" recommended={props.recommendList.general} /> */}
         <Test title="전체Test" recommended={props.recommendList.general} />
         <Test title="프론트Test" recommended={props.recommendList.front} />
         <Test title="백Test" recommended={props.recommendList.back} />

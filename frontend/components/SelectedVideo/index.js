@@ -6,8 +6,6 @@ import SelectedTags from './SelectedTags';
 import VideoSection from './VideoSection';
 
 const SelectedVideo = ({
-  selectedTags,
-  selected,
   selectedContent,
   addDelContentTags,
   selectedStack,
@@ -20,8 +18,6 @@ const SelectedVideo = ({
   return (
     <SelectedVideoWrap>
       <SelectedTags
-        selectedTags={selectedTags}
-        selected={selected}
         selectedContent={selectedContent}
         addDelContentTags={addDelContentTags}
         selectedStack={selectedStack}
@@ -48,8 +44,7 @@ export default SelectedVideo;
 const SelectedVideoWrap = styled.section`
   position: relative;
   align-items: center;
-  max-width: 950px;
-  width: 950px;
+  max-width: 940px;
   padding: 4px;
   margin: 0 auto;
   margin-bottom: 100px;

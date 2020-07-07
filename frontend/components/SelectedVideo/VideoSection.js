@@ -33,10 +33,10 @@ const VideoSection = ({ tag }) => {
         )}
 
         <VideoLiContainer>
-          <ul>
-            {videoData.map((data, index) => {
+          <ListContainer>
+            {videoData.map((data) => {
               return (
-                <VideoLi onClick={() => moveRoute('/detail')}>
+                <VideoLi key={data.id} onClick={() => moveRoute('/detail')}>
                   <Link href="/detail/[id]">
                     <VideoHover>
                       <ThumbNail key={data.id} src={data.thumb} />
@@ -51,7 +51,7 @@ const VideoSection = ({ tag }) => {
                 </VideoLi>
               );
             })}
-          </ul>
+          </ListContainer>
         </VideoLiContainer>
 
         {videoCount && (
@@ -85,24 +85,25 @@ const SlideDiv = styled.div`
 `;
 
 const VideoLiContainer = styled.div`
-  /* border: 1px solid red; */
+  border: 1px solid red;
   display: flex;
   /* position: relative; */
   align-items: center;
+  margin: 0 10px;
   padding: 0 5px;
   width: 100%;
-  overflow: auto;
-  ul {
-    /* border: 1px solid green; */
-    display: flex;
-    margin: 5px 15px;
-    height: 500px;
-    @media (max-width: 500px) {
-      justify-content: center;
-    }
-  }
+  overflow-x: scroll;
 `;
 
+const ListContainer = styled.div`
+  display: flex;
+  margin: 5px 0;
+  height: 500px;
+  flex-wrap: wrap;
+  @media (max-width: 500px) {
+    justify-content: center;
+  }
+`;
 // const VideoWindow = styled.div`
 //   width: 100%;
 //   overflow: auto;
@@ -124,6 +125,7 @@ const Button = styled.div`
     props.back &&
     css`
       left: 0;
+      margin-right: 10px;
     `}
   ${(props) =>
     props.next &&
@@ -138,6 +140,7 @@ const VideoLi = styled.li`
   margin: 10px;
   width: 200px;
   height: auto;
+  list-style-type: none;
 `;
 
 const VideoHover = styled.div`
