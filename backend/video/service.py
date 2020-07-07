@@ -38,6 +38,7 @@ class VideoService:
         )
         return video_detail, video_playlist
 
+
     def get_video_lists(self, params):
 
         filters = {}
@@ -82,3 +83,10 @@ class VideoService:
             video_lists[channel_name[0]["name"]] = videos
 
         return video_lists
+
+    def recommand_video_service(self):
+        videos = []
+        for position in range(1,4):
+            videos.append(self.video_dao.recommand_video_model(position))
+        return videos
+

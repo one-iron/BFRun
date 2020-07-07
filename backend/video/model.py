@@ -1,6 +1,5 @@
 from connection import DB
 
-
 class VideoDao:
     def get_contents_types(self):
         get_contents_types_sql = """
@@ -179,3 +178,22 @@ class VideoDao:
 
         db = DB()
         return db.dict_fetch(get_channel_name_sql, (channel_id))
+
+    def recommand_video_model(self, position):
+        get_recommand_video_sql = """
+        SELECT DISTINCT
+            videos.id AS video_id,
+            videos.view,
+            videos.url,
+            videos.title,
+            channels.name AS channel_name
+        FROM videos
+        INNER JOIN channels ON videos.channel_id = channels.id
+        INNER JOIN stacks ON videos.stack_id = stacks.id
+        WHERE stacks.position_id = %s
+        ORDER BY view DESC
+        LIMIT 10
+        """
+
+        db = DB()
+        return db.dict_fetch(get_recommand_video_sql, position)

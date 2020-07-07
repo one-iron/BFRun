@@ -19,6 +19,9 @@ class DB:
     def close(self):
         self.conn.close()
 
+    def rollback(self):
+        self.conn.rollback()
+
     def fetchall(self, sql, *args):
         try:
             with self.conn.cursor() as cursor:
@@ -26,20 +29,23 @@ class DB:
 
                 if affected_row == 0:
                     return 0
-
             return cursor.fetchall()
 
         finally:
             self.close()
 
     def fetchone(self, sql, *args):
-        with self.conn.cursor() as cursor:
-            affected_row = cursor.execute(sql, *args)
+        try:
+            with self.conn.cursor() as cursor:
+                affected_row = cursor.execute(sql, *args)
 
-            if affected_row == 0:
-                return 0
+                if affected_row == 0:
+                    return 0
 
-        return cursor.fetchone()
+            return cursor.fetchone()
+
+        finally:
+            self.close()
 
     def dict_fetch(self, sql, *args):
         try:
@@ -55,13 +61,19 @@ class DB:
             self.close()
 
     def insert(self, sql, *args):
-        with self.conn.cursor() as cursor:
-            affected_row = cursor.execute(sql, *args)
 
-            if affected_row == -1:
-                return {"message": "CANNOT INSERT DATA"}, 500
-            if affected_row == 0:
-                return 0
-            if affected_row == 1:
-                self.conn.commit()
-                return cursor.lastrowid
+        try:
+            with self.conn.cursor() as cursor:
+                affected_row = cursor.execute(sql, *args)
+
+                if affected_row == -1:
+                    self.rollback()
+                    return {'message': 'CANNOT INSERT DATA'}, 500
+                if affected_row == 0:
+                    return 0
+                if affected_row == 1:
+                    self.commit()
+                    return cursor.lastrowid
+
+        finally:
+            self.close()

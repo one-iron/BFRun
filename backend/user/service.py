@@ -26,7 +26,7 @@ class UserService:
 
         if user_id is None:
             user_id = self.user_dao.get_user(google_id)
-            print(user_id)
+
         token = jwt.encode(
             {'id': user_id}, SECRET_KEY['secret'], algorithm= ALGORITHM['algorithm']
         ).decode('utf-8')
