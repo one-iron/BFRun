@@ -6,11 +6,11 @@ from config import db
 class DB:
     def __init__(self):
         self.conn = pymysql.connect(
-            host=db["host"],
-            user=db["user"],
-            password=db["password"],
-            db=db["database"],
-            autocommit=False,
+            host       = db["host"],
+            user       = db["user"],
+            password   = db["password"],
+            db         = db["database"],
+            autocommit = False,
         )
 
     def commit(self):
