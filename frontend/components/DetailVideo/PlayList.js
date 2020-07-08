@@ -1,40 +1,44 @@
 // external modules
 import styled from 'styled-components';
-
-// internal modules
+import Link from 'next/link';
 
 const PlayList = (props) => {
   const { listVideo, clickList } = props;
+
   return (
     <PlayListWrap>
       <PlayListContainer>
         {listVideo &&
-          listVideo.map((data, index) => {
+          listVideo.map((data) => {
             return (
-              <>
-                <section onClick={() => clickList(data.id)}>
-                  <img
-                    src={`http://i3.ytimg.com/vi/${data.url.slice(
-                      data.url.indexOf('v=') + 2,
-                      data.url.indexOf('&list'),
-                    )}/maxresdefault.jpg`}
-                    alt=""
-                  />
-                  <section className="textSection">
-                    <summary>{data.title}</summary>
-                    <time>{data.created_at.slice(0, 10)}</time>
-                    <p>{data.title}</p>
+              <Link href="/video/[id]" as={`/video/${data.id}`}>
+                <>
+                  <section onClick={() => clickList(data.id)}>
+                    <img
+                      src={`http://i3.ytimg.com/vi/${data.url.slice(
+                        data.url.indexOf('v=') + 2,
+                        data.url.indexOf('&list'),
+                      )}/maxresdefault.jpg`}
+                      alt=""
+                    />
+                    <section className="textSection">
+                      <summary>{data.title}</summary>
+                      <time>{data.created_at.slice(0, 10)}</time>
+                      <p>{data.title}</p>
+                    </section>
                   </section>
-                </section>
-                <div className="line" />
-              </>
+                  <div className="line" />
+                </>
+              </Link>
             );
           })}
       </PlayListContainer>
     </PlayListWrap>
   );
 };
+
 export default PlayList;
+
 const PlayListWrap = styled.div`
   width: 340px;
   overflow: auto;
@@ -58,6 +62,7 @@ const PlayListWrap = styled.div`
     background-color: #ffffff;
   }
 `;
+
 const PlayListContainer = styled.div`
   display: flex;
   flex-direction: column;
