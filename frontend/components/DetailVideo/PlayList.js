@@ -1,9 +1,12 @@
 // external modules
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const PlayList = (props) => {
   const { listVideo, clickList } = props;
+  const router = useRouter();
+  const { id } = router.query;
 
   return (
     <PlayListWrap>
@@ -12,7 +15,7 @@ const PlayList = (props) => {
           listVideo.map((data) => {
             return (
               <Link href="/video/[id]" as={`/video/${data.id}`}>
-                <>
+                <div>
                   <section onClick={() => clickList(data.id)}>
                     <img
                       src={`http://i3.ytimg.com/vi/${data.url.slice(
@@ -28,7 +31,7 @@ const PlayList = (props) => {
                     </section>
                   </section>
                   <div className="line" />
-                </>
+                </div>
               </Link>
             );
           })}

@@ -2,7 +2,6 @@
 import styled from 'styled-components';
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
-import Router from 'next/router';
 
 const Recommend = (props) => {
   const { recommended } = props;
@@ -34,23 +33,25 @@ const Recommend = (props) => {
         <Videos ref={visible}>
           <Absolute toLeft={left} ref={total}>
             {/* url 형태: video/video.video_id */}
-            {recommended.map((data) => {
+            {recommended.map((data, index) => {
               return (
-                <VideoWindow>
-                  <ThumbNail
-                    key={data.video_id}
-                    src={`http://i3.ytimg.com/vi/${data.url.slice(
-                      data.url.indexOf('v=') + 2,
-                      data.url.indexOf('&list'),
-                    )}/maxresdefault.jpg`}
-                  />
-                  <VideoTitle>
-                    {data.title.length < 34
-                      ? data.title
-                      : `${data.title.slice(0, 35)}...`}
-                  </VideoTitle>
-                  <CreatorName>{data.channel_name}</CreatorName>
-                </VideoWindow>
+                <Link href="/video/[id]" as={`/video/${data.video_id}`}>
+                  <VideoWindow key={index}>
+                    <ThumbNail
+                      key={data.video_id}
+                      src={`http://i3.ytimg.com/vi/${data.url.slice(
+                        data.url.indexOf('v=') + 2,
+                        data.url.indexOf('&list'),
+                      )}/maxresdefault.jpg`}
+                    />
+                    <VideoTitle>
+                      {data.title.length < 34
+                        ? data.title
+                        : `${data.title.slice(0, 35)}...`}
+                    </VideoTitle>
+                    <CreatorName>{data.channel_name}</CreatorName>
+                  </VideoWindow>
+                </Link>
               );
             })}
           </Absolute>

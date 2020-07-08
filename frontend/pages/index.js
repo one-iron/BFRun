@@ -11,18 +11,23 @@ import SelectedVideo from '../components/SelectedVideo';
 import { CATEGORY, SELECTED_VIDEO_LIST, RECOMMEND } from '../config';
 
 export async function getStaticProps() {
-  const res = await fetch(CATEGORY);
+  const categoryRes = await fetch(CATEGORY);
   const resP = await fetch(RECOMMEND);
-  const list = await res.json();
+  const categoryList = await categoryRes.json();
   const recommendList = await resP.json();
   return {
-    props: { list, recommendList },
+    props: { categoryList, recommendList },
   };
 }
 
+// export async function getServerSidePrps() {
+//
+//   const returnRes = await fetch(``)
+// }
+
 export default function HomePage(props) {
   // 카테고리 저장
-  const categoryfromAPI = props.pageProps.list;
+  const categoryfromAPI = props.pageProps.categoryList;
   const contentList = categoryfromAPI.content_types;
   const stackList = categoryfromAPI.stacks;
   const creatorList = categoryfromAPI.channels;
@@ -54,14 +59,14 @@ export default function HomePage(props) {
         returnUrl = splitCreatorId;
       }
     }
-    // console.log('return', returnUrl);
 
+    // console.log('returnUrl', returnUrl);
     axios
       .get(`${SELECTED_VIDEO_LIST}?${returnUrl}`)
-      .then((res) => setReturnList(res));
-  }, []);
+      .then((res) => setReturnList(res.data.videos));
+  }, [contentId, stackId, creatorId]);
 
-  console.log(returnList);
+  // console.log('returnList', returnList);
 
   // 컨텐츠 태그 추가/제거
   const addDelContentTags = (name, id) => {
@@ -162,6 +167,7 @@ export default function HomePage(props) {
           />
           {selectedContent[0] || selectedStack[0] || selectedCreator[0] ? (
             <SelectedVideo
+              returnList={returnList}
               selectedContent={selectedContent}
               addDelContentTags={addDelContentTags}
               selectedStack={selectedStack}
