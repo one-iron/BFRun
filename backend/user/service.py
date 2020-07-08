@@ -31,4 +31,4 @@ class UserService:
             {'id': user_id}, SECRET_KEY['secret'], algorithm= ALGORITHM['algorithm']
         ).decode('utf-8')
 
-        return token
+        return {'token' : token}, 200
