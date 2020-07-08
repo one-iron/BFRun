@@ -18,10 +18,12 @@ const Information = (props) => {
         {videoInfo && (
           <>
             <section>
-              <figure>
-                <img src={videoInfo.channel_profile} alt="" />
-                <figcaption>{videoInfo.channel_name}</figcaption>
-              </figure>
+              <a href={videoInfo.video_url} target="_blank">
+                <figure>
+                  <img src={videoInfo.channel_profile} alt="" />
+                  <figcaption>{videoInfo.channel_name}</figcaption>
+                </figure>
+              </a>
             </section>
             <section>
               <summary>{videoInfo.title}</summary>
@@ -78,6 +80,7 @@ const InformationContainer = styled.div`
     width: 95vw;
   }
   figure {
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;

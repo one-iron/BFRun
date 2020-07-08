@@ -14,8 +14,6 @@ const DetailVideo = ({ id }) => {
   const [listVideo, setListVideo] = useState();
   const [videoUrl, setVideoUrl] = useState();
 
-  console.log('detailVideo props', id);
-
   useEffect(() => {
     axios.get(`${VIDEO_LIST}/${id}`).then((response) => {
       const filterUrl = response.data.video_detail.video_url.replace('&', '?');
@@ -26,8 +24,6 @@ const DetailVideo = ({ id }) => {
       setVideoInfo(response.data.video_detail);
     });
   }, [id]);
-
-  console.log('videoInfo', videoInfo);
 
   // clicklist 함수는 디테일 리스트 컴포넌트로 넘겨서, 재생목록을 클릭하면 해당 인덱스를 추가하여 영상을 재랜더하게 해주는 함수이다.
   const clickList = (index) => {
