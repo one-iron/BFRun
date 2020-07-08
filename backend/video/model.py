@@ -142,7 +142,6 @@ class VideoDao:
             channels.profile_url AS channel_profile,
             title,
             DATE_FORMAT(created_at, '%%Y-%%m-%%d') AS created_at,
-            view,
             description,
             url AS video_url,
             stack_id,
@@ -171,40 +170,10 @@ class VideoDao:
         db = DB()
         return db.dict_fetch(get_playlist_sql, video_id)
 
-    def get_videos(self, filters):
-        get_video_lists_sql = """
-        SELECT
-            id,
-            title,
-            DATE_FORMAT(created_at, '%%Y-%%m-%%d') AS created_at,
-            url
-        FROM
-            videos
-        WHERE
-            stack_id = %(stack_id)s AND channel_id = %(channel_id)s
-        LIMIT 5
-        """
-
-        db = DB()
-        return db.dict_fetch(get_video_lists_sql, (filters))
-
-    def get_channel_name(self, channel_id):
-        get_channel_name_sql = """
-        SELECT
-            name
-        FROM
-            channels
-        WHERE id = %s
-        """
-
-        db = DB()
-        return db.dict_fetch(get_channel_name_sql, (channel_id))
-
     def recommand_video_model(self, position):
         get_recommand_video_sql = """
-        SELECT DISTINCT
+        SELECT
             videos.id AS video_id,
-            videos.view,
             videos.url,
             videos.title,
             channels.name AS channel_name
@@ -213,8 +182,27 @@ class VideoDao:
         INNER JOIN stacks ON videos.stack_id = stacks.id
         WHERE stacks.position_id = %s
         ORDER BY view DESC
-        LIMIT 10
+        LIMIT 24
         """
 
         db = DB()
         return db.dict_fetch(get_recommand_video_sql, position)
+
+    def recommand_video_model_test(self, position_id, channel_id):
+        get_recommand_video_sql = """
+        SELECT 
+            videos.id AS video_id,
+            videos.view,
+            videos.url,
+            videos.title,
+            channels.name AS channel_name
+        FROM videos
+        INNER JOIN channels ON videos.channel_id = channels.id
+        INNER JOIN stacks ON videos.stack_id = stacks.id
+        WHERE stacks.position_id = %s and channels.id = %s
+        ORDER BY view DESC
+        LIMIT 4
+        """
+
+        db = DB()
+        return db.dict_fetch(get_recommand_video_sql, (position_id, channel_id))
