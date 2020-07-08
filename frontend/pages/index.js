@@ -26,14 +26,17 @@ export default function HomePage(props) {
   const contentList = categoryfromAPI.content_types;
   const stackList = categoryfromAPI.stacks;
   const creatorList = categoryfromAPI.channels;
+  // 선택된 태그 이름 및 ID
   const [selectedContent, setSelectedContent] = useState([]);
   const [contentId, setContentId] = useState([]);
   const [selectedStack, setSelectedStack] = useState([]);
   const [stackId, setStackId] = useState([]);
   const [selectedCreator, setSelectedCreator] = useState([]);
   const [creatorId, setCreatorId] = useState([]);
+  // 선택한 태그에 대한 list
+  const [returnList, setReturnList] = useState([]);
 
-  // 보여줄 태그 url axios
+  // 선택한 태그 API 가져오기
   useEffect(() => {
     let returnUrl = '';
     const splitContentId = contentId.join('&');
@@ -51,11 +54,14 @@ export default function HomePage(props) {
         returnUrl = splitCreatorId;
       }
     }
-    console.log('return', returnUrl);
+    // console.log('return', returnUrl);
+
     axios
       .get(`${SELECTED_VIDEO_LIST}?${returnUrl}`)
-      .then((res) => console.log(res));
-  });
+      .then((res) => setReturnList(res));
+  }, []);
+
+  console.log(returnList);
 
   // 컨텐츠 태그 추가/제거
   const addDelContentTags = (name, id) => {
@@ -133,12 +139,11 @@ export default function HomePage(props) {
     setSelectedCreator([]);
   };
 
-  // 선택한 태그로 axios
-
   // 맨 위로 가기
   const goToTop = () => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   };
+
   return (
     <>
       <Nav />

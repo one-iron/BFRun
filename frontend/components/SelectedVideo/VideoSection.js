@@ -5,18 +5,16 @@ import Link from 'next/link';
 import Router from 'next/router';
 import styled, { css } from 'styled-components';
 
+// internal modules
 import { SELECTED_VIDEO } from '../../config';
 
 const VideoSection = ({ tag }) => {
   const [videoData, setVideoData] = useState([]);
   const videoCount = videoData.length; // 영상이 4개 이상일때만 좌, 우 버튼이 랜더 될 수 있도록 하기 위함..
 
-  // console.log(tag);
   const moveRoute = (page) => {
     Router.push(page);
   };
-
-  console.log('videoData', videoData);
 
   useEffect(() => {
     axios.get(SELECTED_VIDEO).then((res) => setVideoData(res.data.videos));

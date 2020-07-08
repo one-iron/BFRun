@@ -9,15 +9,16 @@ export const googleLogin = `${YE}/login`;
 // 카테고리 API
 export const CATEGORY =
   'https://run.mocky.io/v3/20e5e480-4505-4ea2-823d-b753cc54f4b2';
-
 // export const CATEGORY = `${SJ}/categories`;
 
 // 태그로 불러올 VIDEO 주소
-export const SELECTED_VIDEO_LIST = `${SJ}/videos`;
+// export const SELECTED_VIDEO_LIST = `${SJ}/videos`;
+export const SELECTED_VIDEO_LIST = '';
 
-// Detail Video API
-export const VIDEO_LIST =
-  'https://run.mocky.io/v3/d8eca722-2afa-423d-a11d-ae27e0e9f750';
+// 보여줄 비디오 API
+// export const VIDEO_LIST =
+//   'https://run.mocky.io/v3/d8eca722-2afa-423d-a11d-ae27e0e9f750';
+export const VIDEO_LIST = `${YE}/video`;
 
 // 선택된 태그에 대한 비디오
 export const SELECTED_VIDEO =
