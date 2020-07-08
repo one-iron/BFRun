@@ -39,8 +39,6 @@ const tagColors = {
 };
 
 const SelectedTags = ({
-  selectedTags,
-  selected,
   selectedContent,
   addDelContentTags,
   selectedStack,

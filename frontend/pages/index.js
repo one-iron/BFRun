@@ -12,9 +12,9 @@ import { CATEGORY, SELECTED_VIDEO_LIST, RECOMMEND } from '../config';
 
 export async function getStaticProps() {
   const categoryRes = await fetch(CATEGORY);
-  const resP = await fetch(RECOMMEND);
+  const recommendRes = await fetch(RECOMMEND);
   const categoryList = await categoryRes.json();
-  const recommendList = await resP.json();
+  const recommendList = await recommendRes.json();
   return {
     props: { categoryList, recommendList },
   };
@@ -24,7 +24,6 @@ export async function getStaticProps() {
 //
 //   const returnRes = await fetch(``)
 // }
-
 export default function HomePage(props) {
   // 카테고리 저장
   const categoryfromAPI = props.pageProps.categoryList;
@@ -142,6 +141,7 @@ export default function HomePage(props) {
     setSelectedContent([]);
     setSelectedStack([]);
     setSelectedCreator([]);
+    setReturnList([]);
   };
 
   // 맨 위로 가기

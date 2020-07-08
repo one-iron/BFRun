@@ -1,5 +1,5 @@
 const SJ = 'http://172.16.100.136:5000';
-const YE = 'http://172.16.101.44:5000';
+const YE = 'http://172.16.100.111:5000';
 
 // 구글 로그인
 export const clientId =
@@ -21,6 +21,6 @@ export const VIDEO_LIST = `${YE}/video`;
 //   'https://run.mocky.io/v3/d8eca722-2afa-423d-a11d-ae27e0e9f750';
 
 // 메인 페이지 추천영상 Mock-up Data
-export const RECOMMEND = `${YE}/main`;
-// export const RECOMMEND =
-//   'https://run.mocky.io/v3/b509b683-7046-4296-827a-7475560062fc';
+// export const RECOMMEND = `${YE}/main`;
+export const RECOMMEND =
+  'https://run.mocky.io/v3/b509b683-7046-4296-827a-7475560062fc';

@@ -15,7 +15,7 @@ const SelectedVideo = ({
   addDelCreatorTags,
   removeTags,
 }) => {
-  console.log('returnList', returnList);
+  console.log('리턴리스트 데이터모양 ->', returnList);
   return (
     <SelectedVideoWrap>
       <SelectedTags
@@ -31,9 +31,14 @@ const SelectedVideo = ({
         selectedContent.map((tag) => {
           return <VideoSection returnContentList={returnList} tag={tag} />;
         })}
-      {selectedStack &&
+      {/* {selectedStack &&
         selectedStack.map((tag) => {
           return <VideoSection returnStackList={returnList} tag={tag} />;
+        })} */}
+      {selectedStack &&
+        returnList &&
+        returnList.map((arr) => {
+          return <VideoSection returnStackList={arr} />;
         })}
       {selectedCreator &&
         selectedCreator.map((tag) => {
