@@ -1,30 +1,35 @@
 // external modules
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 
-const VideoSection = ({
-  tag,
-  returnContentList,
-  returnStackList,
-  returnCreatorList,
-  title,
-}) => {
-  // console.log('returnContentList', returnContentList);
-  // console.log('returnStackList -->', returnStackList);
-  // console.log('returnCreatorList -->', returnCreatorList);
+const VideoSection = ({ title, returnList }) => {
+  const [left, setLeft] = useState(0);
+  const visible = useRef(null);
+  const total = useRef(null);
+
+  const moveScroll = (direction) => {
+    const visibleWidth = visible.current.offsetWidth;
+    const totalWidth = total.current.offsetWidth;
+
+    if (direction === 'before' && left < 0) {
+      setLeft(left + visibleWidth);
+    } else if (direction === 'next' && left >= -totalWidth + 1000) {
+      setLeft(left - visibleWidth);
+    }
+  };
+
   return (
     <VideoSectionWrap>
       <CategoryName>{title}</CategoryName>
       <SlideDiv>
-        <Button back>
+        <Button back onClick={() => moveScroll('before')}>
           <i className="fa fa-caret-left" />
         </Button>
-
-        <VideoLiContainer>
-          <ListContainer>
-            {returnContentList &&
-              returnContentList.map((data, index) => {
-                // console.log('content', data);
+        <VideoLiContainer ref={visible}>
+          <ListContainer toLeft={left} ref={total}>
+            {returnList &&
+              returnList.map((data, index) => {
                 return (
                   <Link
                     href="/video/[id]"
@@ -39,67 +44,11 @@ const VideoSection = ({
                             data.url.indexOf('&list'),
                           )}/maxresdefault.jpg`}
                         />
-                        <VodeoTitle>
+                        <VideoTitle>
                           {data.title.length < 20
                             ? data.title
                             : `${data.title.slice(0, 35)}...`}
-                        </VodeoTitle>
-                        <CreatorName>{data.channel_name}</CreatorName>
-                      </VideoHover>
-                    </VideoLi>
-                  </Link>
-                );
-              })}
-            {returnStackList &&
-              returnStackList.map((data, index) => {
-                return (
-                  <Link
-                    href="/video/[id]"
-                    as={`/video/${data.video_id}`}
-                    key={index}
-                  >
-                    <VideoLi onClick={() => moveRoute('/detail')}>
-                      <VideoHover>
-                        <ThumbNail
-                          key={data.id}
-                          src={`http://i3.ytimg.com/vi/${data.url.slice(
-                            data.url.indexOf('v=') + 2,
-                            data.url.indexOf('&list'),
-                          )}/maxresdefault.jpg`}
-                        />
-                        <VodeoTitle>
-                          {data.title.length < 20
-                            ? data.title
-                            : `${data.title.slice(0, 35)}...`}
-                        </VodeoTitle>
-                        <CreatorName>{data.channel_name}</CreatorName>
-                      </VideoHover>
-                    </VideoLi>
-                  </Link>
-                );
-              })}
-            {returnCreatorList &&
-              returnCreatorList[0].map((data, index) => {
-                // console.log('return creator', data);
-                return (
-                  <Link
-                    href="/video/[id]"
-                    as={`/video/${data.video_id}`}
-                    key={index}
-                  >
-                    <VideoLi>
-                      <VideoHover>
-                        <ThumbNail
-                          src={`http://i3.ytimg.com/vi/${data.url.slice(
-                            data.url.indexOf('v=') + 2,
-                            data.url.indexOf('&list'),
-                          )}/maxresdefault.jpg`}
-                        />
-                        <VodeoTitle>
-                          {data.title.length < 20
-                            ? data.title
-                            : `${data.title.slice(0, 35)}...`}
-                        </VodeoTitle>
+                        </VideoTitle>
                         <CreatorName>{data.channel_name}</CreatorName>
                       </VideoHover>
                     </VideoLi>
@@ -108,7 +57,7 @@ const VideoSection = ({
               })}
           </ListContainer>
         </VideoLiContainer>
-        <Button next>
+        <Button next onClick={() => moveScroll('next')}>
           <i className="fa fa-caret-right" />
         </Button>
       </SlideDiv>
@@ -117,21 +66,30 @@ const VideoSection = ({
 };
 
 export default VideoSection;
+
 const VideoSectionWrap = styled.div`
   /* border: 1px solid blue; */
   width: 100%;
   margin: 10px 0;
   padding: 10px;
 `;
+
 const CategoryName = styled.strong`
-  /* border: 1px solid green; */
-  font-size: 20px;
-  display: block;
+  /* font-size: 20px;
+  display: block; */
+
+  font-weight: 700;
+  font-size: 25px;
+  padding: 5px;
+  margin-left: 10px;
+  margin-bottom: 20px;
 `;
+
 const SlideDiv = styled.div`
   display: flex;
   align-items: center;
 `;
+
 const VideoLiContainer = styled.div`
   border: 1px solid red;
   display: flex;
@@ -143,20 +101,18 @@ const VideoLiContainer = styled.div`
   height: 510px;
   overflow-x: scroll;
 `;
+
 const ListContainer = styled.div`
   display: flex;
   margin: 5px 0;
   height: 500px;
   flex-wrap: wrap;
+  left: ${(props) => props.toLeft}px;
   @media (max-width: 500px) {
     justify-content: center;
   }
 `;
-// const VideoWindow = styled.div`
-//   width: 100%;
-//   overflow: auto;
-//   display: flex;
-// `;
+
 const Button = styled.div`
   transform: scale(1.5);
   transition: all 0.2s ease-in-out;
@@ -180,6 +136,7 @@ const Button = styled.div`
       right: 0;
     `}
 `;
+
 const VideoLi = styled.div`
   cursor: pointer;
   float: left;
@@ -188,6 +145,7 @@ const VideoLi = styled.div`
   height: auto;
   list-style-type: none;
 `;
+
 const VideoHover = styled.div`
   margin: 10px 0;
   height: 200px;
@@ -199,6 +157,7 @@ const VideoHover = styled.div`
     transform: scale(1.04);
   }
 `;
+
 const CreatorName = styled.div`
   margin-left: 5px;
   font-size: 12px;
@@ -206,13 +165,14 @@ const CreatorName = styled.div`
   position: absolute;
   bottom: 5px;
 `;
+
 const ThumbNail = styled.img`
   width: 100%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  /* cursor: pointer; */
 `;
-const VodeoTitle = styled.div`
+
+const VideoTitle = styled.div`
   font-size: 14px;
   margin-left: 4px;
   padding: 4px;

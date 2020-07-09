@@ -18,10 +18,7 @@ const Recommend = (props) => {
     } else if (direction === 'next' && left >= -totalWidth + 1000) {
       setLeft(left - visibleWidth);
     }
-    // console.log('버튼클릭', left);
   };
-
-  // 클릭했을 때, 해당 영상 detail 페이지로 가게 push
 
   return (
     <RecommendWrap>
@@ -32,7 +29,6 @@ const Recommend = (props) => {
         </Button>
         <Videos ref={visible}>
           <Absolute toLeft={left} ref={total}>
-            {/* url 형태: video/video.video_id */}
             {recommended.map((data, index) => {
               return (
                 <Link
@@ -71,7 +67,6 @@ const Recommend = (props) => {
 export default Recommend;
 
 const RecommendWrap = styled.div`
-  /* height: 200px; */
   margin: 40px 0;
 `;
 
