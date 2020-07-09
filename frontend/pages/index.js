@@ -20,10 +20,6 @@ export async function getStaticProps() {
   };
 }
 
-// export async function getServerSidePrps() {
-//
-//   const returnRes = await fetch(``)
-// }
 export default function HomePage(props) {
   // 카테고리 저장
   const categoryfromAPI = props.pageProps.categoryList;

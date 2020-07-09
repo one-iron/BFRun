@@ -1,19 +1,20 @@
 const SJ = 'http://172.16.100.136:5000';
 const YE = 'http://172.16.100.111:5000';
 
+const AWS = 'http://3.14.86.175:5000';
+
 // 구글 로그인
 export const clientId =
   '160523732114-5da8gimc6d808mjt1t30frv94bv227lq.apps.googleusercontent.com';
 export const googleLogin = `${YE}/login`;
 
 // 카테고리 API
+// export const CATEGORY = `${AWS}/categories`;
 export const CATEGORY = `${SJ}/categories`;
-// export const CATEGORY =
-//   'https://run.mocky.io/v3/20e5e480-4505-4ea2-823d-b753cc54f4b2';
 
 // 태그로 불러올 VIDEO 주소
+// export const SELECTED_VIDEO_LIST = `${AWS}/videos`;
 export const SELECTED_VIDEO_LIST = `${SJ}/videos`;
-// export const SELECTED_VIDEO_LIST = 'https://run.mocky.io/v3/67348608-f1af-47a6-94eb-a5a5896c8e5a';
 
 // 보여줄 비디오 API
 export const VIDEO_LIST = `${YE}/video`;
