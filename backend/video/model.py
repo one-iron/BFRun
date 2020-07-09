@@ -1,5 +1,6 @@
 from connection import DB
 
+
 class VideoDao:
     def get_contents_types(self):
         get_contents_types_sql = """
@@ -132,7 +133,7 @@ class VideoDao:
         """
 
         db = DB()
-        return db.dict_fetch(get_channel_name_sql, (channel_id))
+        return db.fetchone(get_channel_name_sql, (channel_id))
 
     def get_video_detail(self, video_id):
         get_video_sql = """

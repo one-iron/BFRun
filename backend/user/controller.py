@@ -20,4 +20,4 @@ def create_user_endpoints(app, user_service):
             return {'token' : token}, 200
 
         except KeyError:
-            return {'message' : 'KEY ERROR'}, 400
+            return {'message' : 'KEY ERROR'}, 400   
