@@ -1,23 +1,23 @@
 from flask                   import request
-from flask_request_validator import (
+from flask_request_validator_custom import (
     GET,
+    JSON,
     Param,
     validate_params
 )
 
 def create_user_endpoints(app, user_service):
 
-    @validate_params(
-        Param('id', GET, str, required=True),
-        Param('token', GET, str, required=True)
-    )
     @app.route("/login", methods=["POST"])
-    def login():
+    @validate_params(
+        Param('id', JSON, str),
+        Param('token', JSON, str)
+    )
+    def login(*args):
         try:
             user = request.json
+            response = user_service.google_login(user)
+            return response
 
-            token = user_service.google_login(user)
-            return {'token' : token}, 200
-
-        except KeyError:
-            return {'message' : 'KEY ERROR'}, 400   
+        except Exception as e:
+            return {'message' : f'{e}'}, 400

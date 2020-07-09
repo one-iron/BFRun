@@ -1,24 +1,28 @@
 // external modules
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 // internal modules
-import Nav from '../components/Nav';
-import DetailVideo from '../components/DetailVideo';
+import Nav from '../../components/Nav';
+import DetailVideo from '../../components/DetailVideo';
 
-const Detail = () => {
+const Video = () => {
+  const router = useRouter();
+  const { id } = router.query;
+
   return (
     <>
       <Nav />
       <DetailWrap>
         <DetailContainer>
-          <DetailVideo />
+          <DetailVideo id={id} />
         </DetailContainer>
       </DetailWrap>
     </>
   );
 };
 
-export default Detail;
+export default Video;
 
 const DetailWrap = styled.div`
   position: relative;
@@ -26,7 +30,6 @@ const DetailWrap = styled.div`
   padding: 20px;
   top: 100px;
   width: 100%;
-  /* height: calc(100vh - 80px); */
   background-color: #f9f9f9;
   border: 1px solid #f9f9f9;
 

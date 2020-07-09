@@ -11,29 +11,37 @@ import SelectedVideo from '../components/SelectedVideo';
 import { CATEGORY, SELECTED_VIDEO_LIST, RECOMMEND } from '../config';
 
 export async function getStaticProps() {
-  const res = await fetch(CATEGORY);
+  const categoryRes = await fetch(CATEGORY);
   const resP = await fetch(RECOMMEND);
-  const list = await res.json();
+  const categoryList = await categoryRes.json();
   const recommendList = await resP.json();
   return {
-    props: { list, recommendList },
+    props: { categoryList, recommendList },
   };
 }
 
+// export async function getServerSidePrps() {
+//
+//   const returnRes = await fetch(``)
+// }
+
 export default function HomePage(props) {
   // 카테고리 저장
-  const categoryfromAPI = props.pageProps.list;
+  const categoryfromAPI = props.pageProps.categoryList;
   const contentList = categoryfromAPI.content_types;
   const stackList = categoryfromAPI.stacks;
   const creatorList = categoryfromAPI.channels;
+  // 선택된 태그 이름 및 ID
   const [selectedContent, setSelectedContent] = useState([]);
   const [contentId, setContentId] = useState([]);
   const [selectedStack, setSelectedStack] = useState([]);
   const [stackId, setStackId] = useState([]);
   const [selectedCreator, setSelectedCreator] = useState([]);
   const [creatorId, setCreatorId] = useState([]);
+  // 선택한 태그에 대한 list
+  const [returnList, setReturnList] = useState([]);
 
-  // 보여줄 태그 url axios
+  // 선택한 태그 API 가져오기
   useEffect(() => {
     let returnUrl = '';
     const splitContentId = contentId.join('&');
@@ -51,11 +59,14 @@ export default function HomePage(props) {
         returnUrl = splitCreatorId;
       }
     }
-    console.log('return', returnUrl);
+
+    // console.log('returnUrl', returnUrl);
     axios
       .get(`${SELECTED_VIDEO_LIST}?${returnUrl}`)
-      .then((res) => console.log(res));
-  });
+      .then((res) => setReturnList(res.data.videos));
+  }, [contentId, stackId, creatorId]);
+
+  // console.log('returnList', returnList);
 
   // 컨텐츠 태그 추가/제거
   const addDelContentTags = (name, id) => {
@@ -133,12 +144,11 @@ export default function HomePage(props) {
     setSelectedCreator([]);
   };
 
-  // 선택한 태그로 axios
-
   // 맨 위로 가기
   const goToTop = () => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   };
+
   return (
     <>
       <Nav />
@@ -157,6 +167,7 @@ export default function HomePage(props) {
           />
           {selectedContent[0] || selectedStack[0] || selectedCreator[0] ? (
             <SelectedVideo
+              returnList={returnList}
               selectedContent={selectedContent}
               addDelContentTags={addDelContentTags}
               selectedStack={selectedStack}

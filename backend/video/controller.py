@@ -1,11 +1,12 @@
 from flask import request
 
-from flask_request_validator import (
+from flask_request_validator_custom import (
     PATH,
     GET,
     Param,
+    Pattern,
     MaxLength,
-    validate_params 
+    validate_params,
 )
 
 
@@ -16,15 +17,21 @@ def create_video_endpoints(app, video_service):
         category_response = video_service.get_category_lists()
         return category_response, 200
 
-    @validate_params(Param("video_id", PATH, int, required=True))
+
     @app.route("/video/<int:video_id>", methods=["GET"])
+    @validate_params(
+        Param('video_id', PATH, int)
+    )
     def get_video_detail(video_id):
         try:
+            if video_id > 1154 or video_id < 1:
+                return {'message' : f'CAN NOT FIND VIDEO ID {video_id}'}, 400
+
             video_detail, video_playlist = video_service.get_video_detail(video_id)
             return {"video_detail": video_detail, "video_playlist": video_playlist}, 200
 
         except Exception as e:
-            return {"message": e}, 400
+            return {"message": str(e)}, 400
 
     @app.route("/videos", methods=["GET"])
     @validate_params(

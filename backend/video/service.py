@@ -47,7 +47,7 @@ class VideoService:
         channels = []
         contents_types = params.get("contents_types_id", None)
         stacks = params.getlist("stack_id", None)
-        channels = params.getlist("channels_id", None)
+        channels = params.getlist("channels_id", None)   
  
         # 콘텐츠 타입 필터
         if contents_types:
@@ -89,7 +89,7 @@ class VideoService:
 
             channel_name = self.video_dao.get_channel_name(channel)         
             video_lists[channel_name[0]["name"]] = videos
-
+          
         return {"videos" : video_lists}
 
     def recommand_video_service(self):

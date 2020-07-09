@@ -1,43 +1,39 @@
 // external modules
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
+
 // internal modules
 import PlayList from './PlayList';
+
 const Information = (props) => {
-  const { listVideo, clickList, videoUrl } = props;
-  const [data, setData] = useState();
+  const { listVideo, clickList, videoUrl, videoInfo } = props;
+
   // 조회수의 숫자에 쉼표를 찍는 Intl 함수를 변수로 지정하여 조회수에 쓰이고 있습니다.
   const numberFilter = new Intl.NumberFormat('en-IN', {
     maximumSignificantDigits: 3,
   });
-  // 영상의 정보들을 이 곳에서 패치하여 data에 저장합니다.
-  useEffect(() => {
-    axios
-      .get('https://run.mocky.io/v3/cd4032e7-50ce-4420-882a-80616cff62b2')
-      .then((response) => {
-        setData(response.data);
-      });
-  }, []);
-  console.log('infoProps', props);
+
   return (
     <InformationWrap>
       <InformationContainer>
-        {data && (
+        {videoInfo && (
           <>
             <section>
-              <figure>
-                <img src={data.profile} alt="" />
-                <figcaption>{data.channel}</figcaption>
-              </figure>
+              <a href={videoInfo.video_url} target="_blank">
+                <figure>
+                  <img src={videoInfo.channel_profile} alt="" />
+                  <figcaption>{videoInfo.channel_name}</figcaption>
+                </figure>
+              </a>
             </section>
             <section>
-              <summary>{data.title}</summary>
+              <summary>{videoInfo.title}</summary>
               <article>
-                조회수 {numberFilter.format(data.view)}회{' '}
-                <time>{data.created_at}</time>
+                조회수 {numberFilter.format(videoInfo.view)}회{' '}
+                <time>{videoInfo.created_at}</time>
               </article>
-              <main>{data.description}</main>
+              <main style={{ whiteSpace: 'pre-line' }}>
+                {videoInfo.description}
+              </main>
             </section>
           </>
         )}
@@ -52,7 +48,9 @@ const Information = (props) => {
     </InformationWrap>
   );
 };
+
 export default Information;
+
 const InformationWrap = styled.div`
   margin-top: 20px;
   width: 960px;
@@ -68,6 +66,7 @@ const InformationWrap = styled.div`
     height: 100%;
   }
 `;
+
 const InformationContainer = styled.div`
   background-color: #ffffff;
   display: flex;
@@ -81,6 +80,7 @@ const InformationContainer = styled.div`
     width: 95vw;
   }
   figure {
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -116,8 +116,12 @@ const InformationContainer = styled.div`
       text-align: left;
       color: gray;
     }
+    main {
+      text-align: left;
+    }
   }
 `;
+
 const ListSection = styled.div`
   display: none;
   @media ${(props) => props.theme.laptopM} {

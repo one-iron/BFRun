@@ -6,6 +6,7 @@ import SelectedTags from './SelectedTags';
 import VideoSection from './VideoSection';
 
 const SelectedVideo = ({
+  returnList,
   selectedContent,
   addDelContentTags,
   selectedStack,
@@ -14,7 +15,7 @@ const SelectedVideo = ({
   addDelCreatorTags,
   removeTags,
 }) => {
-  // console.log('selectedVideo', selectedContent, selecte);
+  console.log('returnList', returnList);
   return (
     <SelectedVideoWrap>
       <SelectedTags
@@ -26,15 +27,18 @@ const SelectedVideo = ({
         addDelCreatorTags={addDelCreatorTags}
         removeTags={removeTags}
       />
-      {selectedContent.map((tag) => {
-        return <VideoSection tag={tag} />;
-      })}
-      {selectedStack.map((tag) => {
-        return <VideoSection tag={tag} />;
-      })}
-      {selectedCreator.map((tag) => {
-        return <VideoSection tag={tag} />;
-      })}
+      {selectedContent &&
+        selectedContent.map((tag) => {
+          return <VideoSection returnContentList={returnList} tag={tag} />;
+        })}
+      {selectedStack &&
+        selectedStack.map((tag) => {
+          return <VideoSection returnStackList={returnList} tag={tag} />;
+        })}
+      {selectedCreator &&
+        selectedCreator.map((tag) => {
+          return <VideoSection returnCreatorList={returnList} tag={tag} />;
+        })}
     </SelectedVideoWrap>
   );
 };

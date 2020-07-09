@@ -1,16 +1,11 @@
-// const mdxRenderer = `
-//   import React from 'react'
-//   import { mdx } from '@mdx-js/react'
-
-const withMDX = require('@next/mdx')({
-  // options: {
-  //   renderer: mdxRenderer,
-  // },
-  extension: /\.mdx?$/,
-  // Or use this to support MD files too
-  // extension: /\.(md|mdx)$/,
-});
-
-module.exports = withMDX({
-  pageExtensions: ['js', 'jsx', 'mdx'],
-});
+module.exports = {
+  serverRuntimeConfig: {
+    // Will only be available on the server side
+    mySecret: 'secret',
+    secondSecret: process.env.SECOND_SECRET, // Pass through env variables
+  },
+  publicRuntimeConfig: {
+    // Will be available on both server and client
+    staticFolder: '/static',
+  },
+};
