@@ -22,14 +22,14 @@ const VideoSection = ({ title, returnList }) => {
   return (
     <VideoSectionWrap>
       <CategoryName>{title}</CategoryName>
-      <SlideDiv>
-        <Button back onClick={() => moveScroll('before')}>
-          <i className="fa fa-caret-left" />
-        </Button>
-        <VideoLiContainer ref={visible}>
-          <ListContainer toLeft={left} ref={total}>
-            {returnList &&
-              returnList.map((data, index) => {
+      {returnList ? (
+        <SlideDiv>
+          <Button back onClick={() => moveScroll('before')}>
+            <i className="fa fa-caret-left" />
+          </Button>
+          <VideoLiContainer ref={visible}>
+            <ListContainer toLeft={left} ref={total}>
+              {returnList.map((data, index) => {
                 return (
                   <Link
                     href="/video/[id]"
@@ -55,12 +55,16 @@ const VideoSection = ({ title, returnList }) => {
                   </Link>
                 );
               })}
-          </ListContainer>
-        </VideoLiContainer>
-        <Button next onClick={() => moveScroll('next')}>
-          <i className="fa fa-caret-right" />
-        </Button>
-      </SlideDiv>
+              )
+            </ListContainer>
+          </VideoLiContainer>
+          <Button next onClick={() => moveScroll('next')}>
+            <i className="fa fa-caret-right" />
+          </Button>
+        </SlideDiv>
+      ) : (
+        <NoContents>준비중!!!</NoContents>
+      )}
     </VideoSectionWrap>
   );
 };
@@ -177,11 +181,13 @@ const VideoTitle = styled.div`
   margin-left: 4px;
   padding: 4px;
   margin-bottom: 30px;
-  /* white-space: nowrap; */
-  /* overflow: hidden; */
-  /* text-overflow: ellipsis; */
   @media (max-width: 500px) {
     width: 300px;
     height: 300px;
   }
+`;
+
+const NoContents = styled.div`
+  margin: 20px 0 0 30px;
+  font-size: 20px;
 `;

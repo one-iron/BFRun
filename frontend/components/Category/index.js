@@ -153,7 +153,7 @@ const Category = ({
                         ? 'white'
                         : 'black',
                     }}
-                    onClick={() => addDelStackTags(type.name)}
+                    onClick={() => addDelStackTags(type.name, type.id)}
                   >
                     {type.name}
                   </Tag>
