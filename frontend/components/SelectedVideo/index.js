@@ -36,10 +36,12 @@ const SelectedVideo = ({
         selectedContent.map((tag) => {
           return <VideoSection returnContentList={returnList} tag={tag} />;
         })}
-      {selectedStack &&
+      {selectedStack[0] &&
         returnList &&
-        returnList.map((arr) => {
-          return <VideoSection returnStackList={arr} />;
+        returnList.map((arr, index) => {
+          return (
+            <VideoSection returnStackList={arr} title={selectedStack[index]} />
+          );
         })}
       {selectedCreator[0] &&
         selectedCreator.map((tag) => {
