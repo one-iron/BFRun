@@ -7,13 +7,14 @@ const VideoSection = ({
   returnContentList,
   returnStackList,
   returnCreatorList,
+  title,
 }) => {
   // console.log('returnContentList', returnContentList);
   // console.log('returnStackList -->', returnStackList);
   // console.log('returnCreatorList -->', returnCreatorList);
   return (
     <VideoSectionWrap>
-      <CategoryName>{tag}</CategoryName>
+      <CategoryName>{title}</CategoryName>
       <SlideDiv>
         <Button back>
           <i className="fa fa-caret-left" />
@@ -49,80 +50,18 @@ const VideoSection = ({
                   </Link>
                 );
               })}
-            {console.log('returnStackList', returnStackList)}
-            {
-              // returnStackList &&
-              // (function (i, len) {
-              //   console.log('--------------function called');
-              //   while (i++ < len) {
-              //     console.log('returnstackList', returnStackList);
-              //     // console.log('returnstackList', i - 1);
-              //     return returnStackList[i - 1].map((data, index) => {
-              //       console.log(i - 1, '번째 stack', data);
-              //       return (
-              //         <Link
-              //           href="/video/[id]"
-              //           as={`/video/${data.video_id}`}
-              //           key={index}
-              //         >
-              //           <VideoLi>
-              //             <VideoHover>
-              //               <ThumbNail
-              //                 src={`http://i3.ytimg.com/vi/${data.url.slice(
-              //                   data.url.indexOf('v=') + 2,
-              //                   data.url.indexOf('&list'),
-              //                 )}/maxresdefault.jpg`}
-              //               />
-              //               <VodeoTitle>
-              //                 {data.title.length < 20
-              //                   ? data.title
-              //                   : `${data.title.slice(0, 35)}...`}
-              //               </VodeoTitle>
-              //               <CreatorName>{data.channel_name}</CreatorName>
-              //             </VideoHover>
-              //           </VideoLi>
-              //         </Link>
-              //       );
-              //     });
-              //   }
-              // })(0, returnStackList.length)
-              // returnStackList[0].map((data, index) => {
-              //   // console.log('return stack', data);
-              //   return (
-              //     <Link href="/video/[id]" as={`/video/${data.video_id}`}>
-              //       <VideoLi key={index}>
-              //         <VideoHover>
-              //           <ThumbNail
-              //             src={`http://i3.ytimg.com/vi/${data.url.slice(
-              //               data.url.indexOf('v=') + 2,
-              //               data.url.indexOf('&list'),
-              //             )}/maxresdefault.jpg`}
-              //           />
-              //           <VodeoTitle>
-              //             {data.title.length < 20
-              //               ? data.title
-              //               : `${data.title.slice(0, 35)}...`}
-              //           </VodeoTitle>
-              //           <CreatorName>{data.channel_name}</CreatorName>
-              //         </VideoHover>
-              //       </VideoLi>
-              //     </Link>
-              //   );
-              // })}
-            }
-
-            {returnCreatorList &&
-              returnCreatorList[0].map((data, index) => {
-                // console.log('return creator', data);
+            {returnStackList &&
+              returnStackList.map((data, index) => {
                 return (
                   <Link
                     href="/video/[id]"
                     as={`/video/${data.video_id}`}
                     key={index}
                   >
-                    <VideoLi>
+                    <VideoLi onClick={() => moveRoute('/detail')}>
                       <VideoHover>
                         <ThumbNail
+                          key={data.id}
                           src={`http://i3.ytimg.com/vi/${data.url.slice(
                             data.url.indexOf('v=') + 2,
                             data.url.indexOf('&list'),
@@ -139,14 +78,18 @@ const VideoSection = ({
                   </Link>
                 );
               })}
-            {returnStackList &&
-              returnStackList.map((data) => {
+            {returnCreatorList &&
+              returnCreatorList[0].map((data, index) => {
+                // console.log('return creator', data);
                 return (
-                  <Link href="/video/[id]" as={`/video/${data.video_id}`}>
-                    <VideoLi key={data.id} onClick={() => moveRoute('/detail')}>
+                  <Link
+                    href="/video/[id]"
+                    as={`/video/${data.video_id}`}
+                    key={index}
+                  >
+                    <VideoLi>
                       <VideoHover>
                         <ThumbNail
-                          key={data.id}
                           src={`http://i3.ytimg.com/vi/${data.url.slice(
                             data.url.indexOf('v=') + 2,
                             data.url.indexOf('&list'),

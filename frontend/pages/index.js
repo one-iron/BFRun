@@ -137,6 +137,9 @@ export default function HomePage(props) {
     setSelectedContent([]);
     setSelectedStack([]);
     setSelectedCreator([]);
+    setContentId([]);
+    setStackId([]);
+    setCreatorId([]);
     setReturnList([]);
   };
 
