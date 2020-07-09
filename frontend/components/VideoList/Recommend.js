@@ -35,12 +35,12 @@ const Recommend = (props) => {
             {/* url 형태: video/video.video_id */}
             {recommended.map((data, index) => {
               return (
-                <Link href="/video/[id]" as={`/video/${data.video_id}`}>
-<<<<<<< HEAD
-                  <VideoWindow key={index}>
-=======
+                <Link
+                  href="/video/[id]"
+                  as={`/video/${data.video_id}`}
+                  key={index}
+                >
                   <VideoWindow>
->>>>>>> 8366799... no no no no no
                     <ThumbNail
                       key={data.video_id}
                       src={`http://i3.ytimg.com/vi/${data.url.slice(
