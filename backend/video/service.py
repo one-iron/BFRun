@@ -38,7 +38,6 @@ class VideoService:
         )
         return video_detail, video_playlist
 
-
     def get_video_lists(self, params):
 
         filters = {}
@@ -48,8 +47,8 @@ class VideoService:
         channels = []
         contents_types = params.get("contents_types_id", None)
         stacks = params.getlist("stack_id", None)
-        channels = params.getlist("channels_id", None)
-
+        channels = params.getlist("channels_id", None)   
+ 
         # 콘텐츠 타입 필터
         if contents_types:
             video_lists["videos"] = self.video_dao.get_contents_types_videos(
@@ -88,14 +87,14 @@ class VideoService:
                     stack_videos = ""
                 videos += stack_videos
 
-            channel_name = self.video_dao.get_channel_name(channel)
+            channel_name = self.video_dao.get_channel_name(channel)         
             video_lists[channel_name[0]["name"]] = videos
-
-        return video_lists
+          
+        return {"videos" : video_lists}
 
     def recommand_video_service(self):
         videos = []
-        for position in range(1,4):
+        for position in range(1, 4):
             videos.append(self.video_dao.recommand_video_model(position))
         return videos
 
