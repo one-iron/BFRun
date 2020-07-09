@@ -6,7 +6,7 @@ import Link from 'next/link';
 // internal modules
 import Login from '../Login';
 
-const Nav = () => {
+const Nav = ({ removeTags }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [searchBox, setSearchBox] = useState(false);
   const [input, setInput] = useState('');
@@ -48,7 +48,7 @@ const Nav = () => {
         <NavLeft openSearchBox={searchBox}>
           <Link href="/">
             <a>
-              <TitleText>BF Run.</TitleText>
+              <TitleText onClick={removeTags}>BF Run.</TitleText>
             </a>
           </Link>
         </NavLeft>
