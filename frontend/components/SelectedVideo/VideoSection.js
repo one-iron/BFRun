@@ -9,8 +9,8 @@ const VideoSection = ({
   returnCreatorList,
 }) => {
   // console.log('returnContentList', returnContentList);
-  // console.log('returnStackList', returnStackList);
-  // console.log('returnCreatorList', returnCreatorList);
+  // console.log('returnStackList -->', returnStackList);
+  // console.log('returnCreatorList -->', returnCreatorList);
 
   return (
     <VideoSectionWrap>
@@ -24,7 +24,7 @@ const VideoSection = ({
           <ListContainer>
             {returnContentList &&
               returnContentList.map((data, index) => {
-                console.log('content', data);
+                // console.log('content', data);
                 return (
                   <Link href="/video/[id]" as={`/video/${data.video_id}`}>
                     <VideoLi key={index}>
@@ -48,7 +48,7 @@ const VideoSection = ({
               })}
             {returnStackList &&
               console.log('returnStackList.length', returnStackList.length)}
-            {
+            {/* {
               returnStackList &&
                 (function (i, len) {
                   console.log('--------------function called');
@@ -103,11 +103,11 @@ const VideoSection = ({
               //     </Link>
               //   );
               // })}
-            }
+            } */}
 
             {returnCreatorList &&
               returnCreatorList[0].map((data, index) => {
-                console.log('return creator', data);
+                // console.log('return creator', data);
                 return (
                   <Link href="/video/[id]" as={`/video/${data.video_id}`}>
                     <VideoLi key={index}>
@@ -129,9 +129,32 @@ const VideoSection = ({
                   </Link>
                 );
               })}
+            {returnStackList &&
+              returnStackList.map((data) => {
+                return (
+                  <Link href="/video/[id]" as={`/video/${data.video_id}`}>
+                    <VideoLi key={data.id} onClick={() => moveRoute('/detail')}>
+                      <VideoHover>
+                        <ThumbNail
+                          key={data.id}
+                          src={`http://i3.ytimg.com/vi/${data.url.slice(
+                            data.url.indexOf('v=') + 2,
+                            data.url.indexOf('&list'),
+                          )}/maxresdefault.jpg`}
+                        />
+                        <VodeoTitle>
+                          {data.title.length < 20
+                            ? data.title
+                            : `${data.title.slice(0, 35)}...`}
+                        </VodeoTitle>
+                        <CreatorName>{data.channel_name}</CreatorName>
+                      </VideoHover>
+                    </VideoLi>
+                  </Link>
+                );
+              })}
           </ListContainer>
         </VideoLiContainer>
-
         <Button next>
           <i className="fa fa-caret-right" />
         </Button>
@@ -164,6 +187,7 @@ const VideoLiContainer = styled.div`
   margin: 0 10px;
   padding: 0 5px;
   width: 100%;
+  height: 510px;
   overflow-x: scroll;
 `;
 const ListContainer = styled.div`
@@ -203,7 +227,7 @@ const Button = styled.div`
       right: 0;
     `}
 `;
-const VideoLi = styled.li`
+const VideoLi = styled.div`
   cursor: pointer;
   float: left;
   margin: 10px;

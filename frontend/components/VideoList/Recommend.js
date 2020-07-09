@@ -36,7 +36,11 @@ const Recommend = (props) => {
             {recommended.map((data, index) => {
               return (
                 <Link href="/video/[id]" as={`/video/${data.video_id}`}>
+<<<<<<< HEAD
                   <VideoWindow key={index}>
+=======
+                  <VideoWindow>
+>>>>>>> 8366799... no no no no no
                     <ThumbNail
                       key={data.video_id}
                       src={`http://i3.ytimg.com/vi/${data.url.slice(
@@ -157,11 +161,11 @@ const ThumbNail = styled.img`
 const VideoTitle = styled.div`
   font-size: 14px;
   margin-left: 4px;
+  word-break: break-all;
   padding: 4px;
   margin-bottom: 30px;
   @media (max-width: 500px) {
-    width: 300px;
-    height: 300px;
+    width: 100%;
   }
 `;
 
