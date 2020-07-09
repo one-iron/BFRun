@@ -1,6 +1,7 @@
+import pymysql
+
 from flask                   import request
 from flask_request_validator_custom import (
-    GET,
     JSON,
     Param,
     validate_params
@@ -19,5 +20,8 @@ def create_user_endpoints(app, user_service):
             response = user_service.google_login(user)
             return response
 
+        except pymysql.err.Error as e:
+            return {"message" : "DATABASE ERROR" + str(e)}, 500
+
         except Exception as e:
-            return {'message' : f'{e}'}, 400
+            return {"message": str(e)}, 400

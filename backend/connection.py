@@ -23,16 +23,22 @@ class DB:
         self.conn.rollback()
 
     def fetchall(self, sql, *args):
-        try:
-            with self.conn.cursor() as cursor:
-                affected_row = cursor.execute(sql, *args)
+        if self.conn:
+            try:
+                with self.conn.cursor() as cursor:
+                    affected_row = cursor.execute(sql, *args)
 
-                if affected_row == 0:
-                    return 0
-            return cursor.fetchall()
+                    if affected_row == 0:
+                        return 0
+                return cursor.fetchall()
 
-        finally:
-            self.close()
+            except Exception as e:
+                return {'message' : str(e)}, 500
+
+            finally:
+                self.close()
+
+        return {'message' : 'CONNECTION ERROR'},500
 
     def fetchone(self, sql, *args):
         try:
