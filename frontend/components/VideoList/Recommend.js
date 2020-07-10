@@ -110,6 +110,7 @@ const Videos = styled.div`
   align-items: center;
   position: relative;
   overflow-x: scroll;
+  overflow-y: hidden;
   ::-webkit-scrollbar {
     width: 0;
   }

@@ -18,7 +18,7 @@ const VideoSection = ({ title, returnList }) => {
       setLeft(left - visibleWidth);
     }
   };
-  console.log('유즈레프 -->', total.current);
+  // console.log('유즈레프 -->', total.current);
   return (
     <VideoSectionWrap>
       <CategoryName>{title}</CategoryName>
@@ -100,6 +100,7 @@ const VideoLiContainer = styled.div`
   width: 880px;
   height: 460px;
   overflow-x: scroll;
+  overflow-y: hidden;
   ::-webkit-scrollbar {
     width: 0;
   }
@@ -115,7 +116,7 @@ const ListContainer = styled.div`
   align-items: center;
   margin: 5px 0;
   height: 100%;
-  width: 50%;
+  width: 50% + 150px;
   @media (max-width: 500px) {
     justify-content: center;
   }
