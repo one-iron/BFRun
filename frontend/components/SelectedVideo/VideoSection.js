@@ -98,8 +98,11 @@ const VideoLiContainer = styled.div`
   margin: 0 10px;
   padding: 0 5px;
   width: 880px;
-  height: 250px;
+  height: 460px;
   overflow-x: scroll;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 `;
 
 const ListContainer = styled.div`
@@ -107,9 +110,12 @@ const ListContainer = styled.div`
   transition: left 0.8s ease-in-out;
   position: absolute;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
   margin: 5px 0;
+  height: 100%;
+  width: 50%;
   @media (max-width: 500px) {
     justify-content: center;
   }

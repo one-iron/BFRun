@@ -186,6 +186,12 @@ const Category = ({
             </AllTags>
           </GroupContainer>
           <GroupContainer>
+            <Title wecode>아직 프론트인지 백인지 모르겠다면?</Title>
+            <TextLink href="http://bftest.wecode.co.kr/" target="_blank">
+              BF-Test 하러가기!
+            </TextLink>
+          </GroupContainer>
+          <GroupContainer>
             <Title wecode>부트캠프를 찾고 계신다면?</Title>
             <a href="https://wecode.co.kr/" target="_blank">
               <WecodeImg src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/logo_black.png" />
@@ -267,22 +273,16 @@ const CategoryWrap = styled.aside`
 const CategoryContainer = styled.div`
   width: 240px;
   border: 1px solid #eee;
-  border-radius: 5px;
-  background-color: #ffffff;
-  box-shadow: 0.1em 0.1em 0.8em rgba(0, 0, 0, 0.3);
-  &:hover {
+  border-radius: 7px;
+  background-color: #f2f2f2;
+  /* box-shadow: 0.1em 0.1em 0.8em rgba(0, 0, 0, 0.3); */
+  /* &:hover {
     background-color: #faf7f7;
-  }
+  } */
 `;
 
 const GroupContainer = styled.div`
   margin: 30px 0 30px 10px;
-
-  :hover {
-    div {
-      color: black;
-    }
-  }
 `;
 
 const Line = styled.div`
@@ -295,7 +295,7 @@ const Title = styled.div`
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 15px;
-  color: gray;
+  color: #2d2d2d;
   ${(props) =>
     props.wecode &&
     css`
@@ -328,5 +328,13 @@ const WecodeImg = styled.img`
   cursor: pointer;
   width: 100px;
   height: auto;
+  margin-top: 15px;
+`;
+
+const TextLink = styled.a`
+  cursor: pointer;
+  font-weight: bold;
+  color: #2d2d2d;
+  display: block;
   margin-top: 15px;
 `;

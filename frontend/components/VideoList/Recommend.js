@@ -67,7 +67,7 @@ const Recommend = (props) => {
 export default Recommend;
 
 const RecommendWrap = styled.div`
-  margin: 40px 0;
+  /* margin: 40px 0; */
 `;
 
 const TitleH2 = styled.h2`
