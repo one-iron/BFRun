@@ -40,57 +40,46 @@ class VideoService:
 
     def get_video_lists(self, params):
 
-        filters = {}
-        video_lists = {}
-        # 필터 parameter binding
-        stacks = []
-        channels = []
-        contents_types = params.get("contents_types_id", None)
-        stacks = params.getlist("stack_id", None)
-        channels = params.getlist("channels_id", None)   
- 
+        videos = []
+        contents_types = params["contents_types_id"]
+        stacks         = params["stack_id"]
+        channels       = params["channels_id"] 
+
         # 콘텐츠 타입 필터
-        if contents_types:
-            video_lists["videos"] = self.video_dao.get_contents_types_videos(
-                contents_types
-            )
-            return video_lists
-
+        if contents_types:        
+            videos.append(self.video_dao.get_contents_types_videos(contents_types))
+          
         # 스택 필터
-        if contents_types is None and len(channels) == 0:
-            videos = []
+        if contents_types is None and channels is None and stacks:        
             for stack in stacks:
-                videos.append(self.video_dao.get_stack_videos(stack))
-                video_lists["videos"] = videos
-
-            return video_lists
+                videos.append(self.video_dao.get_stack_videos(stack))               
 
         # 채널 필터
-        if contents_types is None and len(stacks) == 0:
-            videos = []
+        if contents_types is None and stacks is None and channels:   
             for channel in channels:
-                videos.append(self.video_dao.get_channel_videos(channel))
-                video_lists["videos"] = videos
-
-            return video_lists
+                videos.append(self.video_dao.get_channel_videos(channel))       
 
         # 채널, 스택 필터
-        for channel in channels:
-            videos = []
-            for stack in stacks:
-                filters = {}
-                filters["stack_id"] = stack
-                filters["channel_id"] = channel
-                stack_videos = self.video_dao.get_videos(filters)
+        if contents_types is None and stacks and channels:
+            channel_videos = []        
+            for channel in channels:
+                videos = []
 
-                if stack_videos == 0:
-                    stack_videos = ""
-                videos += stack_videos
+                for stack in stacks:
+                    filters = {}
+                    filters["stack_id"]   = stack
+                    filters["channel_id"] = channel
+                    stack_videos = self.video_dao.get_videos(filters)
 
-            channel_name = self.video_dao.get_channel_name(channel)         
-            video_lists[channel_name[0]["name"]] = videos
-          
-        return {"videos" : video_lists}
+                    if stack_videos == 0:
+                        stack_videos = ""
+                        
+                    videos += stack_videos                
+                channel_videos.append(videos)
+            
+            return channel_videos
+        
+        return videos
 
     def recommand_video_service(self):
         videos = []

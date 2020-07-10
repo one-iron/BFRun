@@ -36,14 +36,18 @@ def create_video_endpoints(app, video_service):
     @app.route("/videos", methods=["GET"])
     @validate_params(
         Param('contents_types_id', GET, str, required=False, rules=[MaxLength(1)]),
-        Param('stack_id', GET, str, required=False, rules=[MaxLength(5)]),
-        Param('channels_id', GET, str, required=False, rules=[MaxLength(18)]),
+        Param('stack_id', GET, list, required=False, rules=[MaxLength(5)]),
+        Param('channels_id', GET, list, required=False, rules=[MaxLength(18)]),
     )
     def get_video_lists(*args):
-        try:                                
-            params = request.args
+        try:           
+            params = {}
+            params["contents_types_id"] = args[0]
+            params["stack_id"]          = args[1]
+            params["channels_id"]       = args[2]
+
             video_list_response = video_service.get_video_lists(params)
-            return video_list_response, 200
+            return {"videos" : video_list_response}, 200
 
         except Exception as e:
             return {"message": e}, 400
