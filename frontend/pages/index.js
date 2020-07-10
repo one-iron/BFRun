@@ -1,29 +1,25 @@
 // external modules
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect, useRef } from 'react';
+import styled, { css } from 'styled-components';
 import axios from 'axios';
 
 // internal modules
 import Nav from '../components/Nav';
 import Category from '../components/Category';
+import MobileCategory from '../components/Category/MobileCategory';
 import VideoList from '../components/VideoList';
 import SelectedVideo from '../components/SelectedVideo';
 import { CATEGORY, SELECTED_VIDEO_LIST, RECOMMEND } from '../config';
 
 export async function getStaticProps() {
   const categoryRes = await fetch(CATEGORY);
-  const resP = await fetch(RECOMMEND);
+  const recommendRes = await fetch(RECOMMEND);
   const categoryList = await categoryRes.json();
-  const recommendList = await resP.json();
+  const recommendList = await recommendRes.json();
   return {
     props: { categoryList, recommendList },
   };
 }
-
-// export async function getServerSidePrps() {
-//
-//   const returnRes = await fetch(``)
-// }
 
 export default function HomePage(props) {
   // 카테고리 저장
@@ -40,6 +36,8 @@ export default function HomePage(props) {
   const [creatorId, setCreatorId] = useState([]);
   // 선택한 태그에 대한 list
   const [returnList, setReturnList] = useState([]);
+  // 카테고리 검은 화면
+  const [black, setBlack] = useState(false);
 
   // 선택한 태그 API 가져오기
   useEffect(() => {
@@ -60,18 +58,15 @@ export default function HomePage(props) {
       }
     }
 
-    // console.log('returnUrl', returnUrl);
     axios
       .get(`${SELECTED_VIDEO_LIST}?${returnUrl}`)
       .then((res) => setReturnList(res.data.videos));
   }, [contentId, stackId, creatorId]);
 
-  // console.log('returnList', returnList);
-
   // 컨텐츠 태그 추가/제거
   const addDelContentTags = (name, id) => {
     if (selectedStack[0] || selectedCreator[0]) {
-      // 스택이나 크리에이터 태그가 있다면 지우고, 컨텐츠 태그로 대체
+      // stack이나 creator 태그가 있다면 지우고, content 태그로 대체
       setSelectedStack([]);
       setSelectedCreator([]);
       setSelectedContent([name]);
@@ -92,7 +87,7 @@ export default function HomePage(props) {
   // 스택 태그 추가/제거
   const addDelStackTags = (name, id) => {
     if (selectedContent[0]) {
-      // content가 선택되었다면 content는 없애고, 스택 태그 추가
+      // content가 선택되었다면 content는 없애고, stack 태그 추가
       setSelectedContent([]);
       setSelectedStack([name]);
       setContentId([]);
@@ -113,6 +108,7 @@ export default function HomePage(props) {
   // 크리에이터 태그 추가/제거
   const addDelCreatorTags = (tag, id) => {
     if (selectedContent[0]) {
+      // content가 선택되었다면 content는 없애고, creator 태그 추가
       setSelectedContent([]);
       setSelectedCreator([tag]);
       setContentId([]);
@@ -142,6 +138,10 @@ export default function HomePage(props) {
     setSelectedContent([]);
     setSelectedStack([]);
     setSelectedCreator([]);
+    setContentId([]);
+    setStackId([]);
+    setCreatorId([]);
+    setReturnList([]);
   };
 
   // 맨 위로 가기
@@ -149,12 +149,72 @@ export default function HomePage(props) {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   };
 
+  // 카테고리 검정
+  const onBlackScreen = () => {
+    if (black) {
+      setBlack(false);
+    } else {
+      setBlack(true);
+    }
+  };
+  const tabletRef = useRef(null);
+  const outsideCategory = () => {
+    useEffect(() => {
+      const outside = (e) => {
+        if (tabletRef.current && !tabletRef.current.contains(e.target)) {
+          setBlack(false);
+        }
+      };
+
+      document.addEventListener('mousedown', outside);
+      return () => {
+        document.removeEventListener('mousedown', outside);
+      };
+    }, [tabletRef]);
+  };
+  outsideCategory(tabletRef);
+
+  console.log('black', black);
+
   return (
     <>
-      <Nav />
-      <ContentWrap>
-        <ContentContainer>
-          <Category
+      <BlackWrap isBlack={black}>
+        <Nav removeTags={removeTags} isBlack={black} />
+        <ContentWrap>
+          <ContentContainer>
+            <Category
+              contentList={contentList}
+              selectedContent={selectedContent}
+              addDelContentTags={addDelContentTags}
+              stackList={stackList}
+              selectedStack={selectedStack}
+              addDelStackTags={addDelStackTags}
+              creatorList={creatorList}
+              selectedCreator={selectedCreator}
+              addDelCreatorTags={addDelCreatorTags}
+            />
+            {selectedContent[0] || selectedStack[0] || selectedCreator[0] ? (
+              <SelectedVideo
+                returnList={returnList}
+                selectedContent={selectedContent}
+                addDelContentTags={addDelContentTags}
+                selectedStack={selectedStack}
+                addDelStackTags={addDelStackTags}
+                selectedCreator={selectedCreator}
+                addDelCreatorTags={addDelCreatorTags}
+                removeTags={removeTags}
+              />
+            ) : (
+              <VideoList recommendList={props.pageProps.recommendList} />
+            )}
+            <GoUp onClick={goToTop}>
+              <i className="fa fa-arrow-up" />
+            </GoUp>
+          </ContentContainer>
+        </ContentWrap>
+        {/* Tablet 이하 카테고리 */}
+        <TabletScreen ref={tabletRef}>
+          <MobileCategory
             contentList={contentList}
             selectedContent={selectedContent}
             addDelContentTags={addDelContentTags}
@@ -164,26 +224,10 @@ export default function HomePage(props) {
             creatorList={creatorList}
             selectedCreator={selectedCreator}
             addDelCreatorTags={addDelCreatorTags}
+            onBlackScreen={onBlackScreen}
           />
-          {selectedContent[0] || selectedStack[0] || selectedCreator[0] ? (
-            <SelectedVideo
-              returnList={returnList}
-              selectedContent={selectedContent}
-              addDelContentTags={addDelContentTags}
-              selectedStack={selectedStack}
-              addDelStackTags={addDelStackTags}
-              selectedCreator={selectedCreator}
-              addDelCreatorTags={addDelCreatorTags}
-              removeTags={removeTags}
-            />
-          ) : (
-            <VideoList recommendList={props.pageProps.recommendList} />
-          )}
-          <GoUp onClick={goToTop}>
-            <i className="fa fa-arrow-up" />
-          </GoUp>
-        </ContentContainer>
-      </ContentWrap>
+        </TabletScreen>
+      </BlackWrap>
     </>
   );
 }
@@ -204,6 +248,19 @@ const ContentContainer = styled.div`
   }
 `;
 
+const BlackWrap = styled.div`
+  ${(props) =>
+    props.isBlack &&
+    css`
+      display: block;
+      width: 100%;
+      height: 100%;
+      // border: 3px solid red;
+      // background-color: black;
+      z-index: 500;
+    `}
+`;
+
 const GoUp = styled.div`
   position: absolute;
   right: 80px;
@@ -218,4 +275,11 @@ const GoUp = styled.div`
   border-radius: 20px;
   text-align: center;
   line-height: 35px;
+`;
+
+const TabletScreen = styled.div`
+  display: none;
+  @media ${(props) => props.theme.laptopM} {
+    display: block;
+  }
 `;

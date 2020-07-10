@@ -13,30 +13,30 @@ const Recommend = (props) => {
     const visibleWidth = visible.current.offsetWidth;
     const totalWidth = total.current.offsetWidth;
 
-    if (direction === 'before' && left < 0) {
+    if (direction === 'back' && left < 0) {
       setLeft(left + visibleWidth);
     } else if (direction === 'next' && left >= -totalWidth + 1000) {
       setLeft(left - visibleWidth);
     }
-    // console.log('버튼클릭', left);
   };
-
-  // 클릭했을 때, 해당 영상 detail 페이지로 가게 push
 
   return (
     <RecommendWrap>
       <TitleH2>{props.title}</TitleH2>
       <VideoContainer>
-        <Button onClick={() => moveScroll('before')}>
+        <Button onClick={() => moveScroll('back')}>
           <i className="fa fa-caret-left" />
         </Button>
         <Videos ref={visible}>
           <Absolute toLeft={left} ref={total}>
-            {/* url 형태: video/video.video_id */}
             {recommended.map((data, index) => {
               return (
-                <Link href="/video/[id]" as={`/video/${data.video_id}`}>
-                  <VideoWindow key={index}>
+                <Link
+                  href="/video/[id]"
+                  as={`/video/${data.video_id}`}
+                  key={index}
+                >
+                  <VideoWindow>
                     <ThumbNail
                       key={data.video_id}
                       src={`http://i3.ytimg.com/vi/${data.url.slice(
@@ -67,8 +67,7 @@ const Recommend = (props) => {
 export default Recommend;
 
 const RecommendWrap = styled.div`
-  /* height: 200px; */
-  margin: 40px 0;
+  /* margin: 40px 0; */
 `;
 
 const TitleH2 = styled.h2`
@@ -111,6 +110,7 @@ const Videos = styled.div`
   align-items: center;
   position: relative;
   overflow-x: scroll;
+  overflow-y: hidden;
   ::-webkit-scrollbar {
     width: 0;
   }
@@ -157,11 +157,11 @@ const ThumbNail = styled.img`
 const VideoTitle = styled.div`
   font-size: 14px;
   margin-left: 4px;
+  word-break: break-all;
   padding: 4px;
   margin-bottom: 30px;
   @media (max-width: 500px) {
-    width: 300px;
-    height: 300px;
+    width: 100%;
   }
 `;
 

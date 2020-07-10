@@ -3,13 +3,11 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 
 // internal modules
-import BFTest from '../BFTest';
 import Recommend from './Recommend';
 
 const VideoList = (props) => {
   return (
     <VideoWrap>
-      <BFTest />
       <article>
         <Recommend
           title="전체 추천영상"

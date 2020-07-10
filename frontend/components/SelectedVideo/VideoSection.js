@@ -1,192 +1,134 @@
 // external modules
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 
-const VideoSection = ({
-  tag,
-  returnContentList,
-  returnStackList,
-  returnCreatorList,
-}) => {
-  // console.log('returnContentList', returnContentList);
-  // console.log('returnStackList', returnStackList);
-  // console.log('returnCreatorList', returnCreatorList);
+const VideoSection = ({ title, returnList }) => {
+  const [left, setLeft] = useState(0);
+  const visible = useRef(null);
+  const total = useRef(null);
 
+  const moveScroll = (direction) => {
+    const visibleWidth = visible.current.offsetWidth;
+    const totalWidth = total.current.offsetWidth;
+
+    if (direction === 'back' && left < 0) {
+      setLeft(left + visibleWidth);
+    } else if (direction === 'next' && left >= -totalWidth + 1000) {
+      setLeft(left - visibleWidth);
+    }
+  };
+  // console.log('유즈레프 -->', total.current);
   return (
     <VideoSectionWrap>
-      <CategoryName>{tag}</CategoryName>
-      <SlideDiv>
-        <Button back>
-          <i className="fa fa-caret-left" />
-        </Button>
-
-        <VideoLiContainer>
-          <ListContainer>
-            {returnContentList &&
-              returnContentList.map((data, index) => {
-                console.log('content', data);
+      <CategoryName>{title}</CategoryName>
+      {returnList ? (
+        <SlideDiv>
+          <Button back onClick={() => moveScroll('back')}>
+            <i className="fa fa-caret-left" />
+          </Button>
+          <VideoLiContainer ref={visible}>
+            <ListContainer toLeft={left} ref={total}>
+              {returnList.map((data, index) => {
                 return (
-                  <Link href="/video/[id]" as={`/video/${data.video_id}`}>
-                    <VideoLi key={index}>
-                      <VideoHover>
-                        <ThumbNail
-                          src={`http://i3.ytimg.com/vi/${data.url.slice(
-                            data.url.indexOf('v=') + 2,
-                            data.url.indexOf('&list'),
-                          )}/maxresdefault.jpg`}
-                        />
-                        <VodeoTitle>
-                          {data.title.length < 20
-                            ? data.title
-                            : `${data.title.slice(0, 35)}...`}
-                        </VodeoTitle>
-                        <CreatorName>{data.channel_name}</CreatorName>
-                      </VideoHover>
+                  <Link
+                    href="/video/[id]"
+                    as={`/video/${data.video_id}`}
+                    key={index}
+                  >
+                    <VideoLi>
+                      <ThumbNail
+                        src={`http://i3.ytimg.com/vi/${data.url.slice(
+                          data.url.indexOf('v=') + 2,
+                          data.url.indexOf('&list'),
+                        )}/maxresdefault.jpg`}
+                      />
+                      <VideoTitle>
+                        {data.title.length < 20
+                          ? data.title
+                          : `${data.title.slice(0, 35)}...`}
+                      </VideoTitle>
+                      <CreatorName>{data.channel_name}</CreatorName>
                     </VideoLi>
                   </Link>
                 );
               })}
-            {returnStackList &&
-              console.log('returnStackList.length', returnStackList.length)}
-            {
-              returnStackList &&
-                (function (i, len) {
-                  console.log('--------------function called');
-                  while (i++ < len) {
-                    console.log('returnstackList', i - 1);
-                    returnStackList[i - 1].map((data, index) => {
-                      console.log(i - 1, '번째 stack', data);
-                      return (
-                        <Link href="/video/[id]" as={`/video/${data.video_id}`}>
-                          <VideoLi key={index}>
-                            <VideoHover>
-                              <ThumbNail
-                                src={`http://i3.ytimg.com/vi/${data.url.slice(
-                                  data.url.indexOf('v=') + 2,
-                                  data.url.indexOf('&list'),
-                                )}/maxresdefault.jpg`}
-                              />
-                              <VodeoTitle>
-                                {data.title.length < 20
-                                  ? data.title
-                                  : `${data.title.slice(0, 35)}...`}
-                              </VodeoTitle>
-                              <CreatorName>{data.channel_name}</CreatorName>
-                            </VideoHover>
-                          </VideoLi>
-                        </Link>
-                      );
-                    });
-                  }
-                })(0, returnStackList.length)
-
-              // returnStackList[0].map((data, index) => {
-              //   console.log('return stack', data);
-              //   return (
-              //     <Link href="/video/[id]" as={`/video/${data.video_id}`}>
-              //       <VideoLi key={index}>
-              //         <VideoHover>
-              //           <ThumbNail
-              //             src={`http://i3.ytimg.com/vi/${data.url.slice(
-              //               data.url.indexOf('v=') + 2,
-              //               data.url.indexOf('&list'),
-              //             )}/maxresdefault.jpg`}
-              //           />
-              //           <VodeoTitle>
-              //             {data.title.length < 20
-              //               ? data.title
-              //               : `${data.title.slice(0, 35)}...`}
-              //           </VodeoTitle>
-              //           <CreatorName>{data.channel_name}</CreatorName>
-              //         </VideoHover>
-              //       </VideoLi>
-              //     </Link>
-              //   );
-              // })}
-            }
-
-            {returnCreatorList &&
-              returnCreatorList[0].map((data, index) => {
-                console.log('return creator', data);
-                return (
-                  <Link href="/video/[id]" as={`/video/${data.video_id}`}>
-                    <VideoLi key={index}>
-                      <VideoHover>
-                        <ThumbNail
-                          src={`http://i3.ytimg.com/vi/${data.url.slice(
-                            data.url.indexOf('v=') + 2,
-                            data.url.indexOf('&list'),
-                          )}/maxresdefault.jpg`}
-                        />
-                        <VodeoTitle>
-                          {data.title.length < 20
-                            ? data.title
-                            : `${data.title.slice(0, 35)}...`}
-                        </VodeoTitle>
-                        <CreatorName>{data.channel_name}</CreatorName>
-                      </VideoHover>
-                    </VideoLi>
-                  </Link>
-                );
-              })}
-          </ListContainer>
-        </VideoLiContainer>
-
-        <Button next>
-          <i className="fa fa-caret-right" />
-        </Button>
-      </SlideDiv>
+            </ListContainer>
+          </VideoLiContainer>
+          <Button next onClick={() => moveScroll('next')}>
+            <i className="fa fa-caret-right" />
+          </Button>
+        </SlideDiv>
+      ) : (
+        <NoContents>준비중!!!</NoContents>
+      )}
     </VideoSectionWrap>
   );
 };
-
 export default VideoSection;
+
 const VideoSectionWrap = styled.div`
   /* border: 1px solid blue; */
   width: 100%;
   margin: 10px 0;
   padding: 10px;
 `;
+
 const CategoryName = styled.strong`
-  /* border: 1px solid green; */
-  font-size: 20px;
-  display: block;
+  /* font-size: 20px;
+  display: block; */
+
+  font-weight: 700;
+  font-size: 25px;
+  padding: 5px;
+  margin-left: 10px;
+  margin-bottom: 20px;
 `;
+
 const SlideDiv = styled.div`
   display: flex;
   align-items: center;
 `;
+
 const VideoLiContainer = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
-  /* position: relative; */
+  position: relative;
   align-items: center;
   margin: 0 10px;
   padding: 0 5px;
-  width: 100%;
+  width: 880px;
+  height: 460px;
   overflow-x: scroll;
+  overflow-y: hidden;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 `;
+
 const ListContainer = styled.div`
+  left: ${(props) => props.toLeft}px;
+  transition: left 0.8s ease-in-out;
+  position: absolute;
   display: flex;
-  margin: 5px 0;
-  height: 500px;
   flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px 0;
+  height: 100%;
+  width: 50% + 150px;
   @media (max-width: 500px) {
     justify-content: center;
   }
 `;
-// const VideoWindow = styled.div`
-//   width: 100%;
-//   overflow: auto;
-//   display: flex;
-// `;
+
 const Button = styled.div`
   transform: scale(1.5);
   transition: all 0.2s ease-in-out;
   display: inline;
   cursor: pointer;
   font-size: 50px;
-  color: rgba(255, 118, 117, 1);
+  color: black;
   position: absolute;
   &:hover {
     transform: scale(2);
@@ -203,17 +145,14 @@ const Button = styled.div`
       right: 0;
     `}
 `;
-const VideoLi = styled.li`
+
+const VideoLi = styled.div`
   cursor: pointer;
   float: left;
   margin: 10px;
   width: 200px;
-  height: auto;
-  list-style-type: none;
-`;
-const VideoHover = styled.div`
-  margin: 10px 0;
   height: 200px;
+  list-style-type: none;
   border-radius: 5px;
   box-shadow: 0.1em 0 0.5em rgba(0, 0, 0, 0.3);
   transform: scale(1);
@@ -222,6 +161,7 @@ const VideoHover = styled.div`
     transform: scale(1.04);
   }
 `;
+
 const CreatorName = styled.div`
   margin-left: 5px;
   font-size: 12px;
@@ -229,22 +169,26 @@ const CreatorName = styled.div`
   position: absolute;
   bottom: 5px;
 `;
+
 const ThumbNail = styled.img`
   width: 100%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  /* cursor: pointer; */
 `;
-const VodeoTitle = styled.div`
+
+const VideoTitle = styled.div`
   font-size: 14px;
   margin-left: 4px;
   padding: 4px;
   margin-bottom: 30px;
-  /* white-space: nowrap; */
-  /* overflow: hidden; */
-  /* text-overflow: ellipsis; */
+
   @media (max-width: 500px) {
     width: 300px;
     height: 300px;
   }
+`;
+
+const NoContents = styled.div`
+  margin: 20px 0 0 30px;
+  font-size: 20px;
 `;

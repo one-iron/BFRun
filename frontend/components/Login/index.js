@@ -53,6 +53,7 @@ const Login = (props) => {
     localStorage.removeItem('email');
     localStorage.removeItem('familyName');
     localStorage.removeItem('givenName');
+    alert('로그아웃 되었습니다.');
   };
 
   return (

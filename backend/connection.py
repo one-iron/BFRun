@@ -62,7 +62,6 @@ class DB:
             self.close()
 
     def insert(self, sql, *args):
-
         try:
             with self.conn.cursor() as cursor:
                 affected_row = cursor.execute(sql, *args)

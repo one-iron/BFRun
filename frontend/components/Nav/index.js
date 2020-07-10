@@ -6,10 +6,11 @@ import Link from 'next/link';
 // internal modules
 import Login from '../Login';
 
-const Nav = () => {
+const Nav = ({ removeTags, isBlack }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [searchBox, setSearchBox] = useState(false);
   const [input, setInput] = useState('');
+  console.log('nav', isBlack);
 
   // 화면 작아졌을 때, 오른쪽 상단 메뉴
   const dropDownMenu = () => {
@@ -43,12 +44,12 @@ const Nav = () => {
   };
 
   return (
-    <NavWrap>
+    <NavWrap isBlack>
       <NavContainer>
         <NavLeft openSearchBox={searchBox}>
           <Link href="/">
             <a>
-              <TitleText>BF Run.</TitleText>
+              <TitleText onClick={removeTags}>BF Run.</TitleText>
             </a>
           </Link>
         </NavLeft>
@@ -78,13 +79,16 @@ const Nav = () => {
         <RightContainer
           openSearchBox={searchBox}
           onMouseEnter={dropDownMenu}
-          onMouseLeave={showMenu && removeDownMenu}
+          onMouseLeave={showMenu ? removeDownMenu : undefined}
         >
           <RightMenu>
             메뉴
             <i className="fa fa-caret-down" />
           </RightMenu>
-          <NavRight isShow={showMenu} onMouseLeave={showMenu && removeDownMenu}>
+          <NavRight
+            isShow={showMenu}
+            onMouseLeave={showMenu ? removeDownMenu : undefined}
+          >
             <RightContent>소개</RightContent>
             <RightContent>로드맵</RightContent>
             <Login />
@@ -102,9 +106,13 @@ const NavWrap = styled.nav`
   height: 100px;
   position: fixed;
   background-color: white;
-  /* background-color: ${(props) => props.theme.mainColor}; */
   z-index: 100;
-  /* box-shadow: 4px 4px 2px #2676E1; */
+
+  ${(props) =>
+    props.isBlack &&
+    css`
+      // background-color: black;
+    `}
 `;
 
 const NavContainer = styled.div`
@@ -138,17 +146,11 @@ const TitleText = styled.div`
   font-size: 25px;
   font-weight: bold;
   color: black;
-  /* color: white;
-  background-color: orange;
-  border: 5px solid orange;
-  padding: 8px 18px;
-  border-radius: 40px; */
   cursor: pointer;
 `;
 
 const NavMiddle = styled.div`
   width: 500px;
-  /* margin-left: 300px; */
 
   @media ${(props) => props.theme.tablet} {
     width: 300px;
