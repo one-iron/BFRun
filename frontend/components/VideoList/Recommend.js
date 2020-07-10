@@ -18,6 +18,7 @@ const Recommend = (props) => {
     } else if (direction === 'next' && left >= -totalWidth + 1000) {
       setLeft(left - visibleWidth);
     }
+    console.log(totalWidth);
   };
 
   return (
@@ -104,8 +105,8 @@ const Button = styled.div`
 
 const Videos = styled.div`
   /* border: 2px solid red; */
-  width: 900px;
-  height: 220px;
+  width: 880px;
+  height: 300px;
   display: flex;
   align-items: center;
   position: relative;
@@ -131,14 +132,17 @@ const Absolute = styled.div`
   position: absolute;
   left: ${(props) => props.toLeft}px;
   transition: left 0.8s ease-in-out;
+  /* @media (max-width: 1004px) {
+    flex-wrap: wrap;
+  } */
 `;
 
 const VideoWindow = styled.div`
   /* border: 1px solid blue; */
   cursor: pointer;
-  width: 200px;
-  height: 180px;
-  margin: 0 5px;
+  width: 270px;
+  height: 230px;
+  margin: 0 6px;
   border-radius: 5px;
   box-shadow: 0.1em 0 0.5em rgba(0, 0, 0, 0.3);
   transform: scale(1);
