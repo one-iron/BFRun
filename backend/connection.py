@@ -1,10 +1,11 @@
 import pymysql
 
-from config import db
+from config import db, test_db
 
 
 class DB:
     def __init__(self):
+
         self.conn = pymysql.connect(
             host       = db["host"],
             user       = db["user"],
