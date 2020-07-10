@@ -1,6 +1,6 @@
 // external modules
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import axios from 'axios';
 
 // internal modules
@@ -35,6 +35,8 @@ export default function HomePage(props) {
   const [creatorId, setCreatorId] = useState([]);
   // 선택한 태그에 대한 list
   const [returnList, setReturnList] = useState([]);
+  // 카테고리 토글
+  // const [showCategory, setShowCategory] = useState(false);
 
   // 선택한 태그 API 가져오기
   useEffect(() => {
@@ -141,6 +143,15 @@ export default function HomePage(props) {
     setReturnList([]);
   };
 
+  // tablet 이하 화면일 때, 카테고리 토글
+  // const toggleCategory = () => {
+  //   if (showCategory) {
+  //     setShowCategory(false);
+  //   } else {
+  //     setShowCategory(true);
+  //   }
+  // };
+
   // 맨 위로 가기
   const goToTop = () => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
@@ -148,39 +159,43 @@ export default function HomePage(props) {
 
   return (
     <>
-      <Nav removeTags={removeTags} />
-      <ContentWrap>
-        <ContentContainer>
-          <Category
-            contentList={contentList}
-            selectedContent={selectedContent}
-            addDelContentTags={addDelContentTags}
-            stackList={stackList}
-            selectedStack={selectedStack}
-            addDelStackTags={addDelStackTags}
-            creatorList={creatorList}
-            selectedCreator={selectedCreator}
-            addDelCreatorTags={addDelCreatorTags}
-          />
-          {selectedContent[0] || selectedStack[0] || selectedCreator[0] ? (
-            <SelectedVideo
-              returnList={returnList}
+      <BlackWrap>
+        <Nav removeTags={removeTags} />
+        <ContentWrap>
+          <ContentContainer>
+            <Category
+              contentList={contentList}
               selectedContent={selectedContent}
               addDelContentTags={addDelContentTags}
+              stackList={stackList}
               selectedStack={selectedStack}
               addDelStackTags={addDelStackTags}
+              creatorList={creatorList}
               selectedCreator={selectedCreator}
               addDelCreatorTags={addDelCreatorTags}
-              removeTags={removeTags}
+              // showCategory={showCategory}
+              // toggleCategory={toggleCategory}
             />
-          ) : (
-            <VideoList recommendList={props.pageProps.recommendList} />
-          )}
-          <GoUp onClick={goToTop}>
-            <i className="fa fa-arrow-up" />
-          </GoUp>
-        </ContentContainer>
-      </ContentWrap>
+            {selectedContent[0] || selectedStack[0] || selectedCreator[0] ? (
+              <SelectedVideo
+                returnList={returnList}
+                selectedContent={selectedContent}
+                addDelContentTags={addDelContentTags}
+                selectedStack={selectedStack}
+                addDelStackTags={addDelStackTags}
+                selectedCreator={selectedCreator}
+                addDelCreatorTags={addDelCreatorTags}
+                removeTags={removeTags}
+              />
+            ) : (
+              <VideoList recommendList={props.pageProps.recommendList} />
+            )}
+            <GoUp onClick={goToTop}>
+              <i className="fa fa-arrow-up" />
+            </GoUp>
+          </ContentContainer>
+        </ContentWrap>
+      </BlackWrap>
     </>
   );
 }
@@ -198,6 +213,18 @@ const ContentContainer = styled.div`
 
   @media ${(props) => props.theme.laptopM} {
     max-width: 100%;
+  }
+`;
+
+const BlackWrap = styled.div`
+  display: none;
+  @media ${(props) => props.theme.laptopM} {
+    ${(props) =>
+      props.isOpen &&
+      css`
+        display: block;
+        background-color: black;
+      `}
   }
 `;
 

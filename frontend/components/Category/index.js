@@ -15,6 +15,8 @@ const Category = ({
   creatorList,
   selectedCreator,
   addDelCreatorTags,
+  // showCategory,
+  // toggleCategory
 }) => {
   const [showCategory, setShowCategory] = useState(false);
   const categoryRef = useRef(null);
@@ -243,15 +245,18 @@ const CategoryWrap = styled.aside`
       props.isOpen &&
       css`
         display: block;
-        position: fixed;
-        z-index: 50;
-        bottom: 80px;
-        left: 20px;
-        height: 400px;
+        position: absolute;
+        z-index: 100;
         overflow-y: scroll;
         overflow-x: hidden;
+        height: 80vh;
+        width: 240px;
+        /* height: 400px;
+        position: fixed;
+        left: 20px;
+        bottom: 80px;
         animation-name: slideUp;
-        animation-duration: 0.3s;
+        animation-duration: 0.3s; */
         ::-webkit-scrollbar {
           width: 4px;
         }
@@ -272,9 +277,9 @@ const CategoryWrap = styled.aside`
 
 const CategoryContainer = styled.div`
   width: 240px;
-  border: 1px solid #eee;
+  border: 1px solid #e4e9ed;
   border-radius: 7px;
-  background-color: #f2f2f2;
+  background-color: white;
   /* box-shadow: 0.1em 0.1em 0.8em rgba(0, 0, 0, 0.3); */
   /* &:hover {
     background-color: #faf7f7;
