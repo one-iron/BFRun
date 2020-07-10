@@ -1,10 +1,11 @@
 // external modules
+import { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 
 // internal modules
 // import LangToggle from './LangToggle';
 
-const Category = ({
+const MobileCategory = ({
   contentList,
   selectedContent,
   addDelContentTags,
@@ -14,10 +15,54 @@ const Category = ({
   creatorList,
   selectedCreator,
   addDelCreatorTags,
+  onBlackScreen,
 }) => {
+  const [showCategory, setShowCategory] = useState(false);
+  const categoryRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  const toggleCategory = () => {
+    if (showCategory) {
+      setShowCategory(false);
+    } else {
+      setShowCategory(true);
+    }
+  };
+
+  const clickedCategoryOutside = () => {
+    useEffect(() => {
+      const handleOutside = (e) => {
+        if (
+          !buttonRef.current.contains(e.target) &&
+          categoryRef.current &&
+          !categoryRef.current.contains(e.target)
+        ) {
+          setShowCategory(false);
+        }
+      };
+
+      document.addEventListener('mousedown', handleOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleOutside);
+      };
+    }, [categoryRef]);
+  };
+
+  clickedCategoryOutside(categoryRef);
+
+  // 작은 화면에서 카테고리 키면 검정색 배경으로 바뀌고, 큰 화면에서는 white로
+
   return (
     <>
-      <CategoryWrap>
+      {/* 모바일일 때 나오는 아이콘 */}
+      <InfoWrap onClick={onBlackScreen}>
+        <InfoButton onClick={toggleCategory} ref={buttonRef}>
+          <i className="fa fa-bars" />
+        </InfoButton>
+      </InfoWrap>
+
+      {/* 카테고리 창 */}
+      <CategoryWrap isOpen={showCategory} ref={categoryRef}>
         <CategoryContainer>
           {/* <LangToggle /> */}
           <GroupContainer>
@@ -159,12 +204,63 @@ const Category = ({
   );
 };
 
-export default Category;
+export default MobileCategory;
+
+const InfoWrap = styled.section`
+  display: block;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  z-index: 50;
+`;
+
+const InfoButton = styled.button`
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background-color: black;
+  border-radius: 50px;
+  outline: none;
+  border: none;
+
+  i {
+    color: white;
+    z-index: 99;
+    font-size: 20px;
+  }
+`;
 
 const CategoryWrap = styled.aside`
-  display: block;
-  @media ${(props) => props.theme.laptopM} {
-    display: none;
+  display: none;
+  ${(props) =>
+    props.isOpen &&
+    css`
+      display: block;
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      height: 100vh;
+      width: 240px;
+      animation-name: slideRight;
+      animation-duration: 0.3s;
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #b8b8b8;
+      }
+    `}
+  @keyframes slideRight {
+    from {
+      left: -240px;
+    }
+    to {
+      left: 0px;
+    }
   }
 `;
 

@@ -1,11 +1,12 @@
 // external modules
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import axios from 'axios';
 
 // internal modules
 import Nav from '../components/Nav';
 import Category from '../components/Category';
+import MobileCategory from '../components/Category/MobileCategory';
 import VideoList from '../components/VideoList';
 import SelectedVideo from '../components/SelectedVideo';
 import { CATEGORY, SELECTED_VIDEO_LIST, RECOMMEND } from '../config';
@@ -35,8 +36,8 @@ export default function HomePage(props) {
   const [creatorId, setCreatorId] = useState([]);
   // 선택한 태그에 대한 list
   const [returnList, setReturnList] = useState([]);
-  // 카테고리 토글
-  // const [showCategory, setShowCategory] = useState(false);
+  // 카테고리 검은 화면
+  const [black, setBlack] = useState(false);
 
   // 선택한 태그 API 가져오기
   useEffect(() => {
@@ -143,24 +144,42 @@ export default function HomePage(props) {
     setReturnList([]);
   };
 
-  // tablet 이하 화면일 때, 카테고리 토글
-  // const toggleCategory = () => {
-  //   if (showCategory) {
-  //     setShowCategory(false);
-  //   } else {
-  //     setShowCategory(true);
-  //   }
-  // };
-
   // 맨 위로 가기
   const goToTop = () => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   };
 
+  // 카테고리 검정
+  const onBlackScreen = () => {
+    if (black) {
+      setBlack(false);
+    } else {
+      setBlack(true);
+    }
+  };
+  const tabletRef = useRef(null);
+  const outsideCategory = () => {
+    useEffect(() => {
+      const outside = (e) => {
+        if (tabletRef.current && !tabletRef.current.contains(e.target)) {
+          setBlack(false);
+        }
+      };
+
+      document.addEventListener('mousedown', outside);
+      return () => {
+        document.removeEventListener('mousedown', outside);
+      };
+    }, [tabletRef]);
+  };
+  outsideCategory(tabletRef);
+
+  console.log('black', black);
+
   return (
     <>
-      <BlackWrap>
-        <Nav removeTags={removeTags} />
+      <BlackWrap isBlack={black}>
+        <Nav removeTags={removeTags} isBlack={black} />
         <ContentWrap>
           <ContentContainer>
             <Category
@@ -173,8 +192,6 @@ export default function HomePage(props) {
               creatorList={creatorList}
               selectedCreator={selectedCreator}
               addDelCreatorTags={addDelCreatorTags}
-              // showCategory={showCategory}
-              // toggleCategory={toggleCategory}
             />
             {selectedContent[0] || selectedStack[0] || selectedCreator[0] ? (
               <SelectedVideo
@@ -195,6 +212,21 @@ export default function HomePage(props) {
             </GoUp>
           </ContentContainer>
         </ContentWrap>
+        {/* Tablet 이하 카테고리 */}
+        <TabletScreen ref={tabletRef}>
+          <MobileCategory
+            contentList={contentList}
+            selectedContent={selectedContent}
+            addDelContentTags={addDelContentTags}
+            stackList={stackList}
+            selectedStack={selectedStack}
+            addDelStackTags={addDelStackTags}
+            creatorList={creatorList}
+            selectedCreator={selectedCreator}
+            addDelCreatorTags={addDelCreatorTags}
+            onBlackScreen={onBlackScreen}
+          />
+        </TabletScreen>
       </BlackWrap>
     </>
   );
@@ -217,15 +249,16 @@ const ContentContainer = styled.div`
 `;
 
 const BlackWrap = styled.div`
-  display: none;
-  @media ${(props) => props.theme.laptopM} {
-    ${(props) =>
-      props.isOpen &&
-      css`
-        display: block;
-        background-color: black;
-      `}
-  }
+  ${(props) =>
+    props.isBlack &&
+    css`
+      display: block;
+      width: 100%;
+      height: 100%;
+      // border: 3px solid red;
+      // background-color: black;
+      z-index: 500;
+    `}
 `;
 
 const GoUp = styled.div`
@@ -242,4 +275,11 @@ const GoUp = styled.div`
   border-radius: 20px;
   text-align: center;
   line-height: 35px;
+`;
+
+const TabletScreen = styled.div`
+  display: none;
+  @media ${(props) => props.theme.laptopM} {
+    display: block;
+  }
 `;
