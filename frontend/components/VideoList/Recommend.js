@@ -13,7 +13,7 @@ const Recommend = (props) => {
     const visibleWidth = visible.current.offsetWidth;
     const totalWidth = total.current.offsetWidth;
 
-    if (direction === 'before' && left < 0) {
+    if (direction === 'back' && left < 0) {
       setLeft(left + visibleWidth);
     } else if (direction === 'next' && left >= -totalWidth + 1000) {
       setLeft(left - visibleWidth);
@@ -24,7 +24,7 @@ const Recommend = (props) => {
     <RecommendWrap>
       <TitleH2>{props.title}</TitleH2>
       <VideoContainer>
-        <Button onClick={() => moveScroll('before')}>
+        <Button onClick={() => moveScroll('back')}>
           <i className="fa fa-caret-left" />
         </Button>
         <Videos ref={visible}>

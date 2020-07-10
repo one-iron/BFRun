@@ -1,10 +1,8 @@
 // external modules
 import styled from 'styled-components';
-
 // internal modules
 import SelectedTags from './SelectedTags';
 import VideoSection from './VideoSection';
-
 const SelectedVideo = ({
   returnList,
   selectedContent,
@@ -43,9 +41,7 @@ const SelectedVideo = ({
     </SelectedVideoWrap>
   );
 };
-
 export default SelectedVideo;
-
 const SelectedVideoWrap = styled.section`
   position: relative;
   align-items: center;
@@ -53,7 +49,6 @@ const SelectedVideoWrap = styled.section`
   padding: 4px;
   margin: 0 auto;
   margin-bottom: 100px;
-
   @media ${(props) => props.theme.laptopM} {
     left: 0;
     width: 90%;

@@ -148,7 +148,7 @@ export default function HomePage(props) {
 
   return (
     <>
-      <Nav />
+      <Nav removeTags={removeTags} />
       <ContentWrap>
         <ContentContainer>
           <Category
