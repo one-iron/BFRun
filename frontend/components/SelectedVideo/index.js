@@ -3,6 +3,7 @@ import styled from 'styled-components';
 // internal modules
 import SelectedTags from './SelectedTags';
 import VideoSection from './VideoSection';
+import Loading from '../Loading';
 const SelectedVideo = ({
   returnList,
   selectedContent,
@@ -13,7 +14,7 @@ const SelectedVideo = ({
   addDelCreatorTags,
   removeTags,
 }) => {
-  // console.log('returnList', returnList);
+  console.log('returnList', returnList);
   return (
     <SelectedVideoWrap>
       <SelectedTags
@@ -25,7 +26,8 @@ const SelectedVideo = ({
         addDelCreatorTags={addDelCreatorTags}
         removeTags={removeTags}
       />
-      {returnList &&
+      {/* <Loading /> */}
+      {returnList ? (
         returnList.map((arr, index) => {
           return (
             <VideoSection
@@ -38,17 +40,21 @@ const SelectedVideo = ({
               key={index}
             />
           );
-        })}
+        })
+      ) : (
+        <Loading />
+      )}
     </SelectedVideoWrap>
   );
 };
 export default SelectedVideo;
+
 const SelectedVideoWrap = styled.section`
   position: relative;
   align-items: center;
-  max-width: 940px;
+  width: 100%;
   padding: 4px;
-  margin: 0 auto;
+  margin-left: 20px;
   margin-bottom: 100px;
   @media ${(props) => props.theme.laptopM} {
     left: 0;

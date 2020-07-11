@@ -11,14 +11,13 @@ const VideoSection = ({ title, returnList }) => {
   const moveScroll = (direction) => {
     const visibleWidth = visible.current.offsetWidth;
     const totalWidth = total.current.offsetWidth;
-
     if (direction === 'back' && left < 0) {
       setLeft(left + visibleWidth);
     } else if (direction === 'next' && left >= -totalWidth + 1000) {
       setLeft(left - visibleWidth);
     }
   };
-  // console.log('유즈레프 -->', total.current);
+
   return (
     <VideoSectionWrap>
       <CategoryName>{title}</CategoryName>
@@ -77,7 +76,6 @@ const VideoSectionWrap = styled.div`
 const CategoryName = styled.strong`
   /* font-size: 20px;
   display: block; */
-
   font-weight: 700;
   font-size: 25px;
   padding: 5px;
@@ -88,6 +86,9 @@ const CategoryName = styled.strong`
 const SlideDiv = styled.div`
   display: flex;
   align-items: center;
+  @media (max-width: 1239px) {
+    justify-content: center;
+  }
 `;
 
 const VideoLiContainer = styled.div`
@@ -98,7 +99,7 @@ const VideoLiContainer = styled.div`
   margin: 0 10px;
   padding: 0 5px;
   width: 880px;
-  height: 460px;
+  height: 300px;
   overflow-x: scroll;
   overflow-y: hidden;
   ::-webkit-scrollbar {
@@ -111,12 +112,9 @@ const ListContainer = styled.div`
   transition: left 0.8s ease-in-out;
   position: absolute;
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   margin: 5px 0;
   height: 100%;
-  width: 50% + 150px;
   @media (max-width: 500px) {
     justify-content: center;
   }
@@ -149,9 +147,9 @@ const Button = styled.div`
 const VideoLi = styled.div`
   cursor: pointer;
   float: left;
-  margin: 10px;
-  width: 200px;
-  height: 200px;
+  margin: 12px;
+  width: 270px;
+  height: 260px;
   list-style-type: none;
   border-radius: 5px;
   box-shadow: 0.1em 0 0.5em rgba(0, 0, 0, 0.3);
@@ -189,6 +187,7 @@ const VideoTitle = styled.div`
 `;
 
 const NoContents = styled.div`
+  /* border: 2px solid red; */
   margin: 20px 0 0 30px;
   font-size: 20px;
 `;
