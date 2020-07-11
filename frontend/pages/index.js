@@ -174,12 +174,10 @@ export default function HomePage(props) {
   };
   outsideCategory(tabletRef);
 
-  console.log('black', black);
-
   return (
     <>
       <BlackWrap isBlack={black}>
-        <Nav removeTags={removeTags} isBlack={black} />
+        <Nav removeTags={removeTags} />
         <ContentWrap>
           <ContentContainer>
             <Category
@@ -212,22 +210,22 @@ export default function HomePage(props) {
             </GoUp>
           </ContentContainer>
         </ContentWrap>
-        {/* Tablet 이하 카테고리 */}
-        <TabletScreen ref={tabletRef}>
-          <MobileCategory
-            contentList={contentList}
-            selectedContent={selectedContent}
-            addDelContentTags={addDelContentTags}
-            stackList={stackList}
-            selectedStack={selectedStack}
-            addDelStackTags={addDelStackTags}
-            creatorList={creatorList}
-            selectedCreator={selectedCreator}
-            addDelCreatorTags={addDelCreatorTags}
-            onBlackScreen={onBlackScreen}
-          />
-        </TabletScreen>
       </BlackWrap>
+      {/* Tablet 이하 카테고리 */}
+      <TabletScreen ref={tabletRef}>
+        <MobileCategory
+          contentList={contentList}
+          selectedContent={selectedContent}
+          addDelContentTags={addDelContentTags}
+          stackList={stackList}
+          selectedStack={selectedStack}
+          addDelStackTags={addDelStackTags}
+          creatorList={creatorList}
+          selectedCreator={selectedCreator}
+          addDelCreatorTags={addDelCreatorTags}
+          onBlackScreen={onBlackScreen}
+        />
+      </TabletScreen>
     </>
   );
 }
@@ -249,15 +247,18 @@ const ContentContainer = styled.div`
 `;
 
 const BlackWrap = styled.div`
+  display: block;
+  padding-bottom: 120px;
+  width: 100%;
+  height: 100%;
   ${(props) =>
     props.isBlack &&
     css`
-      display: block;
-      width: 100%;
-      height: 100%;
-      // border: 3px solid red;
-      // background-color: black;
+      /* background-color: black; */
       z-index: 500;
+      opacity: 0.3;
+      -webkit-filter: grayscale(1);
+      -webkit-filter: blur(2px);
     `}
 `;
 
