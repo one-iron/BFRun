@@ -6,11 +6,10 @@ import Link from 'next/link';
 // internal modules
 import Login from '../Login';
 
-const Nav = ({ removeTags, isBlack }) => {
+const Nav = ({ removeTags }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [searchBox, setSearchBox] = useState(false);
   const [input, setInput] = useState('');
-  console.log('nav', isBlack);
 
   // 화면 작아졌을 때, 오른쪽 상단 메뉴
   const dropDownMenu = () => {
@@ -107,12 +106,6 @@ const NavWrap = styled.nav`
   position: fixed;
   background-color: white;
   z-index: 100;
-
-  ${(props) =>
-    props.isBlack &&
-    css`
-      // background-color: black;
-    `}
 `;
 
 const NavContainer = styled.div`

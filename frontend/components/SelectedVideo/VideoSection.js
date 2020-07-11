@@ -10,10 +10,12 @@ const VideoSection = ({ title, returnList }) => {
 
   const moveScroll = (direction) => {
     const visibleWidth = visible.current.offsetWidth;
-    const totalWidth = total.current.offsetWidth;
+    const totalWidth = total.current.offsetWidth * returnList.length;
+    console.log('visibleWidth', visibleWidth);
+    console.log('totalWidth', totalWidth);
     if (direction === 'back' && left < 0) {
       setLeft(left + visibleWidth);
-    } else if (direction === 'next' && left >= -totalWidth + 1000) {
+    } else if (direction === 'next' && left >= (-totalWidth + 2000) / 2) {
       setLeft(left - visibleWidth);
     }
   };
@@ -67,7 +69,6 @@ const VideoSection = ({ title, returnList }) => {
 export default VideoSection;
 
 const VideoSectionWrap = styled.div`
-  /* border: 1px solid blue; */
   width: 100%;
   margin: 10px 0;
   padding: 10px;
@@ -92,14 +93,13 @@ const SlideDiv = styled.div`
 `;
 
 const VideoLiContainer = styled.div`
-  /* border: 1px solid red; */
-  display: flex;
+  /* display: flex; */
   position: relative;
   align-items: center;
   margin: 0 10px;
   padding: 0 5px;
-  width: 880px;
-  height: 300px;
+  width: 890px;
+  height: 600px;
   overflow-x: scroll;
   overflow-y: hidden;
   ::-webkit-scrollbar {
@@ -112,9 +112,11 @@ const ListContainer = styled.div`
   transition: left 0.8s ease-in-out;
   position: absolute;
   display: flex;
-  /* align-items: center; */
+  flex-flow: column wrap;
   margin: 5px 0;
   height: 100%;
+  /* width: 100%; */
+
   @media (max-width: 500px) {
     justify-content: center;
   }
