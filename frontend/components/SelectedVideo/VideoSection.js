@@ -59,7 +59,7 @@ const VideoSection = ({ title, returnList }) => {
           </Button>
         </SlideDiv>
       ) : (
-        <NoContents>준비중!!!</NoContents>
+        <NoContents>준비중입니다 😀</NoContents>
       )}
     </VideoSectionWrap>
   );

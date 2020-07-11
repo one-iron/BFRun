@@ -14,7 +14,7 @@ const SelectedVideo = ({
   addDelCreatorTags,
   removeTags,
 }) => {
-  console.log('returnList', returnList);
+  console.log('returnList -->', returnList);
   return (
     <SelectedVideoWrap>
       <SelectedTags
@@ -27,20 +27,27 @@ const SelectedVideo = ({
         removeTags={removeTags}
       />
       {/* <Loading /> */}
-      {returnList ? (
-        returnList.map((arr, index) => {
-          return (
-            <VideoSection
-              returnList={arr}
-              title={
-                selectedCreator[index] ||
-                selectedContent[index] ||
-                selectedStack[index]
-              }
-              key={index}
-            />
-          );
-        })
+      {returnList[0] ? (
+        returnList[0].length ? (
+          returnList.map((arr, index) => {
+            return (
+              <VideoSection
+                returnList={arr}
+                title={
+                  selectedCreator[index] ||
+                  selectedContent[index] ||
+                  selectedStack[index]
+                }
+                key={index}
+              />
+            );
+          })
+        ) : (
+          <NoContents>
+            <i className="fa fa-exclamation-triangle"></i> 일치하는 컨텐츠가
+            없습니다
+          </NoContents>
+        )
       ) : (
         <Loading />
       )}
@@ -60,4 +67,11 @@ const SelectedVideoWrap = styled.section`
     left: 0;
     width: 90%;
   }
+`;
+
+const NoContents = styled.div`
+  margin-top: 30px;
+  font-size: 20px;
+  color: rgba(9, 132, 227, 1);
+  text-align: center;
 `;
