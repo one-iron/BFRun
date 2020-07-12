@@ -53,9 +53,9 @@ def create_video_endpoints(app, video_service):
     def get_video_lists(*args):
         try:           
             params = {}
-            params["contents_types_id"] = args[0]
-            params["stack_id"]          = args[1]
-            params["channels_id"]       = args[2]
+            params["contents_types_id"] = args[0] # 콘텐츠 타입
+            params["stack_id"]          = args[1] # 스택
+            params["channels_id"]       = args[2] # 채널
 
             video_list_response = video_service.get_video_lists(params)
             return {"videos" : video_list_response}, 200

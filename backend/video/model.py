@@ -11,7 +11,7 @@ class VideoDao:
         contents_types
         """
 
-        db = DB()
+        db = DB()   
         return db.dict_fetch(get_contents_types_sql)
 
     def get_stacks(self, position_id):
@@ -171,19 +171,7 @@ class VideoDao:
         """
         return db.dict_fetch(get_playlist_sql, video_id)
 
-    def get_channel_name(self, channel_id):
-        get_channel_name_sql = """
-        SELECT
-            name
-        FROM
-            channels
-        WHERE id = %s
-        """
-
-        db = DB()
-        return db.dict_fetch(get_channel_name_sql, (channel_id))
-
-    def recommand_video_model(self, position, db):
+    def recommand_video_model(self, position):
         get_recommand_video_sql = """
         SELECT DISTINCT
             videos.id AS video_id,
