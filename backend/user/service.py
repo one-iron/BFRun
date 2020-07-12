@@ -2,13 +2,15 @@ import jwt
 import json
 import requests
 
-from config import SECRET_KEY, ALGORITHM
+from connection import DB
+from config     import SECRET_KEY, ALGORITHM
 
 class UserService:
     def __init__(self, user_dao):
         self.user_dao = user_dao
 
     def google_login(self, user):
+        db = DB()
 
         GOOGLE_AUTH_URL = 'https://oauth2.googleapis.com/tokeninfo?id_token='
         CORRECT_ISS_LIST = ['accounts.google.com', 'https://accounts.google.com']
@@ -22,13 +24,16 @@ class UserService:
                 token_data['sub'] != google_id):
             return {'message': 'MODIFIED_TOKEN'}, 401
 
-        user_id = self.user_dao.google_login(user)
+        user_id = self.user_dao.google_login(user, db)
 
         if user_id is None:
-            user_id = self.user_dao.get_user(google_id)
+            user_id = self.user_dao.get_user(google_id, db)
 
         token = jwt.encode(
             {'id': user_id}, SECRET_KEY['secret'], algorithm= ALGORITHM['algorithm']
         ).decode('utf-8')
+
+        if db:
+            db.close()
 
         return {'token' : token}, 200

@@ -123,7 +123,20 @@ class VideoDao:
         db = DB()
         return db.dict_fetch(get_stack_videos_sql, (channel))
 
-    def get_video_detail(self, video_id):
+
+    def get_channel_name(self, channel_id):
+        get_channel_name_sql = """
+        SELECT
+            name
+        FROM
+            channels
+        WHERE id = %s
+        """
+
+        db = DB()
+        return db.fetchone(get_channel_name_sql, (channel_id))
+
+    def get_video_detail(self, video_id, db):
         get_video_sql = """
         SELECT
             channel_id,
@@ -142,10 +155,9 @@ class VideoDao:
         WHERE videos.id = %s
         """
 
-        db = DB()
         return db.dict_fetch(get_video_sql, video_id)[0]
 
-    def get_video_playlist(self, video_id):
+    def get_video_playlist(self, video_id, db):
         get_playlist_sql = """
         SELECT 
             videos.id,
@@ -157,7 +169,6 @@ class VideoDao:
         INNER JOIN playlists ON videos.playlist_id = playlists.id
         WHERE playlist_id = (SELECT playlist_id FROM videos WHERE videos.id = %s)
         """
-        db = DB()
         return db.dict_fetch(get_playlist_sql, video_id)
 
     def get_channel_name(self, channel_id):
@@ -172,7 +183,7 @@ class VideoDao:
         db = DB()
         return db.dict_fetch(get_channel_name_sql, (channel_id))
 
-    def recommand_video_model(self, position):
+    def recommand_video_model(self, position, db):
         get_recommand_video_sql = """
         SELECT DISTINCT
             videos.id AS video_id,
@@ -188,5 +199,4 @@ class VideoDao:
         LIMIT 10
         """
 
-        db = DB()
         return db.dict_fetch(get_recommand_video_sql, position)

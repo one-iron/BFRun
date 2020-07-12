@@ -5,7 +5,6 @@ BASE_DIR = os.path.dirname(os.path.abspath("backend"))
 sys.path.extend([BASE_DIR])
 
 import pytest
-import json
 import config
 
 from app import create_app
@@ -18,7 +17,15 @@ def api():
 
     return api
 
-def test_get(api):
+def test_get_wrong_video(api):
+  response = api.get(
+    "/video/",
+    content_type="application/json"
+  )
+  assert response.status_code == 404
+
+# 비디오 상세
+def test_get_video(api):
     response = api.get(
         "/video/2",
         content_type="application/json"
