@@ -55,30 +55,36 @@ const InformationWrap = styled.div`
   margin-top: 20px;
   width: 960px;
   margin-top: 20px;
-  @media ${(props) => props.theme.laptopM} {
+
+  @media (max-width: 1370px) {
     display: flex;
     justify-content: space-between;
     width: 95vw;
   }
+
   @media ${(props) => props.theme.tablet} {
     display: unset;
-    width: 95vw;
+    width: 90vw;
     height: 100%;
   }
 `;
 
 const InformationContainer = styled.div`
-  background-color: #ffffff;
   display: flex;
   font-size: 13px;
   color: #333;
   padding: 15px;
-  @media ${(props) => props.theme.laptopM} {
+  // max-height: 200px;
+
+  @media (max-width: 1370px) {
     width: 45vw;
   }
+
   @media ${(props) => props.theme.tablet} {
-    width: 95vw;
+    width: 90vw;
+    border-bottom: 1px solid gray;
   }
+
   figure {
     cursor: pointer;
     display: flex;
@@ -86,6 +92,7 @@ const InformationContainer = styled.div`
     align-items: center;
     justify-content: center;
     width: 80px;
+
     img {
       border: 1px solid #eee;
       border-radius: 50px;
@@ -104,6 +111,7 @@ const InformationContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    text-align: left;
     * {
       margin-top: 5px;
     }
@@ -113,21 +121,23 @@ const InformationContainer = styled.div`
       /* height: 25px; */
     }
     article {
-      text-align: left;
       color: gray;
     }
     main {
-      text-align: left;
+      line-height: 20px;
     }
   }
 `;
 
 const ListSection = styled.div`
   display: none;
-  @media ${(props) => props.theme.laptopM} {
+
+  @media (max-width: 1370px) {
     display: unset;
+    border-left: 1px solid gray;
   }
+
   @media ${(props) => props.theme.tablet} {
-    display: unset;
+    border-left: none;
   }
 `;
