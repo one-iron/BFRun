@@ -13,7 +13,7 @@ class VideoService:
         # 콘텐츠 타입
         contents_types = self.video_dao.get_contents_types()
         with open("const.yaml") as yaml_const:
-            const = yaml.load(yaml_const)
+            const = yaml.safe_load(yaml_const)
             # 스택
             general_stacks = self.video_dao.get_stacks(const["general"])
             frontend_stacks = self.video_dao.get_stacks(const["frontend"])
@@ -42,7 +42,7 @@ class VideoService:
             db.close()
         return video_detail, video_playlist
 
-    def get_video_lists(self, params):
+    def get_video_lists(self, params):     
 
         videos = []
         contents_types = params["contents_types_id"]
@@ -83,6 +83,10 @@ class VideoService:
             
             return channel_videos
         
+        if len(videos) != 0:    
+            if videos[0] == 0:         
+                videos.pop()
+
         return videos
 
     def recommand_video_service(self):
