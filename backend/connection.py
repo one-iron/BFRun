@@ -24,56 +24,42 @@ class DB:
         self.conn.rollback()
 
     def fetchall(self, sql, *args):
-        try:
-            with self.conn.cursor() as cursor:
-                affected_row = cursor.execute(sql, *args)
+        with self.conn.cursor() as cursor:
+            affected_row = cursor.execute(sql, *args)
 
-                if affected_row == 0:
-                    return 0
-            return cursor.fetchall()
+            if affected_row == 0:
+                return 0
+        return cursor.fetchall()
 
-        finally:
-            self.close()
 
     def fetchone(self, sql, *args):
-        try:
-            with self.conn.cursor() as cursor:
-                affected_row = cursor.execute(sql, *args)
+        with self.conn.cursor() as cursor:
+            affected_row = cursor.execute(sql, *args)
 
-                if affected_row == 0:
-                    return 0
+            if affected_row == 0:
+                return 0
 
             return cursor.fetchone()
 
-        finally:
-            self.close()
-
     def dict_fetch(self, sql, *args):
-        try:
-            with self.conn.cursor(pymysql.cursors.DictCursor) as cursor:
-                affected_row = cursor.execute(sql, *args)
+        with self.conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            affected_row = cursor.execute(sql, *args)
 
-                if affected_row == 0:
-                    return 0
+            if affected_row == 0:
+                return 0
 
-            return cursor.fetchall()
+        return cursor.fetchall()
 
-        finally:
-            self.close()
 
     def insert(self, sql, *args):
-        try:
-            with self.conn.cursor() as cursor:
-                affected_row = cursor.execute(sql, *args)
+        with self.conn.cursor() as cursor:
+            affected_row = cursor.execute(sql, *args)
 
-                if affected_row == -1:
-                    self.rollback()
-                    return {'message': 'CANNOT INSERT DATA'}, 500
-                if affected_row == 0:
-                    return 0
-                if affected_row == 1:
-                    self.commit()
-                    return cursor.lastrowid
-
-        finally:
-            self.close()
+            if affected_row == -1:
+                self.rollback()
+                return {'message': 'CANNOT INSERT DATA'}, 500
+            if affected_row == 0:
+                return 0
+            if affected_row == 1:
+                self.commit()
+                return cursor.lastrowid

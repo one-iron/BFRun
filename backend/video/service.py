@@ -1,4 +1,5 @@
 import yaml
+from connection import DB
 
 
 class VideoService:
@@ -32,10 +33,13 @@ class VideoService:
         return categories
 
     def get_video_detail(self, video_id):
+        db = DB()
         video_detail, video_playlist = (
-            self.video_dao.get_video_detail(video_id),
-            self.video_dao.get_video_playlist(video_id),
+            self.video_dao.get_video_detail(video_id, db),
+            self.video_dao.get_video_playlist(video_id, db),
         )
+        if db:
+            db.close()
         return video_detail, video_playlist
 
     def get_video_lists(self, params):
@@ -82,8 +86,14 @@ class VideoService:
         return videos
 
     def recommand_video_service(self):
+        db = DB()
         videos = []
+
         for position in range(1, 4):
-            videos.append(self.video_dao.recommand_video_model(position))
+            videos.append(self.video_dao.recommand_video_model(position, db))
+
+        if db:
+            db.close()
+
         return videos
 
