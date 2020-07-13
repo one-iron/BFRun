@@ -51,14 +51,18 @@ const DetailVideo = ({ id }) => {
           clickList={clickList}
         />
       </DetailVideoContainer>
-      <section className="listSection">
-        {/* 유튜브 영상 재생복록이 들어갈 컴포넌트 입니다. */}
-        <PlayList
-          videoUrl={videoUrl}
-          listVideo={listVideo}
-          clickList={clickList}
-        />
-      </section>
+      {listVideo === 0 ? (
+        <></>
+      ) : (
+        <section className="listSection">
+          {/* 유튜브 영상 재생복록이 들어갈 컴포넌트 입니다. */}
+          <PlayList
+            videoUrl={videoUrl}
+            listVideo={listVideo}
+            clickList={clickList}
+          />
+        </section>
+      )}
     </DetailVideoWrap>
   );
 };

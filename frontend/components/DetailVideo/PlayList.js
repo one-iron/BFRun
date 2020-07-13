@@ -43,7 +43,7 @@ export default PlayList;
 const PlayListWrap = styled.section`
   width: 340px;
   overflow: auto;
-  height: 85vh;
+  height: 89vh;
   margin-left: 20px;
   background-color: #ffffff;
   ::-webkit-scrollbar {

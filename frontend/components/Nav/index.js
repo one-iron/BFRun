@@ -5,11 +5,11 @@ import Link from 'next/link';
 
 // internal modules
 import Login from '../Login';
+import Search from './Search';
 
 const Nav = ({ removeTags }) => {
-  const [showMenu, setShowMenu] = useState(false);
   const [searchBox, setSearchBox] = useState(false);
-  const [input, setInput] = useState('');
+  const [showMenu, setShowMenu] = useState(false);
 
   // 화면 작아졌을 때, 오른쪽 상단 메뉴
   const dropDownMenu = () => {
@@ -29,19 +29,6 @@ const Nav = ({ removeTags }) => {
     setSearchBox(false);
   };
 
-  // 검색창
-  const searchKeyword = (e) => {
-    setInput(e.target.value);
-  };
-
-  const submitKeyword = (e) => {
-    e.preventDefault();
-    console.log(input);
-    setInput('');
-
-    // 검색한 것 useEffect, axios로
-  };
-
   return (
     <NavWrap isBlack>
       <NavContainer>
@@ -54,36 +41,27 @@ const Nav = ({ removeTags }) => {
         </NavLeft>
         <NavMiddle openSearchBox={searchBox}>
           {/* 600px 이하일 때, 클릭할 때 input창 보이게 */}
-          <Under600Search onClick={showSearchBox} openSearchBox={searchBox}>
+          {/* <Under600Search onClick={showSearchBox} openSearchBox={searchBox}>
             <i className="fa fa-search" />
-          </Under600Search>
+          </Under600Search> */}
           {/* 600px 이상일 때 */}
           <ArrowBack
             className="fa fa-arrow-left"
             openSearchBox={searchBox}
             onClick={hideSearchBox}
           />
-          <SearchBox openSearchBox={searchBox} onSubmit={submitKeyword}>
-            <SearchInput
-              type="text"
-              placeholder="검색어를 입력해주세요"
-              value={input}
-              onChange={searchKeyword}
-            />
-            <SearchButton type="submit" onClick={submitKeyword}>
-              <i className="fa fa-search" />
-            </SearchButton>
-          </SearchBox>
+          {/* 검색 창 추후 추가*/}
+          {/* <Search /> */}
         </NavMiddle>
         <RightContainer
           openSearchBox={searchBox}
           onMouseEnter={dropDownMenu}
           onMouseLeave={showMenu ? removeDownMenu : undefined}
         >
-          <RightMenu>
+          {/* <RightMenu>
             메뉴
             <i className="fa fa-caret-down" />
-          </RightMenu>
+          </RightMenu> */}
           <NavRight
             isShow={showMenu}
             onMouseLeave={showMenu ? removeDownMenu : undefined}
@@ -129,14 +107,15 @@ const NavLeft = styled.div`
   display: flex;
   align-items: center;
   margin-left: 10px;
+  /* width: 30%; */
 
-  @media (max-width: 600px) {
+  /* @media (max-width: 600px) {
     ${(props) =>
       props.openSearchBox &&
       css`
         display: none;
       `}
-  }
+  } */
 `;
 
 const TitleText = styled.div`
@@ -147,7 +126,7 @@ const TitleText = styled.div`
 `;
 
 const NavMiddle = styled.div`
-  width: 500px;
+  /* width: 500px;
 
   @media ${(props) => props.theme.tablet} {
     width: 300px;
@@ -163,23 +142,23 @@ const NavMiddle = styled.div`
         width: 100%;
         display: flex;
       `}
-  }
+  } */
 `;
 
-const Under600Search = styled.div`
-  display: none;
+// const Under600Search = styled.div`
+//   display: none;
 
-  @media (max-width: 600px) {
-    display: block;
-    font-size: 20px;
+//   @media (max-width: 600px) {
+//     display: block;
+//     font-size: 20px;
 
-    ${(props) =>
-      props.openSearchBox &&
-      css`
-        display: none;
-      `}
-  }
-`;
+//     ${(props) =>
+//       props.openSearchBox &&
+//       css`
+//         display: none;
+//       `}
+//   }
+// `;
 
 const ArrowBack = styled.i`
   display: none;
@@ -193,47 +172,6 @@ const ArrowBack = styled.i`
         font-size: 20px;
       `}
   }
-`;
-
-const SearchBox = styled.form`
-  border: 1px solid gray;
-  /* border: 1.5px solid orange; */
-  border-radius: 5px;
-  height: 30px;
-  display: flex;
-  background-color: white;
-
-  @media (max-width: 600px) {
-    display: none;
-
-    ${(props) =>
-      props.openSearchBox &&
-      css`
-        display: flex;
-        width: 300px;
-      `}
-  }
-`;
-
-const SearchInput = styled.input`
-  width: 100%;
-  font-size: 12px;
-  padding-left: 20px;
-`;
-
-const SearchButton = styled.button`
-  width: 30px;
-  height: 28px;
-  border: none;
-  outline: none;
-  background-color: transparent;
-  color: gray;
-  /* background-color: orange;
-  padding: 0 10px;
-
-  i {
-    color: white;
-  } */
 `;
 
 const RightContainer = styled.div`
@@ -253,28 +191,29 @@ const RightContainer = styled.div`
 const RightMenu = styled.div`
   display: none;
 
-  @media ${(props) => props.theme.laptopS} {
+  /* @media ${(props) => props.theme.laptopS} {
     display: block;
     position: sticky;
     cursor: pointer;
     border: 1px solid gray;
     border-radius: 5px;
     padding: 5px;
-    width: 80px;
+    width: 0px;
     background-color: white;
 
     i {
       margin-left: 5px;
       font-size: 18px;
     }
-  }
+  } */
 `;
 
 const NavRight = styled.div`
   display: flex;
   align-items: center;
+  /* width: 100%; */
 
-  @media ${(props) => props.theme.laptopS} {
+  /* @media ${(props) => props.theme.laptopS} {
     display: none;
     position: absolute;
     background-color: white;
@@ -301,7 +240,7 @@ const NavRight = styled.div`
         height: 115px;
       }
     }
-  }
+  } */
 `;
 
 const RightContent = styled.div`
