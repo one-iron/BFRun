@@ -1,4 +1,5 @@
-const AWS = 'http://3.14.86.175:5000';
+// const AWS = 'http://3.14.86.175:5000';
+const AWS = 'http://13.125.79.35:5000';
 
 // 구글 로그인
 export const clientId =

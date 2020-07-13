@@ -1,5 +1,5 @@
 // external modules
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 
@@ -8,11 +8,26 @@ const VideoSection = ({ title, returnList }) => {
   const visible = useRef(null);
   const total = useRef(null);
 
+  useEffect(() => {
+    console.log('달라짐');
+    setLeft(0);
+    console.log(left);
+
+    // const moveToFirst = () => {
+    //   window.scroll({ left: 0, behavior: 'smooth' });
+    // };
+
+    // window.addEventListener('scroll', moveToFirst);
+    // return () => {
+    //   window.removeEventListener('scroll', moveToFirst);
+    // };
+  }, [returnList]);
+
   const moveScroll = (direction) => {
     const visibleWidth = visible.current.offsetWidth;
     const totalWidth = total.current.offsetWidth * returnList.length;
-    console.log('visibleWidth', visibleWidth);
-    console.log('totalWidth', totalWidth);
+    // console.log('visibleWidth', visibleWidth);
+    // console.log('totalWidth', totalWidth);
     if (direction === 'back' && left < 0) {
       setLeft(left + visibleWidth);
     } else if (direction === 'next' && left >= (-totalWidth + 2000) / 2) {
@@ -75,8 +90,6 @@ const VideoSectionWrap = styled.div`
 `;
 
 const CategoryName = styled.strong`
-  /* font-size: 20px;
-  display: block; */
   font-weight: 700;
   font-size: 25px;
   padding: 5px;
@@ -93,7 +106,6 @@ const SlideDiv = styled.div`
 `;
 
 const VideoLiContainer = styled.div`
-  /* display: flex; */
   position: relative;
   align-items: center;
   margin: 0 10px;
