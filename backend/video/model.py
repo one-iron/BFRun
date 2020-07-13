@@ -167,7 +167,7 @@ class VideoDao:
         """
         return db.dict_fetch(get_playlist_sql, video_id)
 
-    def recommand_video_model(self, position):
+    def recommand_video_model(self, position, db):
         get_recommand_video_sql = """
         SELECT DISTINCT
             videos.id AS video_id,

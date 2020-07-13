@@ -1,11 +1,22 @@
 import pymysql
 
-from config import db, test_db
+from config           import db
+from pymysqlpool.pool import Pool
+
+# pool = Pool(
+#             host       = db["host"],
+#             user       = db["user"],
+#             password   = db["password"],
+#             db         = db["database"],
+#             autocommit = False,
+#         )
+# pool.init()
+#
+# conn = pool.get_conn()
 
 
 class DB:
     def __init__(self):
-
         self.conn = pymysql.connect(
             host       = db["host"],
             user       = db["user"],
@@ -13,6 +24,7 @@ class DB:
             db         = db["database"],
             autocommit = False,
         )
+        # self.conn = conn
 
     def commit(self):
         self.conn.commit()

@@ -47,13 +47,19 @@ class VideoService:
 
     def get_video_detail(self, video_id):
         db = DB()
-        video_detail, video_playlist = (
-            self.video_dao.get_video_detail(video_id, db),
-            self.video_dao.get_video_playlist(video_id, db),
-        )
-        if db:
-            db.close()
-        return video_detail, video_playlist
+        try:
+            video_detail, video_playlist = (
+                self.video_dao.get_video_detail(video_id, db),
+                self.video_dao.get_video_playlist(video_id, db),
+            )
+            return video_detail, video_playlist
+
+        except pymysql.err.Error as e:
+            return {"message" : "DATABASE ERROR" + str(e)}, 500
+
+        finally:
+            if db:
+                db.close()
 
     def get_video_lists(self, params): 
         db = DB()
@@ -114,13 +120,18 @@ class VideoService:
                 
     def recommand_video_service(self):
         db = DB()
-        videos = []
+        try:
+            videos = []
 
-        for position in range(1, 4):
-            videos.append(self.video_dao.recommand_video_model(position, db))
+            for position in range(1, 4):
+                videos.append(self.video_dao.recommand_video_model(position, db))
 
-        if db:
-            db.close()
+            return videos
 
-        return videos
+        except pymysql.err.Error as e:
+            return {"message": "DATABASE ERROR" + str(e)}, 500
+
+        finally:
+            if db:
+                db.close()
 

@@ -17,6 +17,7 @@ def api():
 
     return api
 
+# 비디오 상세 API : 없는 페이지 요청 시
 def test_get_wrong_video(api):
   response = api.get(
     "/video/",
@@ -24,7 +25,7 @@ def test_get_wrong_video(api):
   )
   assert response.status_code == 404
 
-# 비디오 상세
+# 비디오 상세 API : response 확인
 def test_get_video(api):
     response = api.get(
         "/video/2",
