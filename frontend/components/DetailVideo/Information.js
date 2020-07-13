@@ -32,13 +32,17 @@ const Information = (props) => {
           </>
         )}
       </InformationContainer>
-      <ListSection>
-        <PlayList
-          videoUrl={videoUrl}
-          listVideo={listVideo}
-          clickList={clickList}
-        />
-      </ListSection>
+      {listVideo === 0 ? (
+        <></>
+      ) : (
+        <ListSection>
+          <PlayList
+            videoUrl={videoUrl}
+            listVideo={listVideo}
+            clickList={clickList}
+          />
+        </ListSection>
+      )}
     </InformationWrap>
   );
 };
@@ -74,7 +78,7 @@ const InformationContainer = styled.div`
 
   @media ${(props) => props.theme.tablet} {
     width: 90vw;
-    border-bottom: 1px solid gray;
+    border-bottom: 2px solid darkgray;
   }
 
   figure {
@@ -95,6 +99,7 @@ const InformationContainer = styled.div`
     }
     figcaption {
       margin-top: 10px;
+      color: black;
     }
   }
   section:nth-of-type(2) {
@@ -125,7 +130,7 @@ const ListSection = styled.div`
 
   @media (max-width: 1370px) {
     display: unset;
-    border-left: 1px solid gray;
+    border-left: 2px solid darkgray;
   }
 
   @media ${(props) => props.theme.tablet} {
