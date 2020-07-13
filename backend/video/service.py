@@ -3,6 +3,8 @@ import pymysql
 
 from connection import DB
 
+with open("const.yaml") as yaml_const:
+    yaml = yaml.safe_load(yaml_const)
 
 class VideoService:
     def __init__(self, video_dao):
@@ -48,6 +50,9 @@ class VideoService:
     def get_video_detail(self, video_id):
         db = DB()
         try:
+            if video_id > yaml["video_max_id"] or video_id < yaml["video_min_id"]:
+                return yaml["no_response"]
+
             video_detail, video_playlist = (
                 self.video_dao.get_video_detail(video_id, db),
                 self.video_dao.get_video_playlist(video_id, db),
@@ -122,8 +127,7 @@ class VideoService:
         db = DB()
         try:
             videos = []
-
-            for position in range(1, 4):
+            for position in yaml['position_id']:
                 videos.append(self.video_dao.recommand_video_model(position, db))
 
             return videos
