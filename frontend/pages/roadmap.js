@@ -1,8 +1,14 @@
 // external modules
 import styled from 'styled-components';
+import Nav from '../components/Nav';
 
 const Roadmap = () => {
-  return <RoadmapWrap>Roadmap</RoadmapWrap>;
+  return (
+    <RoadmapWrap>
+      <Nav />
+      <div>Roadmap</div>
+    </RoadmapWrap>
+  );
 };
 
 export default Roadmap;

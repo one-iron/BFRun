@@ -1,4 +1,5 @@
 const AWS = 'http://3.14.86.175:5000';
+const testAPI = 'http://172.30.1.4:5000';
 
 // 구글 로그인
 export const clientId =
@@ -9,7 +10,7 @@ export const googleLogin = `${AWS}/login`;
 export const CATEGORY = `${AWS}/categories`;
 
 // 태그로 불러올 VIDEO 주소
-export const SELECTED_VIDEO_LIST = `${AWS}/videos`;
+export const SELECTED_VIDEO_LIST = `${testAPI}/videos`;
 
 // 보여줄 비디오 API
 export const VIDEO_LIST = `${AWS}/video`;

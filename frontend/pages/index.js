@@ -57,7 +57,7 @@ export default function HomePage(props) {
         returnUrl = splitCreatorId;
       }
     }
-
+    console.log('adsfadsf', returnUrl);
     axios
       .get(`${SELECTED_VIDEO_LIST}?${returnUrl}`)
       .then((res) => setReturnList(res.data.videos));
