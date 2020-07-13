@@ -88,8 +88,12 @@ const Nav = ({ removeTags }) => {
             isShow={showMenu}
             onMouseLeave={showMenu ? removeDownMenu : undefined}
           >
-            <RightContent>소개</RightContent>
-            <RightContent>로드맵</RightContent>
+            <Link href="/about">
+              <RightContent>소개</RightContent>
+            </Link>
+            <Link href="/roadmap">
+              <RightContent>로드맵</RightContent>
+            </Link>
             <Login />
           </NavRight>
         </RightContainer>
