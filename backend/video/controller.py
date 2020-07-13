@@ -17,10 +17,7 @@ def create_video_endpoints(app, video_service):
         try:
             category_response = video_service.get_category_lists()
             return category_response, 200
-
-        except pymysql.err.Error as e:
-            return {"message" : "DATABASE ERROR" + str(e)}, 500
-
+            
         except Exception as e:
             return {"message": str(e)}, 400
 
@@ -43,7 +40,6 @@ def create_video_endpoints(app, video_service):
         except Exception as e:
             return {"message": str(e)}, 400
 
-
     @app.route("/videos", methods=["GET"])
     @validate_params(
         Param('contents_types_id', GET, str, required=False, rules=[MaxLength(1)]),
@@ -59,9 +55,6 @@ def create_video_endpoints(app, video_service):
 
             video_list_response = video_service.get_video_lists(params)
             return {"videos" : video_list_response}, 200
-
-        except pymysql.err.Error as e:
-            return {"message" : "DATABASE ERROR" + str(e)}, 500
 
         except Exception as e:
             return {"message": e}, 400
