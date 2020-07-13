@@ -24,18 +24,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
           />
-
-          {/*
-          <link
-            rel="shortcut icon"
-            href="/static/favicon.ico"
-            type="image/x-icon"
-          />
-          <script
-            type="text/javascript"
-            src="https://code.jquery.com/jquery-1.12.4.min.js"
-          />
-           */}
+          <link rel="shortcut icon" href="/static/favicon.ico" />
         </Head>
         <body>
           <Main />
