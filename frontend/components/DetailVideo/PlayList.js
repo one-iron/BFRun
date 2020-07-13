@@ -12,10 +12,10 @@ const PlayList = (props) => {
     <PlayListWrap>
       <PlayListContainer>
         {listVideo &&
-          listVideo.map((data) => {
+          listVideo.map((data, index) => {
             return (
-              <Link href="/video/[id]" as={`/video/${data.id}`}>
-                <div>
+              <Link href="/video/[id]" as={`/video/${data.id}`} key={index}>
+                <ListDiv>
                   <section onClick={() => clickList(data.id)}>
                     <img
                       src={`http://i3.ytimg.com/vi/${data.url.slice(
@@ -27,11 +27,9 @@ const PlayList = (props) => {
                     <section className="textSection">
                       <summary>{data.title}</summary>
                       <time>{data.created_at.slice(0, 10)}</time>
-                      <p>{data.title}</p>
                     </section>
                   </section>
-                  <div className="line" />
-                </div>
+                </ListDiv>
               </Link>
             );
           })}
@@ -42,10 +40,10 @@ const PlayList = (props) => {
 
 export default PlayList;
 
-const PlayListWrap = styled.div`
+const PlayListWrap = styled.section`
   width: 340px;
   overflow: auto;
-  height: 100vh;
+  height: 85vh;
   margin-left: 20px;
   background-color: #ffffff;
   ::-webkit-scrollbar {
@@ -54,15 +52,16 @@ const PlayListWrap = styled.div`
   ::-webkit-scrollbar-thumb {
     background: #b8b8b8;
   }
-  @media ${(props) => props.theme.laptopM} {
+
+  @media (max-width: 1370px) {
     width: 45vw;
     height: 300px;
-    background-color: #ffffff;
   }
+
   @media ${(props) => props.theme.tablet} {
-    width: 95vw;
+    margin-top: 10px;
+    width: 90vw;
     height: 300px;
-    background-color: #ffffff;
   }
 `;
 
@@ -70,8 +69,9 @@ const PlayListContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px;
+  padding: 10px;
   font-size: 12px;
+
   section {
     display: flex;
     text-align: left;
@@ -83,9 +83,7 @@ const PlayListContainer = styled.div`
       margin-left: 10px;
       display: flex;
       flex-direction: column;
-      * {
-        margin-bottom: 5px;
-      }
+
       summary {
         font-size: 16px;
         font-weight: 600;
@@ -98,9 +96,11 @@ const PlayListContainer = styled.div`
   img {
     width: 100px;
   }
-  .line {
-    border: 1px solid lightgray;
-    width: 100%;
-    margin: 20px 0;
-  }
+`;
+
+const ListDiv = styled.div`
+  border-bottom: 1px solid lightgray;
+  padding: 20px 0;
+  width: 100%;
+  margin: 5px 0;
 `;

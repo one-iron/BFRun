@@ -2,7 +2,7 @@ from connection import DB
 
 
 class VideoDao:
-    def get_contents_types(self):
+    def get_contents_types(self, db):
         get_contents_types_sql = """
         SELECT
             id,
@@ -10,11 +10,10 @@ class VideoDao:
         FROM
         contents_types
         """
-
-        db = DB()   
+  
         return db.dict_fetch(get_contents_types_sql)
 
-    def get_stacks(self, position_id):
+    def get_stacks(self, position_id, db):
         get_stacks_sql = """
         SELECT
             id,
@@ -25,11 +24,10 @@ class VideoDao:
         WHERE
             position_id = %s
         """
-
-        db = DB()
+    
         return db.dict_fetch(get_stacks_sql, (position_id))
 
-    def get_channels(self):
+    def get_channels(self, db):
         get_channels_sql = """
         SELECT
             id,
@@ -37,11 +35,10 @@ class VideoDao:
         FROM
         channels
         """
-
-        db = DB()
+      
         return db.dict_fetch(get_channels_sql)
 
-    def get_videos(self, filters):
+    def get_videos(self, filters, db):
         get_video_lists_sql = """
         SELECT
             videos.id AS video_id,
@@ -57,10 +54,10 @@ class VideoDao:
             stack_id = %(stack_id)s AND channel_id = %(channel_id)s
         LIMIT 5
         """
-        db = DB()
+
         return db.dict_fetch(get_video_lists_sql, (filters))
 
-    def get_contents_types_videos(self, contents_types_id):
+    def get_contents_types_videos(self, contents_types_id, db):
         get_contents_types_videos_sql = """  
         SELECT
             videos.id AS video_id,
@@ -78,10 +75,10 @@ class VideoDao:
             RAND()
         LIMIT 20
         """
-        db = DB()
+     
         return db.dict_fetch(get_contents_types_videos_sql, (contents_types_id))
 
-    def get_stack_videos(self, stack_id):
+    def get_stack_videos(self, stack_id, db):
         get_stack_videos_sql = """  
         SELECT
             videos.id AS video_id,
@@ -99,10 +96,10 @@ class VideoDao:
             RAND()
         LIMIT 20
         """
-        db = DB()
+ 
         return db.dict_fetch(get_stack_videos_sql, (stack_id))
 
-    def get_channel_videos(self, channel):
+    def get_channel_videos(self, channel, db):
         get_stack_videos_sql = """  
         SELECT
             videos.id AS video_id,
@@ -120,11 +117,11 @@ class VideoDao:
             RAND()
         LIMIT 20
         """
-        db = DB()
+
         return db.dict_fetch(get_stack_videos_sql, (channel))
 
 
-    def get_channel_name(self, channel_id):
+    def get_channel_name(self, channel_id, db):
         get_channel_name_sql = """
         SELECT
             name
@@ -132,8 +129,7 @@ class VideoDao:
             channels
         WHERE id = %s
         """
-
-        db = DB()
+       
         return db.fetchone(get_channel_name_sql, (channel_id))
 
     def get_video_detail(self, video_id, db):
@@ -171,7 +167,7 @@ class VideoDao:
         """
         return db.dict_fetch(get_playlist_sql, video_id)
 
-    def recommand_video_model(self, position):
+    def recommand_video_model(self, position, db):
         get_recommand_video_sql = """
         SELECT DISTINCT
             videos.id AS video_id,

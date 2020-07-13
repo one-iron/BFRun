@@ -7,11 +7,6 @@ import PlayList from './PlayList';
 const Information = (props) => {
   const { listVideo, clickList, videoUrl, videoInfo } = props;
 
-  // 조회수의 숫자에 쉼표를 찍는 Intl 함수를 변수로 지정하여 조회수에 쓰이고 있습니다.
-  const numberFilter = new Intl.NumberFormat('en-IN', {
-    maximumSignificantDigits: 3,
-  });
-
   return (
     <InformationWrap>
       <InformationContainer>
@@ -28,12 +23,11 @@ const Information = (props) => {
             <section>
               <summary>{videoInfo.title}</summary>
               <article>
-                조회수 {numberFilter.format(videoInfo.view)}회{' '}
                 <time>{videoInfo.created_at}</time>
               </article>
-              <main style={{ whiteSpace: 'pre-line' }}>
+              <details style={{ whiteSpace: 'pre-line' }}>
                 {videoInfo.description}
-              </main>
+              </details>
             </section>
           </>
         )}
@@ -52,33 +46,37 @@ const Information = (props) => {
 export default Information;
 
 const InformationWrap = styled.div`
-  margin-top: 20px;
+  margin-top: 10px;
   width: 960px;
-  margin-top: 20px;
-  @media ${(props) => props.theme.laptopM} {
+
+  @media (max-width: 1370px) {
     display: flex;
     justify-content: space-between;
     width: 95vw;
   }
+
   @media ${(props) => props.theme.tablet} {
     display: unset;
-    width: 95vw;
+    width: 90vw;
     height: 100%;
   }
 `;
 
 const InformationContainer = styled.div`
-  background-color: #ffffff;
   display: flex;
   font-size: 13px;
   color: #333;
   padding: 15px;
-  @media ${(props) => props.theme.laptopM} {
+
+  @media (max-width: 1370px) {
     width: 45vw;
   }
+
   @media ${(props) => props.theme.tablet} {
-    width: 95vw;
+    width: 90vw;
+    border-bottom: 1px solid gray;
   }
+
   figure {
     cursor: pointer;
     display: flex;
@@ -86,6 +84,7 @@ const InformationContainer = styled.div`
     align-items: center;
     justify-content: center;
     width: 80px;
+
     img {
       border: 1px solid #eee;
       border-radius: 50px;
@@ -103,9 +102,9 @@ const InformationContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+    text-align: left;
     * {
-      margin-top: 5px;
+      margin: 5px 0;
     }
     summary {
       font-size: 20px;
@@ -113,21 +112,23 @@ const InformationContainer = styled.div`
       /* height: 25px; */
     }
     article {
-      text-align: left;
       color: gray;
     }
-    main {
-      text-align: left;
+    details {
+      line-height: 20px;
     }
   }
 `;
 
 const ListSection = styled.div`
   display: none;
-  @media ${(props) => props.theme.laptopM} {
+
+  @media (max-width: 1370px) {
     display: unset;
+    border-left: 1px solid gray;
   }
+
   @media ${(props) => props.theme.tablet} {
-    display: unset;
+    border-left: none;
   }
 `;

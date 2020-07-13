@@ -63,26 +63,27 @@ const DetailVideo = ({ id }) => {
   );
 };
 export default DetailVideo;
+
 const DetailVideoWrap = styled.div`
   display: flex;
-  @media ${(props) => props.theme.laptopM} {
+
+  @media (max-width: 1370px) {
     .listSection {
       display: none;
     }
   }
 `;
 const DetailVideoContainer = styled.div`
+  height: 100%;
+  background-color: #ffffff;
+
   .videoMain {
-    /* width: 960px; */
     height: calc(68vh + 40px);
-    background-color: #ffffff;
     z-index: 10;
+
     .video {
       width: 100%;
       height: 100%;
     }
-  }
-  .listSection {
-    background-color: #ffffff;
   }
 `;
