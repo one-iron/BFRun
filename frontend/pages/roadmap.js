@@ -1,17 +1,25 @@
 // external modules
 import styled from 'styled-components';
+import Nav from '../components/Nav';
 
 // internal moduels
 import Nav from '../components/Nav';
 
 const Roadmap = () => {
   return (
+<<<<<<< HEAD
+    <RoadmapWrap>
+      <Nav />
+      <div>Roadmap</div>
+    </RoadmapWrap>
+=======
     <>
       <Nav />
       <RoadmapWrap>
         <RoadmapContainer>Roadmap</RoadmapContainer>
       </RoadmapWrap>
     </>
+>>>>>>> master
   );
 };
 

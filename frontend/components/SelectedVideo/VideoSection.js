@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components';
 
 const VideoSection = ({ title, returnList }) => {
   const [left, setLeft] = useState(0);
+  const [isOver, setIsOver] = useState(true);
   const visible = useRef(null);
   const total = useRef(null);
 
@@ -36,13 +37,13 @@ const VideoSection = ({ title, returnList }) => {
   return (
     <VideoSectionWrap>
       <CategoryName>{title}</CategoryName>
-      {returnList ? (
+      {returnList[0] ? (
         <SlideDiv>
           <Button back onClick={() => moveScroll('back')}>
             <i className="fa fa-caret-left" />
           </Button>
           <VideoLiContainer ref={visible}>
-            <ListContainer toLeft={left} ref={total}>
+            <ListContainer toLeft={left} ref={total} isOver={returnList.length}>
               {returnList.map((data, index) => {
                 return (
                   <Link
@@ -122,7 +123,7 @@ const ListContainer = styled.div`
   transition: left 0.8s ease-in-out;
   position: absolute;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: ${(props) => (props.isOver > 4 ? 'column wrap' : 'unset')};
   margin: 5px 0;
   height: 100%;
   /* width: 100%; */
