@@ -86,7 +86,12 @@ class VideoService:
             # 채널 필터
             if contents_types is None and stacks is None and channels:   
                 for channel in channels:
-                    videos.append(self.video_dao.get_channel_videos(channel, db))       
+                    channel_video = self.video_dao.get_channel_videos(channel, db)
+                    # 검색된 배열이 없는 경우
+                    if channel_video == 0:
+                        videos.append([])
+                    else:
+                        videos.append(channel_video)           
 
             # 채널, 스택 필터
             if contents_types is None and stacks and channels:

@@ -52,7 +52,7 @@ class VideoDao:
         INNER JOIN channels ON channels.id = videos.channel_id
         WHERE
             stack_id = %(stack_id)s AND channel_id = %(channel_id)s
-        LIMIT 5
+        LIMIT 20
         """
 
         return db.dict_fetch(get_video_lists_sql, (filters))
@@ -73,7 +73,7 @@ class VideoDao:
             contents_types_id = %s
         ORDER BY
             RAND()
-        LIMIT 20
+        LIMIT 40
         """
      
         return db.dict_fetch(get_contents_types_videos_sql, (contents_types_id))
@@ -94,7 +94,7 @@ class VideoDao:
             stack_id = %s
         ORDER BY
             RAND()
-        LIMIT 20
+        LIMIT 30
         """
  
         return db.dict_fetch(get_stack_videos_sql, (stack_id))
@@ -115,7 +115,7 @@ class VideoDao:
             channel_id = %s
         ORDER BY
             RAND()
-        LIMIT 20
+        LIMIT 30
         """
 
         return db.dict_fetch(get_stack_videos_sql, (channel))
