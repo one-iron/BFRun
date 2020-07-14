@@ -3,10 +3,10 @@ import styled, { css } from 'styled-components';
 
 // internal moduels
 import Nav from '../components/Nav';
+import Team from '../components/About/Team';
+import Update from '../components/About/Update';
 
 const About = () => {
-  const githubImg = 'https://avatars0.githubusercontent.com/u';
-
   return (
     <>
       <Nav />
@@ -25,7 +25,7 @@ const About = () => {
               유튜브로 찾아 들어가야 하는 불편함이 있었습니다. 이를 개선하고자
               알찬 강의들을 모아놓은 사이트를 만든 것이 BFRun 프로젝트입니다.{' '}
               <br />
-              <p style={{ fontStyle: 'italic' }}>
+              <p style={{ fontStyle: 'italic', fontSize: '14px' }}>
                 +저희 프로젝트는 민정님의 ✨반짝이는 아이디어✨로 시작하게
                 되었습니다.
               </p>
@@ -44,142 +44,22 @@ const About = () => {
           <OneContainer>
             <Title team>팀 소개</Title>
             <Contents>
-              <TeamContainer>
-                <End>
-                  <p>프론트엔드</p>
-                  <TeamDiv>
-                    <ImgDiv>
-                      <img
-                        src={`${githubImg}/58619071?s=460&u=94bbef350e5f936666b4aff5601a009bb2d741ef&v=4`}
-                        alt="kmj"
-                      />
-                    </ImgDiv>
-                    <DetailDiv>
-                      <Name>김민정 MJ Kim</Name>
-                      <URL>
-                        <a
-                          href="https://github.com/howdy-mj"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Github
-                        </a>
-                      </URL>
-                    </DetailDiv>
-                  </TeamDiv>
-                  <TeamDiv>
-                    <ImgDiv>
-                      <img
-                        src={`${githubImg}/59866241?s=460&u=2ec46f9a5e73636199d7c335cd93e55663a0ec9b&v=4`}
-                        alt="kmj"
-                      />
-                    </ImgDiv>
-                    <DetailDiv>
-                      <Name>심기현 Simple Key</Name>
-                      <URL>
-                        <a
-                          href="https://github.com/skh417"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Github
-                        </a>
-                      </URL>
-                    </DetailDiv>
-                  </TeamDiv>
-                  <TeamDiv>
-                    <ImgDiv>
-                      <img
-                        src={`${githubImg}/59141662?s=460&u=b761ea7b11ece3885fe8011b5e2f7b4ae5210f7f&v=4`}
-                        alt="kmj"
-                      />
-                    </ImgDiv>
-                    <DetailDiv>
-                      <Name>이원철 One-iron</Name>
-                      <URL>
-                        <a
-                          href="https://github.com/one-iron"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Github
-                        </a>
-                      </URL>
-                    </DetailDiv>
-                  </TeamDiv>
-                </End>
-                <End back>
-                  <p>백엔드</p>
-                  <TeamDiv>
-                    <ImgDiv>
-                      <img
-                        src={`${githubImg}/60729037?s=460&u=02b11a01d5e8a000474fc1edb8266cb00499b193&v=4`}
-                        alt="kmj"
-                      />
-                    </ImgDiv>
-                    <DetailDiv>
-                      <Name>이예은 Yeeun</Name>
-                      <URL>
-                        <a
-                          href="https://github.com/yenilee"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Github
-                        </a>
-                      </URL>
-                    </DetailDiv>
-                  </TeamDiv>
-                  <TeamDiv>
-                    <ImgDiv>
-                      <img
-                        src={`${githubImg}/33950753?s=460&u=81572a4a2e22584e5f695470ad8aab752ac30d33&v=4`}
-                        alt="kmj"
-                      />
-                    </ImgDiv>
-                    <DetailDiv>
-                      <Name>진성준 Jun-Jin</Name>
-                      <URL>
-                        <a
-                          href="https://github.com/sungjun-jin"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Github
-                        </a>
-                      </URL>
-                    </DetailDiv>
-                  </TeamDiv>
-                </End>
-              </TeamContainer>
+              <Team />
             </Contents>
           </OneContainer>
           <OneContainer>
             <Title>마지막으로</Title>
             <Contents>
-              끝으로 영상 활용에 동의해주신 생활코딩의 이고잉님, 얄팍한
-              코딩사전님, 김왼손님, 코딩하는 테크보이 워니님, 드림코딩의 엘리님,
+              영상 활용에 동의해주신 생활코딩의 이고잉님, 얄팍한 코딩사전님,
+              김왼손님, 코딩하는 테크보이 워니님, 드림코딩의 엘리님,
               노마드코더의 니콜라스님, 김버그님, 조코딩님에게 무한한 감사를
               드립니다. <br />
-              해당 사이트에 대한 문의나 피드백은 bfrunteam@gmail.com
-              <MailTag href="mMailTagilto:bfrunteam@gmail.com">
-                (메일 보내기)
-              </MailTag>
+              아울러 해당 사이트에 대한 문의나 피드백은 bfrunteam@gmail.com
+              <MailTag href="mailto:bfrunteam@gmail.com">(메일 보내기)</MailTag>
               로 보내주시면 너무나도 감사하겠습니다.
             </Contents>
           </OneContainer>
-          <Update>
-            <Title>업데이트</Title>
-            <Tobe>
-              예정
-              <details>
-                <ul>
-                  <li>책갈피 기능</li>
-                </ul>
-              </details>
-            </Tobe>
-            <Done>완료</Done>
-          </Update>
+          <Update />
         </AboutContainer>
       </AboutWrap>
     </>
@@ -232,62 +112,8 @@ const Contents = styled.div`
   line-height: 30px;
 `;
 
-const TeamDiv = styled.div`
-  display: flex;
-  margin: 5px 0;
-`;
-
-const End = styled.div`
-  margin-left: 20px;
-
-  ${(props) =>
-    props.back &&
-    css`
-      margin-left: 70px;
-    `}
-
-  p {
-    text-align: center;
-  }
-`;
-
-const TeamContainer = styled.div`
-  display: flex;
-
-  /* justify-content: space-evenly; */
-`;
-
-const ImgDiv = styled.div`
-  img {
-    width: 80px;
-    border-radius: 50%;
-    border: 1px solid black;
-  }
-`;
-
-const DetailDiv = styled.div`
-  margin: auto 0 auto 20px;
-`;
-
-const Name = styled.div`
-  font-weight: 700;
-`;
-
-const URL = styled.div`
-  cursor: pointer;
-  a {
-    color: black;
-  }
-`;
-
 const MailTag = styled.a`
   cursor: pointer;
   font-size: 14px;
   color: blue;
 `;
-
-const Update = styled.div``;
-
-const Tobe = styled.div``;
-
-const Done = styled.div``;

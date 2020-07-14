@@ -57,7 +57,7 @@ export default function HomePage(props) {
         returnUrl = splitCreatorId;
       }
     }
-    console.log('adsfadsf', returnUrl);
+
     axios
       .get(`${SELECTED_VIDEO_LIST}?${returnUrl}`)
       .then((res) => setReturnList(res.data.videos));
@@ -86,13 +86,17 @@ export default function HomePage(props) {
 
   // 스택 태그 추가/제거
   const addDelStackTags = (name, id) => {
-    if (selectedContent[0] || selectedCreator[0]) {
+    if (selectedContent[0]) {
       // content나 creator가 선택되었다면 content, creator는 없애고, stack 태그 추가
       setSelectedContent([]);
-      setSelectedCreator([]);
       setSelectedStack([name]);
       setContentId([]);
+      setStackId([`stack_id=${id}`]);
+    } else if (selectedCreator.length > 1) {
+      // creator가 2개 이상이라면, creator 모두 지우기
+      setSelectedCreator([]);
       setCreatorId([]);
+      setSelectedStack([name]);
       setStackId([`stack_id=${id}`]);
     } else if (selectedStack.includes(name)) {
       setSelectedStack(selectedStack.filter((names) => names !== name));
