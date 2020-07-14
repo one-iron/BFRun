@@ -95,6 +95,7 @@ const PlayListContainer = styled.div`
   }
   img {
     width: 100px;
+    height: auto;
   }
 `;
 

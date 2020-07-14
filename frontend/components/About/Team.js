@@ -7,7 +7,7 @@ const Team = () => {
     <TeamWrap>
       <TeamContainer>
         <End>
-          <p>프론트엔드</p>
+          <p>[ 프론트엔드 ]</p>
           <TeamDiv>
             <ImgDiv>
               <img
@@ -70,7 +70,7 @@ const Team = () => {
           </TeamDiv>
         </End>
         <End back>
-          <p>백엔드</p>
+          <p>[ 백엔드 ]</p>
           <TeamDiv>
             <ImgDiv>
               <img
@@ -124,6 +124,10 @@ const TeamWrap = styled.div``;
 const TeamContainer = styled.div`
   display: flex;
   /* justify-content: space-evenly; */
+
+  @media (max-width: 660px) {
+    display: block;
+  }
 `;
 
 const End = styled.div`
@@ -137,6 +141,14 @@ const End = styled.div`
 
   p {
     text-align: center;
+  }
+
+  @media (max-width: 660px) {
+    ${(props) =>
+      props.back &&
+      css`
+        margin-left: 20px;
+      `}
   }
 `;
 

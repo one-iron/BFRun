@@ -1,26 +1,12 @@
 // external modules
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 
 const VideoSection = ({ title, returnList }) => {
   const [left, setLeft] = useState(0);
-  const [isOver, setIsOver] = useState(true);
   const visible = useRef(null);
   const total = useRef(null);
-
-  useEffect(() => {
-    // console.log('달라짐');
-    // setLeft(0);
-    // console.log(left);
-    // const moveToFirst = () => {
-    //   window.scroll({ left: 0, behavior: 'smooth' });
-    // };
-    // window.addEventListener('scroll', moveToFirst);
-    // return () => {
-    //   window.removeEventListener('scroll', moveToFirst);
-    // };
-  }, [returnList]);
 
   const moveScroll = (direction) => {
     const visibleWidth = visible.current.offsetWidth;
