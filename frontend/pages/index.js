@@ -103,11 +103,11 @@ export default function HomePage(props) {
       setStackId(stackId.filter((ids) => ids !== `stack_id=${id}`));
     } else if (selectedStack.length > 2) {
       // 최대 3개만 가능
-      setSelectedStack(selectedStack.slice(1, 3).concat(name));
-      setStackId(stackId.slice(1, 3).concat(`stack_id=${id}`));
+      setSelectedStack([name, ...selectedStack].slice(0, 3));
+      setStackId([`stack_id=${id}`, ...stackId].slice(0, 3));
     } else {
-      setSelectedStack([...selectedStack, name]);
-      setStackId([...stackId, `stack_id=${id}`]);
+      setSelectedStack([name, ...selectedStack]);
+      setStackId([`stack_id=${id}`, ...stackId]);
     }
   };
 
@@ -130,8 +130,8 @@ export default function HomePage(props) {
       }
     } else {
       // stack이 없을 경우 모든 크리에이터 선택 가능
-      setSelectedCreator([...selectedCreator, tag]);
-      setCreatorId([...creatorId, `channels_id=${id}`]);
+      setSelectedCreator([tag, ...selectedCreator]);
+      setCreatorId([`channels_id=${id}`, ...creatorId]);
       if (selectedCreator.includes(tag)) {
         setSelectedCreator(selectedCreator.filter((tags) => tags !== tag));
         setCreatorId(creatorId.filter((ids) => ids !== `channels_id=${id}`));

@@ -14,7 +14,7 @@ const SelectedVideo = ({
   addDelCreatorTags,
   removeTags,
 }) => {
-  // console.log('returnList -->', returnList);
+  console.log('returnList -->', returnList);
   return (
     <SelectedVideoWrap>
       <SelectedTags
