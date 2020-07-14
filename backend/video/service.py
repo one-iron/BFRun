@@ -40,7 +40,7 @@ class VideoService:
             return categories
 
         except pymysql.err.Error as e:
-            return {"message" : "DATABASE ERROR" + str(e)}
+            return {"message" : "DATABASE ERROR"}
         
         finally:
 
@@ -59,8 +59,8 @@ class VideoService:
             )
             return video_detail, video_playlist
 
-        except pymysql.err.Error as e:
-            return {"message" : "DATABASE ERROR" + str(e)}, 500
+        except pymysql.err.Error:
+            return {"message" : "DATABASE ERROR"}, 500
 
         finally:
             if db:
@@ -120,8 +120,8 @@ class VideoService:
     
             return videos
 
-        except pymysql.err.Error as e:
-            return {"message" : "DATABASE ERROR" + str(e)}, 500
+        except pymysql.err.Error:
+            return {"message" : "DATABASE ERROR"}, 500
         
         finally:
 
@@ -137,8 +137,8 @@ class VideoService:
 
             return videos
 
-        except pymysql.err.Error as e:
-            return {"message": "DATABASE ERROR" + str(e)}, 500
+        except pymysql.err.Error:
+            return {"message": "DATABASE ERROR"}, 500
 
         finally:
             if db:

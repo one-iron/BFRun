@@ -27,7 +27,11 @@ def test_get_wrong_video(api):
 
 # 비디오 상세 API : response 확인
 def test_get_video(api):
-    response = api.get("/video/2", content_type="application/json")
+    response = api.get(
+        "/video/2",
+        content_type="application/json"
+    )
+    assert response.status_code == 200
     assert response.json == {
         "video_detail": {
             "channel_id": 1,
@@ -119,147 +123,68 @@ def test_get_video(api):
 
 # 카테고리 API [GET]
 def test_get_categories(api):
-    response = api.get("/categories", content_type="application/json")
-    assert response.json == {
-        "content_types": [
-            {
-            "id": 1,
-            "name": "강의"
-            },
-            {
-            "id": 2,
-            "name": "꿀팁"
-            },
-            {
-            "id": 3,
-            "name": "핵심개념"
-            },
-            {
-            "id": 4,
-            "name": "동기부여"
-            }
-        ],
-        "stacks": [
-            {
-            "general_stacks": [
-                {
-                "id": 14,
-                "name": "Apollo",
-                "color_code": "#112A47"
-                },
-                {
-                "id": 16,
-                "name": "AWS",
-                "color_code": "#08132B"
-                },
-                {
-                "id": 17,
-                "name": "Database",
-                "color_code": "#036172"
-                },
-                {
-                "id": 19,
-                "name": "Git",
-                "color_code": "#08132B"
-                },
-                {
-                "id": 20,
-                "name": "Linux",
-                "color_code": "#08132B"
-                },
-                {
-                "id": 21,
-                "name": "Etc",
-                "color_code": "#08132B"
-                }
-            ]
-            },
-            {
-            "frontend_stacks": [
-                {
-                "id": 1,
-                "name": "HTML",
-                "color_code": "#E55126"
-                },
-                {
-                "id": 2,
-                "name": "CSS",
-                "color_code": "#0C73B8"
-                },
-                {
-                "id": 3,
-                "name": "JavaScript",
-                "color_code": "#E5A228"
-                },
-                {
-                "id": 5,
-                "name": "TypeScript",
-                "color_code": "#007ACC"
-                },
-                {
-                "id": 6,
-                "name": "React",
-                "color_code": "#5ED4F4"
-                },
-                {
-                "id": 7,
-                "name": "React Native",
-                "color_code": "#5ED4F4"
-                },
-                {
-                "id": 9,
-                "name": "Vue",
-                "color_code": "#3FB37F"
-                },
-                {
-                "id": 12,
-                "name": "Angular",
-                "color_code": "#BE002E"
-                },
-                {
-                "id": 15,
-                "name": "Webpack",
-                "color_code": "#8AD0F4"
-                }
-            ]
-            },
-            {
-            "backend_stacks": [
-                {
-                "id": 4,
-                "name": "Python",
-                "color_code": "#396C97"
-                },
-                {
-                "id": 8,
-                "name": "Django",
-                "color_code": "#092D1F"
-                },
-                {
-                "id": 10,
-                "name": "Node.js",
-                "color_code": "#7CB801"
-                },
-                {
-                "id": 11,
-                "name": "Flask",
-                "color_code": "#000000"
-                },
-                {
-                "id": 13,
-                "name": "GraphQL",
-                "color_code": "#DF34A6"
-                },
-                {
-                "id": 18,
-                "name": "SQL",
-                "color_code": "#008062"
-                }
-            ]
-            }
-        ],
-        "channels": [
-            {
+  response = api.get(
+    "/categories",
+    content_type="application/json"
+  )
+  assert response.status_code == 200
+  assert response.json == {
+      "content_types": [
+      {
+        "id": 1,
+        "name": "강의"
+      },
+      {
+        "id": 2,
+        "name": "꿀팁"
+      },
+      {
+        "id": 3,
+        "name": "핵심개념"
+      },
+      {
+        "id": 4,
+        "name": "동기부여"
+      }
+    ],
+    "stacks": [
+      {
+        "general_stacks": [
+          {
+            "id": 14,
+            "name": "Apollo",
+            "color_code": "#112A47"
+          },
+          {
+            "id": 16,
+            "name": "AWS",
+            "color_code": "#08132B"
+          },
+          {
+            "id": 17,
+            "name": "Database",
+            "color_code": "#036172"
+          },
+          {
+            "id": 19,
+            "name": "Git",
+            "color_code": "#08132B"
+          },
+          {
+            "id": 20,
+            "name": "Linux",
+            "color_code": "#08132B"
+          },
+          {
+            "id": 21,
+            "name": "Etc",
+            "color_code": "#08132B"
+          }
+        ]
+      },
+      {
+        "frontend_stacks": [
+          {
             "id": 1,
             "name": "생활코딩"
             },
@@ -297,6 +222,9 @@ def test_get_categories(api):
             }
         ]
     }
+  ]
+  }
+
 
 # 비디오 리스트 API : 스택, 채널 필터링 시
 def test_get_video_lists(api):

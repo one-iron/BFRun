@@ -27,7 +27,7 @@ def create_video_endpoints(app, video_service):
         try:
             detail_get = video_service.get_video_detail(video_id)
             if detail_get is 0:
-                return {'message': f'CAN NOT FIND VIDEO ID {video_id}'}, 400
+                return {"message": "CAN NOT FIND VIDEO ID"}, 400
             else:
                 video_detail, video_playlist = detail_get
 
