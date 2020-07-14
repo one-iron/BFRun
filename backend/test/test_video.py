@@ -27,7 +27,11 @@ def test_get_wrong_video(api):
 
 # 비디오 상세 API : response 확인
 def test_get_video(api):
-    response = api.get("/video/2", content_type="application/json")
+    response = api.get(
+        "/video/2",
+        content_type="application/json"
+    )
+    assert response.status_code == 200
     assert response.json == {
         "video_detail": {
             "channel_id": 1,
@@ -116,10 +120,10 @@ def test_get_video(api):
         ],
     }
 
-
 # 카테고리 API [GET]
 def test_get_categories(api):
     response = api.get("/categories", content_type="application/json")
+    assert response.status_code == 200
     assert response.json == {
         "content_types": [
             {
@@ -301,6 +305,7 @@ def test_get_categories(api):
 # 비디오 리스트 API : 스택, 채널 필터링 시
 def test_get_video_lists(api):
     response = api.get("/videos?stack_id=2&channels_id=1&stack_id=1")
+    assert response.status_code == 200
     assert response.json == {
                 "videos": [
             [
@@ -599,6 +604,7 @@ def test_get_video_lists(api):
 # 비디오 리스트 API : 비디오 조회결과가 없을 시
 def test_get_video_list_no_result(api):
     response = api.get("/videos?channels_id=95")
+    assert response.status_code == 200
     assert response.json == {
          "videos": [
             []
