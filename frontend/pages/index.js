@@ -94,8 +94,8 @@ export default function HomePage(props) {
       setStackId([`stack_id=${id}`]);
     } else if (selectedCreator.length > 1) {
       // creator가 2개 이상이라면, creator 모두 지우기
-      setSelectedCreator([]);
-      setCreatorId([]);
+      setSelectedCreator([selectedCreator[0]]);
+      setCreatorId([creatorId[0]]);
       setSelectedStack([name]);
       setStackId([`stack_id=${id}`]);
     } else if (selectedStack.includes(name)) {
