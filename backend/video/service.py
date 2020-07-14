@@ -22,16 +22,14 @@ class VideoService:
             # 크리에이터 채널
             channels = self.video_dao.get_channels(db)
             # 스택
-            with open("const.yaml") as yaml_const:
-                stack = yaml.safe_load(yaml_const)
   
-                general_stacks = self.video_dao.get_stacks(stack["general"], db)
-                frontend_stacks = self.video_dao.get_stacks(stack["frontend"], db)
-                backend_stacks = self.video_dao.get_stacks(stack["backend"], db)
+            general_stacks = self.video_dao.get_stacks(yaml["general"], db)
+            frontend_stacks = self.video_dao.get_stacks(yaml["frontend"], db)
+            backend_stacks = self.video_dao.get_stacks(yaml["backend"], db)
 
-                stacks.append({"general_stacks": general_stacks})
-                stacks.append({"frontend_stacks": frontend_stacks})
-                stacks.append({"backend_stacks": backend_stacks})
+            stacks.append({"general_stacks": general_stacks})
+            stacks.append({"frontend_stacks": frontend_stacks})
+            stacks.append({"backend_stacks": backend_stacks})
 
             categories["content_types"] = contents_types
             categories["stacks"] = stacks
@@ -40,7 +38,7 @@ class VideoService:
             return categories
 
         except pymysql.err.Error as e:
-            return {"message" : "DATABASE ERROR" + str(e)}
+            return {"message" : "DATABASE ERROR"}
         
         finally:
 
@@ -59,8 +57,8 @@ class VideoService:
             )
             return video_detail, video_playlist
 
-        except pymysql.err.Error as e:
-            return {"message" : "DATABASE ERROR" + str(e)}, 500
+        except pymysql.err.Error:
+            return {"message" : "DATABASE ERROR"}, 500
 
         finally:
             if db:
@@ -120,8 +118,8 @@ class VideoService:
     
             return videos
 
-        except pymysql.err.Error as e:
-            return {"message" : "DATABASE ERROR" + str(e)}, 500
+        except pymysql.err.Error:
+            return {"message" : "DATABASE ERROR"}, 500
         
         finally:
 
@@ -137,8 +135,8 @@ class VideoService:
 
             return videos
 
-        except pymysql.err.Error as e:
-            return {"message": "DATABASE ERROR" + str(e)}, 500
+        except pymysql.err.Error:
+            return {"message": "DATABASE ERROR"}, 500
 
         finally:
             if db:

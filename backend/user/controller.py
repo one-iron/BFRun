@@ -20,8 +20,8 @@ def create_user_endpoints(app, user_service):
             response = user_service.google_login(user)
             return response
 
-        except pymysql.err.Error as e:
-            return {"message" : "DATABASE ERROR" + str(e)}, 500
+        except pymysql.err.Error:
+            return {"message" : "DATABASE ERROR"}, 500
 
         except Exception as e:
             return {"message": str(e)}, 400
