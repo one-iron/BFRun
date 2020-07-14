@@ -26,7 +26,8 @@ const Information = (props) => {
                 <time>{videoInfo.created_at}</time>
               </article>
               <details style={{ whiteSpace: 'pre-line' }}>
-                {videoInfo.description}
+                <summary>본문 내용</summary>
+                <p>{videoInfo.description}</p>
               </details>
             </section>
           </>
@@ -121,6 +122,11 @@ const InformationContainer = styled.div`
     }
     details {
       line-height: 20px;
+      summary {
+        outline: none;
+        font-size: 15px;
+        font-weight: none;
+      }
     }
   }
 `;
