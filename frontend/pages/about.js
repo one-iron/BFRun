@@ -1,5 +1,6 @@
 // external modules
 import styled, { css } from 'styled-components';
+import Head from 'next/head';
 
 // internal moduels
 import Nav from '../components/Nav';
@@ -9,6 +10,11 @@ import Update from '../components/About/Update';
 const About = () => {
   return (
     <>
+      <Head>
+        <title>BFRun | About</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Nav />
       <AboutWrap>
         <AboutContainer>

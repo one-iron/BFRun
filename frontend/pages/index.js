@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import axios from 'axios';
+import Head from 'next/head';
 
 // internal modules
 import Nav from '../components/Nav';
@@ -182,6 +183,11 @@ export default function HomePage(props) {
 
   return (
     <>
+      <Head>
+        <title>BFRun</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <BlackWrap isBlack={black}>
         <Nav removeTags={removeTags} />
         <ContentWrap>

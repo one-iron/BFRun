@@ -7,7 +7,7 @@ const size = {
 };
 
 const theme = {
-  mainColor: '#b2f5d9',
+  mainColor: '#0055b8',
   subColor: '#0a4297',
   mobile: `(max-width): ${size.mobile}`,
   tablet: `(max-width: ${size.tablet})`,

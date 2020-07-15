@@ -82,21 +82,16 @@ const LoginWrap = styled.div`
   border: 1px solid gray;
   color: gray;
   padding: 6px 8px;
-
-  /* border: 1px solid orange;
-  background-color: orange;
-  color: white;
-  padding: 6px 10px;
-  font-weight: 700; */
+  font-weight: 700;
+  :hover {
+    color: ${(props) => props.theme.mainColor};
+    border-color: ${(props) => props.theme.mainColor};
+  }
 
   @media ${(props) => props.theme.laptopS} {
     margin: 0;
     border: none;
     padding: 0 5px;
-    font-size: 14px;
-
-    :hover {
-      color: red;
-    }
+    font-size: 16px;
   }
 `;

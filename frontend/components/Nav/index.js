@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 // internal modules
 import Login from '../Login';
-import Search from './Search';
+// import Search from './Search';
 
 const Nav = ({ removeTags }) => {
   const [searchBox, setSearchBox] = useState(false);
@@ -35,7 +35,10 @@ const Nav = ({ removeTags }) => {
         <NavLeft openSearchBox={searchBox}>
           <Link href="/">
             <a>
-              <TitleText onClick={removeTags}>BF Run.</TitleText>
+              <TitleText onClick={removeTags}>
+                {/* BF Run. */}
+                <img src="/static/logo.png" />
+              </TitleText>
             </a>
           </Link>
         </NavLeft>
@@ -121,8 +124,14 @@ const NavLeft = styled.div`
 const TitleText = styled.div`
   font-size: 25px;
   font-weight: bold;
-  color: black;
+  color: ${(props) => props.theme.mainColor};
   cursor: pointer;
+
+  img {
+    position: absolute;
+    top: 0;
+    height: 90px;
+  }
 `;
 
 const NavMiddle = styled.div`
@@ -248,15 +257,16 @@ const RightContent = styled.div`
   margin-left: 10px;
   cursor: pointer;
   color: gray;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 700;
+
+  :hover {
+    color: ${(props) => props.theme.mainColor};
+  }
 
   @media ${(props) => props.theme.laptopS} {
     margin: 10px 5px;
     padding: 0;
     /* cursor: pointer; */
-
-    :hover {
-      color: red;
-    }
   }
 `;
