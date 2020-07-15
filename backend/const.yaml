@@ -2,13 +2,12 @@ general: 1
 frontend: 2
 backend: 3
 
-video_max_id: 1155
+video_max_id: 1198
 video_min_id: 1
 
 position_id:
   - 1
   - 2
   - 3
-  - 4
 
 no_response: 0

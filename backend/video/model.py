@@ -167,7 +167,7 @@ class VideoDao:
         """
         return db.dict_fetch(get_playlist_sql, video_id)
 
-    def recommand_video_model(self, position, db):
+    def recommand_video_by_view(self, position, db):
         get_recommand_video_sql = """
         SELECT DISTINCT
             videos.id AS video_id,
@@ -184,3 +184,21 @@ class VideoDao:
         """
 
         return db.dict_fetch(get_recommand_video_sql, position)
+
+    def recommand_video_by_us(self, position, db):
+        get_recommand_update_video_sql = """
+        SELECT
+            videos.id AS video_id,
+            videos.view,
+            videos.url,
+            videos.title,
+            channels.name AS channel_name
+        FROM videos
+        INNER JOIN channels ON videos.channel_id = channels.id
+        INNER JOIN stacks ON videos.stack_id = stacks.id
+        WHERE stacks.position_id = %s and videos.is_recommended = 1
+        ORDER BY view DESC
+        LIMIT 10
+        """
+
+        return db.dict_fetch(get_recommand_update_video_sql, position)

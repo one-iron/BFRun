@@ -130,8 +130,9 @@ class VideoService:
         db = DB()
         try:
             videos = []
+
             for position in yaml['position_id']:
-                videos.append(self.video_dao.recommand_video_model(position, db))
+                videos.append(self.video_dao.recommand_video_by_us(position, db))
 
             return videos
 
