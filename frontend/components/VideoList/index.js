@@ -6,11 +6,12 @@ import React, { useState } from 'react';
 import Recommend from './Recommend';
 
 const VideoList = (props) => {
+  console.log(props.recommendList);
   return (
     <VideoWrap>
       <article>
         <Recommend
-          title="전체 추천영상"
+          title="공통 추천영상"
           recommended={props.recommendList.general}
         />
         <Recommend

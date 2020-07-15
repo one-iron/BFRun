@@ -8,19 +8,6 @@ const VideoSection = ({ title, returnList }) => {
   const visible = useRef(null);
   const total = useRef(null);
 
-  useEffect(() => {
-    // console.log('달라짐');
-    // setLeft(0);
-    // console.log(left);
-    // const moveToFirst = () => {
-    //   window.scroll({ left: 0, behavior: 'smooth' });
-    // };
-    // window.addEventListener('scroll', moveToFirst);
-    // return () => {
-    //   window.removeEventListener('scroll', moveToFirst);
-    // };
-  }, [returnList]);
-
   const moveScroll = (direction) => {
     const visibleWidth = visible.current.offsetWidth;
     const totalWidth = total.current.offsetWidth * returnList.length;

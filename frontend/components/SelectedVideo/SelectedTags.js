@@ -36,6 +36,7 @@ const tagColors = {
   'Minjun Kim': '#F80000',
   '김버그 Kimbug': '#F80000',
   '조코딩 JoCoding': '#F80000',
+  'Corey Schafer': '#F80000',
 };
 
 const tagIds = {

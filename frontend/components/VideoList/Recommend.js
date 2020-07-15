@@ -1,5 +1,5 @@
 // external modules
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 
@@ -8,6 +8,8 @@ const Recommend = (props) => {
   const [left, setLeft] = useState(0);
   const visible = useRef(null);
   const total = useRef(null);
+
+  console.log('reco', recommended);
 
   const moveScroll = (direction) => {
     const visibleWidth = visible.current.offsetWidth;
@@ -25,9 +27,14 @@ const Recommend = (props) => {
     <RecommendWrap>
       <TitleH2>{props.title}</TitleH2>
       <VideoContainer>
-        <Button onClick={() => moveScroll('back')}>
-          <i className="fa fa-caret-left" />
-        </Button>
+        {recommended.length < 4 ? (
+          <></>
+        ) : (
+          <Button back onClick={() => moveScroll('back')}>
+            <i className="fa fa-caret-left" />
+          </Button>
+        )}
+
         <Videos ref={visible}>
           <Absolute toLeft={left} ref={total}>
             {recommended.map((data, index) => {
@@ -42,7 +49,7 @@ const Recommend = (props) => {
                       key={data.video_id}
                       src={`http://i3.ytimg.com/vi/${data.url.slice(
                         data.url.indexOf('v=') + 2,
-                        data.url.indexOf('&list'),
+                        data.url.indexOf('&'),
                       )}/maxresdefault.jpg`}
                     />
                     <VideoTitle>
@@ -57,9 +64,13 @@ const Recommend = (props) => {
             })}
           </Absolute>
         </Videos>
-        <Button onClick={() => moveScroll('next')}>
-          <i className="fa fa-caret-right" />
-        </Button>
+        {recommended.length < 4 ? (
+          <></>
+        ) : (
+          <Button next onClick={() => moveScroll('next')}>
+            <i className="fa fa-caret-right" />
+          </Button>
+        )}
       </VideoContainer>
     </RecommendWrap>
   );
@@ -68,19 +79,19 @@ const Recommend = (props) => {
 export default Recommend;
 
 const RecommendWrap = styled.div`
-  /* margin: 40px 0; */
+  margin: 20px 0;
 `;
 
 const TitleH2 = styled.h2`
   font-weight: 700;
   font-size: 25px;
   padding: 5px;
-  margin: 0 50px;
-  margin-bottom: 20px;
+  margin: 0 0 10px 10px;
 `;
 
 const VideoContainer = styled.article`
   /* border: 1px solid black; */
+  position: relative;
   margin: 2px 4px;
   display: flex;
   align-items: center;
@@ -88,6 +99,9 @@ const VideoContainer = styled.article`
 `;
 
 const Button = styled.div`
+  position: absolute;
+  top: 75px;
+
   cursor: pointer;
   margin: 0 12px;
   font-size: 70px;
@@ -98,15 +112,27 @@ const Button = styled.div`
     transform: scale(1.2);
   }
 
+  ${(props) =>
+    props.next &&
+    css`
+      right: -40px;
+    `}
+
+  ${(props) =>
+    props.back &&
+    css`
+      left: -40px;
+    `}
+
   @media ${(props) => props.theme.tablet} {
     display: none;
   }
 `;
 
 const Videos = styled.div`
-  /* border: 2px solid red; */
+  // border: 2px solid red;
   width: 880px;
-  height: 300px;
+  height: 250px;
   display: flex;
   align-items: center;
   position: relative;
@@ -142,7 +168,7 @@ const VideoWindow = styled.div`
   cursor: pointer;
   width: 270px;
   height: 230px;
-  margin: 0 6px;
+  margin: 0 8px;
   border-radius: 5px;
   box-shadow: 0.1em 0 0.5em rgba(0, 0, 0, 0.3);
   transform: scale(1);
