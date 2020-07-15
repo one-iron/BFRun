@@ -1,6 +1,7 @@
 // external modules
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Head from 'next/head';
 
 // internal moduels
 import Nav from '../components/Nav';
@@ -23,6 +24,11 @@ const Roadmap = () => {
 
   return (
     <RoadmapWrap>
+      <Head>
+        <title>BFRun | Roadmap</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Nav />
       <RoadmapContainer>
         <RoadmapH1>로드맵</RoadmapH1>

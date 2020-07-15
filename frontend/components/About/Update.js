@@ -8,8 +8,8 @@ const Update = () => {
         <Title>업데이트</Title>
         <Contents>
           <Tobe>
-            예정
             <details>
+              <summary>예정</summary>
               <ul>
                 <li>검색창</li>
                 <li>동영상 책갈피 기능</li>
@@ -17,8 +17,8 @@ const Update = () => {
             </details>
           </Tobe>
           <Done>
-            완료
             <details>
+              <summary>완료</summary>
               <ul>
                 <li>책갈피 기능</li>
               </ul>
@@ -53,6 +53,11 @@ const Contents = styled.div`
 `;
 
 const Tobe = styled.div`
+  summary {
+    outline: none;
+    font-size: 15px;
+    font-weight: none;
+  }
   ul {
     margin-left: 50px;
     list-style: circle;
