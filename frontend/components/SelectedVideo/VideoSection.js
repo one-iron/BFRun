@@ -42,7 +42,7 @@ const VideoSection = ({ title, returnList }) => {
                         src={`http://i3.ytimg.com/vi/${data.url.slice(
                           data.url.indexOf('v=') + 2,
                           data.url.indexOf('&list'),
-                        )}/maxresdefault.jpg`}
+                        )}/hqdefault.jpg`}
                       />
                       <VideoTitle>
                         {data.title.length < 20
@@ -154,6 +154,7 @@ const VideoLi = styled.div`
   box-shadow: 0.1em 0 0.5em rgba(0, 0, 0, 0.3);
   transform: scale(1);
   transition: all 0.3s ease-in-out;
+
   &:hover {
     transform: scale(1.04);
   }
@@ -171,6 +172,10 @@ const ThumbNail = styled.img`
   width: 100%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+
+  position: absolute;
+  top: -26px;
+  clip: rect(26px 300px 175px 0px);
 `;
 
 const VideoTitle = styled.div`
@@ -179,6 +184,8 @@ const VideoTitle = styled.div`
   padding: 4px;
   margin-bottom: 30px;
 
+  position: absolute;
+  top: 155px;
   @media (max-width: 500px) {
     width: 300px;
     height: 300px;
