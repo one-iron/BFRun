@@ -28,26 +28,19 @@ const SelectedVideo = ({
       />
       {/* <Loading /> */}
       {returnList[0] ? (
-        returnList[0].length ? (
-          returnList.map((arr, index) => {
-            return (
-              <VideoSection
-                returnList={arr}
-                title={
-                  selectedCreator[index] ||
-                  selectedContent[index] ||
-                  selectedStack[index]
-                }
-                key={index}
-              />
-            );
-          })
-        ) : (
-          <NoContents>
-            <i className="fa fa-exclamation-triangle"></i> 일치하는 컨텐츠가
-            없습니다
-          </NoContents>
-        )
+        returnList.map((arr, index) => {
+          return (
+            <VideoSection
+              returnList={arr}
+              title={
+                selectedCreator[index] ||
+                selectedContent[index] ||
+                selectedStack[index]
+              }
+              key={index}
+            />
+          );
+        })
       ) : (
         <Loading />
       )}
