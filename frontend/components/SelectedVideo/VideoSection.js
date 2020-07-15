@@ -44,11 +44,7 @@ const VideoSection = ({ title, returnList }) => {
                           data.url.indexOf('&list'),
                         )}/hqdefault.jpg`}
                       />
-                      <VideoTitle>
-                        {data.title.length < 20
-                          ? data.title
-                          : `${data.title.slice(0, 35)}...`}
-                      </VideoTitle>
+                      <VideoTitle>{data.title}</VideoTitle>
                       <CreatorName>{data.channel_name}</CreatorName>
                     </VideoLi>
                   </Link>
@@ -183,6 +179,7 @@ const VideoTitle = styled.div`
   margin-left: 4px;
   padding: 4px;
   margin-bottom: 30px;
+  line-height: 20px;
 
   position: absolute;
   top: 155px;
