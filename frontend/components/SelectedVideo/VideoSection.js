@@ -141,6 +141,10 @@ const Button = styled.div`
     css`
       right: 0;
     `}
+
+  @media ${(props) => props.theme.tablet} {
+    display: none;
+  }
 `;
 
 const VideoLi = styled.div`
