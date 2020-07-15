@@ -54,7 +54,7 @@ const VideoSection = ({ title, returnList }) => {
                       <ThumbNail
                         src={`http://i3.ytimg.com/vi/${data.url.slice(
                           data.url.indexOf('v=') + 2,
-                          data.url.indexOf('&list'),
+                          data.url.indexOf('&'),
                         )}/hqdefault.jpg`}
                       />
                       <VideoTitle>{data.title}</VideoTitle>
@@ -139,6 +139,7 @@ const Button = styled.div`
   &:hover {
     transform: scale(2);
   }
+  z-index: 50;
   ${(props) =>
     props.back &&
     css`

@@ -62,6 +62,8 @@ export default function HomePage(props) {
     axios
       .get(`${SELECTED_VIDEO_LIST}?${returnUrl}`)
       .then((res) => setReturnList(res.data.videos));
+
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   }, [contentId, stackId, creatorId]);
 
   // 컨텐츠 태그 추가/제거
