@@ -57,7 +57,10 @@ const VideoSection = ({ title, returnList }) => {
           </Button>
         </SlideDiv>
       ) : (
-        <NoContents>준비중입니다 😀</NoContents>
+        <NoContents>
+          <WarningIcon className="fa fa-exclamation-triangle"> </WarningIcon>
+          준비 중입니다
+        </NoContents>
       )}
     </VideoSectionWrap>
   );
@@ -169,7 +172,6 @@ const ThumbNail = styled.img`
   width: 100%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-
   position: absolute;
   top: -26px;
   clip: rect(26px 300px 175px 0px);
@@ -192,6 +194,24 @@ const VideoTitle = styled.div`
 
 const NoContents = styled.div`
   /* border: 2px solid red; */
-  margin: 20px 0 0 30px;
+  margin-top: 30px;
   font-size: 20px;
+  color: rgba(9, 132, 227, 1);
+  text-align: center;
+`;
+
+const WarningIcon = styled.i`
+  margin-right: 5px;
+  animation: vibe 1s linear infinite;
+  @keyframes vibe {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 `;
