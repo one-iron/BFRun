@@ -1,5 +1,5 @@
 // external modules
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 
@@ -7,6 +7,19 @@ const VideoSection = ({ title, returnList }) => {
   const [left, setLeft] = useState(0);
   const visible = useRef(null);
   const total = useRef(null);
+
+  useEffect(() => {
+    // console.log('달라짐');
+    // setLeft(0);
+    // console.log(left);
+    // const moveToFirst = () => {
+    //   window.scroll({ left: 0, behavior: 'smooth' });
+    // };
+    // window.addEventListener('scroll', moveToFirst);
+    // return () => {
+    //   window.removeEventListener('scroll', moveToFirst);
+    // };
+  }, [returnList]);
 
   const moveScroll = (direction) => {
     const visibleWidth = visible.current.offsetWidth;
@@ -28,7 +41,7 @@ const VideoSection = ({ title, returnList }) => {
           <Button back onClick={() => moveScroll('back')}>
             <i className="fa fa-caret-left" />
           </Button>
-          <VideoLiContainer ref={visible}>
+          <VideoLiContainer ref={visible} isOver={returnList.length}>
             <ListContainer toLeft={left} ref={total} isOver={returnList.length}>
               {returnList.map((data, index) => {
                 return (
@@ -96,7 +109,7 @@ const VideoLiContainer = styled.div`
   margin: 0 10px;
   padding: 0 5px;
   width: 890px;
-  height: 600px;
+  height: ${(props) => (props.isOver > 4 ? '600px' : '300px')};
   overflow-x: scroll;
   overflow-y: hidden;
   ::-webkit-scrollbar {
