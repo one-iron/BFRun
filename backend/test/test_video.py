@@ -125,7 +125,7 @@ def test_get_categories(api):
     response = api.get("/categories", content_type="application/json")
     assert response.status_code == 200
     assert response.json == {
-        "content_types": [
+            "content_types": [
             {
             "id": 1,
             "name": "강의"
@@ -146,6 +146,11 @@ def test_get_categories(api):
         "stacks": [
             {
             "general_stacks": [
+                {
+                "id": 13,
+                "name": "GraphQL",
+                "color_code": "#DF34A6"
+                },
                 {
                 "id": 14,
                 "name": "Apollo",
@@ -248,11 +253,6 @@ def test_get_categories(api):
                 "id": 11,
                 "name": "Flask",
                 "color_code": "#000000"
-                },
-                {
-                "id": 13,
-                "name": "GraphQL",
-                "color_code": "#DF34A6"
                 },
                 {
                 "id": 18,

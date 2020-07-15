@@ -12,10 +12,6 @@ import BackCourse from '../components/RoadmapLink/BackCourse';
 const Roadmap = () => {
   const [select, setSelect] = useState(1);
 
-  const selectedNum = (id) => {
-    setSelect(id);
-  };
-
   const toShow = {
     1: <GeneralCourse />,
     2: <FrontCourse />,
@@ -34,16 +30,16 @@ const Roadmap = () => {
         <RoadmapH1>로드맵</RoadmapH1>
         <RoadmapBody>
           <ChoiceContainer>
-            <RoadChoice select={select === 1} onClick={() => selectedNum(1)}>
+            <RoadChoice select={select === 1} onClick={() => setSelect(1)}>
               공통
             </RoadChoice>
-            <RoadChoice select={select === 2} onClick={() => selectedNum(2)}>
+            <RoadChoice select={select === 2} onClick={() => setSelect(2)}>
               프론트엔드
             </RoadChoice>
             <RoadChoice
               select={select === 3}
               onClick={() => {
-                selectedNum(3);
+                setSelect(3);
               }}
             >
               백엔드
@@ -61,14 +57,15 @@ export default Roadmap;
 const RoadmapWrap = styled.div``;
 
 const RoadmapContainer = styled.div`
-  border: 2px solid red;
+  border: 1px solid rgba(223, 230, 233, 0.6);
+  border-radius: 5px;
   /* box-shadow: 2px 2px rgba(149, 175, 192, 0.4); */
   margin: 0 auto;
   position: relative;
   top: 120px;
   margin-bottom: 100px;
-  padding: 10px;
   width: 900px;
+  height: 500px;
   @media ${(props) => props.theme.laptopM} {
     width: 90%;
   }
@@ -89,7 +86,8 @@ const RoadmapBody = styled.div`
 `;
 const ChoiceContainer = styled.div`
   /* border: 1px solid green; */
-  margin: 2px auto;
+  border-bottom: 1px solid rgba(223, 230, 233, 0.6);
+  margin: 30px auto;
   padding: 5px 90px;
   display: flex;
   justify-content: space-evenly;

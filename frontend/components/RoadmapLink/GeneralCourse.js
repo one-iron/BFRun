@@ -48,9 +48,8 @@ const Course = styled.div`
         position: absolute;
         left: 0;
         top: 20px;
-        display: inline;
         width: 100%;
-        border-bottom: 2px solid;
+        border-bottom: 2px solid #0055b8;
         opacity: 0;
         -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
         transition: opacity 0.6s, transform 0.6s;
@@ -61,6 +60,10 @@ const Course = styled.div`
         opacity: 1;
         -webkit-transform: scale(1);
         transform: scale(1);
+      }
+      &:hover {
+        color: #0055b8;
+        transition: color 0.2s ease-in-out;
       }
     }
   }
