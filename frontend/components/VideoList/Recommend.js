@@ -9,8 +9,6 @@ const Recommend = (props) => {
   const visible = useRef(null);
   const total = useRef(null);
 
-  console.log('reco', recommended);
-
   const moveScroll = (direction) => {
     const visibleWidth = visible.current.offsetWidth;
     const totalWidth = total.current.offsetWidth;

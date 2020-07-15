@@ -1,6 +1,6 @@
 // external modules
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React from 'react';
 
 // internal modules
 import Recommend from './Recommend';
