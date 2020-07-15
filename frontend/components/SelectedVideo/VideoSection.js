@@ -54,14 +54,10 @@ const VideoSection = ({ title, returnList }) => {
                       <ThumbNail
                         src={`http://i3.ytimg.com/vi/${data.url.slice(
                           data.url.indexOf('v=') + 2,
-                          data.url.indexOf('&list'),
+                          data.url.indexOf('&'),
                         )}/hqdefault.jpg`}
                       />
-                      <VideoTitle>
-                        {data.title.length < 20
-                          ? data.title
-                          : `${data.title.slice(0, 35)}...`}
-                      </VideoTitle>
+                      <VideoTitle>{data.title}</VideoTitle>
                       <CreatorName>{data.channel_name}</CreatorName>
                     </VideoLi>
                   </Link>
@@ -143,6 +139,7 @@ const Button = styled.div`
   &:hover {
     transform: scale(2);
   }
+  z-index: 50;
   ${(props) =>
     props.back &&
     css`
@@ -196,6 +193,7 @@ const VideoTitle = styled.div`
   margin-left: 4px;
   padding: 4px;
   margin-bottom: 30px;
+  line-height: 20px;
 
   position: absolute;
   top: 155px;
