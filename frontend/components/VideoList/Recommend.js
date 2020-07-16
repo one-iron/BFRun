@@ -18,7 +18,7 @@ const Recommend = (props) => {
     } else if (direction === 'next' && left >= -totalWidth + 1000) {
       setLeft(left - visibleWidth);
     }
-    console.log(totalWidth);
+    // console.log(totalWidth);
   };
 
   return (
@@ -133,14 +133,13 @@ const Videos = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  ::-webkit-scrollbar {
-    width: 0;
-  }
+  overflow: hidden;
+
   @media ${(props) => props.theme.tablet} {
+    overflow-x: scroll;
+    overflow-y: hidden;
     ::-webkit-scrollbar {
-      /* width: 4px; */
+      width: 0;
     }
   }
 
