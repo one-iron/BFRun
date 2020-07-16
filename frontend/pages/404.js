@@ -45,6 +45,7 @@ const Text = styled.div`
 `;
 
 const Button = styled.button`
+  cursor: pointer;
   border: 1px solid lightgray;
   color: #2d2d2d;
   outline: none;
