@@ -121,9 +121,10 @@ const InformationContainer = styled.div`
       color: gray;
     }
     details {
-      cursor: pointer;
       line-height: 20px;
+      cursor: text;
       summary {
+        cursor: pointer;
         outline: none;
         font-size: 15px;
         font-weight: none;

@@ -151,17 +151,14 @@ const SelectedTags = ({
 export default SelectedTags;
 
 const SelectedTagsWrap = styled.div`
-  /* border: 1px solid black; */
   padding: 6px 10px;
   flex-wrap: wrap;
-  /* display: flex; */
   width: 100%;
   border-radius: 10px;
 `;
 
 const TagLine = styled.div`
   display: flex;
-  /* border: 1px solid red; */
 `;
 
 const TagName = styled.span`

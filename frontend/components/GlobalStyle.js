@@ -111,7 +111,7 @@ const GlobalStyle = (props) => {
             line-height: 1;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
               'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
-              'Segoe UI Emoji', 'Segoe UI Symbol';
+              'Segoe UI Emoji', 'Segoe UI Symbol', 'Gothic A1';
           }
           ol,
           ul {

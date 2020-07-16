@@ -47,10 +47,7 @@ const MobileCategory = ({
       };
     }, [categoryRef]);
   };
-
   clickedCategoryOutside(categoryRef);
-
-  // 작은 화면에서 카테고리 키면 검정색 배경으로 바뀌고, 큰 화면에서는 white로
 
   return (
     <>

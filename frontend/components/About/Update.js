@@ -13,17 +13,18 @@ const Update = () => {
               <ul>
                 <li>검색창</li>
                 <li>동영상 책갈피 기능</li>
+                <li>한/영 영상 나누기</li>
               </ul>
             </details>
           </Tobe>
-          <Done>
+          {/* <Done>
             <details>
               <summary>완료</summary>
               <ul>
                 <li>책갈피 기능</li>
               </ul>
             </details>
-          </Done>
+          </Done> */}
         </Contents>
       </UpdateContainer>
     </UpdateWrap>

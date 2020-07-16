@@ -11,9 +11,6 @@ const Login = (props) => {
   const [loginToken, setToken] = useState('');
   const [img, setImg] = useState('');
 
-  // console.log(loginToken);
-  // console.log(lstoken);
-
   const onGoogleLogin = async (res) => {
     console.log(res);
 
@@ -27,7 +24,7 @@ const Login = (props) => {
           email: res.profileObj.email,
         },
       });
-      console.log(token);
+      // console.log(token);
       if (token.data.token) {
         const { email, familyName, givenName, imageUrl } = res.profileObj;
         localStorage.setItem('token', token.data.token);
