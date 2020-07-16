@@ -58,8 +58,8 @@ const About = () => {
             <Contents>
               영상 활용에 동의해주신 생활코딩의 이고잉님, 얄팍한 코딩사전님,
               김왼손님, 코딩하는 테크보이 워니님, 드림코딩의 엘리님,
-              노마드코더의 니콜라스님, 김버그님, 조코딩님에게 무한한 감사를
-              드립니다. <br />
+              노마드코더의 니콜라스님, 김버그님, 조코딩님, Corey Schafer님에게
+              무한한 감사를 드립니다. <br />
               아울러 해당 사이트에 대한 문의나 피드백은 bfrunteam@gmail.com
               <MailTag href="mailto:bfrunteam@gmail.com">(메일 보내기)</MailTag>
               로 보내주시면 너무나도 감사하겠습니다.

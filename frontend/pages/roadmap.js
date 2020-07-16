@@ -5,9 +5,9 @@ import Head from 'next/head';
 
 // internal moduels
 import Nav from '../components/Nav';
-import GeneralCourse from '../components/RoadmapLink/GeneralCourse';
-import FrontCourse from '../components/RoadmapLink/FrontCourse';
-import BackCourse from '../components/RoadmapLink/BackCourse';
+import GeneralCourse from '../components/Roadmap/GeneralCourse';
+import FrontCourse from '../components/Roadmap/FrontCourse';
+import BackCourse from '../components/Roadmap/BackCourse';
 
 const Roadmap = () => {
   const [select, setSelect] = useState(1);
