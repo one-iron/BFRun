@@ -11,7 +11,7 @@ const VideoList = (props) => {
     <VideoWrap>
       <article>
         <Recommend
-          title="새싹 개발자들을 위한 꿀팁"
+          title="🌱새싹 개발자들을 위한 꿀팁"
           recommended={props.recommendList.general}
         />
         <Recommend
@@ -19,7 +19,7 @@ const VideoList = (props) => {
           recommended={props.recommendList.front}
         />
         <Recommend
-          title="백엔드가 궁금하세요?"
+          title="백엔드에 관심이 있다면!"
           recommended={props.recommendList.back}
         />
       </article>
