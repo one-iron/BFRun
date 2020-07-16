@@ -11,6 +11,7 @@ const VideoSection = ({ title, returnList }) => {
   const moveScroll = (direction) => {
     const visibleWidth = visible.current.offsetWidth;
     const totalWidth = total.current.offsetWidth * returnList.length;
+    // console.log('left', left);
     // console.log('visibleWidth', visibleWidth);
     // console.log('totalWidth', totalWidth);
     if (direction === 'back' && left < 0) {
@@ -96,10 +97,14 @@ const VideoLiContainer = styled.div`
   padding: 0 5px;
   width: 890px;
   height: ${(props) => (props.isOver > 4 ? '600px' : '300px')};
-  overflow-x: scroll;
-  overflow-y: hidden;
-  ::-webkit-scrollbar {
-    width: 0;
+  overflow: hidden;
+
+  @media ${(props) => props.theme.tablet} {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    ::-webkit-scrollbar {
+      width: 0;
+    }
   }
 `;
 
@@ -111,7 +116,6 @@ const ListContainer = styled.div`
   flex-flow: ${(props) => (props.isOver > 4 ? 'column wrap' : 'unset')};
   margin: 5px 0;
   height: 100%;
-  /* width: 100%; */
 
   @media (max-width: 500px) {
     justify-content: center;

@@ -60,7 +60,7 @@ const Text = styled.h1`
 `;
 
 const Button = styled.button`
-  transition: all 0.3s ease-in-out;
+  cursor: pointer;
   border: 1px solid lightgray;
   background-color: white;
   color: #2d2d2d;
