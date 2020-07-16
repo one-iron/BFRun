@@ -108,7 +108,7 @@ const VideoLiContainer = styled.div`
     }
   }
 
-  @media ${(props) => props.theme.mobile} {
+  @media (max-width: 500px) {
     margin: 0 0;
   }
 `;
