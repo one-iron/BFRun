@@ -19,7 +19,7 @@ const BackCourse = () => {
         </span>
       </li>
       <li>
-        <span>[조코딩 - 점프 투 파이썬](</span>
+        <span>[조코딩 - 점프 투 파이썬]</span>
       </li>
     </Course>
   );

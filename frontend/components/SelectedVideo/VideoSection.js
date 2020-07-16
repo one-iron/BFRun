@@ -210,8 +210,8 @@ const NoContents = styled.div`
 
 const WarningIcon = styled.i`
   margin-right: 5px;
-  animation: vibe 1s linear infinite;
-  @keyframes vibe {
+  animation: vibration 1s linear infinite;
+  @keyframes vibration {
     0% {
       transform: scale(1);
     }

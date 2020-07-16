@@ -73,7 +73,7 @@ const RoadmapContainer = styled.div`
 
 const RoadmapH1 = styled.h1`
   /* border: 1px solid blue; */
-  margin: 2px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   font-size: 30px;
