@@ -99,7 +99,6 @@ const VideoContainer = styled.article`
 const Button = styled.div`
   position: absolute;
   top: 75px;
-
   cursor: pointer;
   margin: 0 12px;
   font-size: 70px;
@@ -130,7 +129,7 @@ const Button = styled.div`
 const Videos = styled.div`
   // border: 2px solid red;
   width: 880px;
-  height: 250px;
+  height: 280px;
   display: flex;
   align-items: center;
   position: relative;
@@ -154,6 +153,7 @@ const Absolute = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
+
   left: ${(props) => props.toLeft}px;
   transition: left 0.8s ease-in-out;
   /* @media (max-width: 1004px) {
