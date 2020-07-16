@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const Loading = () => {
   return (
     <LoadingWrap>
-      {/* <i className="fa fa-spinner" /> */}
       <LoadingSpin />
       <LoadingTxt>잠시만 기다려주세요</LoadingTxt>
     </LoadingWrap>

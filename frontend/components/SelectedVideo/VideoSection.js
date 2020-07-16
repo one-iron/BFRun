@@ -11,9 +11,6 @@ const VideoSection = ({ title, returnList }) => {
   const moveScroll = (direction) => {
     const visibleWidth = visible.current.offsetWidth;
     const totalWidth = total.current.offsetWidth * returnList.length;
-    // console.log('left', left);
-    // console.log('visibleWidth', visibleWidth);
-    // console.log('totalWidth', totalWidth);
     if (direction === 'back' && left < 0) {
       setLeft(left + visibleWidth);
     } else if (direction === 'next' && left >= (-totalWidth + 2000) / 2) {
@@ -27,7 +24,21 @@ const VideoSection = ({ title, returnList }) => {
       {returnList[0] ? (
         <SlideDiv>
           <Button back onClick={() => moveScroll('back')}>
-            <i className="fa fa-caret-left" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="36"
+              height="36"
+              viewBox="0 0 36 36"
+            >
+              <g fill="none" fillRule="evenodd">
+                <circle cx="18" cy="18" r="18" fill="#000" fillRule="nonzero" />
+                <path
+                  fill="#FFF"
+                  d="M12 25L22 18 12 11z"
+                  transform="matrix(-1 0 0 1 34 0)"
+                />
+              </g>
+            </svg>
           </Button>
           <VideoLiContainer ref={visible} isOver={returnList.length}>
             <ListContainer toLeft={left} ref={total} isOver={returnList.length}>
@@ -45,7 +56,11 @@ const VideoSection = ({ title, returnList }) => {
                           data.url.indexOf('&'),
                         )}/hqdefault.jpg`}
                       />
-                      <VideoTitle>{data.title}</VideoTitle>
+                      <VideoTitle>
+                        {data.title.length > 70
+                          ? `${data.title.slice(0, 70)}...`
+                          : data.title}
+                      </VideoTitle>
                       <CreatorName>{data.channel_name}</CreatorName>
                     </VideoLi>
                   </Link>
@@ -54,7 +69,25 @@ const VideoSection = ({ title, returnList }) => {
             </ListContainer>
           </VideoLiContainer>
           <Button next onClick={() => moveScroll('next')}>
-            <i className="fa fa-caret-right" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="36"
+              height="36"
+              viewBox="0 0 36 36"
+            >
+              <g
+                fill="none"
+                fillRule="evenodd"
+                transform="matrix(-1 0 0 1 36 0)"
+              >
+                <circle cx="18" cy="18" r="18" fill="#000" fillRule="nonzero" />
+                <path
+                  fill="#FFF"
+                  d="M12 25L22 18 12 11z"
+                  transform="matrix(-1 0 0 1 34 0)"
+                />
+              </g>
+            </svg>
           </Button>
         </SlideDiv>
       ) : (
@@ -78,7 +111,7 @@ const CategoryName = styled.strong`
   font-weight: 700;
   font-size: 25px;
   padding: 5px;
-  margin-left: 10px;
+  margin-left: 30px;
   margin-bottom: 20px;
 `;
 
@@ -132,15 +165,15 @@ const ListContainer = styled.div`
 `;
 
 const Button = styled.div`
-  transform: scale(1.5);
+  transform: scale(1);
   transition: all 0.2s ease-in-out;
   display: inline;
   cursor: pointer;
-  font-size: 50px;
+  font-size: 30px;
   color: black;
   position: absolute;
   &:hover {
-    transform: scale(2);
+    transform: scale(1.2);
   }
   z-index: 50;
   ${(props) =>
@@ -163,23 +196,22 @@ const Button = styled.div`
 const VideoLi = styled.div`
   cursor: pointer;
   float: left;
-  margin: 12px;
-  width: 270px;
+  margin: 10px 17px 10px 17px;
+  width: 260px;
   height: 260px;
   list-style-type: none;
-  border-radius: 5px;
-  box-shadow: 0.1em 0 0.5em rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
   transform: scale(1);
   transition: all 0.3s ease-in-out;
   background-color: white;
-
   &:hover {
-    transform: scale(1.04);
+    box-shadow: 7px 7px 6px rgba(0, 0, 0, 0.3);
   }
 `;
 
 const CreatorName = styled.div`
-  margin-left: 5px;
+  margin: 0 0 16px 16px;
   font-size: 12px;
   color: grey;
   position: absolute;
@@ -188,8 +220,9 @@ const CreatorName = styled.div`
 
 const ThumbNail = styled.img`
   width: 100%;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  /* height: 146px; */
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
   position: absolute;
   top: -26px;
   clip: rect(26px 300px 175px 0px);
@@ -197,11 +230,9 @@ const ThumbNail = styled.img`
 
 const VideoTitle = styled.div`
   font-size: 14px;
-  margin-left: 4px;
   padding: 4px;
-  margin-bottom: 30px;
+  margin: 0 22px 0 16px;
   line-height: 20px;
-
   position: absolute;
   top: 155px;
   /* @media (max-width: 500px) {
