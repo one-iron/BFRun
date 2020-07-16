@@ -1,5 +1,5 @@
 // external modules
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 
@@ -93,9 +93,9 @@ const SlideDiv = styled.div`
 const VideoLiContainer = styled.div`
   position: relative;
   align-items: center;
-  margin: 0 10px;
+  margin: 0 20px;
   padding: 0 5px;
-  width: 890px;
+  width: 880px;
   height: ${(props) => (props.isOver > 4 ? '600px' : '300px')};
   overflow: hidden;
 
@@ -201,7 +201,6 @@ const VideoTitle = styled.div`
 `;
 
 const NoContents = styled.div`
-  /* border: 2px solid red; */
   margin-top: 30px;
   font-size: 20px;
   color: rgba(9, 132, 227, 1);

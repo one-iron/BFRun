@@ -123,7 +123,6 @@ const TeamWrap = styled.div``;
 
 const TeamContainer = styled.div`
   display: flex;
-  /* justify-content: space-evenly; */
 
   @media (max-width: 660px) {
     display: block;

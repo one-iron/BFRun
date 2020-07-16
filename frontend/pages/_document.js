@@ -25,6 +25,10 @@ export default class MyDocument extends Document {
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
           />
           <link rel="shortcut icon" href="/static/favicon.ico" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;700;900&display=swap"
+            rel="stylesheet"
+          ></link>
         </Head>
         <body>
           <Main />

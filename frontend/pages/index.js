@@ -268,11 +268,9 @@ const BlackWrap = styled.div`
   ${(props) =>
     props.isBlack &&
     css`
-      /* background-color: black; */
       z-index: 500;
       opacity: 0.3;
-      -webkit-filter: grayscale(1);
-      -webkit-filter: blur(2px);
+      -webkit-filter: blur(3px);
     `}
 `;
 

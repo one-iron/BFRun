@@ -51,9 +51,9 @@ const Recommend = (props) => {
                       )}/maxresdefault.jpg`}
                     />
                     <VideoTitle>
-                      {data.title.length < 34
+                      {data.title.length < 42
                         ? data.title
-                        : `${data.title.slice(0, 35)}...`}
+                        : `${data.title.slice(0, 43)}...`}
                     </VideoTitle>
                     <CreatorName>{data.channel_name}</CreatorName>
                   </VideoWindow>
@@ -81,14 +81,14 @@ const RecommendWrap = styled.div`
 `;
 
 const TitleH2 = styled.h2`
-  font-weight: 700;
   font-size: 25px;
   padding: 5px;
   margin: 0 0 10px 10px;
+  font-family: 'Gothic A1';
+  font-weight: 900;
 `;
 
 const VideoContainer = styled.article`
-  /* border: 1px solid black; */
   position: relative;
   margin: 2px 4px;
   display: flex;
@@ -127,8 +127,7 @@ const Button = styled.div`
 `;
 
 const Videos = styled.div`
-  // border: 2px solid red;
-  width: 880px;
+  width: 860px;
   height: 280px;
   display: flex;
   align-items: center;
@@ -155,13 +154,9 @@ const Absolute = styled.div`
 
   left: ${(props) => props.toLeft}px;
   transition: left 0.8s ease-in-out;
-  /* @media (max-width: 1004px) {
-    flex-wrap: wrap;
-  } */
 `;
 
 const VideoWindow = styled.div`
-  /* border: 1px solid blue; */
   cursor: pointer;
   width: 270px;
   height: 230px;

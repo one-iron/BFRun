@@ -14,7 +14,7 @@ const SelectedVideo = ({
   addDelCreatorTags,
   removeTags,
 }) => {
-  console.log('returnList -->', returnList);
+  // console.log('returnList -->', returnList);
   return (
     <SelectedVideoWrap>
       <SelectedTags
@@ -60,11 +60,4 @@ const SelectedVideoWrap = styled.section`
     left: 0;
     width: 90%;
   }
-`;
-
-const NoContents = styled.div`
-  margin-top: 30px;
-  font-size: 20px;
-  color: rgba(9, 132, 227, 1);
-  text-align: center;
 `;
