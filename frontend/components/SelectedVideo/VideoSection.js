@@ -85,6 +85,7 @@ const CategoryName = styled.strong`
 const SlideDiv = styled.div`
   display: flex;
   align-items: center;
+
   @media (max-width: 1239px) {
     justify-content: center;
   }
@@ -106,6 +107,10 @@ const VideoLiContainer = styled.div`
       width: 0;
     }
   }
+
+  @media (max-width: 500px) {
+    margin: 0 0;
+  }
 `;
 
 const ListContainer = styled.div`
@@ -119,6 +124,10 @@ const ListContainer = styled.div`
 
   @media (max-width: 500px) {
     justify-content: center;
+  }
+
+  @media ${(props) => props.theme.mobile} {
+    margin: 0;
   }
 `;
 
