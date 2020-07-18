@@ -125,7 +125,7 @@ def test_get_categories(api):
     response = api.get("/categories", content_type="application/json")
     assert response.status_code == 200
     assert response.json == {
-            "content_types": [
+        "content_types": [
             {
             "id": 1,
             "name": "강의"
@@ -216,16 +216,6 @@ def test_get_categories(api):
                 "color_code": "#5ED4F4"
                 },
                 {
-                "id": 9,
-                "name": "Vue",
-                "color_code": "#3FB37F"
-                },
-                {
-                "id": 12,
-                "name": "Angular",
-                "color_code": "#BE002E"
-                },
-                {
                 "id": 15,
                 "name": "Webpack",
                 "color_code": "#8AD0F4"
@@ -288,16 +278,16 @@ def test_get_categories(api):
             "name": "노마드 코더 Nomad Coders"
             },
             {
-            "id": 7,
-            "name": "Minjun Kim"
-            },
-            {
             "id": 8,
             "name": "김버그 Kimbug"
             },
             {
             "id": 9,
             "name": "조코딩 JoCoding"
+            },
+            {
+            "id": 10,
+            "name": "Corey Schafer"
             }
         ]
     }
