@@ -1,5 +1,6 @@
 import yaml
 import pymysql
+import asyncio
 
 from connection import DB
 
@@ -10,40 +11,51 @@ class VideoService:
     def __init__(self, video_dao):
         self.video_dao = video_dao
 
-    def get_category_lists(self):
-        db = DB()         
+    async def get_positions(self, db, positions):
+        fetches = [asyncio.ensure_future(self.video_dao.get_stacks(position, db)) 
+        for position in positions
+        ]     
+        result = await asyncio.gather(*fetches)     
+        return result    
+    
+    def get_category_lists(self): 
+        db = DB()
+        positions = {
+            "general_stacks"  : yaml["general"], 
+            "frontend_stacks" : yaml["frontend"], 
+            "backend_stacks"  : yaml["backend"]
+            }
+                      
         try:          
             # 카테고리
             categories = {}
             stacks = []
-
             # 콘텐츠 타입
             contents_types = self.video_dao.get_contents_types(db)
             # 크리에이터 채널
             channels = self.video_dao.get_channels(db)
-            # 스택
-  
-            general_stacks = self.video_dao.get_stacks(yaml["general"], db)
-            frontend_stacks = self.video_dao.get_stacks(yaml["frontend"], db)
-            backend_stacks = self.video_dao.get_stacks(yaml["backend"], db)
+            # 스택  
+            asyncio.set_event_loop(asyncio.SelectorEventLoop())  
+            loop = asyncio.get_event_loop()
+            stack_categories = loop.run_until_complete(self.get_positions(db, positions.values()))
+            loop.close()
 
-            stacks.append({"general_stacks": general_stacks})
-            stacks.append({"frontend_stacks": frontend_stacks})
-            stacks.append({"backend_stacks": backend_stacks})
+            for stack, position in positions.items():
+                stacks.append({stack : stack_categories[position - 1]})   
 
             categories["content_types"] = contents_types
-            categories["stacks"] = stacks
-            categories["channels"] = channels
+            categories["stacks"]        = stacks
+            categories["channels"]      = channels
+        
+            return categories     
 
-            return categories
-
-        except pymysql.err.Error as e:
+        except pymysql.err.Error:
             return {"message" : "DATABASE ERROR"}
         
         finally:
 
             if db:
-                db.close()
+                db.close()          
 
     def get_video_detail(self, video_id):
         db = DB()

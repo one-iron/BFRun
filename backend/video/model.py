@@ -1,3 +1,5 @@
+import asyncio
+
 from connection import DB
 
 
@@ -12,8 +14,8 @@ class VideoDao:
         """
   
         return db.dict_fetch(get_contents_types_sql)
-
-    def get_stacks(self, position_id, db):
+    
+    async def get_stacks(self, position_id, db):
         get_stacks_sql = """
         SELECT
             id,
@@ -24,7 +26,6 @@ class VideoDao:
         WHERE
             position_id = %s
         """
-    
         return db.dict_fetch(get_stacks_sql, (position_id))
 
     def get_channels(self, db):
