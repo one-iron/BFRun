@@ -1,25 +1,36 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const BackCourse = () => {
   return (
     <Course>
       <li>
-        <span>[김왼손 - Python]</span>
+        <Link href="/video/457">
+          <span>[김왼손 - Python]</span>
+        </Link>
       </li>
       <li>
-        <span>[생활코딩 - Python]</span>
+        <Link href="/video/313">
+          <span>[생활코딩 - Python]</span>
+        </Link>
       </li>
       <li>
-        <span>[생활코딩 - 관계형 데이터 모델링]</span>
+        <Link href="/video/89">
+          <span>[생활코딩 - 관계형 데이터 모델링]</span>
+        </Link>
       </li>
       <li>
-        <span>
-          [테크보이 워니 - 코딩 1시간만에 배우기 - 파이썬 ft. 실리콘밸리
-          엔지니어]
-        </span>
+        <Link href="/video/578">
+          <span>
+            [테크보이 워니 - 코딩 1시간만에 배우기 - 파이썬 ft. 실리콘밸리
+            엔지니어]
+          </span>
+        </Link>
       </li>
       <li>
-        <span>[조코딩 - 점프 투 파이썬]</span>
+        <Link href="/video/1050">
+          <span>[조코딩 - 점프 투 파이썬]</span>
+        </Link>
       </li>
     </Course>
   );

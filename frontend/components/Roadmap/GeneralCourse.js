@@ -1,22 +1,33 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const GeneralCourse = () => {
   return (
     <Course>
       <li>
-        <span>[생활코딩 - WEB1- HTML & Internet]</span>
+        <Link href="/video/210">
+          <span>[생활코딩 - WEB1- HTML & Internet]</span>
+        </Link>
       </li>
       <li>
-        <span>[생활코딩 - WEB2]</span>
+        <Link href="/video/245">
+          <span>[생활코딩 - WEB2]</span>
+        </Link>
       </li>
       <li>
-        <span>[생활코딩 - Github]</span>
+        <Link href="/video/261">
+          <span>[생활코딩 - Github]</span>
+        </Link>
       </li>
       <li>
-        <span>[얄팍한 코딩사전 - Github]</span>
+        <Link href="/video/383">
+          <span>[얄팍한 코딩사전 - Github]</span>
+        </Link>
       </li>
       <li>
-        <span>[엘리 - 개발 공부 방법]</span>
+        <Link href="/video/1113">
+          <span>[엘리 - 개발 공부 방법]</span>
+        </Link>
       </li>
     </Course>
   );

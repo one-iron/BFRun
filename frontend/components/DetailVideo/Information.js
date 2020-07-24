@@ -53,6 +53,8 @@ export default Information;
 const InformationWrap = styled.div`
   margin-top: 10px;
   width: 960px;
+  position: relative;
+  background-color: white;
 
   @media (max-width: 1370px) {
     display: flex;
@@ -72,6 +74,7 @@ const InformationContainer = styled.div`
   font-size: 13px;
   color: #333;
   padding: 15px;
+  width: listVideo === 0 ? '100%' : '45vw'
 
   @media (max-width: 1370px) {
     width: 45vw;
@@ -94,13 +97,13 @@ const InformationContainer = styled.div`
       border: 1px solid #eee;
       border-radius: 50px;
       width: 45px;
-      /* height: 55px; */
       background-image: url(${(props) => props.img});
       background-size: cover;
     }
     figcaption {
       margin-top: 10px;
       color: black;
+      text-align: center;
     }
   }
   section:nth-of-type(2) {
@@ -115,7 +118,6 @@ const InformationContainer = styled.div`
     summary {
       font-size: 20px;
       font-weight: 600;
-      /* height: 25px; */
     }
     article {
       color: gray;
