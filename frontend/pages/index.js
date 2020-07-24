@@ -166,6 +166,7 @@ export default function HomePage(props) {
       setBlack(true);
     }
   };
+
   const tabletRef = useRef(null);
   const outsideCategory = () => {
     useEffect(() => {
@@ -192,7 +193,7 @@ export default function HomePage(props) {
       </Head>
       <BlackWrap isBlack={black}>
         <Nav removeTags={removeTags} />
-        <ContentWrap>
+        <ContentWrap isBlack={black}>
           <ContentContainer>
             <Category
               contentList={contentList}
@@ -246,8 +247,17 @@ export default function HomePage(props) {
 
 const ContentWrap = styled.section`
   position: relative;
-  top: 120px;
-  margin-bottom: 100px;
+  top: 100px;
+  padding: 30px 0;
+  background-color: #f9f9f9;
+  height: 100%;
+
+  ${(props) =>
+    props.isBlack &&
+    css`
+      cursor: default;
+      pointer-events: none;
+    `}
 `;
 
 const ContentContainer = styled.div`
@@ -262,7 +272,6 @@ const ContentContainer = styled.div`
 
 const BlackWrap = styled.div`
   display: block;
-  padding-bottom: 120px;
   width: 100%;
   height: 100%;
   ${(props) =>
@@ -276,8 +285,8 @@ const BlackWrap = styled.div`
 
 const GoUp = styled.div`
   position: absolute;
-  right: 80px;
-  bottom: 0px;
+  right: 50px;
+  bottom: 30px;
   cursor: pointer;
   background-color: black;
   color: white;

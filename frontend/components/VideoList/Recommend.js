@@ -162,6 +162,7 @@ const VideoWindow = styled.div`
   height: 230px;
   margin: 0 8px;
   border-radius: 5px;
+  background-color: white;
   box-shadow: 0.1em 0 0.5em rgba(0, 0, 0, 0.3);
   transform: scale(1);
   transition: all 0.3s ease-in-out;

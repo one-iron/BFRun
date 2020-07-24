@@ -33,15 +33,12 @@ export default Video;
 const DetailWrap = styled.div`
   position: relative;
   text-align: center;
-  padding: 20px;
+  padding: 20px 0 30px 0;
   top: 100px;
   width: 100%;
+  height: 100%;
   background-color: #f9f9f9;
   border: 1px solid #f9f9f9;
-
-  @media ${(props) => props.theme.laptopM} {
-    text-align: unset;
-  }
 `;
 
 const DetailContainer = styled.div`

@@ -171,6 +171,7 @@ const VideoLi = styled.div`
   box-shadow: 0.1em 0 0.5em rgba(0, 0, 0, 0.3);
   transform: scale(1);
   transition: all 0.3s ease-in-out;
+  background-color: white;
 
   &:hover {
     transform: scale(1.04);
@@ -203,10 +204,10 @@ const VideoTitle = styled.div`
 
   position: absolute;
   top: 155px;
-  @media (max-width: 500px) {
+  /* @media (max-width: 500px) {
     width: 300px;
     height: 300px;
-  }
+  } */
 `;
 
 const NoContents = styled.div`

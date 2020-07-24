@@ -70,7 +70,7 @@ export default DetailVideo;
 
 const DetailVideoWrap = styled.div`
   display: flex;
-
+  // height: 100vh;
   @media (max-width: 1370px) {
     .listSection {
       display: none;
@@ -78,16 +78,25 @@ const DetailVideoWrap = styled.div`
   }
 `;
 const DetailVideoContainer = styled.div`
-  height: 100%;
   background-color: #ffffff;
+  position: relative;
+  height: 100%;
 
   .videoMain {
-    height: calc(68vh + 40px);
+    // height: calc(68vh + 40px);
+    height: 70vh;
+    width: auto;
     z-index: 10;
 
     .video {
       width: 100%;
       height: 100%;
+    }
+  }
+
+  @media ${(props) => props.theme.tablet} {
+    .videoMain {
+      height: 40vh;
     }
   }
 `;

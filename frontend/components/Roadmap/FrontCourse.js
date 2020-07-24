@@ -1,21 +1,30 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const FrontCourse = () => {
   return (
     <Course>
       <li>
-        <span>[생활코딩 - HTML]</span>
+        <Link href="/video/213">
+          <span>[생활코딩 - HTML]</span>
+        </Link>
       </li>
       <li>
-        <span>
-          [테크보이 워니 - 코딩 기초 없이 웹사이트 따라 만들기(HTML, CSS)
-        </span>
+        <Link href="/video/1094">
+          <span>
+            [테크보이 워니 - 코딩 기초 없이 웹사이트 따라 만들기(HTML, CSS)
+          </span>
+        </Link>
       </li>
       <li>
-        <span>[김버그 - 프린이 로드맵]</span>
+        <Link href="/video/1044">
+          <span>[김버그 - 3년차 개발자의 프론트엔드 개발 공부 후기]</span>
+        </Link>
       </li>
       <li>
-        <span>[엘리 - 자바스크립트 기초 강의(ES5+]</span>
+        <Link href="/video/1095">
+          <span>[엘리 - 자바스크립트 기초 강의(ES5+]</span>
+        </Link>
       </li>
     </Course>
   );

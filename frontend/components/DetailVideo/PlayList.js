@@ -21,7 +21,7 @@ const PlayList = (props) => {
                       src={`http://i3.ytimg.com/vi/${data.url.slice(
                         data.url.indexOf('v=') + 2,
                         data.url.indexOf('&list'),
-                      )}/maxresdefault.jpg`}
+                      )}/hqdefault.jpg`}
                       alt=""
                     />
                     <section className="textSection">
@@ -43,7 +43,7 @@ export default PlayList;
 const PlayListWrap = styled.section`
   width: 340px;
   overflow: auto;
-  height: 89vh;
+  height: 81vh;
   margin-left: 20px;
   background-color: #ffffff;
   ::-webkit-scrollbar {
@@ -52,12 +52,10 @@ const PlayListWrap = styled.section`
   ::-webkit-scrollbar-thumb {
     background: #b8b8b8;
   }
-
   @media (max-width: 1370px) {
     width: 45vw;
     height: 300px;
   }
-
   @media ${(props) => props.theme.tablet} {
     margin-top: 10px;
     width: 90vw;
@@ -71,10 +69,11 @@ const PlayListContainer = styled.div`
   align-items: flex-start;
   padding: 10px;
   font-size: 12px;
-
   section {
     display: flex;
     text-align: left;
+    overflow: hidden;
+
     &:hover {
       cursor: pointer;
       background-color: #eeeeee;
@@ -83,7 +82,6 @@ const PlayListContainer = styled.div`
       margin-left: 10px;
       display: flex;
       flex-direction: column;
-
       summary {
         font-size: 16px;
         font-weight: 600;
@@ -95,7 +93,8 @@ const PlayListContainer = styled.div`
   }
   img {
     width: 100px;
-    height: auto;
+    height: 60px;
+    object-fit: cover;
   }
 `;
 

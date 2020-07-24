@@ -107,7 +107,7 @@ const RoadChoice = styled.div`
   justify-content: center;
   cursor: pointer;
   margin: 2px;
-  width: 100px;
+  min-width: 100px;
   height: 30px;
   &:hover {
     border: 2px solid rgba(30, 39, 46, 1);
