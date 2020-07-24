@@ -81,7 +81,7 @@ const DetailVideoContainer = styled.div`
   background-color: #ffffff;
   position: relative;
   height: 100%;
-  
+
   .videoMain {
     // height: calc(68vh + 40px);
     height: 70vh;
@@ -94,7 +94,7 @@ const DetailVideoContainer = styled.div`
     }
   }
 
-  @media ${props => props.theme.tablet} {
+  @media ${(props) => props.theme.tablet} {
     .videoMain {
       height: 40vh;
     }

@@ -252,12 +252,12 @@ const ContentWrap = styled.section`
   background-color: #f9f9f9;
   height: 100%;
 
-  ${(props) => 
-  props.isBlack && 
-  css`
-    cursor: default;
-    pointer-events: none;
-  `}
+  ${(props) =>
+    props.isBlack &&
+    css`
+      cursor: default;
+      pointer-events: none;
+    `}
 `;
 
 const ContentContainer = styled.div`
