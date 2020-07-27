@@ -18,8 +18,7 @@ const Category = ({
   return (
     <>
       <CategoryWrap>
-        <CategoryContainer>
-          {/* <LangToggle /> */}
+        <ContentsContainer>
           <GroupContainer>
             <Title>Contents</Title>
             <AllTags>
@@ -44,7 +43,9 @@ const Category = ({
               })}
             </AllTags>
           </GroupContainer>
-          <Line />
+        </ContentsContainer>
+        <CategoryContainer>
+          {/* <LangToggle /> */}
           <GroupContainer>
             <Title>FrontEnd</Title>
             <AllTags>
@@ -69,6 +70,7 @@ const Category = ({
               })}
             </AllTags>
           </GroupContainer>
+          <Line />
           <GroupContainer>
             <Title>BackEnd</Title>
             <AllTags>
@@ -93,6 +95,7 @@ const Category = ({
               })}
             </AllTags>
           </GroupContainer>
+          <Line />
           <GroupContainer>
             <Title>Developer</Title>
             <AllTags>
@@ -117,6 +120,7 @@ const Category = ({
               })}
             </AllTags>
           </GroupContainer>
+          <Line />
           <GroupContainer>
             <Title>Creator</Title>
             <AllTags>
@@ -141,19 +145,27 @@ const Category = ({
               })}
             </AllTags>
           </GroupContainer>
+        </CategoryContainer>
+        <BfTestLink>
           <GroupContainer>
-            <Title wecode>아직 프론트인지 백인지 모르겠다면?</Title>
+            <Title wecode>
+              아직 프론트인지
+              <br /> 백인지 모르겠다면?
+            </Title>
             <TextLink href="http://bftest.wecode.co.kr/" target="_blank">
-              BF-Test 하러가기!
+              BF-Test 하러가기! <i className="fa fa-angle-right"></i>
             </TextLink>
           </GroupContainer>
+        </BfTestLink>
+        <WecodeLink>
           <GroupContainer>
             <Title wecode>부트캠프를 찾고 계신다면?</Title>
-            <a href="https://wecode.co.kr/" target="_blank">
+            <TextLink href="https://wecode.co.kr/" target="_blank">
               <WecodeImg src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/logo_black.png" />
-            </a>
+              바로가기 <i className="fa fa-angle-right"></i>
+            </TextLink>
           </GroupContainer>
-        </CategoryContainer>
+        </WecodeLink>
       </CategoryWrap>
     </>
   );
@@ -168,11 +180,15 @@ const CategoryWrap = styled.aside`
   }
 `;
 
-const CategoryContainer = styled.div`
+const ContentsContainer = styled.div`
   width: 240px;
   border: 1px solid #e4e9ed;
   border-radius: 7px;
   background-color: white;
+`;
+
+const CategoryContainer = styled(ContentsContainer)`
+  margin-top: 10px;
 `;
 
 const GroupContainer = styled.div`
@@ -193,8 +209,9 @@ const Title = styled.div`
   ${(props) =>
     props.wecode &&
     css`
-      font-size: 13px;
-      font-weight: 400;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 24px;
       margin-bottom: 0;
     `}
 `;
@@ -217,11 +234,20 @@ const Tag = styled.div`
   cursor: pointer;
 `;
 
+const BfTestLink = styled(ContentsContainer)`
+  margin-top: 10px;
+`;
+
+const WecodeLink = styled(ContentsContainer)`
+  margin-top: 10px;
+`;
+
 const WecodeImg = styled.img`
   cursor: pointer;
   width: 100px;
   height: auto;
   margin-top: 15px;
+  margin-right: 5px;
 `;
 
 const TextLink = styled.a`
@@ -230,4 +256,15 @@ const TextLink = styled.a`
   color: #2d2d2d;
   display: block;
   margin-top: 15px;
+  i {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 3px;
+    transition: all 0.3s linear;
+  }
+  &:hover {
+    i {
+      margin-left: 14px;
+    }
+  }
 `;
