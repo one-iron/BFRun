@@ -26,7 +26,6 @@ const SelectedVideo = ({
         addDelCreatorTags={addDelCreatorTags}
         removeTags={removeTags}
       />
-      {/* <Loading /> */}
       {returnList[0] ? (
         returnList.map((arr, index) => {
           return (

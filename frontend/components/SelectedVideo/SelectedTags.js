@@ -104,6 +104,9 @@ const SelectedTags = ({
               }}
             >
               {tag}
+              <Xbutton>
+                <i className="fa fa-times"></i>
+              </Xbutton>
             </TagName>
           );
         })}
@@ -122,6 +125,9 @@ const SelectedTags = ({
               }}
             >
               {tag}
+              <Xbutton>
+                <i className="fa fa-times"></i>
+              </Xbutton>
             </TagName>
           );
         })}
@@ -140,6 +146,9 @@ const SelectedTags = ({
               }}
             >
               {tag}
+              <Xbutton>
+                <i className="fa fa-times"></i>
+              </Xbutton>
             </TagName>
           );
         })}
@@ -169,6 +178,21 @@ const TagName = styled.span`
   padding: 4px 8px;
   min-width: 10px;
   cursor: pointer;
+`;
+
+const Xbutton = styled.span`
+  margin-left: 8px;
+  border-left: 1px solid white;
+  padding: 2px 0 3px 7px;
+  height: 100%;
+  i {
+    transition: all 0.2s linear;
+  }
+  &:hover {
+    i {
+      font-weight: 800;
+    }
+  }
 `;
 
 const Remove = styled.div`

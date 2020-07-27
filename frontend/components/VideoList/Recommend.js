@@ -18,7 +18,6 @@ const Recommend = (props) => {
     } else if (direction === 'next' && left >= -totalWidth + 1000) {
       setLeft(left - visibleWidth);
     }
-    // console.log(totalWidth);
   };
 
   return (
@@ -29,7 +28,21 @@ const Recommend = (props) => {
           <></>
         ) : (
           <Button back onClick={() => moveScroll('back')}>
-            <i className="fa fa-caret-left" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="36"
+              height="36"
+              viewBox="0 0 36 36"
+            >
+              <g fill="none" fillRule="evenodd">
+                <circle cx="18" cy="18" r="18" fill="#000" fillRule="nonzero" />
+                <path
+                  fill="#FFF"
+                  d="M12 25L22 18 12 11z"
+                  transform="matrix(-1 0 0 1 34 0)"
+                />
+              </g>
+            </svg>
           </Button>
         )}
 
@@ -50,11 +63,7 @@ const Recommend = (props) => {
                         data.url.indexOf('&'),
                       )}/maxresdefault.jpg`}
                     />
-                    <VideoTitle>
-                      {data.title.length < 42
-                        ? data.title
-                        : `${data.title.slice(0, 43)}...`}
-                    </VideoTitle>
+                    <VideoTitle>{data.title}</VideoTitle>
                     <CreatorName>{data.channel_name}</CreatorName>
                   </VideoWindow>
                 </Link>
@@ -66,7 +75,25 @@ const Recommend = (props) => {
           <></>
         ) : (
           <Button next onClick={() => moveScroll('next')}>
-            <i className="fa fa-caret-right" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="36"
+              height="36"
+              viewBox="0 0 36 36"
+            >
+              <g
+                fill="none"
+                fillRule="evenodd"
+                transform="matrix(-1 0 0 1 36 0)"
+              >
+                <circle cx="18" cy="18" r="18" fill="#000" fillRule="nonzero" />
+                <path
+                  fill="#FFF"
+                  d="M12 25L22 18 12 11z"
+                  transform="matrix(-1 0 0 1 34 0)"
+                />
+              </g>
+            </svg>
           </Button>
         )}
       </VideoContainer>
@@ -81,9 +108,12 @@ const RecommendWrap = styled.div`
 `;
 
 const TitleH2 = styled.h2`
+  display: inline-block;
+  width: 175px;
+  line-height: 30px;
   font-size: 25px;
   padding: 5px;
-  margin: 0 0 10px 10px;
+  margin-left: 10px;
   font-family: 'Gothic A1';
   font-weight: 900;
 `;
@@ -98,7 +128,6 @@ const VideoContainer = styled.article`
 
 const Button = styled.div`
   position: absolute;
-  top: 75px;
   cursor: pointer;
   margin: 0 12px;
   font-size: 70px;
@@ -112,13 +141,13 @@ const Button = styled.div`
   ${(props) =>
     props.next &&
     css`
-      right: -40px;
+      right: -50px;
     `}
 
   ${(props) =>
     props.back &&
     css`
-      left: -40px;
+      left: -50px;
     `}
 
   @media ${(props) => props.theme.tablet} {
@@ -127,7 +156,7 @@ const Button = styled.div`
 `;
 
 const Videos = styled.div`
-  width: 860px;
+  width: 850px;
   height: 280px;
   display: flex;
   align-items: center;
@@ -158,17 +187,14 @@ const Absolute = styled.div`
 
 const VideoWindow = styled.div`
   cursor: pointer;
-  width: 270px;
-  height: 230px;
-  margin: 0 8px;
-  border-radius: 5px;
-  background-color: white;
-  box-shadow: 0.1em 0 0.5em rgba(0, 0, 0, 0.3);
-  transform: scale(1);
+  width: 260px;
+  height: 242px;
+  margin: 0 12px;
+  border-radius: 3px;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
   &:hover {
-    transform: scale(1.04);
-  }
+    box-shadow: 7px 7px 6px rgba(0, 0, 0, 0.3);
 `;
 
 const ThumbNail = styled.img`
