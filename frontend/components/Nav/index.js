@@ -10,6 +10,8 @@ import Login from '../Login';
 const Nav = ({ removeTags }) => {
   const [searchBox, setSearchBox] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  // const [currentY, setCurrentY] = useState(document.pageYOffset);
+  // console.log('현재 스크롤-->', currentY);
 
   // 화면 작아졌을 때, 오른쪽 상단 메뉴
   const dropDownMenu = () => {
@@ -28,7 +30,6 @@ const Nav = ({ removeTags }) => {
   const hideSearchBox = () => {
     setSearchBox(false);
   };
-
   return (
     <NavWrap isBlack>
       <NavContainer>
@@ -89,7 +90,7 @@ const NavWrap = styled.nav`
   width: 100%;
   height: 100px;
   position: fixed;
-  background-color: white;
+  background-color: rgba(255, 212, 41, 0.96);
   z-index: 100;
 `;
 
@@ -254,11 +255,12 @@ const NavRight = styled.div`
 
 const RightContent = styled.div`
   padding: 0 5px;
-  margin-left: 10px;
+  margin: 15px;
   cursor: pointer;
-  color: gray;
+  color: black;
   font-size: 16px;
   font-weight: 700;
+  transition: all 0.2s linear;
 
   :hover {
     color: ${(props) => props.theme.mainColor};

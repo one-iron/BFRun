@@ -73,6 +73,7 @@ const Login = (props) => {
 export default Login;
 
 const LoginWrap = styled.div`
+  background-color: white;
   margin-left: 10px;
   cursor: pointer;
   border-radius: 3px;
@@ -80,9 +81,11 @@ const LoginWrap = styled.div`
   color: gray;
   padding: 6px 8px;
   font-weight: 700;
+  transition: all 0.2s linear;
   :hover {
     color: ${(props) => props.theme.mainColor};
     border-color: ${(props) => props.theme.mainColor};
+    box-shadow: 1px 1px 4px #0055b8;
   }
 
   @media ${(props) => props.theme.laptopS} {
