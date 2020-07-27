@@ -195,6 +195,7 @@ const VideoWindow = styled.div`
   transition: all 0.3s ease-in-out;
   &:hover {
     box-shadow: 7px 7px 6px rgba(0, 0, 0, 0.3);
+  }
 `;
 
 const ThumbNail = styled.img`
@@ -205,19 +206,18 @@ const ThumbNail = styled.img`
 
 const VideoTitle = styled.div`
   font-size: 14px;
-  margin-left: 4px;
+  margin: 0 22px 0 16px;
   word-break: break-all;
   padding: 4px;
-  margin-bottom: 30px;
   @media (max-width: 500px) {
     width: 100%;
   }
 `;
 
 const CreatorName = styled.div`
-  margin-left: 5px;
+  margin-left: 16px;
   font-size: 12px;
   color: grey;
   position: absolute;
-  bottom: 5px;
+  bottom: 16px;
 `;
