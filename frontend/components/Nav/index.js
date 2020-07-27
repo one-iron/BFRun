@@ -130,8 +130,9 @@ const TitleText = styled.div`
 
   img {
     position: absolute;
-    top: 0;
-    height: 90px;
+    filter: brightness(0);
+    top: 10px;
+    height: 70px;
   }
 `;
 

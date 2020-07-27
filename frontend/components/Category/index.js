@@ -19,7 +19,7 @@ const Category = ({
     <>
       <CategoryWrap>
         <ContentsContainer>
-          <GroupContainer>
+          <GroupContainer contents>
             <Title>Contents</Title>
             <AllTags>
               {contentList.map((type) => {
@@ -30,7 +30,7 @@ const Category = ({
                     style={{
                       backgroundColor: selectedContent.includes(type.name)
                         ? 'green'
-                        : 'white',
+                        : '#f2f1e9',
                       color: selectedContent.includes(type.name)
                         ? 'white'
                         : 'black',
@@ -57,7 +57,7 @@ const Category = ({
                     style={{
                       backgroundColor: selectedStack.includes(type.name)
                         ? type.color_code
-                        : 'white',
+                        : '#f2f1e9',
                       color: selectedStack.includes(type.name)
                         ? 'white'
                         : 'black',
@@ -82,7 +82,7 @@ const Category = ({
                     style={{
                       backgroundColor: selectedStack.includes(type.name)
                         ? type.color_code
-                        : 'white',
+                        : '#f2f1e9',
                       color: selectedStack.includes(type.name)
                         ? 'white'
                         : 'black',
@@ -107,7 +107,7 @@ const Category = ({
                     style={{
                       backgroundColor: selectedStack.includes(type.name)
                         ? type.color_code
-                        : 'white',
+                        : '#f2f1e9',
                       color: selectedStack.includes(type.name)
                         ? 'white'
                         : 'black',
@@ -132,7 +132,7 @@ const Category = ({
                     style={{
                       backgroundColor: selectedCreator.includes(type.name)
                         ? '#F80000'
-                        : 'white',
+                        : '#f2f1e9',
                       color: selectedCreator.includes(type.name)
                         ? 'white'
                         : 'black',
@@ -159,10 +159,12 @@ const Category = ({
         </BfTestLink>
         <WecodeLink>
           <GroupContainer>
-            <Title wecode>부트캠프를 찾고 계신다면?</Title>
+            <Title wecode>
+              부트캠프를 <br />
+              찾고 계신다면?
+            </Title>
             <TextLink href="https://wecode.co.kr/" target="_blank">
-              <WecodeImg src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/logo_black.png" />
-              바로가기 <i className="fa fa-angle-right"></i>
+              WeCode 바로가기 <i className="fa fa-angle-right"></i>
             </TextLink>
           </GroupContainer>
         </WecodeLink>
@@ -193,6 +195,12 @@ const CategoryContainer = styled(ContentsContainer)`
 
 const GroupContainer = styled.div`
   margin: 30px 0 30px 10px;
+
+  ${(props) =>
+    props.contents &&
+    css`
+      margin: 30px 0 10px 10px;
+    `}
 `;
 
 const Line = styled.div`
@@ -202,10 +210,13 @@ const Line = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 15px;
+  font-family: 'Gothic A1';
+  font-size: 18px;
+  font-weight: 900;
+  margin-left: 5px;
+  margin-bottom: 10px;
   color: #2d2d2d;
+
   ${(props) =>
     props.wecode &&
     css`
@@ -223,13 +234,11 @@ const AllTags = styled.div`
 `;
 
 const Tag = styled.div`
-  background-color: white;
-  border: 1px solid #eee;
-  color: #333;
+  font-family: 'AppleSDGothicNeo';
   font-size: 14px;
+  border: 1px solid #e0e0e0;
   border-radius: 3px;
   padding: 8px;
-  font-weight: 700;
   margin: 5px 3px;
   cursor: pointer;
 `;
@@ -242,20 +251,13 @@ const WecodeLink = styled(ContentsContainer)`
   margin-top: 10px;
 `;
 
-const WecodeImg = styled.img`
-  cursor: pointer;
-  width: 100px;
-  height: auto;
-  margin-top: 15px;
-  margin-right: 5px;
-`;
-
 const TextLink = styled.a`
   cursor: pointer;
-  font-weight: bold;
   color: #2d2d2d;
   display: block;
-  margin-top: 15px;
+  margin-top: 7px;
+  margin-left: 7px;
+
   i {
     font-weight: bold;
     font-size: 20px;
@@ -263,6 +265,7 @@ const TextLink = styled.a`
     transition: all 0.3s linear;
   }
   &:hover {
+    text-decoration: underline;
     i {
       margin-left: 14px;
     }

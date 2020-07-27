@@ -1,6 +1,6 @@
 // external modules
 import styled from 'styled-components';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Head from 'next/head';
 
 // internal modules
@@ -10,6 +10,10 @@ import DetailVideo from '../../components/DetailVideo';
 const Video = () => {
   const router = useRouter();
   const { id } = router.query;
+
+  const goBack = () => {
+    Router.back();
+  };
 
   return (
     <>
@@ -21,6 +25,10 @@ const Video = () => {
       <Nav />
       <DetailWrap>
         <DetailContainer>
+          <GoBack onClick={goBack}>
+            <img src="/static/goback.png" />
+            돌아가기
+          </GoBack>
           <DetailVideo id={id} />
         </DetailContainer>
       </DetailWrap>
@@ -43,4 +51,18 @@ const DetailWrap = styled.div`
 
 const DetailContainer = styled.div`
   display: inline-block;
+`;
+
+const GoBack = styled.div`
+  width: 130px;
+  height: 40px;
+  line-height: 40px;
+  background-color: black;
+  color: white;
+  margin-bottom: 15px;
+  cursor: pointer;
+
+  img {
+    margin-right: 5px;
+  }
 `;
