@@ -156,11 +156,7 @@ const Button = styled.div`
 `;
 
 const Videos = styled.div`
-<<<<<<< HEAD
-  width: 860px;
-=======
   width: 850px;
->>>>>>> 86e3fc2... modify selectedTags and videoList hover effect
   height: 280px;
   display: flex;
   align-items: center;
@@ -191,21 +187,11 @@ const Absolute = styled.div`
 
 const VideoWindow = styled.div`
   cursor: pointer;
-<<<<<<< HEAD
-  width: 270px;
-  height: 230px;
-  margin: 0 8px;
-  border-radius: 5px;
-  background-color: white;
-  box-shadow: 0.1em 0 0.5em rgba(0, 0, 0, 0.3);
-  transform: scale(1);
-=======
   width: 260px;
   height: 242px;
   margin: 0 12px;
   border-radius: 3px;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
->>>>>>> 86e3fc2... modify selectedTags and videoList hover effect
   transition: all 0.3s ease-in-out;
   &:hover {
     box-shadow: 7px 7px 6px rgba(0, 0, 0, 0.3);
