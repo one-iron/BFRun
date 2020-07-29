@@ -4,40 +4,34 @@ from connection import DB
 
 
 class VideoDao:
-    def get_contents_types(self, db):
+    def get_contents_types_channels(self, db):
         get_contents_types_sql = """
         SELECT
             id,
             name
         FROM
         contents_types
-        """
-  
-        return db.dict_fetch(get_contents_types_sql)
-    
-    async def get_stacks(self, position_id, db):
-        get_stacks_sql = """
-        SELECT
-            id,
-            name,
-            color_code
-        FROM
-            stacks
-        WHERE
-            position_id = %s
-        """
-        return db.dict_fetch(get_stacks_sql, (position_id))
-
-    def get_channels(self, db):
-        get_channels_sql = """
+        UNION
         SELECT
             id,
             name
         FROM
         channels
         """
-      
-        return db.dict_fetch(get_channels_sql)
+  
+        return db.dict_fetch(get_contents_types_sql)
+    
+    def get_stacks(self, db):
+        get_stacks_sql = """
+        SELECT
+            id,
+            name,
+            position_id,
+            color_code
+        FROM
+            stacks
+        """
+        return db.dict_fetch(get_stacks_sql)
 
     def get_videos(self, filters, db):
         get_video_lists_sql = """

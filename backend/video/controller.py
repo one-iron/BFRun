@@ -11,13 +11,12 @@ def create_video_endpoints(app, video_service):
 
     @app.route("/categories", methods=["GET"])
     def get_categories():
-        # try:
-        category_response = video_service.get_category_lists()
-        return category_response, 200
-            
-        # except Exception as e:
-        #     return {"message": str(e)}, 400
-
+        try:
+            category_response = video_service.get_category_lists()        
+            return category_response, 200        
+        
+        except Exception as e:
+            return {"message": str(e)}, 400
 
     @app.route("/video/<int:video_id>", methods=["GET"])
     @validate_params(
