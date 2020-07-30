@@ -1,53 +1,46 @@
 import yaml
 import pymysql
-import asyncio
 
 from connection import DB
 
 with open("const.yaml") as yaml_const:
     yaml = yaml.safe_load(yaml_const)
 
+
 class VideoService:
     def __init__(self, video_dao):
         self.video_dao = video_dao
 
-    async def get_positions(self, db, positions):
-        fetches = [asyncio.ensure_future(self.video_dao.get_stacks(position, db)) 
-        for position in positions
-        ]     
-        result = await asyncio.gather(*fetches)     
-        return result    
-    
     def get_category_lists(self): 
-        db = DB()
-        positions = {
-            "general_stacks"  : yaml["general"], 
-            "frontend_stacks" : yaml["frontend"], 
-            "backend_stacks"  : yaml["backend"]
+        db = DB()                      
+        try:
+            response = {}
+            dict_stacks = {             
+                'general_stacks'  : [],
+                'frontend_stacks' : [],
+                'backend_stacks'  : []
             }
-                      
-        try:          
-            # 카테고리
-            categories = {}
-            stacks = []
-            # 콘텐츠 타입
-            contents_types = self.video_dao.get_contents_types(db)
-            # 크리에이터 채널
-            channels = self.video_dao.get_channels(db)
-            # 스택  
-            asyncio.set_event_loop(asyncio.SelectorEventLoop())  
-            loop = asyncio.get_event_loop()
-            stack_categories = loop.run_until_complete(self.get_positions(db, positions.values()))
-            loop.close()
+            contents_types_channels   = self.video_dao.get_contents_types_channels(db)
+            stacks                    = self.video_dao.get_stacks(db) 
+            response['content_types'] = contents_types_channels[:4] 
+            response['stacks']        = []
+            response['channels']      = contents_types_channels[4:] 
 
-            for stack, position in positions.items():
-                stacks.append({stack : stack_categories[position - 1]})   
+            for stack in stacks:
 
-            categories["content_types"] = contents_types
-            categories["stacks"]        = stacks
-            categories["channels"]      = channels
-        
-            return categories     
+                if stack['position_id'] == yaml['general']:
+                    dict_stacks['general_stacks'].append(stack)
+
+                elif stack['position_id'] == yaml['frontend']:
+                    dict_stacks['frontend_stacks'].append(stack)
+                    
+                else:
+                    dict_stacks['backend_stacks'].append(stack)   
+
+            for stack, position in dict_stacks.items():
+                response['stacks'].append({stack : position}) 
+
+            return response
 
         except pymysql.err.Error:
             return {"message" : "DATABASE ERROR"}
@@ -154,4 +147,3 @@ class VideoService:
         finally:
             if db:
                 db.close()
-
