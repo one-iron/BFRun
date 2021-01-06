@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@next/mdx": "^9.4.4",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
     "babel-plugin-styled-components": "^1.10.7",
     "eslint": "^7.4.0",
